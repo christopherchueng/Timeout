@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
 
-    # One-to-Many relationship with Watchlist
+    # One-to-Many relationship with Alarmlist
     watchlists = db.relationship('Alarmlist', back_populates='users')
 
     @property

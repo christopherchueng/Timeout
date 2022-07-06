@@ -7,8 +7,12 @@ class Alarmlist(db.Model):
     name = db.Column(db.String(100), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
+
+    # Many-to-One relationship with User
     users = db.relationship('User', back_populates='alarmlists')
 
+    # One-to-Many relationship with Alarms
+    alarms = db.relationship('Alarm', back_populates='alarmlists', cascade="all, delete")
 
     def to_dict(self):
         return {
