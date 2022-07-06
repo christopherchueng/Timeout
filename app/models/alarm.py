@@ -19,14 +19,14 @@ class Alarm(db.Model):
     alarmlists = db.relationship('Alarmlist', back_populates='alarms', cascade="all, delete")
 
     def to_dict(self):
-    return {
-        'id': self.id,
-        'name': self.name,
-        'hour': self.hour,
-        'minutes': self.minutes,
-        'meridiem': self.meridiem,
-        'sound': self.sound,
-        'repeat': self.repeat,
-        'snooze': self.snooze,
-        'alarmlistId': self.alarmlist_id,
-    }
+        return {
+            'id': self.id,
+            'name': self.name,
+            'hour': self.hour,
+            'minutes': self.minutes,
+            'meridiem': self.meridiem,
+            'sound': self.sound,
+            'repeat': self.repeat,
+            'snooze': self.snooze,
+            'alarmlistId': self.alarmlist_id
+        }
