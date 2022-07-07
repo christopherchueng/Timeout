@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { getAlarmlists } from "../../store/alarmlist"
+import CreateAlarmlistModal from "./CreateAlarmlistModal"
 import './Dashboard.css'
 
 const Dashboard = () => {
@@ -17,6 +18,9 @@ const Dashboard = () => {
 
     return (
         <div id='dashboard'>
+            <div className='create-alarmlist-modal'>
+                <CreateAlarmlistModal />
+            </div>
             <div className='alarmlist-content'>
                 {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                     <div key={alarmlist.id}>
