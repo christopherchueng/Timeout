@@ -32,7 +32,8 @@ const CreateAlarmlistForm = () => {
         setIsSubmitted(true)
 
         const payload = {
-            name
+            name,
+            user_id: currentUser?.id
         }
 
         const alarmlist = await dispatch(createAlarmlist(payload))
@@ -58,6 +59,9 @@ const CreateAlarmlistForm = () => {
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
                     />
+                    <div className='submit-new-alarmlist'>
+                        <button type='submit'>Save</button>
+                    </div>
                     <div className='create-alarmlist-formError-ctn'>
                         {isSubmitted && <ErrorMessage error={errors.name} setClassName="create-alarmlist-error" />}
                     </div>
