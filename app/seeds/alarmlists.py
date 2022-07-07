@@ -1,8 +1,8 @@
 from app.models import db, Alarmlist
 
-def seed_alarmlists();
+def seed_alarmlists():
     independent_alarms = Watchlist(
-        name='Alarms',
+        name='Default',
         user_id=1
     )
     work_alarmlist = Watchlist(

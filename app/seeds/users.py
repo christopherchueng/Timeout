@@ -6,7 +6,7 @@ def seed_users():
     demo = User(
         first_name='Demo', last_name='User', email='demo@aa.io', password='password')
     cchueng = User(
-        first_name='Christopher', last_name='Chueng' email='cchueng@test.com', password='password')
+        first_name='Christopher', last_name='Chueng', email='cchueng@test.com', password='password')
 
     db.session.add(demo)
     db.session.add(cchueng)

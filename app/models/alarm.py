@@ -1,4 +1,14 @@
 from .db import db
+from enum import Enum
+
+class Days(Enum):
+    SUNDAY = 0
+    MONDAY = 1
+    TUESDAY = 2
+    WEDNESDAY = 3
+    THURSDAY = 4
+    FRIDAY = 5
+    SATURDAY = 6
 
 
 class Alarm(db.Model):
@@ -10,8 +20,8 @@ class Alarm(db.Model):
     minutes = db.Column(db.Integer, nullable=False)
     meridiem = db.Column(db.String(10), nullable=False)
     sound = db.Column(db.String(255))
-    repeat = db.Column(db.String(30))
-    snooze = db.Column(db.Boolean)
+    repeat = db.Column(db.Enum(Days))
+    snooze = db.Column(db.Boolean, nullable=False)
     alarmlist_id = db.Column(db.Integer, db.ForeignKey('alarmlists.id'), nullable=False)
 
 
