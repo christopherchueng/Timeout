@@ -11,6 +11,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import SplashPage from './components/SplashPage';
 import Dashboard from './components/Dashboard';
+import AlarmList from './components/AlarmList';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +45,9 @@ function App() {
         </Route>
         <ProtectedRoute path='/dashboard' exact={true} >
           <Dashboard />
+        </ProtectedRoute>
+        <ProtectedRoute path='/:id' exact={true} >
+          <AlarmList />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
