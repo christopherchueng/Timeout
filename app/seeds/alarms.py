@@ -1,10 +1,10 @@
-from app.models import db, Alarm, Days
+from app.models import db, Alarm
 
-def seed_alarms();
+def seed_alarms():
     alarm1 = Alarm(
         name='Alarm',
-        hour=9
-        minutes=00,
+        hour=9,
+        minutes=0,
         meridiem='PM',
         snooze=False,
         alarmlist_id=1
@@ -20,7 +20,7 @@ def seed_alarms();
     alarm3 = Alarm(
         name='Pick friend up from airport',
         hour=7,
-        minutes=00,
+        minutes=0,
         meridiem='AM',
         snooze=False,
         alarmlist_id=1
@@ -28,9 +28,9 @@ def seed_alarms();
     alarm4 = Alarm(
         name='Wake up!',
         hour=7,
-        minutes=00,
+        minutes=0,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=2
     )
@@ -39,7 +39,7 @@ def seed_alarms();
         hour=8,
         minutes=30,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=2
     )
@@ -48,7 +48,7 @@ def seed_alarms();
         hour=12,
         minutes=30,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=2
     )
@@ -57,7 +57,7 @@ def seed_alarms();
         hour=1,
         minutes=30,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=2
     )
@@ -66,16 +66,16 @@ def seed_alarms();
         hour=5,
         minutes=30,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=2
     )
     alarm9 = Alarm(
         name='Check in',
         hour=11,
-        minutes=00,
+        minutes=0,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=3
     )
@@ -84,7 +84,7 @@ def seed_alarms();
         hour=2,
         minutes=15,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=3
     )
@@ -93,7 +93,7 @@ def seed_alarms();
         hour=3,
         minutes=30,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=3
     )
@@ -102,34 +102,34 @@ def seed_alarms();
         hour=5,
         minutes=45,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=3
     )
     alarm13 = Alarm(
         name='Check in',
         hour=6,
-        minutes=00,
+        minutes=0,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=3
     )
     alarm14 = Alarm(
         name='Evening report',
         hour=8,
-        minutes=00,
+        minutes=0,
         meridiem='PM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=3
     )
     alarm15 = Alarm(
         name='First wake up',
         hour=6,
-        minutes=00,
+        minutes=0,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
@@ -138,7 +138,7 @@ def seed_alarms();
         hour=6,
         minutes=10,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
@@ -147,7 +147,7 @@ def seed_alarms();
         hour=6,
         minutes=15,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
@@ -156,7 +156,7 @@ def seed_alarms();
         hour=6,
         minutes=15,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
@@ -165,7 +165,7 @@ def seed_alarms();
         hour=6,
         minutes=20,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
@@ -174,7 +174,7 @@ def seed_alarms();
         hour=6,
         minutes=25,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
@@ -183,16 +183,16 @@ def seed_alarms();
         hour=6,
         minutes=30,
         meridiem='AM',
-        repeat=[Days.MONDAY.value, Days.TUESDAY.value, Days.WEDNESDAY.value, Days.THURSDAY.value, Days.FRIDAY.value]
+        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
     alarm22 = Alarm(
         name="Basketball",
         hour=9,
-        minutes=00,
+        minutes=0,
         meridiem='AM',
-        repeat=Days.SUNDAY.value
+        repeat="['Sunday']",
         snooze=False,
         alarmlist_id=1
     )
@@ -207,7 +207,7 @@ def seed_alarms();
     alarm24 = Alarm(
         name="Nap time!",
         hour=1,
-        minutes=00,
+        minutes=0,
         meridiem='PM',
         snooze=False,
         alarmlist_id=1

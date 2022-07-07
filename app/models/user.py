@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
 
 
     # One-to-Many relationship with Alarmlist
-    watchlists = db.relationship('Alarmlist', back_populates='users')
+    alarmlists = db.relationship('Alarmlist', back_populates='users')
 
     @property
     def password(self):

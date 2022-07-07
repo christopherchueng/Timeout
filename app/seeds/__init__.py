@@ -13,6 +13,7 @@ seed_commands = AppGroup('seed')
 def seed():
     seed_users()
     seed_alarmlists()
+    seed_alarms()
 
 
 # Creates the `flask seed undo` command
@@ -20,3 +21,4 @@ def seed():
 def undo():
     undo_users()
     undo_alarmlists()
+    undo_alarms

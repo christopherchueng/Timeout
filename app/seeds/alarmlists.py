@@ -1,19 +1,19 @@
 from app.models import db, Alarmlist
 
 def seed_alarmlists():
-    independent_alarms = Watchlist(
+    independent_alarms = Alarmlist(
         name='Default',
         user_id=1
     )
-    work_alarmlist = Watchlist(
+    work_alarmlist = Alarmlist(
         name='Work',
         user_id=1
     )
-    school_alarmlist = Watchlist(
+    school_alarmlist = Alarmlist(
         name='School',
         user_id=1
     )
-    sleep_alarmlist = Watchlist(
+    sleep_alarmlist = Alarmlist(
         name='Sleep',
         user_id=1
     )
