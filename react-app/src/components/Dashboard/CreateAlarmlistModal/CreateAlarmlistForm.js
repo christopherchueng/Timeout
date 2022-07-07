@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { createAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
-import './CreateAlarmlistForm.css'
+import './AlarmlistForm.css'
 
 const CreateAlarmlistForm = () => {
     const dispatch = useDispatch()

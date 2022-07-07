@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAlarmlists } from "../../store/alarmlist"
 import CreateAlarmlistModal from "./CreateAlarmlistModal"
 import './Dashboard.css'
+import EditAlarmlistForm from "./EditAlarmlistForm"
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -22,8 +23,17 @@ const Dashboard = () => {
             </div>
             <div className='alarmlist-content'>
                 {alarmlistsArr && alarmlistsArr.map(alarmlist => (
-                    <div key={alarmlist.id}>
-                        <Link to={`/${alarmlist.id}`}>{alarmlist.name === 'Default' ? 'Other' : alarmlist.name}</Link>
+                    <div key={alarmlist.id} className={`alarmlist-${alarmlist.id}`}>
+                        <div className='alarmlist-name'>
+                            <Link to={`/${alarmlist.id}`}>
+                                {alarmlist.name === 'Default' ? 'Other' : alarmlist.name}
+                            </Link>
+                        </div>
+                        <div className=''>
+                            <button type='button'>
+                                <span className="fa-solid fa-pen"></span>
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
