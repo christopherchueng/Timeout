@@ -1,6 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .alarmlists import seed_alarmlists, undo_alarmlists
+from .alarms import seed_alarms, undo_alarms
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
