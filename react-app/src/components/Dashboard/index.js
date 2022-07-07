@@ -11,6 +11,8 @@ const Dashboard = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj).reverse()
 
+    const [edit, setEdit] = useState(false)
+
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
@@ -24,16 +26,21 @@ const Dashboard = () => {
             <div className='alarmlist-content'>
                 {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                     <div key={alarmlist.id} className={`alarmlist-${alarmlist.id}`}>
-                        <div className='alarmlist-name'>
-                            <Link to={`/${alarmlist.id}`}>
-                                {alarmlist.name === 'Default' ? 'Other' : alarmlist.name}
-                            </Link>
-                        </div>
-                        <div className=''>
-                            <button type='button'>
-                                <span className="fa-solid fa-pen"></span>
-                            </button>
-                        </div>
+                        {edit
+                        ? <EditAlarmlistForm edit={edit} setEdit={setEdit} alarmlist={alarmlist} />
+                        :
+                        <>
+                            <div className='alarmlist-name'>
+                                <Link to={`/${alarmlist.id}`}>
+                                    {alarmlist.name === 'Default' ? 'Other' : alarmlist.name}
+                                </Link>
+                            </div>
+                            <div className=''>
+                                <button type='button' onClick={() => setEdit(!edit)}>
+                                    <span className="fa-solid fa-pen"></span>
+                                </button>
+                            </div>
+                        </>}
                     </div>
                 ))}
             </div>

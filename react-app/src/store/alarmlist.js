@@ -1,5 +1,6 @@
 const LOAD_ALARMLISTS = 'alarmlist/LOAD_ALARMLISTS'
 const POST_ALARMLIST = 'alarmlist/POST_ALARMLIST'
+const EDIT_ALARMLIST = 'alarmlist/EDIT_ALARMLIST'
 
 export const loadAlarmlists = (alarmlists) => {
     return {
@@ -11,6 +12,13 @@ export const loadAlarmlists = (alarmlists) => {
 export const postAlarmlist = (alarmlist) => {
     return {
         type: POST_ALARMLIST,
+        alarmlist
+    }
+}
+
+export const editAlarmlist = (alarmlist) => {
+    return {
+        type: EDIT_ALARMLIST,
         alarmlist
     }
 }
@@ -36,6 +44,20 @@ export const createAlarmlist = payload => async (dispatch) => {
     }
 }
 
+export const updateAlarmlist = payload => async (dispatch) => {
+    const response = await fetch('/api/alarmlists/', {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        const alarmlist = await response.json()
+        dispatch(editAlarmlist(alarmlist))
+        return alarmlist
+    }
+}
+
 const initialState = { entries: {}, isLoading: true }
 
 const alarmlistReducer = (state = initialState, action) => {
@@ -46,6 +68,10 @@ const alarmlistReducer = (state = initialState, action) => {
             action.alarmlists.map(alarmlist => { newState.entries[alarmlist.id] = alarmlist })
             return newState
         case POST_ALARMLIST:
+            newState = { ...state, entries: { ... state.entries }}
+            newState.entries[action.alarmlist.id] = action.alarmlist
+            return newState
+        case EDIT_ALARMLIST:
             newState = { ...state, entries: { ... state.entries }}
             newState.entries[action.alarmlist.id] = action.alarmlist
             return newState

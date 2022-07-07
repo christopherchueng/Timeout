@@ -50,7 +50,7 @@ const CreateAlarmlistForm = () => {
     return (
         <div className='create-alarmlist'>
             <form onSubmit={onSubmit}>
-                <div className='alarmlist input'>
+                <div className='alarmlist-input'>
                     {/* -------------------- NAME -------------------- */}
                     <input
                         name='name'
@@ -59,11 +59,11 @@ const CreateAlarmlistForm = () => {
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <div className='submit-new-alarmlist'>
-                        <button type='submit'>Save</button>
+                    <div className='submit-alarmlist'>
+                        <button type='submit'><span className="fa-solid fa-check"></span></button>
                     </div>
-                    <div className='create-alarmlist-formError-ctn'>
-                        {isSubmitted && <ErrorMessage error={errors.name} setClassName="create-alarmlist-error" />}
+                    <div className='alarmlist-formError-ctn'>
+                        {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-error" />}
                     </div>
                 </div>
             </form>
