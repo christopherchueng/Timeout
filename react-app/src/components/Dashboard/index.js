@@ -8,7 +8,7 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state?.session?.user)
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const alarmlistsArr = Object.values(alarmlistsObj)
+    const alarmlistsArr = Object.values(alarmlistsObj).reverse()
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
