@@ -19,7 +19,7 @@ def post_alarmlist():
     form = AlarmlistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if (form.validate_on_submit()):
+    if form.validate_on_submit():
         new_alarmlist = Alarmlist(
             name=form.data['name'],
             user_id=form.data['user_id']
@@ -28,3 +28,18 @@ def post_alarmlist():
         db.session.add(new_alarmlist)
         db.session.commit()
         return new_alarmlist.to_dict()
+
+@alarmlist_routes.route('/', methods=['PATCH'])
+@login_required
+def update_alarmlist():
+    form = AlarmlistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    id = request.json['id']
+
+    alarmlist = Alarmlist.query.get(id)
+
+    if form.validate_on_submit():
+        alarmlist.name = form.data['name']
+
+        db.session.commit()
+        return alarmlist.to_dict()

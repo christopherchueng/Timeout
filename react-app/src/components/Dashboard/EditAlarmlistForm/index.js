@@ -31,13 +31,13 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
         setIsSubmitted(true)
 
         const payload = {
-            name,
-            user_id: currentUser?.id
+            id: alarmlist?.id,
+            name
         }
 
-        const alarmlist = await dispatch(updateAlarmlist(payload))
+        const updatedAlarmlist = await dispatch(updateAlarmlist(payload))
 
-        if (alarmlist) {
+        if (updatedAlarmlist) {
             setName('')
             setErrors({})
             setIsSubmitted(false)
@@ -59,7 +59,7 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     <div className='submit-alarmlist'>
-                        <button type='submit'><span className="fa-solid fa-check"></span></button>
+                        <button type='submit' onClick={() => setEdit(!edit)}><span className="fa-solid fa-check"></span></button>
                     </div>
                     <div className='cancel-alarmlist'>
                         <button type='button' onClick={() => setEdit(!edit)}><span className="fa-solid fa-xmark"></span></button>
