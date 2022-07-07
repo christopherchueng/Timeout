@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from app.models import Alarmlist
 from flask_login import login_required
 
@@ -9,4 +9,4 @@ alarmlist_routes = Blueprint('alarmlists', __name__)
 @login_required
 def get_alarmlists():
     alarmlists = Alarmlist.query.all()
-    return [alarmlist.to_dict() for alarmlist in alarmlists]
+    return jsonify([alarmlist.to_dict() for alarmlist in alarmlists])
