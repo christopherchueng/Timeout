@@ -16,7 +16,7 @@ export const getAlarmlists = () => async (dispatch) => {
 
 const initialState = { entries: {}, isLoading: true }
 
-export default alarmlistReducer = (state = initialState, action) => {
+const alarmlistReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case LOAD_ALARMLISTS:
@@ -27,3 +27,5 @@ export default alarmlistReducer = (state = initialState, action) => {
             return state
     }
 }
+
+export default alarmlistReducer
