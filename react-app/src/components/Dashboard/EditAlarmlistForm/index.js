@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
+const EditAlarmlistForm = forwardRef(({ isEditing, setIsEditing, alarmlist }, ref) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
@@ -41,7 +41,7 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
             setName('')
             setErrors({})
             setIsSubmitted(false)
-            setEdit(!edit)
+            setIsEditing(!isEditing)
             history.push('/dashboard')
         }
 
@@ -54,16 +54,20 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
                     {/* -------------------- NAME -------------------- */}
                     <input
                         name={`edit_${alarmlist.id}`}
+                        id={`edit-input-${alarmlist.id}`}
                         type='text'
                         value={name}
+                        ref={ref}
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <div className='submit-alarmlist'>
-                        <button type='submit'><span className="fa-solid fa-check"></span></button>
-                    </div>
-                    <div className='cancel-alarmlist'>
-                        <button type='button' onClick={() => setEdit(!edit)}><span className="fa-solid fa-xmark"></span></button>
+                    <div className='edit-alarmlist-form-btns'>
+                        <div className='submit-alarmlist'>
+                            <button type='submit'><span className="fa-solid fa-check"></span></button>
+                        </div>
+                        <div className='cancel-alarmlist'>
+                            <button type='button' onClick={() => setIsEditing(!isEditing)}><span className="fa-solid fa-xmark"></span></button>
+                        </div>
                     </div>
                     <div className='alarmlist-formError-ctn'>
                         {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-error" />}
@@ -72,6 +76,6 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
             </form>
         </>
       );
-}
+})
 
 export default EditAlarmlistForm
