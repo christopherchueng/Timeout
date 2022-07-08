@@ -14,17 +14,15 @@ const Dashboard = () => {
     const alarmlistsArr = Object.values(alarmlistsObj)
     const alarmlists = alarmlistsArr.reverse()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
-    const independentAlarms = useSelector(state => state?.alarm?.default)
-
+    const independentAlarmsObj = useSelector(state => state?.alarm?.independent)
+    const independentAlarmsArr = Object.values(independentAlarmsObj)
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
         dispatch(getDefaultAlarmlist())
-        dispatch(getAlarms(defaultAlarmlist?.id))
+        dispatch(getAlarms(1))
     }, [dispatch])
-
-
 
     return (
         <div id='dashboard'>
@@ -44,7 +42,16 @@ const Dashboard = () => {
                         </Link>
                     </div>
                     <div className='default-alarmlist-alarms'>
-
+                        {independentAlarmsArr && independentAlarmsArr.map(alarm => (
+                            <div key={alarm.id} className='independent-alarm-content'>
+                                <div className='independent-alarm-name'>
+                                    {alarm.name}
+                                </div>
+                                <div className='independent-alarm-time'>
+                                    {alarm.hour}:{alarm.minutes < 10 ? '0' + alarm.minutes : alarm.minutes} {alarm.merididem}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
