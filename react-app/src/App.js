@@ -4,8 +4,6 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { authenticate } from './store/session';
-import User from './components/User';
-import UsersList from './components/UsersList';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';

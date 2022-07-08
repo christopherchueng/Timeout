@@ -39,7 +39,6 @@ const alarmReducer = (state = initialState, action) => {
             action.alarms.forEach(alarm => {
                 if (alarm.alarmlistId === 1) {
                     newState.independent[alarm.id] = alarm
-                    console.log('inside reducer for independet allarms', newState.independent)
                     return newState
                 } else {
                     newState.entries[alarm.id] = alarm

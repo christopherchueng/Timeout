@@ -1,3 +1,5 @@
+import './CreateAlarm.css'
+
 const CreateAlarm = () => {
     return (
         <h1>In Create Alarm!</h1>

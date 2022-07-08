@@ -5,7 +5,6 @@ import { getAlarmlists, getDefaultAlarmlist } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import InlineAlarmlistEdit from "../AlarmList/InlineAlarmlistEdit/InlineAlarmlistEdit"
-import Alarm from "../Alarm"
 import './Dashboard.css'
 
 const Dashboard = () => {
