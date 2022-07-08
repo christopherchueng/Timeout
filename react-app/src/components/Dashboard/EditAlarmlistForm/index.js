@@ -26,7 +26,7 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
 
     }, [name])
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
         setIsSubmitted(true)
 
@@ -35,12 +35,13 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
             name
         }
 
-        const updatedAlarmlist = await dispatch(updateAlarmlist(payload))
+        const updatedAlarmlist = dispatch(updateAlarmlist(payload))
 
         if (updatedAlarmlist) {
             setName('')
             setErrors({})
             setIsSubmitted(false)
+            setEdit(!edit)
             history.push('/dashboard')
         }
 
@@ -59,7 +60,7 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     <div className='submit-alarmlist'>
-                        <button type='submit' onClick={() => setEdit(!edit)}><span className="fa-solid fa-check"></span></button>
+                        <button type='submit'><span className="fa-solid fa-check"></span></button>
                     </div>
                     <div className='cancel-alarmlist'>
                         <button type='button' onClick={() => setEdit(!edit)}><span className="fa-solid fa-xmark"></span></button>

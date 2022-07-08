@@ -53,7 +53,8 @@ export const createAlarmlist = payload => async (dispatch) => {
 }
 
 export const updateAlarmlist = payload => async (dispatch) => {
-    const response = await fetch('/api/alarmlists/', {
+    console.log('what is this payload id', payload.id)
+    const response = await fetch(`/api/alarmlists/${payload.id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)

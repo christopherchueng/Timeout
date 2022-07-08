@@ -29,12 +29,11 @@ def post_alarmlist():
         db.session.commit()
         return new_alarmlist.to_dict()
 
-@alarmlist_routes.route('/', methods=['PATCH'])
+@alarmlist_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
-def update_alarmlist():
+def update_alarmlist(id):
     form = AlarmlistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    id = request.json['id']
 
     alarmlist = Alarmlist.query.get(id)
 
@@ -47,9 +46,9 @@ def update_alarmlist():
 @alarmlist_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_alarmlist(id):
-    # id = request.json['id']
-
     alarmlist = Alarmlist.query.get(id)
+
     db.session.delete(alarmlist)
     db.session.commit()
+
     return alarmlist.to_dict()
