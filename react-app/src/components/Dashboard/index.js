@@ -2,9 +2,9 @@ import React, { useState, useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { getAlarmlists } from "../../store/alarmlist"
-import CreateAlarmlistModal from "./CreateAlarmlistModal"
+import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
+import InlineAlarmlistEdit from "../AlarmList/InlineAlarmlistEdit/InlineAlarmlistEdit"
 import './Dashboard.css'
-import InlineAlarmlistEdit from "./InlineAlarmlistEdit/InlineAlarmlistEdit"
 
 const Dashboard = () => {
     const dispatch = useDispatch()
