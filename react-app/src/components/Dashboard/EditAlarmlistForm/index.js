@@ -53,8 +53,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
                 <div className='alarmlist-input'>
                     {/* -------------------- NAME -------------------- */}
                     <input
-                        name={`edit_${alarmlist.id}`}
-                        id={`edit-input-${alarmlist.id}`}
+                        name={'name'}
                         type='text'
                         value={name}
                         placeholder='Name'

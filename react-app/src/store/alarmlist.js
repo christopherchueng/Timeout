@@ -86,7 +86,7 @@ const alarmlistReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ALARMLISTS:
             newState = { ...state, entries: { ...state.entries }}
-            action.alarmlists.map(alarmlist => { newState.entries[alarmlist.id] = alarmlist })
+            action.alarmlists.forEach(alarmlist => { newState.entries[alarmlist.id] = alarmlist })
             return newState
         case POST_ALARMLIST:
             newState = { ...state, entries: { ...state.entries }}
