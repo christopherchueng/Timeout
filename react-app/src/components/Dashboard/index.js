@@ -10,7 +10,7 @@ import './Dashboard.css'
 const Dashboard = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const alarmlistsArr = Object.values(alarmlistsObj).reverse()
+    let alarmlistsArr = Object.values(alarmlistsObj).reverse()
 
     const [edit, setEdit] = useState(false)
 
@@ -18,6 +18,15 @@ const Dashboard = () => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
     }, [dispatch])
+
+    const editOnClick = e => {
+        setEdit(!edit)
+        alarmlistsArr.forEach(alarmlist => {
+            let editFormId = document.getElementsByClassName(`edit-alarmlist-${alarmlist.id}`)
+            console.log('what is this edit form list', editFormId)
+        })
+
+    }
 
     return (
         <div id='dashboard'>
@@ -28,21 +37,24 @@ const Dashboard = () => {
                 {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                     <div key={alarmlist.id} className={`alarmlist-${alarmlist.id}`}>
                         {edit
-                        ? <EditAlarmlistForm edit={edit} setEdit={setEdit} alarmlist={alarmlist} />
-                        :
-                        <>
-                            <div className='alarmlist-name'>
-                                <Link to={`/${alarmlist.id}`}>
-                                    {alarmlist.name === 'Default' ? 'Other' : alarmlist.name}
-                                </Link>
+                            ? <div className={`edit-alarmlist-${alarmlist.id}`}>
+                                <EditAlarmlistForm edit={edit} setEdit={setEdit} alarmlist={alarmlist} />
                             </div>
-                            <div className=''>
-                                <button type='button' onClick={() => setEdit(!edit)}>
-                                    <span className="fa-solid fa-pen"></span>
-                                </button>
-                                <DeleteAlarmlistModal alarmlist={alarmlist} />
-                            </div>
-                        </>}
+                            :
+                            <>
+                                <div className='alarmlist-name'>
+                                    <Link to={`/${alarmlist.id}`}>
+                                        {alarmlist.name === 'Default' ? 'Other' : alarmlist.name}
+                                    </Link>
+                                </div>
+                                <div className={`edit-alarmlist-btn`}>
+                                    <button type='button' onClick={editOnClick}>
+                                        <span className="fa-solid fa-pen"></span>
+                                    </button>
+                                    <DeleteAlarmlistModal alarmlist={alarmlist} />
+                                </div>
+                            </>
+                        }
                     </div>
                 ))}
             </div>
