@@ -28,7 +28,7 @@ const Dashboard = () => {
             </div>
             <div className='alarmlist-content'>
                 {alarmlists && alarmlists.map(alarmlist => (
-                    <InlineAlarmlistEdit alarmlist={alarmlist} />
+                    <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
                 ))}
                 <div className='default-alarmlist'>
                     <Link to={`/${defaultAlarmlist?.id}`}>

@@ -8,7 +8,7 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
     const [isEditing, setIsEditing] = useState(false)
 
     return (
-        <div key={alarmlist.id} className={`alarmlist-${alarmlist.id}`}>
+        <div className={`alarmlist-${alarmlist.id}`}>
             {isEditing
                 ?
                     <div id={'edit-alarmlist-form'} className={`edit-alarmlist-${alarmlist.id}`}>
