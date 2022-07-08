@@ -1,6 +1,7 @@
 const LOAD_ALARMLISTS = 'alarmlist/LOAD_ALARMLISTS'
 const POST_ALARMLIST = 'alarmlist/POST_ALARMLIST'
 const EDIT_ALARMLIST = 'alarmlist/EDIT_ALARMLIST'
+const REMOVE_ALARMLIST = 'alarmlist/REMOVE_ALARMLIST'
 
 export const loadAlarmlists = (alarmlists) => {
     return {
@@ -20,6 +21,13 @@ export const editAlarmlist = (alarmlist) => {
     return {
         type: EDIT_ALARMLIST,
         alarmlist
+    }
+}
+
+export const removeAlarmlist = (alarmlistId) => {
+    return {
+        type: REMOVE_ALARMLIST,
+        alarmlistId
     }
 }
 
@@ -58,6 +66,18 @@ export const updateAlarmlist = payload => async (dispatch) => {
     }
 }
 
+export const deleteAlarmlist = (alarmlistId) => async (dispatch) => {
+    const response = await fetch(`/api/alarmlists/${alarmlistId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const alarmlist = await response.json()
+        dispatch(removeAlarmlist(alarmlistId))
+        return alarmlist
+    }
+}
+
 const initialState = { entries: {}, isLoading: true }
 
 const alarmlistReducer = (state = initialState, action) => {
@@ -68,12 +88,16 @@ const alarmlistReducer = (state = initialState, action) => {
             action.alarmlists.map(alarmlist => { newState.entries[alarmlist.id] = alarmlist })
             return newState
         case POST_ALARMLIST:
-            newState = { ...state, entries: { ... state.entries }}
+            newState = { ...state, entries: { ...state.entries }}
             newState.entries[action.alarmlist.id] = action.alarmlist
             return newState
         case EDIT_ALARMLIST:
-            newState = { ...state, entries: { ... state.entries }}
+            newState = { ...state, entries: { ...state.entries }}
             newState.entries[action.alarmlist.id] = action.alarmlist
+            return newState
+        case REMOVE_ALARMLIST:
+            newState = { ...state, entries: { ...state.entries } }
+            delete newState.entries[action.alarmlistId]
             return newState
         default:
             return state

@@ -5,6 +5,7 @@ import { getAlarmlists } from "../../store/alarmlist"
 import CreateAlarmlistModal from "./CreateAlarmlistModal"
 import './Dashboard.css'
 import EditAlarmlistForm from "./EditAlarmlistForm"
+import DeleteAlarmlistModal from "./DeleteAlarmlistModal"
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -39,6 +40,7 @@ const Dashboard = () => {
                                 <button type='button' onClick={() => setEdit(!edit)}>
                                     <span className="fa-solid fa-pen"></span>
                                 </button>
+                                <DeleteAlarmlistModal alarmlist={alarmlist} />
                             </div>
                         </>}
                     </div>

@@ -12,7 +12,7 @@ const CreateAlarmlistModal = () => {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <CreateAlarmlistForm />
+                    <CreateAlarmlistForm showModal={showModal} setShowModal={setShowModal} />
                 </Modal>
             )}
         </>

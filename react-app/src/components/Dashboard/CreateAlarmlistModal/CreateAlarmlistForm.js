@@ -5,7 +5,7 @@ import { createAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import './AlarmlistForm.css'
 
-const CreateAlarmlistForm = () => {
+const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
@@ -41,6 +41,7 @@ const CreateAlarmlistForm = () => {
         if (alarmlist) {
             setName('')
             setErrors({})
+            setShowModal(!showModal)
             setIsSubmitted(false)
             history.push('/dashboard')
         }
