@@ -6,10 +6,10 @@ const SplashPage = () => {
     return (
         <>
             <h1>Hi from Splash</h1>
-            <Link to='/login' exact={true}>
+            <Link to='/login'>
                 Login
             </Link>
-            <Link to='/register' exact={true}>
+            <Link to='/register'>
                 Register
             </Link>
             <DemoUserForm />

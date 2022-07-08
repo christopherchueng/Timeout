@@ -34,19 +34,19 @@ function App() {
     <BrowserRouter>
       {currentUser ? <NavBar /> : ""}
       <Switch>
-        <Route path='/' exact={true}>
+        <Route exact path='/'>
           <SplashPage />
         </Route>
-        <Route path='/login' exact={true}>
+        <Route path='/login'>
           <LoginForm />
         </Route>
-        <Route path='/register' exact={true}>
+        <Route path='/register'>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/dashboard' exact={true} >
+        <ProtectedRoute path='/dashboard'>
           <Dashboard />
         </ProtectedRoute>
-        <ProtectedRoute path='/:id' exact={true} >
+        <ProtectedRoute path='/:id'>
           <AlarmList />
         </ProtectedRoute>
       </Switch>
