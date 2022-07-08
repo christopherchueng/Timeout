@@ -1,4 +1,5 @@
 const LOAD_ALARMLISTS = 'alarmlist/LOAD_ALARMLISTS'
+const LOAD_DEFAULT_ALARMLIST = 'alarmlist/LOAD_DEFAULT_ALARMLIST'
 const POST_ALARMLIST = 'alarmlist/POST_ALARMLIST'
 const EDIT_ALARMLIST = 'alarmlist/EDIT_ALARMLIST'
 const REMOVE_ALARMLIST = 'alarmlist/REMOVE_ALARMLIST'
@@ -7,6 +8,13 @@ export const loadAlarmlists = (alarmlists) => {
     return {
         type: LOAD_ALARMLISTS,
         alarmlists
+    }
+}
+
+export const loadDefaultAlarmlist = (alarmlist) => {
+    return {
+        type: LOAD_DEFAULT_ALARMLIST,
+        alarmlist
     }
 }
 
@@ -36,6 +44,13 @@ export const getAlarmlists = () => async (dispatch) => {
 
     const alarmlists = await response.json()
     dispatch(loadAlarmlists(alarmlists))
+}
+
+export const getDefaultAlarmlist = () => async (dispatch) => {
+    const response = await fetch('/api/alarmlists/default')
+
+    const alarmlists = await response.json()
+    dispatch(loadDefaultAlarmlist(alarmlists))
 }
 
 export const createAlarmlist = payload => async (dispatch) => {
@@ -78,25 +93,29 @@ export const deleteAlarmlist = (alarmlistId) => async (dispatch) => {
     }
 }
 
-const initialState = { entries: {}, isLoading: true }
+const initialState = { entries: {}, default: {}, isLoading: true }
 
 const alarmlistReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case LOAD_ALARMLISTS:
-            newState = { ...state, entries: { ...state.entries }}
+            newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             action.alarmlists.forEach(alarmlist => { newState.entries[alarmlist.id] = alarmlist })
             return newState
+        case LOAD_DEFAULT_ALARMLIST:
+            newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
+            newState.default[action.alarmlist.id] = action.alarmlist
+            return newState
         case POST_ALARMLIST:
-            newState = { ...state, entries: { ...state.entries }}
+            newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             newState.entries[action.alarmlist.id] = action.alarmlist
             return newState
         case EDIT_ALARMLIST:
-            newState = { ...state, entries: { ...state.entries }}
+            newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             newState.entries[action.alarmlist.id] = action.alarmlist
             return newState
         case REMOVE_ALARMLIST:
-            newState = { ...state, entries: { ...state.entries } }
+            newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             delete newState.entries[action.alarmlistId]
             return newState
         default:

@@ -7,5 +7,5 @@ alarm_routes = Blueprint('alarms', __name__)
 @alarm_routes.route('/<int:id>/alarms')
 @login_required
 def get_alarmlist_alarms(id):
-    alarms = Alarm.query.filter(Alarm.alarmlist_id == id).all()
+    alarms = Alarm.query.filter(Alarm.alarmlist_id == id, Alarm.alarmlist_id != 1).all()
     return jsonify([alarm.to_dict() for alarm in alarms])

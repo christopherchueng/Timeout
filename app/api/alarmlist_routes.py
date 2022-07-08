@@ -8,10 +8,17 @@ alarmlist_routes = Blueprint('alarmlists', __name__)
 
 @alarmlist_routes.route('/')
 @login_required
-def get_alarmlists():
-    # Get all of the current user's alarmlists
-    alarmlists = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id()).all()
+def get_alarmlists_no_default():
+    # Get all of the current user's alarmlists (no default)
+    alarmlists = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id(), Alarmlist.name != 'Default').all()
     return jsonify([alarmlist.to_dict() for alarmlist in alarmlists])
+
+@alarmlist_routes.route('/default')
+@login_required
+def get_default_alarmlist():
+    # Get default alarmlist
+    default_alarmlist = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id(), Alarmlist.name == 'Default').first()
+    return default_alarmlist.to_dict()
 
 @alarmlist_routes.route('/', methods=['POST'])
 @login_required

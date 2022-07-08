@@ -1,7 +1,8 @@
 import React, { useState, useEffect} from "react"
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { getAlarmlists } from "../../store/alarmlist"
+import { getAlarmlists, getDefaultAlarmlist } from "../../store/alarmlist"
+import { getAlarms } from "../../store/alarm"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import InlineAlarmlistEdit from "../AlarmList/InlineAlarmlistEdit/InlineAlarmlistEdit"
 import Alarm from "../Alarm"
@@ -12,12 +13,15 @@ const Dashboard = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj)
     const alarmlists = alarmlistsArr.reverse()
-    const defaultAlarmlist = alarmlists.splice(-1, 1)[0]
+    const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
+    const independentAlarms = useSelector(state => state?.alarm?.default)
 
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
+        dispatch(getDefaultAlarmlist())
+        dispatch(getAlarms(defaultAlarmlist?.id))
     }, [dispatch])
 
 
@@ -34,9 +38,14 @@ const Dashboard = () => {
                     </>
                 ))}
                 <div className='default-alarmlist'>
-                    <Link to={`/${defaultAlarmlist?.id}`}>
-                        {defaultAlarmlist?.name}
-                    </Link>
+                    <div className='default-alarmlist-name'>
+                        <Link to={`/${defaultAlarmlist?.id}`}>
+                            {defaultAlarmlist[1]?.name}
+                        </Link>
+                    </div>
+                    <div className='default-alarmlist-alarms'>
+
+                    </div>
                 </div>
             </div>
         </div>
