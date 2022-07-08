@@ -53,7 +53,7 @@ const EditAlarmlistForm = ({ edit, setEdit, alarmlist }) => {
                 <div className='alarmlist-input'>
                     {/* -------------------- NAME -------------------- */}
                     <input
-                        name='name'
+                        name={`edit_${alarmlist.id}`}
                         type='text'
                         value={name}
                         placeholder='Name'
