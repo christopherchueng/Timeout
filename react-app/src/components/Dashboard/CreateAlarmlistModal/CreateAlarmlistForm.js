@@ -27,7 +27,7 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
 
     }, [name])
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
         setIsSubmitted(true)
 
@@ -36,7 +36,7 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
             user_id: currentUser?.id
         }
 
-        const alarmlist = await dispatch(createAlarmlist(payload))
+        const alarmlist = dispatch(createAlarmlist(payload))
 
         if (alarmlist) {
             setName('')
