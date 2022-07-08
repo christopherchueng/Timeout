@@ -21,7 +21,7 @@ const Alarm = ({ alarmlist }) => {
                         {alarm.name}
                     </div>
                     <div className='alarm-time'>
-                        {alarm.hour}:{alarm.minutes < 10 ? '0' + alarm.minutes : alarm.minutes} {alarm.merididem}
+                        {alarm.hour}:{alarm.minutes < 10 ? '0' + alarm.minutes : alarm.minutes} {alarm.meridiem}
                     </div>
                 </div>
             ))}

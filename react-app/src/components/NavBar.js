@@ -17,6 +17,11 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to='/create'>
+            <button><img className='add-alarm-icon' title='Upload' src='../../../static/add-alarm-icon.png'></img></button>
+          </NavLink>
+        </li>
+        <li>
           <LogoutButton />
         </li>
       </ul>

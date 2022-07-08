@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import SplashPage from './components/SplashPage';
 import Dashboard from './components/Dashboard';
 import AlarmList from './components/AlarmList';
+import CreateAlarm from './components/Alarm/CreateAlarm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -48,6 +49,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/:id'>
           <AlarmList />
+        </ProtectedRoute>
+        <ProtectedRoute path='/create'>
+          <CreateAlarm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
