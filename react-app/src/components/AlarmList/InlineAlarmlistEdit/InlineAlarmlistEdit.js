@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import EditAlarmlistForm from "../EditAlarmlistForm"
 import DeleteAlarmlistModal from "../DeleteAlarmlistModal"
+import Alarm from "../../Alarm"
 import './InlineAlarmlistEdit.css'
 
 const InlineAlarmlistEdit = ({ alarmlist }) => {
@@ -30,6 +31,9 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                             <div className='delete-alarmlist'>
                                 <DeleteAlarmlistModal alarmlist={alarmlist} />
                             </div>
+                        </div>
+                        <div id='dashboard-alarms'>
+                            <Alarm alarmlist={alarmlist} key={alarmlist.id} />
                         </div>
                     </>
             }

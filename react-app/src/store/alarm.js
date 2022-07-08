@@ -7,8 +7,8 @@ export const loadAlarms = (alarms) => {
     }
 }
 
-export const getAlarms = () => async (dispatch) => {
-    const response = await fetch('/api/alarms/')
+export const getAlarms = (id) => async (dispatch) => {
+    const response = await fetch(`/api/alarms/${id}/alarms`)
 
     const alarms = await response.json()
     dispatch(loadAlarms(alarms))

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAlarmlists } from "../../store/alarmlist"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import InlineAlarmlistEdit from "../AlarmList/InlineAlarmlistEdit/InlineAlarmlistEdit"
+import Alarm from "../Alarm"
 import './Dashboard.css'
 
 const Dashboard = () => {
@@ -28,7 +29,9 @@ const Dashboard = () => {
             </div>
             <div className='alarmlist-content'>
                 {alarmlists && alarmlists.map(alarmlist => (
-                    <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
+                    <>
+                        <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
+                    </>
                 ))}
                 <div className='default-alarmlist'>
                     <Link to={`/${defaultAlarmlist?.id}`}>

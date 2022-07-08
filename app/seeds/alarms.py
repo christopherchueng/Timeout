@@ -134,18 +134,18 @@ def seed_alarms():
         alarmlist_id=4
     )
     alarm16 = Alarm(
-        name="3rd time's the charm",
+        name="Second call!",
         hour=6,
-        minutes=10,
+        minutes=5,
         meridiem='AM',
         repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
         alarmlist_id=4
     )
     alarm17 = Alarm(
-        name="YOURE KIDDING",
+        name="3rd time's the charm",
         hour=6,
-        minutes=15,
+        minutes=10,
         meridiem='AM',
         repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
         snooze=False,
