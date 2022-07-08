@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-const EditAlarmlistForm = forwardRef(({ isEditing, setIsEditing, alarmlist }, ref) => {
+const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
@@ -57,7 +57,6 @@ const EditAlarmlistForm = forwardRef(({ isEditing, setIsEditing, alarmlist }, re
                         id={`edit-input-${alarmlist.id}`}
                         type='text'
                         value={name}
-                        ref={ref}
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
                     />
@@ -76,6 +75,6 @@ const EditAlarmlistForm = forwardRef(({ isEditing, setIsEditing, alarmlist }, re
             </form>
         </>
       );
-})
+}
 
 export default EditAlarmlistForm
