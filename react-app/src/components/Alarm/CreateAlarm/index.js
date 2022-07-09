@@ -11,7 +11,8 @@ const CreateAlarm = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
-    const independentAlarmsObj = useSelector(state => state?.alarm?.independent)
+    const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
+    const defaultAlarmlistArr = Object.values(defaultAlarmlist)
 
 
     const [name, setName] = useState('Alarm')
@@ -20,7 +21,7 @@ const CreateAlarm = () => {
     const [meridiem, setMeridiem] = useState(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
     const [repeat, setRepeat] = useState([])
     const [snooze, setSnooze] = useState(false)
-    const [alarmlist, setAlarmlist] = useState([])
+    const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
     let repeatDays = new Set()
@@ -33,6 +34,7 @@ const CreateAlarm = () => {
     const onSubmit = (e) => {
         e.preventDefault()
         setRepeat([...repeatDays])
+        setIsSubmitted(true)
 
         const payload = {
             name,
@@ -41,7 +43,7 @@ const CreateAlarm = () => {
             meridiem,
             repeat,
             snooze,
-            alarmlist_id: alarmlist[0]
+            alarmlist_id: parseInt(alarmlist)
         }
 
         const alarm = dispatch(createAlarm(payload))
@@ -50,7 +52,12 @@ const CreateAlarm = () => {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
-
+            setRepeat([])
+            setSnooze(false)
+            setAlarmlist(defaultAlarmlistArr[0]?.id)
+            setErrors({})
+            setIsSubmitted(false)
+            history.push('/dashboard')
         }
 
     }
@@ -202,14 +209,11 @@ const CreateAlarm = () => {
                     <select
                         name='alarmlist'
                         value={alarmlist}
-                        defaultValue={independentAlarmsObj[1].id}
                         onChange={e => setAlarmlist(e.target.value)}
-                        // onClick={e => !addToAlarmlist.has(e.target.value) ? addToAlarmlist.add(e.target.value) : addToAlarmlist.delete(e.target.value)}
-
                     >
-                        <option value={independentAlarmsObj[1].id}>None</option>
+                        <option value={defaultAlarmlistArr[0]?.id}>None</option>
                         {alarmlistsArr && alarmlistsArr.map(alarmlist => (
-                            <option value={alarmlist.id} key={alarmlist.id}>{alarmlist.name}</option>
+                            <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
                         ))}
                     </select>
                 </div>
