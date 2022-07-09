@@ -45,11 +45,11 @@ function App() {
         <ProtectedRoute path='/dashboard'>
           <Dashboard />
         </ProtectedRoute>
+        <ProtectedRoute exact path='/create'>
+          <CreateAlarm />
+        </ProtectedRoute>
         <ProtectedRoute path='/:id'>
           <AlarmList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/create'>
-          <CreateAlarm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
