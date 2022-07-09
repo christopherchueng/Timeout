@@ -6,9 +6,7 @@ from app.models import Alarmlist
 # Checking if alarm name exists and if it is within the 150 character range.
 def name_exists(form, field):
     name = field.data
-    if not name:
-        raise ValidationError('Please provide an alarm name.')
-    elif len(name) > 150:
+    if len(name) > 150:
         raise ValidationError('Please provide a name that is at most 150 characters long.')
 
 def check_hour(form, field):

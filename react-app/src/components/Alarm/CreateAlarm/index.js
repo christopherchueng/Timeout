@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
 import { createAlarm } from '../../../store/alarm'
 import Multiselect from 'multiselect-react-dropdown'
+import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import './CreateAlarm.css'
 
 const CreateAlarm = () => {
@@ -32,6 +33,18 @@ const CreateAlarm = () => {
         dispatch(getDefaultAlarmlist())
     }, [dispatch])
 
+    useEffect(() => {
+        const validationErrors = {}
+        if (!name) {
+            validationErrors.name = 'Please provide an alarm name.'
+        }
+        if (name.length > 150) {
+            validationErrors.name = 'Please provide a name that is at most 150 characters long.'
+        }
+
+        setErrors(validationErrors)
+    }, [name])
+
     /* ---------------------- START MULTISELECT INFO ---------------------- */
     let days = {
         options: [
@@ -51,7 +64,7 @@ const CreateAlarm = () => {
     }
     /* ---------------------- END MULTISELECT INFO ---------------------- */
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         setIsSubmitted(true)
 
@@ -66,25 +79,36 @@ const CreateAlarm = () => {
             alarmlist_id: parseInt(alarmlist)
         }
 
-        const alarm = dispatch(createAlarm(payload))
-
+        const alarm = await dispatch(createAlarm(payload))
         if (alarm) {
+            setErrors(alarm)
+        }
+        console.log('are we hitting errors here in onSubmit', errors)
+
+
+        // setIsSubmitted(false)
+        if (alarmlist === 1 && !errors) {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
             setSound('')
             setRepeat([])
             setSnooze(false)
-            setAlarmlist(defaultAlarmlistArr[0]?.id)
-            setErrors({})
+            setAlarmlist(1)
             setIsSubmitted(false)
-            if (alarmlist === 1) {
-                history.push('/dashboard')
-            } else {
-                history.push(`/alarmlists/${alarmlist}`)
-            }
-        } else {
-            setErrors(alarm)
+            setErrors({})
+            history.push('/dashboard')
+        } else if (alarmlist !== 1 && !errors) {
+            setName('Alarm')
+            setHour((todaysDate.getHours() + 24) % 12 || 12)
+            setMinutes(todaysDate.getMinutes())
+            setSound('')
+            setRepeat([])
+            setSnooze(false)
+            setAlarmlist(1)
+            setIsSubmitted(false)
+            setErrors({})
+            history.push(`/alarmlists/${alarmlist}`)
         }
 
     }
@@ -209,6 +233,9 @@ const CreateAlarm = () => {
                         />
                     </div>
                 </div>
+                <div className='alarm-formError-ctn'>
+                    {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-name-error" />}
+                </div>
                 {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
                 <div className='add-to-alarmlist'>
                     <div className='alarm-alarmlist-label'>
@@ -272,7 +299,7 @@ const CreateAlarm = () => {
                     </div>
                 </div>
                 <div className='create-alarm-submit'>
-                    <button type='submit'>Save</button>
+                    <button type='submit' disabled={Object.values(errors).length !== 0}>Save</button>
                 </div>
             </form>
         </div>

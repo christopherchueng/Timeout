@@ -38,7 +38,6 @@ export const getIndependentAlarms = (id) => async (dispatch) => {
 }
 
 export const createAlarm = (payload) => async (dispatch) => {
-    console.log('here in createaAlarm thunk with payload', payload)
     const response = await fetch('/api/alarms/create', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -48,6 +47,14 @@ export const createAlarm = (payload) => async (dispatch) => {
     if (response.ok) {
         const alarm = await response.json()
         dispatch(addAlarm(alarm))
+    } else if (response.status < 500) {
+        const alarm = await response.json();
+        console.log('are we hitting errors', alarm)
+        if (alarm.errors) {
+            return alarm.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
     }
 }
 
