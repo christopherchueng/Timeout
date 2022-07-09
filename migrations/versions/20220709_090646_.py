@@ -1,8 +1,8 @@
 """create_alarms_table
 
-Revision ID: 15c4efc30ff6
+Revision ID: 6714d1376983
 Revises: bb8825d9e75f
-Create Date: 2022-07-07 11:32:39.731067
+Create Date: 2022-07-09 09:06:46.407444
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '15c4efc30ff6'
+revision = '6714d1376983'
 down_revision = 'bb8825d9e75f'
 branch_labels = None
 depends_on = None
@@ -26,7 +26,7 @@ def upgrade():
     sa.Column('meridiem', sa.String(length=10), nullable=False),
     sa.Column('sound', sa.String(length=255), nullable=True),
     sa.Column('repeat', sa.String(length=255), nullable=True),
-    sa.Column('snooze', sa.Boolean(), nullable=False),
+    sa.Column('snooze', sa.Boolean(), nullable=True),
     sa.Column('alarmlist_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['alarmlist_id'], ['alarmlists.id'], ),
     sa.PrimaryKeyConstraint('id')

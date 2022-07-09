@@ -57,7 +57,7 @@ const CreateAlarm = () => {
             setAlarmlist(defaultAlarmlistArr[0]?.id)
             setErrors({})
             setIsSubmitted(false)
-            history.push('/dashboard')
+            // history.push('/dashboard')
         }
 
     }

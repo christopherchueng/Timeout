@@ -11,7 +11,7 @@ class Alarm(db.Model):
     meridiem = db.Column(db.String(10), nullable=False)
     sound = db.Column(db.String(255))
     repeat = db.Column(db.String(255))
-    snooze = db.Column(db.Boolean, nullable=False)
+    snooze = db.Column(db.Boolean)
     alarmlist_id = db.Column(db.Integer, db.ForeignKey('alarmlists.id'), nullable=False)
 
 
