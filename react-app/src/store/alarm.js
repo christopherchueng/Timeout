@@ -49,7 +49,6 @@ export const createAlarm = (payload) => async (dispatch) => {
         dispatch(addAlarm(alarm))
     } else if (response.status < 500) {
         const alarm = await response.json();
-        console.log('are we hitting errors', alarm)
         if (alarm.errors) {
             return alarm.errors;
         }

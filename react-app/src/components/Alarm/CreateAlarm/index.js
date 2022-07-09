@@ -89,10 +89,7 @@ const CreateAlarm = () => {
         if (alarm) {
             setErrors(alarm)
         }
-        console.log('are we hitting errors here in onSubmit', errors)
 
-
-        // setIsSubmitted(false)
         if (alarmlist === 1 && !errors) {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
