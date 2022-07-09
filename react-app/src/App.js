@@ -52,7 +52,7 @@ function App() {
         <ProtectedRoute exact path='/edit'>
           <EditAlarm />
         </ProtectedRoute>
-        <ProtectedRoute path='/:id'>
+        <ProtectedRoute path='/alarmlists/:id'>
           <AlarmList />
         </ProtectedRoute>
       </Switch>

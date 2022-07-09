@@ -18,7 +18,7 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                 :
                     <>
                         <div className='alarmlist-name'>
-                            <Link to={`/${alarmlist.id}`}>
+                            <Link to={`/alarmlists/${alarmlist.id}`}>
                                 {alarmlist.name}
                             </Link>
                         </div>
