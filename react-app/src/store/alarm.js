@@ -38,6 +38,7 @@ export const getIndependentAlarms = (id) => async (dispatch) => {
 }
 
 export const createAlarm = (payload) => async (dispatch) => {
+    console.log('here in createaAlarm thunk with payload', payload)
     const response = await fetch('/api/alarms/create', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

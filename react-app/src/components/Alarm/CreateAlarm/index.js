@@ -12,10 +12,10 @@ const CreateAlarm = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
 
-    const [name, setName] = useState('')
-    const [hour, setHour] = useState(0)
-    const [minutes, setMinutes] = useState(0)
-    const [meridiem, setMeridiem] = useState('')
+    const [name, setName] = useState('Alarm')
+    const [hour, setHour] = useState((todaysDate.getHours() + 24) % 12 || 12)
+    const [minutes, setMinutes] = useState(todaysDate.getMinutes())
+    const [meridiem, setMeridiem] = useState(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
     const [repeat, setRepeat] = useState([])
     const [snooze, setSnooze] = useState(false)
     const [alarmlist, setAlarmlist] = useState([])
@@ -27,6 +27,11 @@ const CreateAlarm = () => {
     useEffect(() => {
         dispatch(getAlarmlists())
     }, [dispatch])
+
+    const onClickAlarmlist = (e) => {
+        !addToAlarmlist.has(e.target.value) ? addToAlarmlist.add(e.target.value) : addToAlarmlist.delete(e.target.value)
+        console.log('ADDING TO ALARMLIST', addToAlarmlist)
+    }
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -45,7 +50,7 @@ const CreateAlarm = () => {
             meridiem,
             repeat,
             snooze,
-            alarmlist
+            alarmlist_id: alarmlist[0]
         }
 
         const alarm = dispatch(createAlarm(payload))
@@ -65,8 +70,9 @@ const CreateAlarm = () => {
                 <div className='alarm-hour'>
                     <select
                         name='hour'
-                        defaultValue={(todaysDate.getHours() + 24) % 12 || 12}
-                        onChange={e => setHour(e.target.value)}
+                        value={hour}
+                        // defaultValue={(todaysDate.getHours() + 24) % 12 || 12}
+                        onChange={e => setHour(parseInt(e.target.value))}
                     >
                         <option value='1'>1</option>
                         <option value='2'>2</option>
@@ -85,8 +91,9 @@ const CreateAlarm = () => {
                 <div className='alarm-minutes'>
                     <select
                         name='minutes'
-                        defaultValue={todaysDate.getMinutes()}
-                        onChange={e => setMinutes(e.target.value)}
+                        value={minutes}
+                        // defaultValue={todaysDate.getMinutes()}
+                        onChange={e => setMinutes(parseInt(e.target.value))}
                     >
                         <option value='0'>00</option>
                         <option value='1'>01</option>
@@ -154,7 +161,8 @@ const CreateAlarm = () => {
                 <div className='alarm-meridiem'>
                     <select
                         name='meridiem'
-                        defaultValue={todaysDate.getHours() >= 12 ? 'PM' : 'AM'}
+                        value={meridiem}
+                        // defaultValue={todaysDate.getHours() >= 12 ? 'PM' : 'AM'}
                         onChange={e => setMeridiem(e.target.value)}
                     >
                         <option value='AM'>AM</option>
@@ -202,9 +210,11 @@ const CreateAlarm = () => {
                 <div className='add-to-alarmlist'>
                     <select
                         name='alarmlist'
-                        defaultValue={[1]}
+                        value={alarmlist}
+                        // defaultValue={[1]}
                         multiple={true}
-                        onClick={e => !addToAlarmlist.has(e.target.value) ? addToAlarmlist.add(e.target.value) : addToAlarmlist.delete(e.target.value)}
+                        onClick={e => onClickAlarmlist(e)}
+                        // onClick={e => !addToAlarmlist.has(e.target.value) ? addToAlarmlist.add(e.target.value) : addToAlarmlist.delete(e.target.value)}
 
                     >
                         {alarmlistsArr && alarmlistsArr.map(alarmlist => (
