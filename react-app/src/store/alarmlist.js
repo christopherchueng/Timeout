@@ -1,8 +1,17 @@
+const LOAD_ONE_ALARMLIST = 'alarmlist/LOAD_ONE_ALARMLIST'
 const LOAD_ALARMLISTS = 'alarmlist/LOAD_ALARMLISTS'
 const LOAD_DEFAULT_ALARMLIST = 'alarmlist/LOAD_DEFAULT_ALARMLIST'
 const POST_ALARMLIST = 'alarmlist/POST_ALARMLIST'
 const EDIT_ALARMLIST = 'alarmlist/EDIT_ALARMLIST'
 const REMOVE_ALARMLIST = 'alarmlist/REMOVE_ALARMLIST'
+
+
+export const loadOneAlarmlist = (alarmlist) => {
+    return {
+        type: LOAD_ONE_ALARMLIST,
+        alarmlist
+    }
+}
 
 export const loadAlarmlists = (alarmlists) => {
     return {
@@ -37,6 +46,14 @@ export const removeAlarmlist = (alarmlistId) => {
         type: REMOVE_ALARMLIST,
         alarmlistId
     }
+}
+
+export const getAlarmlist = (alarmlist_id) => async (dispatch) => {
+    console.log('alarmlist id in thunk', alarmlist_id)
+    const response = await fetch(`/api/alarmlists/${alarmlist_id}`)
+
+    const alarmlist = await response.json()
+    dispatch(loadOneAlarmlist(alarmlist))
 }
 
 export const getAlarmlists = () => async (dispatch) => {
@@ -98,6 +115,10 @@ const initialState = { entries: {}, default: {}, isLoading: true }
 const alarmlistReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
+        case LOAD_ONE_ALARMLIST:
+            newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
+            newState.entries[action.alarmlist.id] = action.alarmlist
+            return newState
         case LOAD_ALARMLISTS:
             newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             action.alarmlists.forEach(alarmlist => { newState.entries[alarmlist.id] = alarmlist })

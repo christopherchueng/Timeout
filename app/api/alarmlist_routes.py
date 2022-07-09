@@ -6,6 +6,13 @@ from app.forms import AlarmlistForm
 alarmlist_routes = Blueprint('alarmlists', __name__)
 
 
+@alarmlist_routes.route('/<int:alarmlist_id>')
+@login_required
+def get_one_alarmlist_no_default(alarmlist_id):
+    # Get all of the current user's alarmlists (no default)
+    alarmlist = Alarmlist.query.get(alarmlist_id)
+    return alarmlist.to_dict()
+
 @alarmlist_routes.route('/')
 @login_required
 def get_alarmlists_no_default():

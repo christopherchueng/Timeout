@@ -36,7 +36,7 @@ const Dashboard = () => {
                 ))}
                 <div className='default-alarmlist'>
                     <div className='default-alarmlist-name'>
-                        <Link to={`/${defaultAlarmlist?.id}`}>
+                        <Link to={`/alarmlists/${defaultAlarmlist[1]?.id}`}>
                             {defaultAlarmlist[1]?.name}
                         </Link>
                     </div>

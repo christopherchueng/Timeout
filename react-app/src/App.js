@@ -49,7 +49,7 @@ function App() {
         <ProtectedRoute exact path='/create'>
           <CreateAlarm />
         </ProtectedRoute>
-        <ProtectedRoute exact path='/edit'>
+        <ProtectedRoute path='/alarms/:id/edit'>
           <EditAlarm />
         </ProtectedRoute>
         <ProtectedRoute path='/alarmlists/:id'>
