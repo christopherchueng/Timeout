@@ -1,6 +1,14 @@
+const LOAD_ONE_ALARM = 'alarm/loadOneAlarm'
 const LOAD_ALARMS = 'alarm/loadAlarms'
 const LOAD_INDEPENDENT_ALARMS = 'alarm/loadIndependentAlarms'
 const ADD_ALARM = 'alarm/addAlarm'
+
+export const loadOneAlarm = (alarm) => {
+    return {
+        type: LOAD_ONE_ALARM,
+        alarm
+    }
+}
 
 export const loadAlarms = (alarms) => {
     return {
@@ -23,15 +31,22 @@ export const addAlarm = (alarm) => {
     }
 }
 
-export const getAlarms = (id) => async (dispatch) => {
-    const response = await fetch(`/api/alarms/${id}/alarms`)
+export const getAlarm = (alarm_id) => async (dispatch) => {
+    const response = await fetch(`/api/alarms/${alarm_id}`)
+
+    const alarm = await response.json()
+    dispatch(loadAlarms(alarm))
+}
+
+export const getAlarms = (alarmlist_id) => async (dispatch) => {
+    const response = await fetch(`/api/alarms/${alarmlist_id}/alarms`)
 
     const alarms = await response.json()
     dispatch(loadAlarms(alarms))
 }
 
-export const getIndependentAlarms = (id) => async (dispatch) => {
-    const response = await fetch(`/api/alarms/${id}/alarms`)
+export const getIndependentAlarms = (alarmlist_id) => async (dispatch) => {
+    const response = await fetch(`/api/alarms/${alarmlist_id}/alarms`)
 
     const alarms = await response.json()
     dispatch(loadAlarms(alarms))
@@ -57,11 +72,15 @@ export const createAlarm = (payload) => async (dispatch) => {
     }
 }
 
-const initialState = { entries: {}, independent: {}, isLoading: true }
+const initialState = { entries: {}, independent: {}, editAlarm: {}, isLoading: true }
 
 const alarmReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
+        case LOAD_ONE_ALARM:
+            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }, editAlarm: {}}
+            newState.editAlarm[action.alarm.id] = action.alarm
+            return newState
         case LOAD_ALARMS:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             action.alarms.forEach(alarm => {

@@ -16,6 +16,12 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages[field] = error
     return errorMessages
 
+@alarm_routes.route('/<int:alarm_id>')
+@login_required
+def get_one_alarm(alarm_id):
+    alarm = Alarm.query.get(alarm_id)
+    return alarm.to_dict()
+
 @alarm_routes.route('/<int:alarmlist_id>/alarms')
 @login_required
 def get_alarmlist_alarms(alarmlist_id):

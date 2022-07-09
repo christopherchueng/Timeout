@@ -49,7 +49,6 @@ export const removeAlarmlist = (alarmlistId) => {
 }
 
 export const getAlarmlist = (alarmlist_id) => async (dispatch) => {
-    console.log('alarmlist id in thunk', alarmlist_id)
     const response = await fetch(`/api/alarmlists/${alarmlist_id}`)
 
     const alarmlist = await response.json()

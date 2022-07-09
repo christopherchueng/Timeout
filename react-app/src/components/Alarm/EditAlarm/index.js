@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
-import { createAlarm } from '../../../store/alarm'
+import { createAlarm, getAlarm } from '../../../store/alarm'
 import Multiselect from 'multiselect-react-dropdown'
 import './EditAlarm.css'
 
-const EditAlarm = ({ alarm }) => {
+const EditAlarm = () => {
+    const { id } = useParams()
+    const alarmId = parseInt(id)
     let todaysDate = new Date()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -14,6 +16,9 @@ const EditAlarm = ({ alarm }) => {
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
+    const alarmObj = useSelector(state => state?.alarm?.entries)
+    console.log('did we get one alarm', alarmObj)
+    const alarm = Object.values(alarmObj)
 
     const [name, setName] = useState(alarm.name)
     const [hour, setHour] = useState(alarm.hour)
@@ -30,6 +35,7 @@ const EditAlarm = ({ alarm }) => {
     useEffect(() => {
         dispatch(getAlarmlists())
         dispatch(getDefaultAlarmlist())
+        dispatch(getAlarm(alarmId))
     }, [dispatch])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
@@ -249,7 +255,7 @@ const EditAlarm = ({ alarm }) => {
                             showCheckbox={true}
                             displayValue="name"
                             placeholder={'Never'}
-                            hidePlaceholder={repeat.length}
+                            // hidePlaceholder={repeat.length}
                         />
                     </div>
                 </div>
