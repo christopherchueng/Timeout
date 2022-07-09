@@ -27,6 +27,8 @@ const CreateAlarm = () => {
     const [alarmlist, setAlarmlist] = useState(1)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [nameFocus, setNameFocus] = useState(false)
+    const [messageCount, setMessageCount] = useState(0)
 
     useEffect(() => {
         dispatch(getAlarmlists())
@@ -43,6 +45,10 @@ const CreateAlarm = () => {
         }
 
         setErrors(validationErrors)
+    }, [name])
+
+    useEffect(() => {
+        setMessageCount(name.length)
     }, [name])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
@@ -228,9 +234,27 @@ const CreateAlarm = () => {
                         <input
                             name='name'
                             type='text'
+                            value={name}
                             defaultValue={'Alarm'}
                             onChange={e => setName(e.target.value)}
+                            onClick={() => setNameFocus(true)}
+                            onBlur={() => setNameFocus(false)}
                         />
+                    </div>
+                    <div className='name-char-count'>
+                        {nameFocus
+                        ?
+                        <>
+                            {messageCount > 150
+                            ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
+                                    <span>{messageCount} / 150</span>
+                                </div>
+                            :   <div className='char-count-cmt'>
+                                    <span>{messageCount} / 150</span>
+                                </div>}
+                        </>
+                        : ''
+                        }
                     </div>
                 </div>
                 <div className='alarm-formError-ctn'>
@@ -263,6 +287,7 @@ const CreateAlarm = () => {
                         <input
                             name='sound'
                             type='text'
+                            value={sound}
                             onChange={e => setSound(e.target.value)}
                         />
                     </div>
