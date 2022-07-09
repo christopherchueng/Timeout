@@ -30,7 +30,7 @@ def seed_alarms():
         hour=7,
         minutes=0,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=2
     )
@@ -39,7 +39,7 @@ def seed_alarms():
         hour=8,
         minutes=30,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=2
     )
@@ -48,7 +48,7 @@ def seed_alarms():
         hour=12,
         minutes=30,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=2
     )
@@ -57,7 +57,7 @@ def seed_alarms():
         hour=1,
         minutes=30,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=2
     )
@@ -66,7 +66,7 @@ def seed_alarms():
         hour=5,
         minutes=30,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=2
     )
@@ -75,7 +75,7 @@ def seed_alarms():
         hour=11,
         minutes=0,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=3
     )
@@ -84,7 +84,7 @@ def seed_alarms():
         hour=2,
         minutes=15,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=3
     )
@@ -93,7 +93,7 @@ def seed_alarms():
         hour=3,
         minutes=30,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=3
     )
@@ -102,7 +102,7 @@ def seed_alarms():
         hour=5,
         minutes=45,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=3
     )
@@ -111,7 +111,7 @@ def seed_alarms():
         hour=6,
         minutes=0,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=3
     )
@@ -120,7 +120,7 @@ def seed_alarms():
         hour=8,
         minutes=0,
         meridiem='PM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=3
     )
@@ -129,7 +129,7 @@ def seed_alarms():
         hour=6,
         minutes=0,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=4
     )
@@ -138,7 +138,7 @@ def seed_alarms():
         hour=6,
         minutes=5,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=4
     )
@@ -147,7 +147,7 @@ def seed_alarms():
         hour=6,
         minutes=10,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=4
     )
@@ -156,7 +156,7 @@ def seed_alarms():
         hour=6,
         minutes=15,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=4
     )
@@ -165,7 +165,7 @@ def seed_alarms():
         hour=6,
         minutes=20,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=4
     )
@@ -174,7 +174,7 @@ def seed_alarms():
         hour=6,
         minutes=25,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=4
     )
@@ -183,7 +183,7 @@ def seed_alarms():
         hour=6,
         minutes=30,
         meridiem='AM',
-        repeat="['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']",
+        repeat="[1, 2, 3, 4, 5]",
         snooze=False,
         alarmlist_id=4
     )
@@ -192,7 +192,7 @@ def seed_alarms():
         hour=9,
         minutes=0,
         meridiem='AM',
-        repeat="['Sunday']",
+        repeat="[0]",
         snooze=False,
         alarmlist_id=1
     )
