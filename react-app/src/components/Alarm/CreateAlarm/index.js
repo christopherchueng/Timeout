@@ -14,7 +14,6 @@ const CreateAlarm = () => {
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
-    let newRepeat = new Set()
 
     const [name, setName] = useState('Alarm')
     const [hour, setHour] = useState((todaysDate.getHours() + 24) % 12 || 12)
@@ -24,7 +23,7 @@ const CreateAlarm = () => {
     const [repeat, setRepeat] = useState([])
     const [snooze, setSnooze] = useState(false)
     // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
-    const [alarmlist, setAlarmlist] = useState(1)
+    const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -50,7 +49,6 @@ const CreateAlarm = () => {
         const daysSelected = selectedList.map(day => day.id)
         setRepeat(daysSelected)
     }
-
     /* ---------------------- END MULTISELECT INFO ---------------------- */
 
     const onSubmit = (e) => {
