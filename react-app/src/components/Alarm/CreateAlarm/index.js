@@ -14,11 +14,11 @@ const CreateAlarm = () => {
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
 
-
     const [name, setName] = useState('Alarm')
     const [hour, setHour] = useState((todaysDate.getHours() + 24) % 12 || 12)
     const [minutes, setMinutes] = useState(todaysDate.getMinutes())
     const [meridiem, setMeridiem] = useState(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
+    const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState([])
     const [snooze, setSnooze] = useState(false)
     const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
@@ -31,9 +31,18 @@ const CreateAlarm = () => {
         dispatch(getDefaultAlarmlist())
     }, [dispatch])
 
+
+    const onClickRepeatDays = e => {
+        if (!repeatDays.has(e.target.value)) {
+            repeatDays.add(e.target.value)
+        } else {
+            repeatDays.delete(e.target.value)
+        }
+    }
+
     const onSubmit = (e) => {
         e.preventDefault()
-        setRepeat([...repeatDays])
+        // setRepeat([...repeatDays])
         setIsSubmitted(true)
 
         const payload = {
@@ -41,7 +50,8 @@ const CreateAlarm = () => {
             hour,
             minutes,
             meridiem,
-            repeat,
+            sound,
+            repeat: `${[...repeatDays]}`,
             snooze,
             alarmlist_id: parseInt(alarmlist)
         }
@@ -52,6 +62,7 @@ const CreateAlarm = () => {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
+            setSound('')
             setRepeat([])
             setSnooze(false)
             setAlarmlist(defaultAlarmlistArr[0]?.id)
@@ -65,11 +76,11 @@ const CreateAlarm = () => {
     return (
         <div className='create-alarm'>
             <form onSubmit={onSubmit}>
+                {/* ------------------------- HOUR ------------------------- */}
                 <div className='alarm-hour'>
                     <select
                         name='hour'
                         value={hour}
-                        // defaultValue={(todaysDate.getHours() + 24) % 12 || 12}
                         onChange={e => setHour(parseInt(e.target.value))}
                     >
                         <option value='1'>1</option>
@@ -86,11 +97,11 @@ const CreateAlarm = () => {
                         <option value='12'>12</option>
                     </select>
                 </div>
+                {/* ------------------------- MINUTES ------------------------- */}
                 <div className='alarm-minutes'>
                     <select
                         name='minutes'
                         value={minutes}
-                        // defaultValue={todaysDate.getMinutes()}
                         onChange={e => setMinutes(parseInt(e.target.value))}
                     >
                         <option value='0'>00</option>
@@ -156,20 +167,21 @@ const CreateAlarm = () => {
                         <option value='60'>60</option>
                     </select>
                 </div>
+                {/* ------------------------- MERIDIEM ------------------------- */}
                 <div className='alarm-meridiem'>
                     <select
                         name='meridiem'
                         value={meridiem}
-                        // defaultValue={todaysDate.getHours() >= 12 ? 'PM' : 'AM'}
                         onChange={e => setMeridiem(e.target.value)}
                     >
                         <option value='AM'>AM</option>
                         <option value='PM'>PM</option>
                     </select>
                 </div>
+                {/* ------------------------- NAME ------------------------- */}
                 <div className='alarm-name'>
                     <div className='alarm-name-label'>
-                        Name
+                        <label htmlFor='name'>Name</label>
                     </div>
                     <div className='alarm-name-input'>
                         <input
@@ -180,42 +192,72 @@ const CreateAlarm = () => {
                         />
                     </div>
                 </div>
+                {/* ------------------------- SOUND ------------------------- */}
+                <div className='alarm-sound'>
+                    <div className='alarm-sound-label'>
+                        <label htmlFor='sound'>Sound</label>
+                    </div>
+                    <div className='alarm-sound-input'>
+                        <input
+                            name='sound'
+                            type='text'
+                            onChange={e => setSound(e.target.value)}
+                        />
+                    </div>
+                </div>
+                {/* ------------------------- REPEAT ------------------------- */}
                 <div className='alarm-repeat'>
-                    <select
-                        name='repeat'
-                        defaultValue={[]}
-                        multiple={true}
-                        onClick={e => !repeatDays.has(e.target.value) ? repeatDays.add(e.target.value) : repeatDays.delete(e.target.value)}
-                    >
-                        <option value='Sunday'>Sunday</option>
-                        <option value='Monday'>Monday</option>
-                        <option value='Tuesday'>Tuesday</option>
-                        <option value='Wednesday'>Wednesday</option>
-                        <option value='Thursday'>Thursday</option>
-                        <option value='Friday'>Friday</option>
-                        <option value='Saturday'>Saturday</option>
-                    </select>
+                    <div className='alarm-repeat-label'>
+                        <label htmlFor='repeat'>Repeat</label>
+                    </div>
+                    <div className='alarm-repeat-select'>
+                        <select
+                            name='repeat'
+                            defaultValue={[]}
+                            multiple={true}
+                            onClick={e => onClickRepeatDays(e)}
+                        >
+                            <option value='Sunday'>Sunday</option>
+                            <option value='Monday'>Monday</option>
+                            <option value='Tuesday'>Tuesday</option>
+                            <option value='Wednesday'>Wednesday</option>
+                            <option value='Thursday'>Thursday</option>
+                            <option value='Friday'>Friday</option>
+                            <option value='Saturday'>Saturday</option>
+                        </select>
+                    </div>
                 </div>
+                {/* ------------------------- SNOOZE ------------------------- */}
                 <div className='alarm-snooze'>
-                    <label htmlFor='snooze'>Snooze</label>
-                    <input
-                        name='snooze'
-                        type='checkbox'
-                        value={snooze}
-                        onChange={e => setSnooze(e.target.value)}
-                    />
+                    <div className='alarm-snooze-label'>
+                        <label htmlFor='snooze'>Snooze</label>
+                    </div>
+                    <div className='alarm-snooze-input'>
+                        <input
+                            name='snooze'
+                            type='checkbox'
+                            value={snooze}
+                            onChange={e => setSnooze(e.target.value)}
+                        />
+                    </div>
                 </div>
+                {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
                 <div className='add-to-alarmlist'>
-                    <select
-                        name='alarmlist'
-                        value={alarmlist}
-                        onChange={e => setAlarmlist(e.target.value)}
-                    >
-                        <option value={defaultAlarmlistArr[0]?.id}>None</option>
-                        {alarmlistsArr && alarmlistsArr.map(alarmlist => (
-                            <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
-                        ))}
-                    </select>
+                    <div className='alarm-alarmlist-label'>
+                        <label htmlFor='alarmlist'>Add to Alarmlist</label>
+                    </div>
+                    <div className='alarm-alarmlist-select'>
+                        <select
+                            name='alarmlist'
+                            value={alarmlist}
+                            onChange={e => setAlarmlist(e.target.value)}
+                        >
+                            <option value={defaultAlarmlistArr[0]?.id}>None</option>
+                            {alarmlistsArr && alarmlistsArr.map(alarmlist => (
+                                <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
                 <div className='create-alarm-submit'>
                     <button type='submit'>Save</button>
