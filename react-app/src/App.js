@@ -11,6 +11,7 @@ import SplashPage from './components/SplashPage';
 import Dashboard from './components/Dashboard';
 import AlarmList from './components/AlarmList';
 import CreateAlarm from './components/Alarm/CreateAlarm';
+import EditAlarm from './components/Alarm/EditAlarm'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute exact path='/create'>
           <CreateAlarm />
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/edit'>
+          <EditAlarm />
         </ProtectedRoute>
         <ProtectedRoute path='/:id'>
           <AlarmList />

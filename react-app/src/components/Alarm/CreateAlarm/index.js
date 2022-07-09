@@ -87,6 +87,7 @@ const CreateAlarm = () => {
 
     return (
         <div className='create-alarm'>
+            <h1>Add Alarm</h1>
             <form onSubmit={onSubmit}>
                 {/* ------------------------- HOUR ------------------------- */}
                 <div className='alarm-hour'>
