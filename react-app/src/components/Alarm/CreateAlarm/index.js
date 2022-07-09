@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
 import { createAlarm } from '../../../store/alarm'
+import Multiselect from 'multiselect-react-dropdown'
 import './CreateAlarm.css'
 
 const CreateAlarm = () => {
@@ -13,6 +14,7 @@ const CreateAlarm = () => {
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
+    let newRepeat = new Set()
 
     const [name, setName] = useState('Alarm')
     const [hour, setHour] = useState((todaysDate.getHours() + 24) % 12 || 12)
@@ -21,28 +23,38 @@ const CreateAlarm = () => {
     const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState([])
     const [snooze, setSnooze] = useState(false)
-    const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
+    // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
+    const [alarmlist, setAlarmlist] = useState(1)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
-    let repeatDays = new Set()
 
     useEffect(() => {
         dispatch(getAlarmlists())
         dispatch(getDefaultAlarmlist())
     }, [dispatch])
 
-
-    const onClickRepeatDays = e => {
-        if (!repeatDays.has(e.target.value)) {
-            repeatDays.add(e.target.value)
-        } else {
-            repeatDays.delete(e.target.value)
-        }
+    /* ---------------------- START MULTISELECT INFO ---------------------- */
+    let days = {
+        options: [
+            {name: 'Sunday', id: 0},
+            {name: 'Monday', id: 1},
+            {name: 'Tuesday', id: 2},
+            {name: 'Wednesday', id: 3},
+            {name: 'Thursday', id: 4},
+            {name: 'Friday', id: 5},
+            {name: 'Saturday', id: 6}
+        ]
     }
+
+    const onSelect = (selectedList, selectedItem) => {
+        const daysSelected = selectedList.map(day => day.id)
+        setRepeat(daysSelected)
+    }
+
+    /* ---------------------- END MULTISELECT INFO ---------------------- */
 
     const onSubmit = (e) => {
         e.preventDefault()
-        // setRepeat([...repeatDays])
         setIsSubmitted(true)
 
         const payload = {
@@ -51,7 +63,7 @@ const CreateAlarm = () => {
             minutes,
             meridiem,
             sound,
-            repeat: `${[...repeatDays]}`,
+            repeat: repeat.toString(),
             snooze,
             alarmlist_id: parseInt(alarmlist)
         }
@@ -192,6 +204,24 @@ const CreateAlarm = () => {
                         />
                     </div>
                 </div>
+                {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
+                <div className='add-to-alarmlist'>
+                    <div className='alarm-alarmlist-label'>
+                        <label htmlFor='alarmlist'>Add to Alarmlist</label>
+                    </div>
+                    <div className='alarm-alarmlist-select'>
+                        <select
+                            name='alarmlist'
+                            value={alarmlist}
+                            onChange={e => setAlarmlist(e.target.value)}
+                        >
+                            <option value={defaultAlarmlistArr[0]?.id}>None</option>
+                            {alarmlistsArr && alarmlistsArr.map(alarmlist => (
+                                <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
                 {/* ------------------------- SOUND ------------------------- */}
                 <div className='alarm-sound'>
                     <div className='alarm-sound-label'>
@@ -211,20 +241,15 @@ const CreateAlarm = () => {
                         <label htmlFor='repeat'>Repeat</label>
                     </div>
                     <div className='alarm-repeat-select'>
-                        <select
-                            name='repeat'
-                            defaultValue={[]}
-                            multiple={true}
-                            onClick={e => onClickRepeatDays(e)}
-                        >
-                            <option value='Sunday'>Sunday</option>
-                            <option value='Monday'>Monday</option>
-                            <option value='Tuesday'>Tuesday</option>
-                            <option value='Wednesday'>Wednesday</option>
-                            <option value='Thursday'>Thursday</option>
-                            <option value='Friday'>Friday</option>
-                            <option value='Saturday'>Saturday</option>
-                        </select>
+                        <Multiselect
+                            options={days.options}
+                            onSelect={onSelect}
+                            onRemove={onSelect}
+                            showCheckbox={true}
+                            displayValue="name"
+                            placeholder={'Never'}
+                            hidePlaceholder={repeat.length}
+                        />
                     </div>
                 </div>
                 {/* ------------------------- SNOOZE ------------------------- */}
@@ -239,24 +264,6 @@ const CreateAlarm = () => {
                             value={snooze}
                             onChange={e => setSnooze(e.target.value)}
                         />
-                    </div>
-                </div>
-                {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
-                <div className='add-to-alarmlist'>
-                    <div className='alarm-alarmlist-label'>
-                        <label htmlFor='alarmlist'>Add to Alarmlist</label>
-                    </div>
-                    <div className='alarm-alarmlist-select'>
-                        <select
-                            name='alarmlist'
-                            value={alarmlist}
-                            onChange={e => setAlarmlist(e.target.value)}
-                        >
-                            <option value={defaultAlarmlistArr[0]?.id}>None</option>
-                            {alarmlistsArr && alarmlistsArr.map(alarmlist => (
-                                <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
-                            ))}
-                        </select>
                     </div>
                 </div>
                 <div className='create-alarm-submit'>
