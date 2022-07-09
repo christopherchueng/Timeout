@@ -31,7 +31,7 @@ class AlarmForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), name_exists])
     hour = IntegerField('hour', validators=[DataRequired(), check_hour])
     minutes = IntegerField('minutes', validators=[DataRequired(), check_minutes])
-    meridiem = StringField('meridiem', validators=[DataRequired(), check_meridiem])
+    meridiem = StringField('meridiem', validators=[DataRequired()])
     sound = StringField('sound')
     repeat = StringField('repeat')
     snooze = BooleanField('snooze')

@@ -19,10 +19,8 @@ def validation_errors_to_error_messages(validation_errors):
 @alarm_routes.route('/<int:alarmlist_id>/alarms')
 @login_required
 def get_alarmlist_alarms(alarmlist_id):
-    print('---------------------- IS THIS INT OR STR----------------------', type(alarmlist_id))
     if alarmlist_id == 1:
         independent_alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id)).all()
-        print('---------------------- SO WHERE YOU AT BRUH----------------------', independent_alarms)
         return jsonify([alarm.to_dict() for alarm in independent_alarms])
     else:
         alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id), Alarm.alarmlist_id != 1).all()

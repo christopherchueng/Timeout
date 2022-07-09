@@ -23,7 +23,7 @@ const CreateAlarm = () => {
     const [repeat, setRepeat] = useState([])
     const [snooze, setSnooze] = useState(false)
     // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
-    const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
+    const [alarmlist, setAlarmlist] = useState(1)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -78,7 +78,9 @@ const CreateAlarm = () => {
             setAlarmlist(defaultAlarmlistArr[0]?.id)
             setErrors({})
             setIsSubmitted(false)
-            // history.push('/dashboard')
+            history.push('/dashboard')
+        } else {
+            setErrors(alarm)
         }
 
     }
