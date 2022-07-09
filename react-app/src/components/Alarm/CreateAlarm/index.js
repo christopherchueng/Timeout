@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAlarmlists } from '../../../store/alarmlist'
+import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
 import { createAlarm } from '../../../store/alarm'
 import './CreateAlarm.css'
 
@@ -11,6 +11,8 @@ const CreateAlarm = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
+    const independentAlarmsObj = useSelector(state => state?.alarm?.independent)
+
 
     const [name, setName] = useState('Alarm')
     const [hour, setHour] = useState((todaysDate.getHours() + 24) % 12 || 12)
@@ -22,26 +24,15 @@ const CreateAlarm = () => {
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
     let repeatDays = new Set()
-    let addToAlarmlist = new Set()
 
     useEffect(() => {
         dispatch(getAlarmlists())
+        dispatch(getDefaultAlarmlist())
     }, [dispatch])
-
-    const onClickAlarmlist = (e) => {
-        !addToAlarmlist.has(e.target.value) ? addToAlarmlist.add(e.target.value) : addToAlarmlist.delete(e.target.value)
-        console.log('ADDING TO ALARMLIST', addToAlarmlist)
-    }
 
     const onSubmit = (e) => {
         e.preventDefault()
         setRepeat([...repeatDays])
-
-        if (alarmlist.length === 0) {
-            setAlarmlist([1])
-        } else {
-            setAlarmlist([...addToAlarmlist])
-        }
 
         const payload = {
             name,
@@ -211,12 +202,12 @@ const CreateAlarm = () => {
                     <select
                         name='alarmlist'
                         value={alarmlist}
-                        // defaultValue={[1]}
-                        multiple={true}
-                        onClick={e => onClickAlarmlist(e)}
+                        defaultValue={independentAlarmsObj[1].id}
+                        onChange={e => setAlarmlist(e.target.value)}
                         // onClick={e => !addToAlarmlist.has(e.target.value) ? addToAlarmlist.add(e.target.value) : addToAlarmlist.delete(e.target.value)}
 
                     >
+                        <option value={independentAlarmsObj[1].id}>None</option>
                         {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                             <option value={alarmlist.id} key={alarmlist.id}>{alarmlist.name}</option>
                         ))}
