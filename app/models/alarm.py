@@ -1,4 +1,25 @@
 from .db import db
+from datetime import datetime
+
+
+def convert_repeat(day_str):
+    weekdays_mapping = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+    repeat_days = []
+    print('----------------------- THIS IS WHAT DAY_STR IS WHEN PASSED IN -----------------------', day_str)
+    if len(day_str) == 1:
+        day_str = [day_str]
+        print('----------------------- THIS IS WHAT DAY_STR IS WHEN ONLY 1 ELEMENT -----------------------', day_str)
+    elif len(day_str) == 0:
+        day_str = ''
+    else:
+        day_str = day_str.split(',')
+        print('----------------------- THIS IS WHAT DAY_STR IS WHEN MULTIPLE ELES -----------------------', day_str)
+
+    for num in day_str:
+        for i, day in enumerate(weekdays_mapping):
+            if int(num) == i:
+                repeat_days.append({'name': day, 'id': i})
+    return repeat_days
 
 
 class Alarm(db.Model):
@@ -18,9 +39,6 @@ class Alarm(db.Model):
     # Many-to-One relationship with Alarmlists
     alarmlists = db.relationship('Alarmlist', back_populates='alarms', cascade="all, delete")
 
-    def convert_repeat(self):
-        repeat_list = dict(self.repeat)
-
 
     def to_dict(self):
         return {
@@ -30,7 +48,17 @@ class Alarm(db.Model):
             'minutes': self.minutes,
             'meridiem': self.meridiem,
             'sound': self.sound,
-            'repeat': self.repeat,
+            'repeat': convert_repeat(self.repeat),
             'snooze': self.snooze,
+            'alarmlistId': self.alarmlist_id
+        }
+
+    def view_alarmlist_alarms(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'hour': self.hour,
+            'minutes': self.minutes,
+            'meridiem': self.meridiem,
             'alarmlistId': self.alarmlist_id
         }

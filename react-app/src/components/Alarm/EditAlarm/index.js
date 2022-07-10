@@ -33,7 +33,7 @@ const EditAlarm = () => {
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
-    const [messageCount, setMessageCount] = useState(0)
+    const [messageCount, setMessageCount] = useState(name?.length)
 
     useEffect(() => {
         if (alarm === undefined) {
