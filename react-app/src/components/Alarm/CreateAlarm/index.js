@@ -102,6 +102,7 @@ const CreateAlarm = () => {
             setErrors({})
             history.push('/dashboard')
         } else if (alarmlist !== 1 && !errors) {
+            console.log('hello what is this alarmlist', alarmlist)
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())

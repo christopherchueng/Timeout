@@ -34,7 +34,7 @@ class Alarm(db.Model):
 
 
     # Many-to-One relationship with Alarmlists
-    alarmlists = db.relationship('Alarmlist', back_populates='alarms', cascade="all, delete")
+    alarmlists = db.relationship('Alarmlist', back_populates='alarms')
 
 
     def to_dict(self):

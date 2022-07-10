@@ -1,12 +1,14 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getAlarms } from "../../store/alarm"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useHistory } from "react-router-dom"
+import { deleteAlarm } from "../../store/alarm"
 
 import './Alarm.css'
 
 const Alarm = ({ alarmlist }) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     // Only use this id below for when you are on the alarmlists/:id page! DO NOT USE WHEN ON DASHBOARD
     const { id } = useParams()
     const alarmsObj = useSelector(state => state?.alarm?.entries)
@@ -15,6 +17,12 @@ const Alarm = ({ alarmlist }) => {
     useEffect(() => {
         dispatch(getAlarms(alarmlist?.id))
     }, [dispatch])
+
+    const onClick = (e, alarm) => {
+        e.preventDefault()
+        dispatch(deleteAlarm(alarm.id))
+        history.push(`/alarmlists/${alarmlist.id}`)
+    }
 
     return (
         <div className='alarm-info'>
@@ -35,7 +43,7 @@ const Alarm = ({ alarmlist }) => {
                                 <Link to={`/alarms/${alarm.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
                         </div>
                         <div className='alarm-delete-btn'>
-                            <button type='button'>
+                            <button type='button' onClick={e => onClick(e, alarm)}>
                                 <span className="fa-solid fa-trash"></span>
                             </button>
                         </div>

@@ -74,3 +74,13 @@ def update_alarm(alarm_id):
         db.session.commit()
         return alarm.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@alarm_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_alarm(id):
+    alarm = Alarm.query.get(id)
+
+    db.session.delete(alarm)
+    db.session.commit()
+
+    return alarm.to_dict()

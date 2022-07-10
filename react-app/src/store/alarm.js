@@ -3,6 +3,7 @@ const LOAD_ALARMS = 'alarm/loadAlarms'
 const LOAD_INDEPENDENT_ALARMS = 'alarm/loadIndependentAlarms'
 const ADD_ALARM = 'alarm/addAlarm'
 const EDIT_ALARM = 'alarm/editAlarm'
+const REMOVE_ALARM = 'alarm/removeAlarm'
 
 export const loadOneAlarm = (alarm) => {
     return {
@@ -36,6 +37,13 @@ export const editAlarm = (alarm) => {
     return {
         type: EDIT_ALARM,
         alarm
+    }
+}
+
+export const removeAlarm = (alarmId) => {
+    return {
+        type: REMOVE_ALARM,
+        alarmId
     }
 }
 
@@ -101,6 +109,18 @@ export const updateAlarm = (payload) => async (dispatch) => {
     }
 }
 
+export const deleteAlarm = (alarmId) => async (dispatch) => {
+    const response = await fetch(`/api/alarms/${alarmId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const alarm = await response.json()
+        dispatch(removeAlarm(alarmId))
+        return alarm
+    }
+}
+
 const initialState = { entries: {}, independent: {}, isLoading: true }
 
 const alarmReducer = (state = initialState, action) => {
@@ -137,6 +157,16 @@ const alarmReducer = (state = initialState, action) => {
                 return newState
             } else {
                 newState.entries[action.alarm.id] = action.alarm
+            }
+            return newState
+        case REMOVE_ALARM:
+            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
+            if (action.alarm.alarmlistId === 1) {
+                delete newState.independent[action.alarmId]
+                return newState
+            } else {
+                newState.entries[action.alarm.id] = action.alarm
+                delete newState.entries[action.alarmId]
             }
             return newState
         default:
