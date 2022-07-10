@@ -30,6 +30,8 @@ const CreateAlarm = () => {
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(0)
 
+    console.log('repeat', repeat)
+
     useEffect(() => {
         dispatch(getAlarmlists())
         dispatch(getDefaultAlarmlist())

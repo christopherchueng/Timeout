@@ -78,13 +78,8 @@ const alarmReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case LOAD_ONE_ALARM:
-            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
-            if (action.alarm.alarmlistId === 1) {
-                newState.independent[action.alarm.id] = action.alarm
-                return newState
-            } else {
-                newState.entries[action.alarm.id] = action.alarm
-            }
+            newState = { ...state, entries: { ...state.entries }}
+            newState.entries[action.alarm.id] = action.alarm
             return newState
         case LOAD_ALARMS:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}

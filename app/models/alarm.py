@@ -18,7 +18,7 @@ class Alarm(db.Model):
     # Many-to-One relationship with Alarmlists
     alarmlists = db.relationship('Alarmlist', back_populates='alarms', cascade="all, delete")
 
-    def convert_repeat(self.repeat):
+    def convert_repeat(self):
         repeat_list = dict(self.repeat)
 
 

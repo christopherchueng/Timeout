@@ -18,8 +18,8 @@ const EditAlarm = () => {
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
     const alarmObj = useSelector(state => state?.alarm?.entries)
+    const alarmArr = Object.entries(alarmObj)
     const alarm = alarmObj[id]
-    console.log('this is the alarm were working with', alarm)
 
     const [name, setName] = useState(alarm?.name)
     const [hour, setHour] = useState(alarm?.hour)
@@ -36,9 +36,11 @@ const EditAlarm = () => {
     const [messageCount, setMessageCount] = useState(0)
 
     useEffect(() => {
-        dispatch(getAlarmlists())
-        dispatch(getDefaultAlarmlist())
-        dispatch(getAlarm(alarmId))
+        if (alarm === undefined) {
+            dispatch(getAlarmlists())
+            dispatch(getDefaultAlarmlist())
+            dispatch(getAlarm(alarmId))
+        }
     }, [dispatch])
 
     useEffect(() => {
@@ -125,7 +127,7 @@ const EditAlarm = () => {
     return (
         <div id='edit-alarm'>
             <h1>Edit Alarm</h1>
-            <form onSubmit={onSubmit}>
+            {alarm !== undefined && <form onSubmit={onSubmit}>
                 {/* ------------------------- HOUR ------------------------- */}
                 <div className='alarm-hour'>
                     <select
@@ -238,6 +240,7 @@ const EditAlarm = () => {
                             name='name'
                             type='text'
                             value={name}
+                            // defaultValue={name}
                             onChange={e => setName(e.target.value)}
                             onClick={() => setNameFocus(true)}
                             onBlur={() => setNameFocus(false)}
@@ -323,7 +326,7 @@ const EditAlarm = () => {
                 <div className='create-alarm-submit'>
                     <button type='submit' disabled={Object.values(errors).length !== 0}>Save</button>
                 </div>
-            </form>
+            </form>}
         </div>
     )
 }
