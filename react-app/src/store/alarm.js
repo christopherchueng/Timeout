@@ -72,14 +72,19 @@ export const createAlarm = (payload) => async (dispatch) => {
     }
 }
 
-const initialState = { entries: {}, independent: {}, editAlarm: {}, isLoading: true }
+const initialState = { entries: {}, independent: {}, isLoading: true }
 
 const alarmReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case LOAD_ONE_ALARM:
-            newState = { ...state, entries: { }, independent: { ...state.independent }, editAlarm: { ...state.editAlarm }}
-            newState.editAlarm[action.alarm.id] = action.alarm
+            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
+            if (action.alarm.alarmlistId === 1) {
+                newState.independent[action.alarm.id] = action.alarm
+                return newState
+            } else {
+                newState.entries[action.alarm.id] = action.alarm
+            }
             return newState
         case LOAD_ALARMS:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}

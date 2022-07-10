@@ -32,7 +32,7 @@ const Alarm = ({ alarmlist }) => {
                     {id ?
                     <div className='alarm-setting-btns'>
                         <div className='alarm-edit-btn'>
-                                <Link to={`/alarms/${id}/edit`}><span className="fa-solid fa-pen"></span></Link>
+                                <Link to={`/alarms/${alarm.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
                         </div>
                         <div className='alarm-delete-btn'>
                             <button type='button'>

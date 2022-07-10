@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
-import { createAlarm, getAlarm } from '../../../store/alarm'
+import { getAlarm } from '../../../store/alarm'
+import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import Multiselect from 'multiselect-react-dropdown'
 import './EditAlarm.css'
 
@@ -17,26 +18,44 @@ const EditAlarm = () => {
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
     const alarmObj = useSelector(state => state?.alarm?.entries)
-    console.log('did we get one alarm', alarmlistsObj)
-    const alarm = Object.values(alarmObj)
+    const alarm = alarmObj[id]
+    console.log('this is the alarm were working with', alarm)
 
-    const [name, setName] = useState(alarm.name)
-    const [hour, setHour] = useState(alarm.hour)
-    const [minutes, setMinutes] = useState(alarm.minutes)
-    const [meridiem, setMeridiem] = useState(alarm.meridiem)
-    const [sound, setSound] = useState(alarm.sound)
-    const [repeat, setRepeat] = useState(alarm.repeat)
-    const [snooze, setSnooze] = useState(alarm.snooze)
+    const [name, setName] = useState(alarm?.name)
+    const [hour, setHour] = useState(alarm?.hour)
+    const [minutes, setMinutes] = useState(alarm?.minutes)
+    const [meridiem, setMeridiem] = useState(alarm?.meridiem)
+    const [sound, setSound] = useState(alarm?.sound)
+    const [repeat, setRepeat] = useState(alarm?.repeat)
+    const [snooze, setSnooze] = useState(alarm?.snooze)
     // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
-    const [alarmlist, setAlarmlist] = useState(alarm.alarmlist)
+    const [alarmlist, setAlarmlist] = useState(alarm?.alarmlist)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [nameFocus, setNameFocus] = useState(false)
+    const [messageCount, setMessageCount] = useState(0)
 
     useEffect(() => {
         dispatch(getAlarmlists())
         dispatch(getDefaultAlarmlist())
         dispatch(getAlarm(alarmId))
     }, [dispatch])
+
+    useEffect(() => {
+        const validationErrors = {}
+        if (!name) {
+            validationErrors.name = 'Please provide an alarm name.'
+        }
+        if (name?.length > 150) {
+            validationErrors.name = 'Please provide a name that is at most 150 characters long.'
+        }
+
+        setErrors(validationErrors)
+    }, [name])
+
+    useEffect(() => {
+        setMessageCount(name?.length)
+    }, [name])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
     let days = {
@@ -57,7 +76,7 @@ const EditAlarm = () => {
     }
     /* ---------------------- END MULTISELECT INFO ---------------------- */
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         setIsSubmitted(true)
 
@@ -72,21 +91,33 @@ const EditAlarm = () => {
             alarmlist_id: parseInt(alarmlist)
         }
 
-        const alarm = dispatch(createAlarm(payload))
-
+        const alarm = await dispatch((payload))
         if (alarm) {
+            setErrors(alarm)
+        }
+
+        if (alarmlist === 1 && !errors) {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
             setSound('')
             setRepeat([])
             setSnooze(false)
-            setAlarmlist(defaultAlarmlistArr[0]?.id)
-            setErrors({})
+            setAlarmlist(1)
             setIsSubmitted(false)
+            setErrors({})
             history.push('/dashboard')
-        } else {
-            setErrors(alarm)
+        } else if (alarmlist !== 1 && !errors) {
+            setName('Alarm')
+            setHour((todaysDate.getHours() + 24) % 12 || 12)
+            setMinutes(todaysDate.getMinutes())
+            setSound('')
+            setRepeat([])
+            setSnooze(false)
+            setAlarmlist(1)
+            setIsSubmitted(false)
+            setErrors({})
+            history.push(`/alarmlists/${alarmlist}`)
         }
 
     }
@@ -206,10 +237,30 @@ const EditAlarm = () => {
                         <input
                             name='name'
                             type='text'
-                            defaultValue={'Alarm'}
+                            value={name}
                             onChange={e => setName(e.target.value)}
+                            onClick={() => setNameFocus(true)}
+                            onBlur={() => setNameFocus(false)}
                         />
+                        <div className='name-char-count'>
+                            {nameFocus && alarm
+                            ?
+                            <>
+                                {messageCount > 150 && alarm
+                                ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
+                                        <span>{messageCount} / 150</span>
+                                    </div>
+                                :   <div className='char-count-cmt'>
+                                        <span>{messageCount} / 150</span>
+                                    </div>}
+                            </>
+                            : ''
+                            }
+                        </div>
                     </div>
+                </div>
+                <div className='alarm-formError-ctn'>
+                    {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-name-error" />}
                 </div>
                 {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
                 <div className='add-to-alarmlist'>
@@ -235,11 +286,7 @@ const EditAlarm = () => {
                         <label htmlFor='sound'>Sound</label>
                     </div>
                     <div className='alarm-sound-input'>
-                        <input
-                            name='sound'
-                            type='text'
-                            onChange={e => setSound(e.target.value)}
-                        />
+                        sound AWS here...
                     </div>
                 </div>
                 {/* ------------------------- REPEAT ------------------------- */}
@@ -274,7 +321,7 @@ const EditAlarm = () => {
                     </div>
                 </div>
                 <div className='create-alarm-submit'>
-                    <button type='submit'>Save</button>
+                    <button type='submit' disabled={Object.values(errors).length !== 0}>Save</button>
                 </div>
             </form>
         </div>

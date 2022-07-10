@@ -281,12 +281,7 @@ const CreateAlarm = () => {
                         <label htmlFor='sound'>Sound</label>
                     </div>
                     <div className='alarm-sound-input'>
-                        <input
-                            name='sound'
-                            type='text'
-                            value={sound}
-                            onChange={e => setSound(e.target.value)}
-                        />
+                        sound AWS here...
                     </div>
                 </div>
                 {/* ------------------------- REPEAT ------------------------- */}
