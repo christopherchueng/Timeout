@@ -299,6 +299,7 @@ const CreateAlarm = () => {
                             placeholder={'Never'}
                             hidePlaceholder={repeat.length}
                             avoidHighlightFirstOption={true}
+                            showArrow={true}
                         />
                     </div>
                 </div>

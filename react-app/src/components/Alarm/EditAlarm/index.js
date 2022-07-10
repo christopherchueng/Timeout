@@ -308,6 +308,7 @@ const EditAlarm = () => {
                             selectedValues={repeat}
                             placeholder={'Never'}
                             avoidHighlightFirstOption={true}
+                            showArrow={true}
                             // hidePlaceholder={repeat.length}
                         />
                     </div>
