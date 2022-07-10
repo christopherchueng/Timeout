@@ -69,7 +69,6 @@ export const getIndependentAlarms = (alarmlist_id) => async (dispatch) => {
 }
 
 export const createAlarm = (payload) => async (dispatch) => {
-    console.log('what am I sending to backend?????', payload)
     const response = await fetch('/api/alarms/create', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -127,7 +126,7 @@ const alarmReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case LOAD_ONE_ALARM:
-            newState = { ...state, entries: { }}
+            newState = { ...state, entries: { ...state.entries }}
             newState.entries[action.alarm.id] = action.alarm
             return newState
         case LOAD_ALARMS:

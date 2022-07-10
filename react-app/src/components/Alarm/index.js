@@ -15,7 +15,10 @@ const Alarm = ({ alarmlist }) => {
     const alarmsArr = Object.values(alarmsObj)
 
     useEffect(() => {
-        dispatch(getAlarms(alarmlist?.id))
+        // Need the or statement here because Alarm is used in alarmlist/:id AND dashboard
+        // parseInt(id) will be used for when on the alarmlist page
+        // alarmlist?.id is used for dashboard because parseInt(id) will be rendered as NaN.
+        dispatch(getAlarms(parseInt(id) || alarmlist?.id))
     }, [dispatch])
 
     const onClick = (e, alarm) => {
@@ -27,9 +30,8 @@ const Alarm = ({ alarmlist }) => {
     return (
         <div className='alarm-info'>
             {alarmsObj && alarmsArr.map(alarm => (
-                alarmlist.id === alarm.alarmlistId &&
-                <>
-                    <div key={alarm.id}>
+                <div key={alarm.id}>
+                    <div>
                         <div className='alarm-name'>
                             {alarm.name}
                         </div>
@@ -40,7 +42,7 @@ const Alarm = ({ alarmlist }) => {
                     {id ?
                     <div className='alarm-setting-btns'>
                         <div className='alarm-edit-btn'>
-                                <Link to={`/alarms/${alarm.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
+                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
                         </div>
                         <div className='alarm-delete-btn'>
                             <button type='button' onClick={e => onClick(e, alarm)}>
@@ -49,7 +51,7 @@ const Alarm = ({ alarmlist }) => {
                         </div>
                     </div>
                     : ""}
-                </>
+                </div>
             ))}
 
         </div>

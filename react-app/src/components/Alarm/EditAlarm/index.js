@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
-import { getAlarm, updateAlarm } from '../../../store/alarm'
+import { getAlarm, getAlarms, updateAlarm } from '../../../store/alarm'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import Multiselect from 'multiselect-react-dropdown'
 import './EditAlarm.css'
@@ -17,9 +17,10 @@ const EditAlarm = () => {
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
-    const alarmObj = useSelector(state => state?.alarm?.entries)
+    const alarmObj = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
     const alarmArr = Object.entries(alarmObj)
-    const alarm = alarmObj[id]
+    const alarm = alarmObj[alarmId]
+    console.log('what is this alarmObj', alarm)
 
     const [name, setName] = useState(alarm?.name)
     const [hour, setHour] = useState(alarm?.hour)
@@ -29,18 +30,19 @@ const EditAlarm = () => {
     const [repeat, setRepeat] = useState(alarm?.repeat)
     const [snooze, setSnooze] = useState(alarm?.snooze)
     // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
-    const [alarmlist, setAlarmlist] = useState(alarm?.alarmlist)
+    const [alarmlist, setAlarmlist] = useState(alarm?.alarmlistId)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
-    const [messageCount, setMessageCount] = useState(name?.length)
-    console.log('repeat here', alarm)
+    const [messageCount, setMessageCount] = useState(alarm?.name?.length)
+    console.log('why the name dont work', name)
 
     useEffect(() => {
         // if (alarm === undefined) {
+            dispatch(getAlarm(alarmId))
             dispatch(getAlarmlists())
             dispatch(getDefaultAlarmlist())
-            dispatch(getAlarm(alarmId))
+            // dispatch(getAlarms(alarm?.alarmlistId))
         // }
     }, [dispatch])
 
@@ -57,8 +59,8 @@ const EditAlarm = () => {
     }, [name])
 
     useEffect(() => {
-        setMessageCount(name?.length)
-    }, [name])
+        setMessageCount(alarm?.name?.length)
+    }, [name, alarm])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
     let days = {
@@ -95,12 +97,12 @@ const EditAlarm = () => {
             alarmlist_id: parseInt(alarmlist)
         }
 
-        const alarm = await dispatch(updateAlarm(payload))
-        if (alarm) {
-            setErrors(alarm)
+        const errorData = await dispatch(updateAlarm(payload))
+        if (errorData) {
+            setErrors(errorData)
         }
 
-        if (alarmlist === 1 && !errors) {
+        if (alarmObj) {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
@@ -110,18 +112,12 @@ const EditAlarm = () => {
             setAlarmlist(1)
             setIsSubmitted(false)
             setErrors({})
-            history.push('/dashboard')
-        } else if (alarmlist !== 1 && !errors) {
-            setName('Alarm')
-            setHour((todaysDate.getHours() + 24) % 12 || 12)
-            setMinutes(todaysDate.getMinutes())
-            setSound('')
-            setRepeat([])
-            setSnooze(false)
-            setAlarmlist(1)
-            setIsSubmitted(false)
-            setErrors({})
-            history.push(`/alarmlists/${alarmlist}`)
+
+            if (parseInt(alarmlist) === 1) {
+                history.push('/dashboard')
+            } else {
+                history.push(`/alarmlists/${alarmlist}`)
+            }
         }
 
     }
@@ -129,7 +125,7 @@ const EditAlarm = () => {
     return (
         <div id='edit-alarm'>
             <h1>Edit Alarm</h1>
-            {alarm !== undefined && <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit}>
                 {/* ------------------------- HOUR ------------------------- */}
                 <div className='alarm-hour'>
                     <select
@@ -253,10 +249,10 @@ const EditAlarm = () => {
                             <>
                                 {messageCount > 150 && alarm
                                 ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
-                                        <span>{messageCount} / 150</span>
+                                        <span>{name?.length} / 150</span>
                                     </div>
                                 :   <div className='char-count-cmt'>
-                                        <span>{messageCount} / 150</span>
+                                        <span>{name?.length} / 150</span>
                                     </div>}
                             </>
                             : ''
@@ -331,7 +327,7 @@ const EditAlarm = () => {
                 <div className='create-alarm-submit'>
                     <button type='submit' disabled={Object.values(errors).length !== 0}>Save</button>
                 </div>
-            </form>}
+            </form>
         </div>
     )
 }
