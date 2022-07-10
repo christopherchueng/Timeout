@@ -233,7 +233,6 @@ const CreateAlarm = () => {
                             name='name'
                             type='text'
                             value={name}
-                            defaultValue={'Alarm'}
                             onChange={e => setName(e.target.value)}
                             onClick={() => setNameFocus(true)}
                             onBlur={() => setNameFocus(false)}
