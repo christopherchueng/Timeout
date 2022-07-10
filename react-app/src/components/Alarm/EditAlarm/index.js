@@ -34,13 +34,14 @@ const EditAlarm = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(name?.length)
+    console.log('repeat here', alarm)
 
     useEffect(() => {
-        if (alarm === undefined) {
+        // if (alarm === undefined) {
             dispatch(getAlarmlists())
             dispatch(getDefaultAlarmlist())
             dispatch(getAlarm(alarmId))
-        }
+        // }
     }, [dispatch])
 
     useEffect(() => {
@@ -304,7 +305,9 @@ const EditAlarm = () => {
                             onRemove={onSelect}
                             showCheckbox={true}
                             displayValue="name"
+                            selectedValues={repeat}
                             placeholder={'Never'}
+                            avoidHighlightFirstOption={true}
                             // hidePlaceholder={repeat.length}
                         />
                     </div>
