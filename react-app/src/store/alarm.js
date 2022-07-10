@@ -2,6 +2,7 @@ const LOAD_ONE_ALARM = 'alarm/loadOneAlarm'
 const LOAD_ALARMS = 'alarm/loadAlarms'
 const LOAD_INDEPENDENT_ALARMS = 'alarm/loadIndependentAlarms'
 const ADD_ALARM = 'alarm/addAlarm'
+const EDIT_ALARM = 'alarm/editAlarm'
 
 export const loadOneAlarm = (alarm) => {
     return {
@@ -31,6 +32,13 @@ export const addAlarm = (alarm) => {
     }
 }
 
+export const editAlarm = (alarm) => {
+    return {
+        type: EDIT_ALARM,
+        alarm
+    }
+}
+
 export const getAlarm = (alarm_id) => async (dispatch) => {
     const response = await fetch(`/api/alarms/${alarm_id}`)
 
@@ -53,6 +61,7 @@ export const getIndependentAlarms = (alarmlist_id) => async (dispatch) => {
 }
 
 export const createAlarm = (payload) => async (dispatch) => {
+    console.log('what am I sending to backend?????', payload)
     const response = await fetch('/api/alarms/create', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -62,6 +71,26 @@ export const createAlarm = (payload) => async (dispatch) => {
     if (response.ok) {
         const alarm = await response.json()
         dispatch(addAlarm(alarm))
+    } else if (response.status < 500) {
+        const alarm = await response.json();
+        if (alarm.errors) {
+            return alarm.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+}
+
+export const updateAlarm = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/alarms/${payload.alarmId}/edit`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        const alarm = await response.json()
+        dispatch(editAlarm(alarm))
     } else if (response.status < 500) {
         const alarm = await response.json();
         if (alarm.errors) {
@@ -93,6 +122,15 @@ const alarmReducer = (state = initialState, action) => {
             })
             return newState
         case ADD_ALARM:
+            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
+            if (action.alarm.alarmlistId === 1) {
+                newState.independent[action.alarm.id] = action.alarm
+                return newState
+            } else {
+                newState.entries[action.alarm.id] = action.alarm
+            }
+            return newState
+        case EDIT_ALARM:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             if (action.alarm.alarmlistId === 1) {
                 newState.independent[action.alarm.id] = action.alarm

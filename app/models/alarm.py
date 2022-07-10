@@ -5,15 +5,12 @@ from datetime import datetime
 def convert_repeat(day_str):
     weekdays_mapping = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     repeat_days = []
-    print('----------------------- THIS IS WHAT DAY_STR IS WHEN PASSED IN -----------------------', day_str)
     if len(day_str) == 1:
         day_str = [day_str]
-        print('----------------------- THIS IS WHAT DAY_STR IS WHEN ONLY 1 ELEMENT -----------------------', day_str)
     elif len(day_str) == 0:
         day_str = ''
     else:
         day_str = day_str.split(',')
-        print('----------------------- THIS IS WHAT DAY_STR IS WHEN MULTIPLE ELES -----------------------', day_str)
 
     for num in day_str:
         for i, day in enumerate(weekdays_mapping):

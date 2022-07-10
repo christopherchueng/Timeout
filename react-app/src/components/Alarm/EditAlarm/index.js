@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
-import { getAlarm } from '../../../store/alarm'
+import { getAlarm, updateAlarm } from '../../../store/alarm'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import Multiselect from 'multiselect-react-dropdown'
 import './EditAlarm.css'
@@ -84,17 +84,18 @@ const EditAlarm = () => {
         setIsSubmitted(true)
 
         const payload = {
+            alarmId,
             name,
             hour,
             minutes,
             meridiem,
             sound,
-            repeat: repeat.toString(),
+            repeat: repeat?.toString(),
             snooze,
             alarmlist_id: parseInt(alarmlist)
         }
 
-        const alarm = await dispatch((payload))
+        const alarm = await dispatch(updateAlarm(payload))
         if (alarm) {
             setErrors(alarm)
         }
