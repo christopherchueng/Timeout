@@ -24,12 +24,13 @@ const Alarm = ({ alarmlist }) => {
     const onClick = (e, alarm) => {
         e.preventDefault()
         dispatch(deleteAlarm(alarm.id))
-        history.push(`/alarmlists/${alarmlist.id}`)
+        history.push(`/alarmlists/${parseInt(id) || alarmlist.id}`)
     }
 
     return (
         <div className='alarm-info'>
             {alarmsObj && alarmsArr.map(alarm => (
+                alarm.alarmlistId === alarmlist.id &&
                 <div key={alarm.id}>
                     <div>
                         <div className='alarm-name'>

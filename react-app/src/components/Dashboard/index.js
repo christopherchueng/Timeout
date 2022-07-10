@@ -15,6 +15,7 @@ const Dashboard = () => {
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const independentAlarmsObj = useSelector(state => state?.alarm?.independent)
     const independentAlarmsArr = Object.values(independentAlarmsObj)
+    console.log('default Alarmlist here', typeof Object.values(defaultAlarmlist))
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
@@ -36,7 +37,7 @@ const Dashboard = () => {
                 ))}
                 <div className='default-alarmlist'>
                     <div className='default-alarmlist-name'>
-                        <Link to={`/alarmlists/${defaultAlarmlist[1]?.id}`}>
+                        <Link to={`/alarmlists/${defaultAlarmlist['1']?.id}`}>
                             {defaultAlarmlist[1]?.name}
                         </Link>
                     </div>

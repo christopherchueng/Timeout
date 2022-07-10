@@ -109,6 +109,7 @@ export const updateAlarm = (payload) => async (dispatch) => {
 }
 
 export const deleteAlarm = (alarmId) => async (dispatch) => {
+    console.log('what is the tpye of this alarmId', typeof alarmId)
     const response = await fetch(`/api/alarms/${alarmId}`, {
         method: 'DELETE'
     })
@@ -116,7 +117,6 @@ export const deleteAlarm = (alarmId) => async (dispatch) => {
     if (response.ok) {
         const alarm = await response.json()
         dispatch(removeAlarm(alarmId))
-        return alarm
     }
 }
 
@@ -160,14 +160,14 @@ const alarmReducer = (state = initialState, action) => {
             return newState
         case REMOVE_ALARM:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
-            if (action.alarm.alarmlistId === 1) {
+            console.log('what is this alarm that Im trying to delete'. action)
+            if (action.alarmId === 1) {
                 delete newState.independent[action.alarmId]
                 return newState
             } else {
-                newState.entries[action.alarm.id] = action.alarm
                 delete newState.entries[action.alarmId]
+                return newState
             }
-            return newState
         default:
             return state
     }

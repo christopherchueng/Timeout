@@ -38,13 +38,13 @@ const EditAlarm = () => {
     console.log('why the name dont work', name)
 
     useEffect(() => {
-        // if (alarm === undefined) {
+        if (alarm === undefined) {
             dispatch(getAlarm(alarmId))
             dispatch(getAlarmlists())
             dispatch(getDefaultAlarmlist())
             // dispatch(getAlarms(alarm?.alarmlistId))
-        // }
-    }, [dispatch])
+        }
+    }, [dispatch, id])
 
     useEffect(() => {
         const validationErrors = {}
@@ -59,8 +59,8 @@ const EditAlarm = () => {
     }, [name])
 
     useEffect(() => {
-        setMessageCount(alarm?.name?.length)
-    }, [name, alarm])
+        setMessageCount(name?.length)
+    }, [name, id])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
     let days = {
@@ -244,10 +244,10 @@ const EditAlarm = () => {
                             onBlur={() => setNameFocus(false)}
                         />
                         <div className='name-char-count'>
-                            {nameFocus && alarm
+                            {nameFocus && name
                             ?
                             <>
-                                {messageCount > 150 && alarm
+                                {messageCount > 150 && name
                                 ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
                                         <span>{name?.length} / 150</span>
                                     </div>
