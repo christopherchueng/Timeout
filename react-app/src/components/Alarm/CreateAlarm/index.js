@@ -15,6 +15,7 @@ const CreateAlarm = () => {
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
+    const newAlarm = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
 
     const [name, setName] = useState('Alarm')
     const [hour, setHour] = useState((todaysDate.getHours() + 24) % 12 || 12)
@@ -85,12 +86,12 @@ const CreateAlarm = () => {
             alarmlist_id: parseInt(alarmlist)
         }
 
-        const alarm = await dispatch(createAlarm(payload))
-        if (alarm) {
-            setErrors(alarm)
+        const errorData = await dispatch(createAlarm(payload))
+        if (errorData) {
+            setErrors(errorData)
         }
 
-        if (alarmlist === 1 && !errors) {
+        if (newAlarm) {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
@@ -100,21 +101,13 @@ const CreateAlarm = () => {
             setAlarmlist(1)
             setIsSubmitted(false)
             setErrors({})
-            history.push('/dashboard')
-        } else if (alarmlist !== 1 && !errors) {
-            console.log('hello what is this alarmlist', alarmlist)
-            setName('Alarm')
-            setHour((todaysDate.getHours() + 24) % 12 || 12)
-            setMinutes(todaysDate.getMinutes())
-            setSound('')
-            setRepeat([])
-            setSnooze(false)
-            setAlarmlist(1)
-            setIsSubmitted(false)
-            setErrors({})
-            history.push(`/alarmlists/${alarmlist}`)
-        }
 
+            if (parseInt(alarmlist) === 1) {
+                history.push('/dashboard')
+            } else {
+                history.push(`/alarmlists/${alarmlist}`)
+            }
+        }
     }
 
     return (
