@@ -35,7 +35,7 @@ export const getAlarm = (alarm_id) => async (dispatch) => {
     const response = await fetch(`/api/alarms/${alarm_id}`)
 
     const alarm = await response.json()
-    dispatch(loadAlarms(alarm))
+    dispatch(loadOneAlarm(alarm))
 }
 
 export const getAlarms = (alarmlist_id) => async (dispatch) => {
@@ -78,7 +78,7 @@ const alarmReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case LOAD_ONE_ALARM:
-            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }, editAlarm: {}}
+            newState = { ...state, entries: { }, independent: { ...state.independent }, editAlarm: { ...state.editAlarm }}
             newState.editAlarm[action.alarm.id] = action.alarm
             return newState
         case LOAD_ALARMS:

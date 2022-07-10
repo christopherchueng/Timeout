@@ -17,7 +17,7 @@ const EditAlarm = () => {
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
     const alarmObj = useSelector(state => state?.alarm?.entries)
-    console.log('did we get one alarm', alarmObj)
+    console.log('did we get one alarm', alarmlistsObj)
     const alarm = Object.values(alarmObj)
 
     const [name, setName] = useState(alarm.name)
