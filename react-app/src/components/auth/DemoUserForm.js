@@ -14,7 +14,10 @@ const DemoUserForm = () => {
     }
 
     return (
-        <button className="auth-demo-btn" type='submit' onClick={onSubmit}>Demo </button>
+        <div className='switch' onClick={onSubmit}>
+            <div className='ball'>
+            </div>
+        </div>
     )
 }
 

@@ -51,17 +51,35 @@ const SplashPage = () => {
             </div>
             {/* ---------------------------- ENTRIES ---------------------------- */}
             <div className='splash-entries'>
-                <div className='splash-login'>
-                    <Link to='/login'>
+                <div className='splash-login-ctn'>
+                    <div className='login-label'>
                         Login
+                    </div>
+                    {/* ---------------------------- LOGIN SWITCH & BALL ---------------------------- */}
+                    <Link to='/login'>
+                        <div className='switch'>
+                            <div className='ball'>
+                            </div>
+                        </div>
                     </Link>
                 </div>
-                <div className='splash-register'>
-                    <Link to='/register'>
+                <div className='splash-register-ctn'>
+                    <div className='register-label'>
                         Register
+                    </div>
+                    {/* ---------------------------- REGISTER SWITCH & BALL ---------------------------- */}
+                    <Link to='/register'>
+                        <div className='switch'>
+                            <div className='ball'>
+                            </div>
+                        </div>
                     </Link>
                 </div>
-                <div className='splash-demo'>
+                <div className='splash-demo-ctn'>
+                    <div className='splash-demo'>
+                        Demo
+                    </div>
+                    {/* ---------------------------- DEMO SWITCH & BALL ---------------------------- */}
                     <DemoUserForm />
                 </div>
             </div>
