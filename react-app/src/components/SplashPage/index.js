@@ -56,13 +56,13 @@ const SplashPage = () => {
                 </div>
             </div>
             <div className='splash-days'>
-                <div className='splash-sun' value={0} style={{color: currentTime.getDay() === 0 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SUN</div>
-                <div className='splash-mon' value={1} style={{color: currentTime.getDay() === 1 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>MON</div>
-                <div className='splash-tue' value={2} style={{color: currentTime.getDay() === 2 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>TUE</div>
-                <div className='splash-wed' value={3} style={{color: currentTime.getDay() === 3 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>WED</div>
-                <div className='splash-thu' value={4} style={{color: currentTime.getDay() === 4 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>THU</div>
-                <div className='splash-fri' value={5} style={{color: currentTime.getDay() === 5 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>FRI</div>
-                <div className='splash-sat' value={6} style={{color: currentTime.getDay() === 6 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SAT</div>
+                <div className='splash-sun' style={{color: currentTime.getDay() === 0 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SUN</div>
+                <div className='splash-mon' style={{color: currentTime.getDay() === 1 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>MON</div>
+                <div className='splash-tue' style={{color: currentTime.getDay() === 2 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>TUE</div>
+                <div className='splash-wed' style={{color: currentTime.getDay() === 3 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>WED</div>
+                <div className='splash-thu' style={{color: currentTime.getDay() === 4 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>THU</div>
+                <div className='splash-fri' style={{color: currentTime.getDay() === 5 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>FRI</div>
+                <div className='splash-sat' style={{color: currentTime.getDay() === 6 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SAT</div>
             </div>
             {/* ---------------------------- ENTRIES ---------------------------- */}
             <div className='splash-entries'>
