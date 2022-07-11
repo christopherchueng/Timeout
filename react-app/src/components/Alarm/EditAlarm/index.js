@@ -17,10 +17,13 @@ const EditAlarm = () => {
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
-    const alarmObj = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
+    // const alarmObj = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
+    const alarmObj = useSelector(state => state?.alarm?.entries)
     const alarmArr = Object.values(alarmObj)
     const alarm = alarmObj[alarmId]
-    // console.log('what is this alarmArr', typeof alarm.snooze)
+
+    console.log('here is the alarm array', alarmArr)
+
 
     const [name, setName] = useState(alarm?.name)
     const [hour, setHour] = useState(alarm?.hour)
@@ -35,16 +38,37 @@ const EditAlarm = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(alarm?.name?.length)
-    // console.log('why the name dont work', name)
+    console.log('HERE IS THE NAME STATE VARIABLE', name)
+    console.log('HERE IS THE HOUR STATE VARIABLE', hour)
+    console.log('HERE IS THE MINUTES STATE VARIABLE', minutes)
+    console.log('HERE IS THE MERIDIEM NAME STATE VARIABLE', meridiem)
+    console.log('HERE IS THE SOUND STATE VARIABLE', sound)
+    console.log('HERE IS THE REPEAT STATE VARIABLE', repeat)
+    console.log('HERE IS THE SNOOZE STATE VARIABLE', snooze)
 
     useEffect(() => {
-        // if (alarm === undefined) {
-            dispatch(getAlarm(alarmId))
-            dispatch(getAlarmlists())
-            dispatch(getDefaultAlarmlist())
-            // dispatch(getAlarms(alarm?.alarmlistId))
+        // const asyncDispatch = async () => {
+        dispatch(getAlarm(alarmId))
+        dispatch(getAlarmlists())
+        dispatch(getDefaultAlarmlist())
         // }
+        // asyncDispatch()
+        // if (alarm === undefined) {
+            // dispatch(getAlarms(alarm?.alarmlistId))
+            // }
     }, [dispatch, id])
+
+
+
+    useEffect(() => {
+        setName(alarm?.name)
+        setHour(alarm?.hour)
+        setMinutes(alarm?.minutes)
+        setMeridiem(alarm?.meridiem)
+        setSound(alarm?.sound)
+        setSnooze(alarm?.snooze)
+        setRepeat(alarm?.repeat)
+    }, [alarm])
 
     useEffect(() => {
         const validationErrors = {}
@@ -79,6 +103,15 @@ const EditAlarm = () => {
         const daysSelected = selectedList.map(day => day.id)
         setRepeat(daysSelected)
     }
+
+    // let selectedDays = []
+
+    // const onSelect = (e) => {
+    //     if (!selectedDays.includes(e.target.value)) {
+    //         selectedDays.push(e.target.value)
+    //         setRepeat(selectedDays)
+    //     }
+    // }
     /* ---------------------- END MULTISELECT INFO ---------------------- */
 
     const onSubmit = async (e) => {
@@ -102,22 +135,21 @@ const EditAlarm = () => {
             setErrors(errorData)
         }
 
-        if (alarmObj) {
-            setName('Alarm')
-            setHour((todaysDate.getHours() + 24) % 12 || 12)
-            setMinutes(todaysDate.getMinutes())
-            setSound('')
-            setRepeat([])
-            setSnooze(false)
-            setAlarmlist(1)
-            setIsSubmitted(false)
-            setErrors({})
+        // Will always return true will need to refactor
+        setName('Alarm')
+        setHour((todaysDate.getHours() + 24) % 12 || 12)
+        setMinutes(todaysDate.getMinutes())
+        setSound('')
+        setRepeat([])
+        setSnooze(false)
+        setAlarmlist(1)
+        setIsSubmitted(false)
+        setErrors({})
 
-            if (parseInt(alarmlist) === 1) {
-                history.push('/dashboard')
-            } else {
-                history.push(`/alarmlists/${alarmlist}`)
-            }
+        if (parseInt(alarmlist) === 1) {
+            history.push('/dashboard')
+        } else {
+            history.push(`/alarmlists/${parseInt(alarmlist)}`)
         }
 
     }
@@ -302,12 +334,24 @@ const EditAlarm = () => {
                             onRemove={onSelect}
                             showCheckbox={true}
                             displayValue="name"
-                            selectedValues={repeat}
+                            selectedValues={alarm?.repeat}
                             placeholder={'Never'}
                             avoidHighlightFirstOption={true}
                             showArrow={true}
-                            // hidePlaceholder={repeat.length}
+                            hidePlaceholder={repeat?.length}
                         />
+                        {/* <select
+                            name='repeat'
+                            multiple='true'
+                            aria-multiselectable="true"
+                            value={repeat}
+                        >
+                            {days.options.map(day => (
+                                <option value={day.id} key={day.id} onClick={e => onSelect(e)}>
+                                    {day.name}
+                                </option>
+                            ))}
+                        </select> */}
                     </div>
                 </div>
                 {/* ------------------------- SNOOZE ------------------------- */}
@@ -320,7 +364,8 @@ const EditAlarm = () => {
                             name='snooze'
                             type='checkbox'
                             value={snooze}
-                            onChange={e => setSnooze(e.target.value)}
+                            defaultChecked={snooze}
+                            onClick={() => setSnooze(!snooze)}
                         />
                     </div>
                 </div>

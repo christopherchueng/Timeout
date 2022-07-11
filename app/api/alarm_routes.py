@@ -27,10 +27,10 @@ def get_one_alarm(alarm_id):
 def get_alarmlist_alarms(alarmlist_id):
     if alarmlist_id == 1:
         independent_alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id)).all()
-        return jsonify([alarm.view_alarmlist_alarms() for alarm in independent_alarms])
+        return jsonify([alarm.to_dict() for alarm in independent_alarms])
     else:
         alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id), Alarm.alarmlist_id != 1).all()
-        return jsonify([alarm.view_alarmlist_alarms() for alarm in alarms])
+        return jsonify([alarm.to_dict() for alarm in alarms])
 
 @alarm_routes.route('/create', methods=['POST'])
 @login_required
@@ -54,7 +54,7 @@ def add_alarm():
         return new_alarm.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@alarm_routes.route('/<int:alarm_id>/edit', methods=['PATCH'])
+@alarm_routes.route('/<int:alarm_id>/edit', methods=['PUT'])
 @login_required
 def update_alarm(alarm_id):
     form = AlarmForm()

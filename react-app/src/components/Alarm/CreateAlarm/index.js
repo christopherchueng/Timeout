@@ -306,7 +306,7 @@ const CreateAlarm = () => {
                             name='snooze'
                             type='checkbox'
                             value={snooze}
-                            onChange={e => setSnooze(e.target.value)}
+                            onClick={() => setSnooze(!snooze)}
                         />
                     </div>
                 </div>
