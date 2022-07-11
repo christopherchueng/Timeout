@@ -20,7 +20,7 @@ const EditAlarm = () => {
     const alarmObj = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
     const alarmArr = Object.entries(alarmObj)
     const alarm = alarmObj[alarmId]
-    console.log('what is this alarmObj', alarm)
+    // console.log('what is this alarmObj', alarm)
 
     const [name, setName] = useState(alarm?.name)
     const [hour, setHour] = useState(alarm?.hour)
@@ -35,7 +35,7 @@ const EditAlarm = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(alarm?.name?.length)
-    console.log('why the name dont work', name)
+    // console.log('why the name dont work', name)
 
     useEffect(() => {
         if (alarm === undefined) {
