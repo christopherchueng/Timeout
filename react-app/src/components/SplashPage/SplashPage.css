@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner&family=Didact+Gothic&family=Readex+Pro:wght@200&display=swap');
+
+#splash-page {
+    font-family: 'Readex Pro';
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #E6EAEF; */
+    background-color: #E3E7F4;
+}
+
+.splash-page-icon {
+    width: 150px;
+    height: 40px;
+}
+
+.splash-full-time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 100vw;
+}
+
+.splash-time-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 224pt;
+    width: 1000px;
+}
+
+.splash-hour {
+    display: flex;
+    justify-content: flex-end;
+    width: 200px;
+}
+
+.splash-second-colon {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 100px;
+}
+
+.splash-minutes {
+    display: flex;
+    justify-content: flex-end;
+    width: 350px;
+}
+
+.meridiem-ctn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 50px;
+}
+
+.splash-meridiem {
+    display: flex;
+    align-items: flex-end;
+    font-size: 16pt;
+    padding: 0 0 65px 0;
+
+}
+
+.splash-entries {
+    display: flex;
+    flex-direction: row;
+}
