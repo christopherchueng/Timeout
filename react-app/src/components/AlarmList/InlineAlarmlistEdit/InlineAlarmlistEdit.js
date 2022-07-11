@@ -22,7 +22,8 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                                 {alarmlist.name}
                             </Link>
                         </div>
-                        <div className='alarmlist-btn-settings'>
+                        {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
+                        {alarmlist.id !== 1 ? <div className='alarmlist-btn-settings'>
                             <div className='edit-alarmlist'>
                                 <button type='button' className={`alarmlist-edit-btn-${alarmlist.id}`} onClick={() => setIsEditing(!isEditing)}>
                                     <span className="fa-solid fa-pen"></span>
@@ -31,7 +32,7 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                             <div className='delete-alarmlist'>
                                 <DeleteAlarmlistModal alarmlist={alarmlist} />
                             </div>
-                        </div>
+                        </div> : ""}
                         <div id='dashboard-alarms'>
                             <Alarm alarmlist={alarmlist} key={alarmlist.id} />
                         </div>

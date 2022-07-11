@@ -25,12 +25,12 @@ def get_one_alarm(alarm_id):
 @alarm_routes.route('/<int:alarmlist_id>/alarms')
 @login_required
 def get_alarmlist_alarms(alarmlist_id):
-    if alarmlist_id == 1:
-        independent_alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id)).all()
-        return jsonify([alarm.to_dict() for alarm in independent_alarms])
-    else:
-        alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id), Alarm.alarmlist_id != 1).all()
-        return jsonify([alarm.to_dict() for alarm in alarms])
+    # if alarmlist_id == 1:
+    #     independent_alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id)).all()
+    #     return jsonify([alarm.to_dict() for alarm in independent_alarms])
+    # else:
+    alarms = Alarm.query.filter(Alarm.alarmlist_id == int(alarmlist_id)).all()
+    return jsonify([alarm.to_dict() for alarm in alarms])
 
 @alarm_routes.route('/create', methods=['POST'])
 @login_required

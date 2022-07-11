@@ -132,12 +132,14 @@ const alarmReducer = (state = initialState, action) => {
         case LOAD_ALARMS:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             action.alarms.forEach(alarm => {
-                if (alarm.alarmlistId === 1) {
-                    newState.independent[alarm.id] = alarm
-                    return newState
-                } else {
-                    newState.entries[alarm.id] = alarm
-                }
+                newState.entries[alarm.id] = alarm
+
+                // if (alarm.alarmlistId === 1) {
+                //     newState.independent[alarm.id] = alarm
+                //     return newState
+                // } else {
+                //     newState.entries[alarm.id] = alarm
+                // }
             })
             return newState
         case ADD_ALARM:

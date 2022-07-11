@@ -13,14 +13,14 @@ const Dashboard = () => {
     const alarmlistsArr = Object.values(alarmlistsObj)
     const alarmlists = alarmlistsArr.reverse()
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
-    const independentAlarmsObj = useSelector(state => state?.alarm?.independent)
-    const independentAlarmsArr = Object.values(independentAlarmsObj)
+    // const independentAlarmsObj = useSelector(state => state?.alarm?.independent)
+    // const independentAlarmsArr = Object.values(independentAlarmsObj)
     // console.log('default Alarmlist here', typeof Object.values(defaultAlarmlist))
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
-        dispatch(getDefaultAlarmlist())
+        // dispatch(getDefaultAlarmlist())
         dispatch(getAlarms(1))
     }, [dispatch])
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
                         <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
                     </>
                 ))}
-                <div className='default-alarmlist'>
+                {/* <div className='default-alarmlist'>
                     <div className='default-alarmlist-name'>
                         <Link to={`/alarmlists/${defaultAlarmlist['1']?.id}`}>
                             {defaultAlarmlist[1]?.name}
@@ -53,7 +53,7 @@ const Dashboard = () => {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
