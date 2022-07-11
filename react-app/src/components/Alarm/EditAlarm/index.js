@@ -18,9 +18,9 @@ const EditAlarm = () => {
     const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     const defaultAlarmlistArr = Object.values(defaultAlarmlist)
     const alarmObj = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
-    const alarmArr = Object.entries(alarmObj)
+    const alarmArr = Object.values(alarmObj)
     const alarm = alarmObj[alarmId]
-    // console.log('what is this alarmObj', alarm)
+    // console.log('what is this alarmArr', typeof alarm.snooze)
 
     const [name, setName] = useState(alarm?.name)
     const [hour, setHour] = useState(alarm?.hour)
@@ -38,12 +38,12 @@ const EditAlarm = () => {
     // console.log('why the name dont work', name)
 
     useEffect(() => {
-        if (alarm === undefined) {
+        // if (alarm === undefined) {
             dispatch(getAlarm(alarmId))
             dispatch(getAlarmlists())
             dispatch(getDefaultAlarmlist())
             // dispatch(getAlarms(alarm?.alarmlistId))
-        }
+        // }
     }, [dispatch, id])
 
     useEffect(() => {

@@ -89,6 +89,7 @@ export const createAlarm = (payload) => async (dispatch) => {
 }
 
 export const updateAlarm = (payload) => async (dispatch) => {
+    console.log('what is this payload we sending to the backend', payload)
     const response = await fetch(`/api/alarms/${payload.alarmId}/edit`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
@@ -125,7 +126,7 @@ const alarmReducer = (state = initialState, action) => {
     let newState
     switch (action.type) {
         case LOAD_ONE_ALARM:
-            newState = { ...state, entries: { ...state.entries }}
+            newState = { ...state, entries: { }}
             newState.entries[action.alarm.id] = action.alarm
             return newState
         case LOAD_ALARMS:
