@@ -29,7 +29,7 @@ const Alarm = ({ alarmlist }) => {
 
     return (
         <div className='alarm-info'>
-            {alarmsObj && alarmsArr.map(alarm => (
+            {alarmsArr && alarmsArr.map(alarm => (
                 alarm.alarmlistId === alarmlist.id &&
                 <div key={alarm.id}>
                     <div>

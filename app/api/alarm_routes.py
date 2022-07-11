@@ -63,12 +63,13 @@ def update_alarm(alarm_id):
     alarm = Alarm.query.get(alarm_id)
 
     if form.validate_on_submit():
-        alarm.name=form.data['name'],
-        alarm.hour=form.data['hour'],
-        alarm.minutes=form.data['minutes'],
-        alarm.meridiem=form.data['meridiem'],
-        alarm.repeat=form.data['repeat'],
-        alarm.snooze=form.data['snooze'],
+        alarm.name=form.data['name']
+        alarm.hour=form.data['hour']
+        alarm.minutes=form.data['minutes']
+        alarm.meridiem=form.data['meridiem']
+        alarm.repeat=form.data['repeat']
+        alarm.snooze=form.data['snooze']
+        alarm.sound=form.data['sound']
         alarm.alarmlist_id=form.data['alarmlist_id']
 
         db.session.commit()

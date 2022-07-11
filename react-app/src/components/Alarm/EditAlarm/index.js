@@ -22,9 +22,6 @@ const EditAlarm = () => {
     const alarmArr = Object.values(alarmObj)
     const alarm = alarmObj[alarmId]
 
-    console.log('here is the alarm array', alarmArr)
-
-
     const [name, setName] = useState(alarm?.name)
     const [hour, setHour] = useState(alarm?.hour)
     const [minutes, setMinutes] = useState(alarm?.minutes)
@@ -38,13 +35,6 @@ const EditAlarm = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(alarm?.name?.length)
-    console.log('HERE IS THE NAME STATE VARIABLE', name)
-    console.log('HERE IS THE HOUR STATE VARIABLE', hour)
-    console.log('HERE IS THE MINUTES STATE VARIABLE', minutes)
-    console.log('HERE IS THE MERIDIEM NAME STATE VARIABLE', meridiem)
-    console.log('HERE IS THE SOUND STATE VARIABLE', sound)
-    console.log('HERE IS THE REPEAT STATE VARIABLE', repeat)
-    console.log('HERE IS THE SNOOZE STATE VARIABLE', snooze)
 
     useEffect(() => {
         // const asyncDispatch = async () => {
@@ -57,8 +47,6 @@ const EditAlarm = () => {
             // dispatch(getAlarms(alarm?.alarmlistId))
             // }
     }, [dispatch, id])
-
-
 
     useEffect(() => {
         setName(alarm?.name)
@@ -149,7 +137,7 @@ const EditAlarm = () => {
         if (parseInt(alarmlist) === 1) {
             history.push('/dashboard')
         } else {
-            history.push(`/alarmlists/${parseInt(alarmlist)}`)
+            history.push(`/alarmlists/${alarm?.alarmlistId}`)
         }
 
     }
