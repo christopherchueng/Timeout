@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import DemoUserForm from '../auth/DemoUserForm';
 import './SplashPage.css'
 
 const SplashPage = () => {
+    const currentUser = useSelector(state => state.session.user)
     const currentTime = new Date()
     const [hour, setHour] = useState((currentTime.getHours() + 24) % 12 || 12)
     const [minutes, setMinutes] = useState(currentTime.getMinutes())
@@ -22,6 +24,10 @@ const SplashPage = () => {
             clearInterval(meridInterval)
         }
     }, [seconds, minutes, hour, meridiem])
+
+    if (currentUser) {
+        return <Redirect to='/dashboard' />;
+    }
 
     return (
         <div id='splash-page'>
