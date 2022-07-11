@@ -31,8 +31,12 @@ const SignUpForm = () => {
       validationErrors['email'] = 'Please enter a valid email.'
     }
 
-    if (password !== repeatPassword) {
+    if (password !== repeatPassword && isSubmitted) {
       validationErrors['repeatPassword'] = "'Password' and 'Repeat Password' fields did not match."
+    }
+
+    if (repeatPassword.length === 0) {
+      validationErrors['repeatPassword'] = 'Please provide a password.'
     }
 
     setErrors(validationErrors)
@@ -42,13 +46,20 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     setIsSubmitted(true)
-    if (password === repeatPassword && errors.length === 0) {
-      const data = await dispatch(signUp(firstName, lastName, email, password));
+    if (Object.values(errors).length === 0) {
+      const payload = {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password
+      }
+      const data = await dispatch(signUp(payload));
       if (data) {
-        setIsSubmitted(false)
         setErrors(data)
       }
     }
+
+      // await dispatch(signUp(firstName, lastName, email, password));
   };
 
   const updateFirstName = (e) => {
@@ -85,7 +96,7 @@ const SignUpForm = () => {
           name='firstName'
           onChange={updateFirstName}
           value={firstName}
-        ></input>
+        />
       </div>
       <div className='firstName-error-ctn'>
        {isSubmitted && <ErrorMessage error={errors.firstName} setClassName="firstName-error" />}
@@ -99,7 +110,7 @@ const SignUpForm = () => {
           name='lastName'
           onChange={updateLastName}
           value={lastName}
-        ></input>
+        />
       </div>
       <div className='lastName-error-ctn'>
        {isSubmitted && <ErrorMessage error={errors.lastName} setClassName="lastName-error" />}
@@ -145,7 +156,7 @@ const SignUpForm = () => {
        {isSubmitted && <ErrorMessage error={errors.repeatPassword} setClassName="register-pwRepeat-error" />}
       </div>
 
-      <button type='submit' disabled={errors.length}>Sign Up</button>
+      <button type='submit' disabled={Object.values(errors).length !== 0}>Sign Up</button>
     </form>
   );
 };
