@@ -12,7 +12,7 @@ const Dashboard = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj)
     const alarmlists = alarmlistsArr.reverse()
-    const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
+    // const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
     // const independentAlarmsObj = useSelector(state => state?.alarm?.independent)
     // const independentAlarmsArr = Object.values(independentAlarmsObj)
     // console.log('default Alarmlist here', typeof Object.values(defaultAlarmlist))

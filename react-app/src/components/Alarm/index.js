@@ -16,7 +16,7 @@ const Alarm = ({ alarmlist }) => {
 
     useEffect(() => {
         // Need the or statement here because Alarm is used in alarmlist/:id AND dashboard
-        // parseInt(id) will be used for when on the alarmlist page
+        // parseInt(id) will be used for when user is on the alarmlist page
         // alarmlist?.id is used for dashboard because parseInt(id) will be rendered as NaN.
         dispatch(getAlarms(parseInt(id) || alarmlist?.id))
     }, [dispatch])
@@ -24,13 +24,13 @@ const Alarm = ({ alarmlist }) => {
     const onClick = (e, alarm) => {
         e.preventDefault()
         dispatch(deleteAlarm(alarm.id))
-        history.push(`/alarmlists/${parseInt(id) || alarmlist.id}`)
+        history.push(`/alarmlists/${id}`)
     }
 
     return (
         <div className='alarm-info'>
             {alarmsArr && alarmsArr.map(alarm => (
-                alarm.alarmlistId === alarmlist.id &&
+                alarm.alarmlistId === alarmlist?.id &&
                 <div key={alarm.id}>
                     <div>
                         <div className='alarm-name'>

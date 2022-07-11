@@ -13,8 +13,8 @@ const CreateAlarm = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
-    const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
-    const defaultAlarmlistArr = Object.values(defaultAlarmlist)
+    // const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
+    // const defaultAlarmlistArr = Object.values(defaultAlarmlist)
     const newAlarm = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
 
     const [name, setName] = useState('Alarm')
@@ -33,7 +33,7 @@ const CreateAlarm = () => {
 
     useEffect(() => {
         dispatch(getAlarmlists())
-        dispatch(getDefaultAlarmlist())
+        // dispatch(getDefaultAlarmlist())
     }, [dispatch])
 
     useEffect(() => {
@@ -101,12 +101,7 @@ const CreateAlarm = () => {
             setAlarmlist(1)
             setIsSubmitted(false)
             setErrors({})
-
-            if (parseInt(alarmlist) === 1) {
-                history.push('/dashboard')
-            } else {
-                history.push(`/alarmlists/${alarmlist}`)
-            }
+            history.push(`/alarmlists/${alarmlist}`)
         }
     }
 
@@ -261,7 +256,6 @@ const CreateAlarm = () => {
                             value={alarmlist}
                             onChange={e => setAlarmlist(e.target.value)}
                         >
-                            <option value={defaultAlarmlistArr[0]?.id}>None</option>
                             {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                                 <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
                             ))}
