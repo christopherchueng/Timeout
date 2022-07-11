@@ -101,6 +101,7 @@
     padding-bottom: 10px;
 }
 
+/* Div that houses the ball */
 .switch {
     position: relative;
     display: block;
@@ -112,6 +113,7 @@
     cursor: pointer;
 }
 
+/* Creates the ball that will turn 'on' and 'off' */
 .ball:before {
     content: '';
     position: absolute;
@@ -125,6 +127,7 @@
     left: 2px;
 }
 
+/* When mouse is hovered, the ball will move from left to right */
 .switch:hover .ball:before {
     transform: translateX(36px);
     transition: 0.3s;
