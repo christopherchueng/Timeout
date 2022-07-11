@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    height: 400px;
     width: 100vw;
 }
 
@@ -64,7 +64,18 @@
     align-items: flex-end;
     font-size: 16pt;
     padding: 0 0 65px 0;
+}
 
+.splash-days {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+}
+
+.splash-days > div {
+    padding: 0 40px 40px 40px;
+    color: rgba(0, 0, 0, 0.4)
 }
 
 .splash-entries {
