@@ -99,6 +99,7 @@
 .register-label,
 .splash-demo {
     padding-bottom: 10px;
+    color: rgba(0, 0, 0, 0.4)
 }
 
 /* Div that houses the ball */
@@ -121,34 +122,24 @@
     height: 35px;
     background-color: white;
     border-radius: 25px;
-    transition: 0.4s;
+    transition: 0.2s;
     cursor: pointer;
-    top: 2px;
-    left: 2px;
+    top: 2.5px;
+    left: 2.5px;
 }
 
 /* When mouse is hovered, the ball will move from left to right */
 .switch:hover .ball:before {
-    transform: translateX(36px);
-    transition: 0.3s;
+    transform: translateX(35px);
+    transition: 0.2s;
 }
 
+/* When mouse is hovered on div, change div background to hex code color. */
 .switch:hover {
     background-color: #3478F6;
     /* background-color: lightgreen; */
-    transition: 0.4s
+    transition: 0.2s
 }
-
-/* .ball:before {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: lightgray;
-    border-radius: 25px;
-    cursor: pointer;
-    top: 10px;
-    left: 10px;
-} */
 
 .login-label a,
 .register-label a {

@@ -23,12 +23,6 @@ const SplashPage = () => {
         }
     }, [seconds, minutes, hour, meridiem])
 
-    const styleDay = (e) => {
-        if (e.target.value === currentTime.getDay()) {
-            return {color: 'red'}
-        }
-    }
-
     return (
         <div id='splash-page'>
             {/* ---------------------------- LOGO ---------------------------- */}
@@ -38,7 +32,6 @@ const SplashPage = () => {
             {/* ---------------------------- TIME ---------------------------- */}
             <div className='splash-full-time'>
                 <div className='splash-time-ctn'>
-                    {/* {time} */}
                     <div className='splash-hour'>
                         {hour}
                     </div>
