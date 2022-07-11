@@ -17,22 +17,29 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                     </div>
                 :
                     <>
-                        <div className='alarmlist-name'>
-                            <Link to={`/alarmlists/${alarmlist.id}`}>
-                                {alarmlist.name}
-                            </Link>
+                        <div className='alarmlist-name-and-settings'>
+                            <div className='alarmlist-name'>
+                                <h1>
+                                    <Link to={`/alarmlists/${alarmlist.id}`}>
+                                        {alarmlist.name}
+                                    </Link>
+                                </h1>
+                            </div>
+                            {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
+                            {alarmlist.id !== 1
+                            ?
+                            <div className='alarmlist-btn-settings'>
+                                <div className='edit-alarmlist'>
+                                    <button type='button' className={`alarmlist-edit-btn-${alarmlist.id}`} onClick={() => setIsEditing(!isEditing)}>
+                                        <span className="fa-solid fa-pen"></span>
+                                    </button>
+                                </div>
+                                <div className='delete-alarmlist'>
+                                    <DeleteAlarmlistModal alarmlist={alarmlist} />
+                                </div>
+                            </div>
+                            : ""}
                         </div>
-                        {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
-                        {alarmlist.id !== 1 ? <div className='alarmlist-btn-settings'>
-                            <div className='edit-alarmlist'>
-                                <button type='button' className={`alarmlist-edit-btn-${alarmlist.id}`} onClick={() => setIsEditing(!isEditing)}>
-                                    <span className="fa-solid fa-pen"></span>
-                                </button>
-                            </div>
-                            <div className='delete-alarmlist'>
-                                <DeleteAlarmlistModal alarmlist={alarmlist} />
-                            </div>
-                        </div> : ""}
                         <div id='dashboard-alarms'>
                             <Alarm alarmlist={alarmlist} key={alarmlist.id} />
                         </div>
