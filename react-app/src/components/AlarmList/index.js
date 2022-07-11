@@ -18,6 +18,13 @@ const AlarmList = () => {
         dispatch(getAlarmlist(alarmlistId))
         dispatch(getAlarms(alarmlistId))
     }, [dispatch])
+
+    // Sometimes, the page renders at the bottom first,
+    // so this will force the page to scroll up on mount
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+
     return (
         <div id='alarmlists'>
             <div className='alarmlist-header'>
