@@ -21,7 +21,7 @@ const SplashPage = () => {
             clearInterval(hourInterval)
             clearInterval(meridInterval)
         }
-    })
+    }, [seconds, minutes, hour, meridiem])
 
     const styleDay = (e) => {
         if (e.target.value === currentTime.getDay()) {
@@ -56,13 +56,13 @@ const SplashPage = () => {
                 </div>
             </div>
             <div className='splash-days'>
-                <div className='splash-sun' value={0} style={{color: currentTime.getDay() === 0 ? '#00A3FF' : 'rgba(0, 0, 0, 0.4)'}}>Sun</div>
-                <div className='splash-mon' value={1} style={{color: currentTime.getDay() === 1 ? '#00A3FF' : 'rgba(0, 0, 0, 0.4)'}}>Mon</div>
-                <div className='splash-tue' value={2} style={{color: currentTime.getDay() === 2 ? '#00A3FF' : 'rgba(0, 0, 0, 0.4)'}}>Tue</div>
-                <div className='splash-wed' value={3} style={{color: currentTime.getDay() === 3 ? '#00A3FF' : 'rgba(0, 0, 0, 0.4)'}}>Wed</div>
-                <div className='splash-thu' value={4} style={{color: currentTime.getDay() === 4 ? '#00A3FF' : 'rgba(0, 0, 0, 0.4)'}}>Thu</div>
-                <div className='splash-fri' value={5} style={{color: currentTime.getDay() === 5 ? '#00A3FF' : 'rgba(0, 0, 0, 0.4)'}}>Fri</div>
-                <div className='splash-sat' value={6} style={{color: currentTime.getDay() === 6 ? '#00A3FF' : 'rgba(0, 0, 0, 0.4)'}}>Sat</div>
+                <div className='splash-sun' value={0} style={{color: currentTime.getDay() === 0 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SUN</div>
+                <div className='splash-mon' value={1} style={{color: currentTime.getDay() === 1 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>MON</div>
+                <div className='splash-tue' value={2} style={{color: currentTime.getDay() === 2 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>TUE</div>
+                <div className='splash-wed' value={3} style={{color: currentTime.getDay() === 3 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>WED</div>
+                <div className='splash-thu' value={4} style={{color: currentTime.getDay() === 4 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>THU</div>
+                <div className='splash-fri' value={5} style={{color: currentTime.getDay() === 5 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>FRI</div>
+                <div className='splash-sat' value={6} style={{color: currentTime.getDay() === 6 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SAT</div>
             </div>
             {/* ---------------------------- ENTRIES ---------------------------- */}
             <div className='splash-entries'>

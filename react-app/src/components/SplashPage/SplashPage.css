@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Commissioner&family=Didact+Gothic&family=Readex+Pro:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Commissioner&family=Didact+Gothic&family=Lexend+Deca:wght@100&family=Readex+Pro:wght@200&display=swap');
 
 #splash-page {
     font-family: 'Readex Pro';
@@ -18,6 +19,7 @@
 }
 
 .splash-full-time {
+    font-family: 'Lexend Deca';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,19 +38,19 @@
 .splash-hour {
     display: flex;
     justify-content: flex-end;
-    width: 200px;
+    width: 300px;
 }
 
 .splash-second-colon {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100px;
 }
 
 .splash-minutes {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     width: 350px;
 }
 
@@ -129,7 +131,7 @@
 }
 
 .switch:hover {
-    background-color: #00A3FF;
+    background-color: #3478F6;
     /* background-color: lightgreen; */
     transition: 0.4s
 }
