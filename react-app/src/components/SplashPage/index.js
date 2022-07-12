@@ -7,23 +7,27 @@ import './SplashPage.css'
 const SplashPage = () => {
     const currentUser = useSelector(state => state.session.user)
     const currentTime = new Date()
-    const [hour, setHour] = useState((currentTime.getHours() + 24) % 12 || 12)
+    const [hour, setHour] = useState((currentTime.getHours()))
     const [minutes, setMinutes] = useState(currentTime.getMinutes())
     const [seconds, setSeconds] = useState(currentTime.getSeconds())
     const [meridiem, setMeridiem] = useState(currentTime.getHours() >= 12 ? 'PM' : 'AM')
+    // const [time, setTime] = useState('')
 
     useEffect(() => {
-        const secInterval = setInterval(() => setSeconds(currentTime.getSeconds()), 1000)
-        const minInterval = setInterval(() => setMinutes(currentTime.getMinutes()), 1000)
-        const hourInterval = setInterval(() => setHour((currentTime.getHours() + 24) % 12 || 12), 1000)
-        const meridInterval = setInterval(() => setMeridiem(currentTime.getHours() >= 12 ? 'PM' : 'AM'), 1000)
+        const secInterval = setInterval(() => setSeconds(currentTime.toLocaleTimeString('en-US', {second: 'numeric'})), 1000)
+        const minInterval = setInterval(() => setMinutes(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})), 1000)
+        const hourInterval = setInterval(() => setHour(((currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) + 24) % 12 || 12, 1000))
+        const meridInterval = setInterval(() => setMeridiem(hour >= 12 ? 'PM' : 'AM'), 1000)
+        // const setCurrentTime = setInterval(() => setTime(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})), 1000)
         return () => {
             clearInterval(secInterval)
             clearInterval(minInterval)
             clearInterval(hourInterval)
             clearInterval(meridInterval)
+            // clearInterval(setCurrentTime)
         }
-    }, [seconds, minutes, hour, meridiem])
+    })
+    // }, [seconds, minutes, hour, meridiem])
 
     if (currentUser) {
         return <Redirect to='/dashboard' />;
@@ -37,12 +41,14 @@ const SplashPage = () => {
             </div>
             {/* ---------------------------- TIME ---------------------------- */}
             <div className='splash-full-time'>
+                {/* {time} */}
                 <div className='splash-time-ctn'>
                     <div className='splash-hour'>
                         {hour}
                     </div>
                     <div className='splash-second-colon'>
                         {seconds % 2 === 0 ? ":" : ""}
+                        {/* {seconds} */}
                     </div>
                     <div className='splash-minutes'>
                         {minutes < 10 ? '0' + minutes : minutes}

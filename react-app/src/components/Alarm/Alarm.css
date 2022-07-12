@@ -2,6 +2,8 @@
     position: relative;
 }
 
+/* This will allow the checkbox to embody/"swallow" the entire label
+so that whereever you click the slider, the radio box will be (un)checked */
 .alarm-switch input {
     position: absolute;
     opacity: 0;
