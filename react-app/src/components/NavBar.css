@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Commissioner&family=Didact+Gothic&family=Lexend+Deca:wght@100;400;600&family=Readex+Pro:wght@200&display=swap');
+
+#navbar,
+#navbar > ul,
+#navbar-right {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.home-logo-ctn {
+    display: flex;
+    align-items: center;
+}
+
+#navbar > ul {
+    justify-content: space-between;
+    width: 100vw;
+    padding: 5px 80px;
+}
+
+.home-logo {
+    width: 130px;
+    height: 35px;
+}
+
+#navbar-right {
+    align-items: center;
+}
+
+.navbar-create-alarm {
+    padding: 0 10px;
+}
+
+.fa-plus {
+    color: black;
+}
+
+.fa-plus:hover {
+    transition: 0.3s;
+    color: #3478F6;
+}
+
+.navbar-logout-btn {
+    margin: 0 10px;
+    font-family: 'Lexend Deca';
+    background-color: #3478F6;
+    font-size: 10pt;
+    font-weight: 700;
+    color: white;
+    border: 1px solid #3478F6;
+    border-radius: 5px;
+    width: 80px;
+    height: 37px;
+    cursor: pointer;
+}

@@ -1,24 +1,29 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import './NavBar.css'
 
 const NavBar = () => {
 
   return (
-    <nav>
+    <nav id='navbar'>
       <ul>
-        <li>
-          <NavLink to='/dashboard' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
+        <li id='navbar-left'>
+          <div className='home-logo-ctn'>
+            <NavLink to='/dashboard' exact={true} activeClassName='active'>
+              <img className='home-logo' src={process.env.PUBLIC_URL + '../../../static/timeout-black.png'}></img>
+            </NavLink>
+          </div>
         </li>
-        <li>
-          <NavLink to='/create'>
-            <button><img className='add-alarm-icon' title='Upload' src='../../../static/add-alarm-icon.png'></img></button>
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton />
+        <li id='navbar-right'>
+          <div className='navbar-create-alarm'>
+            <NavLink to='/create'>
+              <span className="fa-solid fa-plus fa-2x"></span>
+            </NavLink>
+          </div>
+          <div className='navbar-logout'>
+            <LogoutButton />
+          </div>
         </li>
       </ul>
     </nav>
