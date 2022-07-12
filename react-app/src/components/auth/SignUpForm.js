@@ -32,7 +32,7 @@ const SignUpForm = () => {
       validationErrors['email'] = 'Please enter a valid email.'
     }
 
-    if (password !== repeatPassword && isSubmitted) {
+    if (password !== repeatPassword) {
       validationErrors['repeatPassword'] = "'Password' and 'Repeat Password' fields did not match."
     }
 
@@ -42,7 +42,7 @@ const SignUpForm = () => {
 
     setErrors(validationErrors)
 
-  }, [firstName, lastName, email, repeatPassword])
+  }, [firstName, lastName, email, password, repeatPassword])
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -171,7 +171,7 @@ const SignUpForm = () => {
         </div>
 
         <div className='register-submit-btn'>
-          <button type='submit' className='toggle-register' disabled={Object.values(errors).length !== 0}>
+          <button type='submit' className='toggle-register'>
             <span className='register-span'>Sign Up</span>
             <div className='register-ball'></div>
           </button>
