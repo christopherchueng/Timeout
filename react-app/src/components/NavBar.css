@@ -38,7 +38,7 @@
 
 .fa-plus:hover {
     transition: 0.3s;
-    color: #3478F6;
+    color: rgb(36, 92, 196);
 }
 
 .navbar-logout-btn {
@@ -53,4 +53,10 @@
     width: 80px;
     height: 37px;
     cursor: pointer;
+}
+
+.navbar-logout-btn:hover {
+    background-color: rgb(36, 92, 196);
+    border: 1px solid rgb(36, 92, 196);
+    transition: 0.3s;
 }
