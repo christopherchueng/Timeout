@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import EditAlarmlistForm from "../EditAlarmlistForm"
 import DeleteAlarmlistModal from "../DeleteAlarmlistModal"
@@ -7,6 +7,11 @@ import './InlineAlarmlistEdit.css'
 
 const InlineAlarmlistEdit = ({ alarmlist }) => {
     const [isEditing, setIsEditing] = useState(false)
+    const [openTab, setOpenTab] = useState(false)
+
+    useEffect(() => {
+        alarmlist.id === 1 ? setOpenTab(true) : setOpenTab(false)
+    }, [])
 
     return (
         <div className={`alarmlist-${alarmlist.id}`}>
@@ -24,6 +29,9 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                                         {alarmlist.name}
                                     </Link>
                                 </h1>
+                                <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </button>
                             </div>
                             {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                             {alarmlist.id !== 1
@@ -40,9 +48,11 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                             </div>
                             : ""}
                         </div>
+                        {openTab ?
                         <div id='dashboard-alarms'>
                             <Alarm alarmlist={alarmlist} key={alarmlist.id} />
                         </div>
+                        : ""}
                     </>
             }
         </div>
