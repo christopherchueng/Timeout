@@ -103,6 +103,7 @@ const SignUpForm = () => {
               value={firstName}
               placeholder='First name'
               className='firstName-input'
+              style={{backgroundColor: errors['firstName'] && isSubmitted ? '#FFA194' : ""}}
             />
             <div className='firstName-error-ctn'>
             {isSubmitted && <ErrorMessage error={errors.firstName} setClassName="firstName-error" />}
@@ -118,6 +119,7 @@ const SignUpForm = () => {
               value={lastName}
               placeholder='Last name'
               className='lastName-input'
+              style={{backgroundColor: errors['lastName'] && isSubmitted ? '#FFA194' : ""}}
             />
             <div className='lastName-error-ctn'>
               {isSubmitted && <ErrorMessage error={errors.lastName} setClassName="lastName-error" />}
@@ -134,6 +136,7 @@ const SignUpForm = () => {
             value={email}
             placeholder='you@example.com'
             className='email-input'
+            style={{backgroundColor: errors['email'] && isSubmitted ? '#FFA194' : ""}}
           />
           <div className='register-email-error-ctn'>
             {isSubmitted && <ErrorMessage error={errors.email} setClassName="register-email-error" />}
@@ -163,6 +166,7 @@ const SignUpForm = () => {
               placeholder='Repeat password'
               required={true}
               className='password-input'
+              style={{backgroundColor: errors['repeatPassword'] && isSubmitted ? '#FFA194' : ""}}
             />
             <div className='register-pwRepeat-error-ctn'>
               {isSubmitted && <ErrorMessage error={errors.repeatPassword} setClassName="register-pwRepeat-error" />}
