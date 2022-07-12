@@ -113,10 +113,13 @@ const EditAlarm = () => {
             minutes,
             meridiem,
             sound,
-            repeat: repeat?.toString(),
+            repeat: `${repeat}`,
             snooze,
             alarmlist_id: parseInt(alarmlist)
         }
+
+        console.log('what is this repeat.........', repeat)
+        console.log('THIS IS THE PAYLOAD REPEAT.........', payload.repeat)
 
         const errorData = await dispatch(updateAlarm(payload))
         if (errorData) {
@@ -134,12 +137,7 @@ const EditAlarm = () => {
         setIsSubmitted(false)
         setErrors({})
 
-        if (parseInt(alarmlist) === 1) {
-            history.push('/dashboard')
-        } else {
-            history.push(`/alarmlists/${alarm?.alarmlistId}`)
-        }
-
+        history.push(`/alarmlists/${parseInt(alarmlist)}`)
     }
 
     return (
@@ -294,7 +292,6 @@ const EditAlarm = () => {
                             value={alarmlist}
                             onChange={e => setAlarmlist(e.target.value)}
                         >
-                            <option value={defaultAlarmlistArr[0]?.id}>None</option>
                             {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                                 <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
                             ))}

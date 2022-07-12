@@ -30,7 +30,7 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                                     </Link>
                                 </h1>
                                 <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
-                                    <i class="fa-solid fa-angle-right"></i>
+                                    <i className="fa-solid fa-angle-right"></i>
                                 </button>
                             </div>
                             {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
