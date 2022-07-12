@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import './SignUpForm.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState({});
@@ -87,77 +88,104 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      {/* --------------------------- FIRST NAME --------------------------- */}
-      <div>
-        <label>First Name</label>
-        <input
-          type='text'
-          name='firstName'
-          onChange={updateFirstName}
-          value={firstName}
-        />
-      </div>
-      <div className='firstName-error-ctn'>
-       {isSubmitted && <ErrorMessage error={errors.firstName} setClassName="firstName-error" />}
-      </div>
+    <div id='register'>
+      <h1>Create an account</h1>
+      <p className='required-asterisk'>*Required fields are marked with an asterisk</p>
+      <form onSubmit={onSignUp} className='register-form'>
+        {/* --------------------------- FIRST NAME --------------------------- */}
+        <div className='register-name-ctn'>
+          <div className='register-firstName'>
+           <div className='register-firstName-label'>First name<span className='required'>*</span></div>
+            <input
+              type='text'
+              name='firstName'
+              onChange={updateFirstName}
+              value={firstName}
+              placeholder='First name'
+              className='firstName-input'
+            />
+            <div className='firstName-error-ctn'>
+            {isSubmitted && <ErrorMessage error={errors.firstName} setClassName="firstName-error" />}
+            </div>
+          </div>
+          {/* --------------------------- LAST NAME --------------------------- */}
+          <div className='register-lastName'>
+            <div className='register-lastName-label'>Last name<span className='required'>*</span></div>
+            <input
+              type='text'
+              name='lastName'
+              onChange={updateLastName}
+              value={lastName}
+              placeholder='Last name'
+              className='lastName-input'
+            />
+            <div className='lastName-error-ctn'>
+              {isSubmitted && <ErrorMessage error={errors.lastName} setClassName="lastName-error" />}
+            </div>
+          </div>
+        </div>
+        {/* --------------------------- EMAIL --------------------------- */}
+        <div className='register-email-ctn'>
+          <div className='register-email-label'>Email<span className='required'>*</span></div>
+          <input
+            type='text'
+            name='email'
+            onChange={updateEmail}
+            value={email}
+            placeholder='you@example.com'
+            className='email-input'
+          />
+          <div className='register-email-error-ctn'>
+            {isSubmitted && <ErrorMessage error={errors.email} setClassName="register-email-error" />}
+          </div>
+        </div>
+        {/* --------------------------- PASSWORD --------------------------- */}
+        <div className='register-password-ctn'>
+          <div className='register-password'>
+            <div className='register-password-label'>Password<span className='required'>*</span></div>
+            <input
+              type='password'
+              name='password'
+              onChange={updatePassword}
+              value={password}
+              placeholder='••••••••'
+              className='password-input'
+            />
+          </div>
+          {/* --------------------------- REPEAT PASSWORD --------------------------- */}
+          <div className='register-repeat'>
+            <div className='register-repeat-label'>Repeat password<span className='required'>*</span></div>
+            <input
+              type='password'
+              name='repeat_password'
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              placeholder='Repeat password'
+              required={true}
+              className='password-input'
+            />
+            <div className='register-pwRepeat-error-ctn'>
+              {isSubmitted && <ErrorMessage error={errors.repeatPassword} setClassName="register-pwRepeat-error" />}
+            </div>
+          </div>
+        </div>
 
-      {/* --------------------------- LAST NAME --------------------------- */}
-      <div>
-        <label>Last Name</label>
-        <input
-          type='text'
-          name='lastName'
-          onChange={updateLastName}
-          value={lastName}
-        />
-      </div>
-      <div className='lastName-error-ctn'>
-       {isSubmitted && <ErrorMessage error={errors.lastName} setClassName="lastName-error" />}
-      </div>
-
-      {/* --------------------------- EMAIL --------------------------- */}
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div className='register-email-error-ctn'>
-       {isSubmitted && <ErrorMessage error={errors.email} setClassName="register-email-error" />}
-      </div>
-
-      {/* --------------------------- PASSWORD --------------------------- */}
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-
-      {/* --------------------------- REPEAT PASSWORD --------------------------- */}
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <div className='register-pwRepeat-error-ctn'>
-       {isSubmitted && <ErrorMessage error={errors.repeatPassword} setClassName="register-pwRepeat-error" />}
-      </div>
-
-      <button type='submit' disabled={Object.values(errors).length !== 0}>Sign Up</button>
-    </form>
+        <div className='register-submit-btn'>
+          <button type='submit' className='toggle-register' disabled={Object.values(errors).length !== 0}>
+            <span className='register-span'>Sign Up</span>
+            <div className='register-ball'></div>
+          </button>
+        </div>
+        <div className='login-ctn'>
+          <Link to='/login'>
+            <div className='toggle-create-account'>
+              <span className='create-account'>Already have an account? Sign in!</span>
+              <div className='create-account-ball'></div>
+            </div>
+          </Link>
+        </div>
+      </form>
+    </div>
   );
 };
 
