@@ -12,8 +12,6 @@ def convert_repeat(day_str):
     else:
         day_str = day_str.split(',')
 
-    print('-------------- what is Day str for SLEEP printing --------------', day_str)
-
     for num in day_str:
         for i, day in enumerate(weekdays_mapping):
             if int(num) == i:

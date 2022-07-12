@@ -118,9 +118,6 @@ const EditAlarm = () => {
             alarmlist_id: parseInt(alarmlist)
         }
 
-        console.log('what is this repeat.........', repeat)
-        console.log('THIS IS THE PAYLOAD REPEAT.........', payload.repeat)
-
         const errorData = await dispatch(updateAlarm(payload))
         if (errorData) {
             setErrors(errorData)

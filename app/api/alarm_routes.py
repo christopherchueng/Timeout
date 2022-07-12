@@ -61,7 +61,6 @@ def update_alarm(alarm_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     alarm = Alarm.query.get(alarm_id)
-    print('----------------- alarm repeat BEFORE!!!!! -----------------', alarm.repeat)
 
     if form.validate_on_submit():
         alarm.name=form.data['name']
@@ -72,8 +71,6 @@ def update_alarm(alarm_id):
         alarm.snooze=form.data['snooze']
         alarm.sound=form.data['sound']
         alarm.alarmlist_id=form.data['alarmlist_id']
-
-        print('----------------- alarm repeat REPLACED!!!! -----------------', alarm.repeat)
 
         db.session.commit()
         return alarm.to_dict()
