@@ -1,0 +1,100 @@
+#login {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 600px;
+    height: 500px;
+}
+
+.email-input,
+.password-input,
+.login-emailError,
+.login-pwError {
+    width: 400px;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 25px;
+}
+
+.email-input,
+.password-input {
+    position: relative;
+    display: block;
+    border: 1px lightgray solid;
+    border-radius: 25px;
+}
+
+.email-input::placeholder,
+.password-input::placeholder {
+    padding-left: 10px;
+}
+
+.toggle-login {
+    position: relative;
+    display: block;
+    border: 1px lightgray solid;
+    border-radius: 25px;
+    background-color: lightgray;
+    width: 100px;
+    height: 42px;
+    cursor: pointer;
+}
+
+.ball:before {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.2s;
+    cursor: pointer;
+    top: 2.5px;
+    left: 5px;
+}
+
+.login-emailError-ctn,
+.login-pwError-ctn {
+    height: 80px;
+}
+
+.toggle-login:hover .ball:before {
+    transform: translateX(57.5px);
+    transition: 0.2s;
+}
+
+.toggle-login:hover {
+    background-color: #3478F6;
+    /* background-color: lightgreen; */
+    transition: 0.2s ease-out;
+}
+
+.login-span {
+    opacity: 1;
+    padding-left: 25px;
+    /* color: white; */
+}
+
+.toggle-login:hover .login-span {
+    opacity: 0;
+    transition: all 0.2s ease-out;
+}
+
+/* .email-input::placeholder,
+.password-input::placeholder {
+} */
+
+.login-btn {
+    display: flex;
+    justify-content: flex-end;
+    width: 400px;
+}
