@@ -28,7 +28,20 @@ const AlarmList = () => {
     return (
         <div id='alarmlists'>
             <div className='alarmlist-header'>
-                <h1>{alarmlist[id]?.name}</h1>
+                <div className='alarmlist-name'>
+                    <h1>{alarmlist[id]?.name}</h1>
+                </div>
+                <div className='alarmlist-toggle'>
+                    <label className='alarm-switch'>
+                        <input
+                            type='checkbox'
+                            // onClick={}
+                            className='alarm-radio-box'
+                        />
+                        <div className='alarm-slider alarm-ball'>
+                        </div>
+                    </label>
+                </div>
             </div>
             <div id='alarmlist-alarms'>
                 <Alarm alarmlist={alarmlist[id]} />

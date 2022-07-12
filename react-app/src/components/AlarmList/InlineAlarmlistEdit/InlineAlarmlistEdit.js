@@ -2,12 +2,15 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import EditAlarmlistForm from "../EditAlarmlistForm"
 import DeleteAlarmlistModal from "../DeleteAlarmlistModal"
+import AlarmlistToggle from "../AlarmlistToggle/AlarmlistToggle"
 import Alarm from "../../Alarm"
 import './InlineAlarmlistEdit.css'
 
 const InlineAlarmlistEdit = ({ alarmlist }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [openTab, setOpenTab] = useState(false)
+    const [alarmOn, setAlarmOn] = useState(false)
+    // const [alarmlistOn, setAlarmlistOn] = useState(false)
 
     useEffect(() => {
         alarmlist.id === 1 ? setOpenTab(true) : setOpenTab(false)
@@ -23,36 +26,29 @@ const InlineAlarmlistEdit = ({ alarmlist }) => {
                 :
                     <>
                         <div className='alarmlist-name-and-settings'>
-                            <div className='alarmlist-name'>
+                            <div className='dashboard-alarmlist-name'>
                                 <h1>
                                     <Link to={`/alarmlists/${alarmlist.id}`}>
                                         {alarmlist.name}
                                     </Link>
                                 </h1>
-                                <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
-                                    <i className="fa-solid fa-angle-right"></i>
-                                </button>
-                            </div>
-                            {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
-                            {alarmlist.id !== 1
-                            ?
-                            <div className='alarmlist-btn-settings'>
-                                <div className='edit-alarmlist'>
-                                    <button type='button' className={`alarmlist-edit-btn-${alarmlist.id}`} onClick={() => setIsEditing(!isEditing)}>
-                                        <span className="fa-solid fa-pen"></span>
-                                    </button>
+                                {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
+                                {alarmlist.id !== 1
+                                ?
+                                <div className='alarmlist-btn-settings'>
+                                    <div className='edit-alarmlist'>
+                                        <button type='button' className={`alarmlist-edit-btn-${alarmlist.id}`} onClick={() => setIsEditing(!isEditing)}>
+                                            <span className="fa-solid fa-pen"></span>
+                                        </button>
+                                    </div>
+                                    <div className='delete-alarmlist'>
+                                        <DeleteAlarmlistModal alarmlist={alarmlist} />
+                                    </div>
                                 </div>
-                                <div className='delete-alarmlist'>
-                                    <DeleteAlarmlistModal alarmlist={alarmlist} />
-                                </div>
+                                : ""}
+                                <AlarmlistToggle alarmOn={alarmOn} setAlarmOn={setAlarmOn} openTab={openTab} setOpenTab={setOpenTab} alarmlist={alarmlist} />
                             </div>
-                            : ""}
                         </div>
-                        {openTab ?
-                        <div id='dashboard-alarms'>
-                            <Alarm alarmlist={alarmlist} key={alarmlist.id} />
-                        </div>
-                        : ""}
                     </>
             }
         </div>

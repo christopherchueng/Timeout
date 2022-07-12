@@ -56,8 +56,9 @@ const Alarm = ({ alarmlist }) => {
                         <label className='alarm-switch'>
                             <input
                                 type='checkbox'
-                                // onClick={}
+                                // onClick={() => setAlarmlistOn(!alarmlistOn) && setAlarmOn(!alarmOn)}
                                 className='alarm-radio-box'
+                                // checked={alarmlistOn || alarmOn}
                             />
                             <div className='alarm-slider alarm-ball'>
                             </div>
