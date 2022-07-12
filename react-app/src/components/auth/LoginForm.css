@@ -2,8 +2,13 @@
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#login > h1 {
+    font-family: 'Readex Pro';
 }
 
 .login-form {
@@ -12,7 +17,13 @@
     justify-content: center;
     flex-direction: column;
     width: 600px;
-    height: 500px;
+    height: 400px;
+    font-family: 'Lexend Deca'
+}
+
+.login-email-label,
+.login-password-label {
+    padding: 0 0 10px 15px;
 }
 
 .email-input,
@@ -21,7 +32,6 @@
 .login-pwError {
     width: 400px;
     height: 40px;
-    padding-left: 10px;
     border-radius: 25px;
 }
 
@@ -31,60 +41,70 @@
     display: block;
     border: 1px lightgray solid;
     border-radius: 25px;
+    padding-left: 20px;
 }
 
-.email-input::placeholder,
-.password-input::placeholder {
-    padding-left: 10px;
-}
-
-.toggle-login {
+.toggle-login,
+.toggle-create-account {
     position: relative;
     display: block;
     border: 1px lightgray solid;
     border-radius: 25px;
     background-color: lightgray;
-    width: 100px;
-    height: 42px;
+    width: 424px;
+    height: 44px;
     cursor: pointer;
+    padding: 0;
 }
 
-.ball:before {
+.signin-ball:before,
+.create-account-ball:before {
     content: '';
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
     background-color: white;
     border-radius: 25px;
     transition: 0.2s;
     cursor: pointer;
-    top: 2.5px;
-    left: 5px;
+    top: 3px;
+    left: 3px;
 }
 
 .login-emailError-ctn,
 .login-pwError-ctn {
-    height: 80px;
+    height: 60px;
+    color: red;
 }
 
-.toggle-login:hover .ball:before {
-    transform: translateX(57.5px);
+.login-emailError,
+.login-pwError {
+    margin: 10px 0 0 0;
+}
+
+.toggle-login:hover .signin-ball:before,
+.toggle-create-account:hover .create-account-ball:before {
+    transform: translateX(379px);
     transition: 0.2s;
 }
 
-.toggle-login:hover {
+.toggle-login:hover,
+.toggle-create-account:hover {
     background-color: #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s ease-out;
 }
 
-.login-span {
+.login-span,
+.create-account {
     opacity: 1;
-    padding-left: 25px;
+    font-family: 'Lexend Deca';
+    /* padding-left: 25px; */
     /* color: white; */
 }
 
-.toggle-login:hover .login-span {
+.toggle-login:hover .login-span,
+.toggle-create-account:hover .create-account {
     opacity: 0;
     transition: all 0.2s ease-out;
 }
@@ -93,8 +113,29 @@
 .password-input::placeholder {
 } */
 
-.login-btn {
+.login-btn,
+.create-account-ctn {
     display: flex;
-    justify-content: flex-end;
-    width: 400px;
+    justify-content: center;
+    width: 500px;
+}
+
+.login-btn,
+.create-account-ctn {
+    padding-top: 20px;
+}
+
+.toggle-create-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10pt;
+}
+
+.create-account-ctn > a {
+    text-decoration: none;
+}
+
+.create-account {
+    color: black;
 }

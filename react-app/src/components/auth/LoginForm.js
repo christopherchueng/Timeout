@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './LoginForm.css'
@@ -54,14 +54,15 @@ const LoginForm = () => {
 
   return (
     <div id='login'>
+      <h1>Sign in to Timeout</h1>
       <form onSubmit={onLogin} className='login-form'>
         {/* ---------------------- EMAIL ---------------------- */}
         <div className='login-email-ctn'>
-          {/* <label htmlFor='email'>Email</label> */}
+          <div className='login-email-label'>Email</div>
           <input
             name='email'
             type='text'
-            placeholder='Email'
+            placeholder='you@example.com'
             value={email}
             onChange={updateEmail}
             className='email-input'
@@ -74,10 +75,11 @@ const LoginForm = () => {
         {/* ---------------------- PASSWORD ---------------------- */}
         <div className='login-password-ctn'>
           {/* <label htmlFor='password'>Password</label> */}
+          <div className='login-password-label'>Password</div>
           <input
             name='password'
             type='password'
-            placeholder='Password'
+            placeholder='••••••••'
             value={password}
             onChange={updatePassword}
             className='password-input'
@@ -89,9 +91,16 @@ const LoginForm = () => {
         <div className='login-btn'>
           <button type='submit' className='toggle-login'>
             <span className='login-span'>Login</span>
-            <div className='ball'>
-            </div>
+            <div className='signin-ball'></div>
           </button>
+        </div>
+        <div className='create-account-ctn'>
+          <Link to='/register'>
+            <div className='toggle-create-account'>
+              <span className='create-account'>Create an account</span>
+              <div className='create-account-ball'></div>
+            </div>
+          </Link>
         </div>
       </form>
     </div>
