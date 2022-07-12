@@ -79,8 +79,6 @@ export const signUp = (payload) => async (dispatch) => {
     body: JSON.stringify(payload),
   });
 
-  console.log('hitting thunk')
-
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))

@@ -89,7 +89,6 @@ export const createAlarm = (payload) => async (dispatch) => {
 }
 
 export const updateAlarm = (payload) => async (dispatch) => {
-    console.log('what is this payload we sending to the backend', payload)
     const response = await fetch(`/api/alarms/${payload.alarmId}/edit`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},

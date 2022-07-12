@@ -59,17 +59,6 @@ const EditAlarm = () => {
         setAlarmlist(alarm?.alarmlistId)
     }, [alarm])
 
-    console.log('here is the alarm again....', alarm)
-    console.log('name here', name)
-    console.log('hour here', hour)
-    console.log('minutes here', minutes)
-    console.log('meridiem here', meridiem)
-    console.log('repeat here', repeat)
-    console.log('snooze here', snooze)
-    console.log('alarmlist here', alarmlist)
-    console.log('name here', name)
-    console.log('name here', name)
-
     useEffect(() => {
         const validationErrors = {}
         if (!name) {
