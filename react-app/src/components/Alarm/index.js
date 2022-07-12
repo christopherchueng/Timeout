@@ -52,6 +52,17 @@ const Alarm = ({ alarmlist }) => {
                         </div>
                     </div>
                     : ""}
+                    <div className='alarm-toggle-ctn'>
+                        <label className='alarm-switch'>
+                            <input
+                                type='checkbox'
+                                // onClick={}
+                                className='alarm-radio-box'
+                            />
+                            <div className='alarm-slider alarm-ball'>
+                            </div>
+                        </label>
+                    </div>
                 </div>
             ))}
 

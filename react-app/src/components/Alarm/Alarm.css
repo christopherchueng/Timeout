@@ -1,0 +1,45 @@
+.alarm-switch {
+    position: relative;
+}
+
+.alarm-switch input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.alarm-slider {
+    position: relative;
+    display: block;
+    border: 1px lightgray solid;
+    border-radius: 25px;
+    background-color: lightgray;
+    width: 75px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.alarm-slider:before {
+    content: '';
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.2s;
+    cursor: pointer;
+    top: 2.5px;
+    left: 2.5px;
+}
+
+.alarm-radio-box:checked + .alarm-slider:before {
+    transform: translateX(35px);
+    transition: 0.2s;
+}
+
+.alarm-radio-box:checked + .alarm-slider {
+    background-color: #3478F6;
+    /* background-color: lightgreen; */
+    transition: 0.2s
+}
