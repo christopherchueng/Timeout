@@ -20,7 +20,11 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     const [alarmOn, setAlarmOn] = useState(false)
 
     useEffect(() => {
+        // If alarmlist is default, display all alarms.
+        // Otherwise, if on the alarmlist/:id page, always display the alarms.
+        // For all other cases, don't show alarms
         alarmlist?.id === 1 ? setOpenTab(true) : (id ? setOpenTab(true) : setOpenTab(false))
+
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
         setAlarmOn(alarmOn)
     }, [])
