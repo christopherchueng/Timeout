@@ -33,13 +33,6 @@ const AlarmList = ({ dashAlarmlist }) => {
         // so this will force the page to scroll up on mount
         window.scrollTo(0, 0)
 
-        if (id) {
-            setOpenTab(true)
-        }
-        if (dashAlarmlist?.id === 1) {
-            setOpenTab(true)
-        }
-
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
 
@@ -53,7 +46,7 @@ const AlarmList = ({ dashAlarmlist }) => {
             :
             <div className='alarmlist-header' key={dashAlarmlist?.id || alarmlistId}>
                 <div className='alarmlist-name'>
-                    <h1>{dashAlarmlist ? <Link to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlist[id]?.name}</h1>
+                    <h1>{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlist[id]?.name}</h1>
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                     {alarmlist.id !== 1
                     ?

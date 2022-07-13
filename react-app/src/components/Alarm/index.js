@@ -20,7 +20,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     const [alarmOn, setAlarmOn] = useState(false)
 
     useEffect(() => {
-        alarmlist?.id === 1 ? setOpenTab(true) : setOpenTab(false)
+        alarmlist?.id === 1 ? setOpenTab(true) : (id ? setOpenTab(true) : setOpenTab(false))
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
         setAlarmOn(alarmOn)
     }, [])
