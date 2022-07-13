@@ -5,7 +5,6 @@ import { getAlarmlist } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
 import EditAlarmlistForm from "./EditAlarmlistForm"
 import DeleteAlarmlistModal from "./DeleteAlarmlistModal"
-import { useToggleContext } from "../../context/ToggleContext"
 import Alarm from "../Alarm"
 import './AlarmList.css'
 
@@ -57,7 +56,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                             </button>
                         </div>
                         <div className='delete-alarmlist'>
-                            <DeleteAlarmlistModal alarmlist={alarmlist} />
+                            <DeleteAlarmlistModal dashAlarmlist={dashAlarmlist} />
                         </div>
                     </div>
                     : ""}

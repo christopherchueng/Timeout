@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getAlarms } from "../../store/alarm"
 import { useParams, Link, useHistory } from "react-router-dom"
-import AlarmlistToggle from "../AlarmList/AlarmlistToggle/AlarmlistToggle"
 import { deleteAlarm } from "../../store/alarm"
-import AlarmToggle from "./AlarmToggle"
-import { useToggleContext } from "../../context/ToggleContext"
 import './Alarm.css'
 
 const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, setMainAlarmlistSwitch }) => {

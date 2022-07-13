@@ -4,12 +4,12 @@ import { deleteAlarmlist } from '../../../store/alarmlist'
 import './DeleteAlarmlistForm.css'
 
 
-const DeleteAlarmlistForm = ({ alarmlist, showModal, setShowModal }) => {
+const DeleteAlarmlistForm = ({ dashAlarmlist, showModal, setShowModal }) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
     const onClick = () => {
-        dispatch(deleteAlarmlist(alarmlist?.id))
+        dispatch(deleteAlarmlist(dashAlarmlist?.id))
         setShowModal(!showModal)
         history.push('/dashboard')
 
@@ -18,8 +18,8 @@ const DeleteAlarmlistForm = ({ alarmlist, showModal, setShowModal }) => {
     return (
         <div className='delete-alarmlist'>
             <div className='confirm-delete'>
-                <p>{`Are you sure you want to delete ${alarmlist.name}?`}</p>
-                <p>{`All alarms under ${alarmlist.name} will be deleted.`}</p>
+                <p>{`Are you sure you want to delete ${dashAlarmlist?.name}?`}</p>
+                <p>{`All alarms under ${dashAlarmlist?.name} will be deleted.`}</p>
             </div>
             <button onClick={onClick}>Delete</button>
         </div>
