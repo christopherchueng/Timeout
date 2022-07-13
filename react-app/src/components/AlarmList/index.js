@@ -16,13 +16,14 @@ const AlarmList = ({ dashAlarmlist }) => {
     const alarmlist = useSelector(state => state?.alarmlist?.entries)
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
+    const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
+    console.log('here are the filtered alarms', filteredAlarms)
 
     const [openTab, setOpenTab] = useState(false)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
-    console.log('here is the alarmlist', alarmlist)
-    console.log('here is the dashboard alarmlist', dashAlarmlist)
+    // console.log("here is the alarmsArr", alarmsArr)
 
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
@@ -40,7 +41,7 @@ const AlarmList = ({ dashAlarmlist }) => {
 
 
     return (
-        <div id='alarmlists'>
+        <div id='alarmlists' key={alarmlistId || dashAlarmlist?.id}>
             {isEditing
             ?
             <div id={'edit-alarmlist-form'}>
@@ -78,11 +79,30 @@ const AlarmList = ({ dashAlarmlist }) => {
                 </div> */}
             </div>}
             <div id='alarmlist-alarms'>
-                <Alarm
-                    alarmlist={alarmlist[id] || dashAlarmlist}
-                    mainAlarmlistSwitch={mainAlarmlistSwitch}
-                    setMainAlarmlistSwitch={setMainAlarmlistSwitch}
-                />
+                <label className='alarmlist-switch'>
+                    <input
+                        type='checkbox'
+                        value={mainAlarmlistSwitch}
+                        onClick={() => setMainAlarmlistSwitch(!mainAlarmlistSwitch)}
+                        className='alarmlist-radio-box'
+                        checked={mainAlarmlistSwitch}
+                    />
+                    <div className='alarmlist-slider alarmlist-ball'>
+                    </div>
+                </label>
+                <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
+                    <i className="fa-solid fa-angle-right"></i>
+                </button>
+                {filteredAlarms && filteredAlarms.map(alarm => (
+                    <Alarm
+                        alarm={alarm}
+                        openTab={openTab}
+                        setOpenTab={setOpenTab}
+                        alarmlist={alarmlist[id] || dashAlarmlist}
+                        mainAlarmlistSwitch={mainAlarmlistSwitch}
+                        setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+                    />
+                ))}
             </div>
         </div>
     )

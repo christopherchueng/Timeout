@@ -16,14 +16,7 @@ const AlarmToggle = ({ alarm, id, alarmlist, alarmsArr, mainAlarmlistSwitch, set
     //     setAlarmlistOn(alarmlistOn)
     //     setAlarmOn(alarmOn)
     // }, [])
-    useEffect(() => {
-        if (mainAlarmlistSwitch) {
-            setAlarmOn(true)
-        } else {
-            setAlarmOn(false)
-        }
 
-    }, [mainAlarmlistSwitch])
 
     // useEffect(() => {
     //     // Some conditional stating: If alarmlist toggle is on,
