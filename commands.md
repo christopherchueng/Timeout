@@ -8,6 +8,7 @@ flask db downgrade
 heroku run -a app-timeout flask seed undo
 heroku run -a app-timeout flask seed all
 
+Branch:
 
 What are you working on? (give us some context)
 
@@ -37,13 +38,10 @@ EX: 9/10 OF THE ALARMS IN THE ALARMLIST ARE ON. IF I TURN ON THE 10TH ALARM,
 THE ALARMLIST TOGGLE SHOULD BE ON BECAUSE NOW ALL ALARMS ARE ON. -->
 
 
-        Alarmlist   Dashboard
-             \         /\
-              \       /  \
-               \     /    \
-                Alarm     InlineAlarmlistEdit
-                  /\
-                 /  \
-    AlarmlistToggle  \
-                      \
-                AlarmToggle
+     Dashboard
+        /
+       /
+ Alarmlist
+     /
+    /
+Alarm
