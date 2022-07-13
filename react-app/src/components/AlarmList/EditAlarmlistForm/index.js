@@ -5,6 +5,7 @@ import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
 const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
+    console.log('here in edit alarmlist form', alarmlist)
     const dispatch = useDispatch()
     const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
