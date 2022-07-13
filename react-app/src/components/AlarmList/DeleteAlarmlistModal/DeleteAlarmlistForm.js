@@ -18,8 +18,8 @@ const DeleteAlarmlistForm = ({ dashAlarmlist, showModal, setShowModal }) => {
     return (
         <div className='delete-alarmlist'>
             <div className='confirm-delete'>
-                <p>{`Are you sure you want to delete ${dashAlarmlist?.name}?`}</p>
-                <p>{`All alarms under ${dashAlarmlist?.name} will be deleted.`}</p>
+                <p>{`Are you sure you want to delete '${dashAlarmlist?.name}'?`}</p>
+                <p>{`All alarms under '${dashAlarmlist?.name}' will be deleted.`}</p>
             </div>
             <button onClick={onClick}>Delete</button>
         </div>
