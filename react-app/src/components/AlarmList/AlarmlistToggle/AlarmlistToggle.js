@@ -15,14 +15,18 @@ const AlarmlistToggle = ({ alarmlist, alarmsArr }) => {
     //     }
     // }
 
-    // ALARMLIST SHOULD ONLY BE ON IF ALLLLL ALARMS ARE ON
-    // ALARMLIST OFF SHOULD HAVE 2 OPERATIONS:
-    // TURN OFF ALL ALARMS IF ALL ALARMS WERE ON TO BEGIN WITH
-    // ALARMLIST TOGGLE SHOULD REMAIN OFF UNLESS ALL ALARMS UNDER ALARMLIST ARE ON.
+    /* ALARMLIST SHOULD ONLY BE ON IF ALLLLL ALARMS ARE ON
+    ALARMLIST OFF SHOULD HAVE 2 OPERATIONS:
+    TURN OFF ALL ALARMS IF ALL ALARMS WERE ON TO BEGIN WITH
+    ALARMLIST TOGGLE SHOULD REMAIN OFF UNLESS ALL ALARMS UNDER ALARMLIST ARE ON. */
     const onChange = () => {
         let onCount = 0
         // If alarms have a toggle boolean in models, I can keep a count of the "True" elements
         // If the count === selectedAlarms.length, then alarmlist should be on. Otherwise stay off.
+
+        // If boolean not in models, how can I keep track of each alarm and whether it's on or off with state?
+        // Especially if the state variables are on a more "broader scale" type of use
+        // (not directed towards every individial alarm...)???
         let selectedAlarms = alarmsArr.filter(alarm => alarmlist?.id === alarm?.alarmlistId)
         for (let alarm of selectedAlarms) {
             if (alarm?.alarmlistId === alarmlist?.id) {

@@ -30,10 +30,10 @@ const AlarmToggle = ({ alarm, id, alarmlist, alarmsArr }) => {
     //     // !alarmlistOn ? setAlarmlistOn(alarmlistOn) : setAlarmlistOn(!alarmlistOn)
     // }
 
-    // ALARM CAN BE ON OR OFF AND SHOULD NOT AFFECT THE ALARMLIST TOGGLE NOR OTHER ALARMS.
-    // UNLESS YOU ARE TURNING ON THE LAST ALARM IN THE ALARMLIST.
-    // EX: 9/10 OF THE ALARMS IN THE ALARMLIST ARE ON. IF I TURN ON THE 10TH ALARM,
-    // THE ALARMLIST TOGGLE SHOULD BE ON BECAUSE NOW ALL ALARMS ARE ON.
+    /* ALARM CAN BE ON OR OFF AND SHOULD NOT AFFECT THE ALARMLIST TOGGLE NOR OTHER ALARMS.
+    UNLESS YOU ARE TURNING ON THE LAST ALARM IN THE ALARMLIST.
+    EX: 9/10 OF THE ALARMS IN THE ALARMLIST ARE ON. IF I TURN ON THE 10TH ALARM,
+    THE ALARMLIST TOGGLE SHOULD BE ON BECAUSE NOW ALL ALARMS ARE ON. */
     const onChange = () => {
         let onCount = 0
         let selectedAlarms = alarmsArr.filter(alarm => alarmlist?.id === alarm?.alarmlistId)
