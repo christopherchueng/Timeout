@@ -19,7 +19,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     // const [openTab, setOpenTab] = useState(false)
     const [alarmOn, setAlarmOn] = useState(false)
 
-
     useEffect(() => {
         alarmlist?.id === 1 ? setOpenTab(true) : setOpenTab(false)
     }, [])
@@ -86,7 +85,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                                         value={alarmOn}
                                         onClick={() => setAlarmOn(!alarmOn)}
                                         className='alarm-radio-box'
-                                        // checked={alarmOn}
+                                        checked={alarmOn}
                                     />
                                     <div className='alarm-slider alarm-ball'>
                                     </div>
