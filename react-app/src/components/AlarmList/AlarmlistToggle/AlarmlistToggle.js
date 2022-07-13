@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react"
 import Alarm from "../../Alarm"
 
-const AlarmlistToggle = ({ alarmlist }) => {
-    const [alarmlistOn, setAlarmlistOn] = useState(false)
-    const [alarmOn, setAlarmOn] = useState(false)
+const AlarmlistToggle = ({ alarmlist, alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn }) => {
+    // const [alarmOn, setAlarmOn] = useState(false)
 
     return (
         <>
             <label className='alarmlist-switch'>
                 <input
                     type='checkbox'
-                    value={alarmlistOn || alarmOn}
+                    // value={alarmlistOn || alarmOn}
                     onClick={() => setAlarmlistOn(!alarmlistOn)}
                     className='alarmlist-radio-box'
-                    checked={alarmlistOn}
+                    // checked={alarmOn}
                 />
                 <div className='alarmlist-slider alarmlist-ball'>
                 </div>

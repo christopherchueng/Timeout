@@ -3,17 +3,25 @@ import { useDispatch } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
 
-const AlarmToggle = ({ alarm, id }) => {
+const AlarmToggle = ({ alarm, id, alarmlistOn, setAlarmlistOn }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [alarmOn, setAlarmOn] = useState(false)
 
 
-    const onClick = (e, alarm) => {
+    const onDelete = (e, alarm) => {
         e.preventDefault()
         dispatch(deleteAlarm(alarm.id))
         history.push(`/alarmlists/${id}`)
     }
+
+    const onClick = () => {
+        alarmOn ? setAlarmOn(!alarmOn) : setAlarmOn(alarmOn)
+        !alarmlistOn ? setAlarmlistOn(alarmlistOn) : setAlarmlistOn(!alarmlistOn)
+    }
+
+    console.log('what is alarmOn', alarmOn)
+    console.log('what is alarmlistOn', alarmlistOn)
 
     return (
         <>
@@ -31,7 +39,7 @@ const AlarmToggle = ({ alarm, id }) => {
                         <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
                 </div>
                 <div className='alarm-delete-btn'>
-                    <button type='button' onClick={e => onClick(e, alarm)}>
+                    <button type='button' onClick={e => onDelete(e, alarm)}>
                         <span className="fa-solid fa-trash"></span>
                     </button>
                 </div>
@@ -40,10 +48,10 @@ const AlarmToggle = ({ alarm, id }) => {
             <label className='alarm-switch'>
                 <input
                     type='checkbox'
-                    value={alarmOn}
-                    onClick={() => setAlarmOn(!alarmOn)}
+                    // value={alarmOn}
+                    onClick={onClick}
                     className='alarm-radio-box'
-                    checked={alarmOn}
+                    checked={alarmOn || alarmlistOn}
                 />
                 <div className='alarm-slider alarm-ball'>
                 </div>

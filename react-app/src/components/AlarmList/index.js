@@ -14,10 +14,16 @@ const AlarmList = () => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
 
+    const [openTab, setOpenTab] = useState(false)
+
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId))
         dispatch(getAlarms(alarmlistId))
     }, [dispatch])
+
+    useEffect(() => {
+        setOpenTab(true)
+    }, [])
 
     // Sometimes, the page renders at the bottom first,
     // so this will force the page to scroll up on mount
@@ -31,7 +37,7 @@ const AlarmList = () => {
                 <div className='alarmlist-name'>
                     <h1>{alarmlist[id]?.name}</h1>
                 </div>
-                <div className='alarmlist-toggle'>
+                {/* <div className='alarmlist-toggle'>
                     <label className='alarm-switch'>
                         <input
                             type='checkbox'
@@ -41,7 +47,7 @@ const AlarmList = () => {
                         <div className='alarm-slider alarm-ball'>
                         </div>
                     </label>
-                </div>
+                </div> */}
             </div>
             <div id='alarmlist-alarms'>
                 <Alarm alarmlist={alarmlist[id]} />
