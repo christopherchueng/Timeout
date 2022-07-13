@@ -8,13 +8,8 @@ import './InlineAlarmlistEdit.css'
 
 const InlineAlarmlistEdit = ({ alarmlist }) => {
     const [isEditing, setIsEditing] = useState(false)
-    const [openTab, setOpenTab] = useState(false)
     const [alarmOn, setAlarmOn] = useState(false)
     const [alarmlistOn, setAlarmlistOn] = useState(false)
-
-    useEffect(() => {
-        alarmlist.id === 1 ? setOpenTab(true) : setOpenTab(false)
-    }, [])
 
     return (
         <div className={`alarmlist-${alarmlist.id}`}>

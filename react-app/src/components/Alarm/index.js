@@ -1,20 +1,25 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getAlarms } from "../../store/alarm"
 import { useParams, Link, useHistory } from "react-router-dom"
-import { deleteAlarm } from "../../store/alarm"
 import AlarmlistToggle from "../AlarmList/AlarmlistToggle/AlarmlistToggle"
 import AlarmToggle from "./AlarmToggle"
 
 import './Alarm.css'
 
-const Alarm = ({ alarmlist, alarmOn, setAlarmOn }) => {
+const Alarm = ({ alarmlist }) => {
     const dispatch = useDispatch()
-    const history = useHistory()
     // Only use this id below for when you are on the alarmlists/:id page! DO NOT USE WHEN ON DASHBOARD
     const { id } = useParams()
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
+
+    const [alarmlistOn, setAlarmlistOn] = useState(false)
+    const [openTab, setOpenTab] = useState(false)
+
+    useEffect(() => {
+        alarmlist.id === 1 ? setOpenTab(true) : setOpenTab(false)
+    }, [])
 
     useEffect(() => {
         // Need the or statement here because Alarm is used in alarmlist/:id AND dashboard
@@ -23,43 +28,26 @@ const Alarm = ({ alarmlist, alarmOn, setAlarmOn }) => {
         dispatch(getAlarms(parseInt(id) || alarmlist?.id))
     }, [dispatch])
 
-    const onClick = (e, alarm) => {
-        e.preventDefault()
-        dispatch(deleteAlarm(alarm.id))
-        history.push(`/alarmlists/${id}`)
-    }
-
     return (
-        <div className='alarm-info'>
-            {alarmsArr && alarmsArr.map(alarm => (
-                alarm.alarmlistId === alarmlist?.id &&
-                <div key={alarm.id}>
-                    <div>
-                        <div className='alarm-name'>
-                            {alarm.name}
-                        </div>
-                        <div className='alarm-time'>
-                            {alarm.hour}:{alarm.minutes < 10 ? '0' + alarm.minutes : alarm.minutes} {alarm.meridiem}
-                        </div>
-                    </div>
-                    {id ?
-                    <div className='alarm-setting-btns'>
-                        <div className='alarm-edit-btn'>
-                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
-                        </div>
-                        <div className='alarm-delete-btn'>
-                            <button type='button' onClick={e => onClick(e, alarm)}>
-                                <span className="fa-solid fa-trash"></span>
-                            </button>
-                        </div>
-                    </div>
-                    : ""}
-                    <div className='alarm-toggle-ctn'>
-                        <AlarmToggle alarmOn={alarmOn} setAlarmOn={setAlarmOn} />
+        <div className="toggle-alarms">
+            <AlarmlistToggle alarmlist={alarmlist} />
+            <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
+                <i className="fa-solid fa-angle-right"></i>
+            </button>
+            {openTab ?
+                <div id='dashboard-alarms'>
+                    <div className='alarm-info'>
+                        {alarmsArr && alarmsArr.map(alarm => (
+                            alarm.alarmlistId === alarmlist?.id &&
+                            <div className='alarm-toggle-ctn'>
+                                {/* <AlarmToggle alarm={alarm} id={id} key={alarm.id} alarmOn={alarmOn} setAlarmOn={setAlarmOn} /> */}
+                                <AlarmToggle alarm={alarm} id={id} key={alarm.id} />
+                            </div>
+                        ))}
+
                     </div>
                 </div>
-            ))}
-
+            : ""}
         </div>
     )
 }

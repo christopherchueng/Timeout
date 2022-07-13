@@ -1,10 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Alarm from "../../Alarm"
 
 const AlarmlistToggle = ({ alarmlist }) => {
     const [alarmlistOn, setAlarmlistOn] = useState(false)
     const [alarmOn, setAlarmOn] = useState(false)
-    const [openTab, setOpenTab] = useState(false)
 
     return (
         <>
@@ -19,15 +18,7 @@ const AlarmlistToggle = ({ alarmlist }) => {
                 <div className='alarmlist-slider alarmlist-ball'>
                 </div>
             </label>
-            <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
-                <i className="fa-solid fa-angle-right"></i>
-            </button>
-            {openTab ?
-                <div id='dashboard-alarms'>
-                    {/* <Alarm alarmlist={alarmlist} key={alarmlist.id} alarmOn={alarmOn} setAlarmOn={setAlarmOn} /> */}
-                    <Alarm alarmlist={alarmlist} key={alarmlist.id} alarmOn={alarmOn} setAlarmOn={setAlarmOn} />
-                </div>
-            : ""}
+
         </>
     )
 }
