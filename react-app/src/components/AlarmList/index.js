@@ -17,7 +17,6 @@ const AlarmList = ({ dashAlarmlist }) => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
     const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
-    console.log('here are the filtered alarms', filteredAlarms)
 
     const [openTab, setOpenTab] = useState(false)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
@@ -39,7 +38,6 @@ const AlarmList = ({ dashAlarmlist }) => {
         // setAlarmOn(alarmOn)
     }, [])
 
-
     return (
         <div id='alarmlists' key={alarmlistId || dashAlarmlist?.id}>
             {isEditing
@@ -50,7 +48,7 @@ const AlarmList = ({ dashAlarmlist }) => {
             :
             <div className='alarmlist-header'>
                 <div className='alarmlist-name'>
-                    <h1>{alarmlist[id]?.name || dashAlarmlist?.name}</h1>
+                    <h1>{dashAlarmlist ? <Link to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlist[id]?.name}</h1>
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                     {alarmlist.id !== 1
                     ?
