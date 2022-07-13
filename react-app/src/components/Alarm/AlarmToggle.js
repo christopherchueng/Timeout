@@ -2,11 +2,13 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
+import { useToggleAlarmlist } from "../../context/ToggleAlarmlist"
 
-const AlarmToggle = ({ alarm, id, alarmlistOn, setAlarmlistOn }) => {
+const AlarmToggle = ({ alarm, id, alarmlist, alarmsArr }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [alarmOn, setAlarmOn] = useState(false)
+    const { alarmlistOn, setAlarmlistOn } = useToggleAlarmlist()
 
 
     const onDelete = (e, alarm) => {
@@ -15,13 +17,21 @@ const AlarmToggle = ({ alarm, id, alarmlistOn, setAlarmlistOn }) => {
         history.push(`/alarmlists/${id}`)
     }
 
-    const onClick = () => {
-        alarmOn ? setAlarmOn(!alarmOn) : setAlarmOn(alarmOn)
-        !alarmlistOn ? setAlarmlistOn(alarmlistOn) : setAlarmlistOn(!alarmlistOn)
-    }
+    // const onClick = () => {
+    //     if (alarm?.alarmlistId === alarmlist?.id) {
+    //         setAlarmlistOn(!alarmlistOn)
+    //     }
+    //     // alarmOn ? setAlarmOn(!alarmOn) : setAlarmOn(alarmOn)
+    //     // !alarmlistOn ? setAlarmlistOn(alarmlistOn) : setAlarmlistOn(!alarmlistOn)
+    // }
 
-    console.log('what is alarmOn', alarmOn)
-    console.log('what is alarmlistOn', alarmlistOn)
+    const onChange = () => {
+        for (let alarm of alarmsArr) {
+            if (alarmlist?.id === alarm?.alarmlistId) {
+                setAlarmOn(!alarmOn)
+            }
+        }
+    }
 
     return (
         <>
@@ -48,10 +58,10 @@ const AlarmToggle = ({ alarm, id, alarmlistOn, setAlarmlistOn }) => {
             <label className='alarm-switch'>
                 <input
                     type='checkbox'
-                    // value={alarmOn}
-                    onClick={onClick}
+                    value={alarmOn || alarmlistOn}
+                    onChange={onChange}
                     className='alarm-radio-box'
-                    checked={alarmOn || alarmlistOn}
+                    checked={alarmlistOn || alarmOn}
                 />
                 <div className='alarm-slider alarm-ball'>
                 </div>

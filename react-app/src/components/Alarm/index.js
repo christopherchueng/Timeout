@@ -14,7 +14,7 @@ const Alarm = ({ alarmlist }) => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
 
-    const { alarmlistOn, setAlarmlistOn } = useToggleAlarmlist()
+    // const { alarmlistOn, setAlarmlistOn } = useToggleAlarmlist()
     const [alarmOn, setAlarmOn] = useState(false)
     const [openTab, setOpenTab] = useState(false)
 
@@ -31,7 +31,7 @@ const Alarm = ({ alarmlist }) => {
 
     return (
         <div className="toggle-alarms">
-            <AlarmlistToggle alarmlist={alarmlist} alarmOn={alarmOn} setAlarmOn={setAlarmOn} />
+            <AlarmlistToggle alarmlist={alarmlist} alarmOn={alarmOn} setAlarmOn={setAlarmOn} alarmsArr={alarmsArr} />
             <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
                 <i className="fa-solid fa-angle-right"></i>
             </button>
@@ -42,7 +42,7 @@ const Alarm = ({ alarmlist }) => {
                             alarm.alarmlistId === alarmlist?.id &&
                             <div className='alarm-toggle-ctn'>
                                 {/* <AlarmToggle alarm={alarm} id={id} key={alarm.id} alarmOn={alarmOn} setAlarmOn={setAlarmOn} /> */}
-                                <AlarmToggle alarm={alarm} id={id} key={alarm.id} alarmlistOn={alarmlistOn} setAlarmlistOn={setAlarmlistOn} />
+                                <AlarmToggle alarm={alarm} id={id} key={alarm.id} alarmlist={alarmlist} alarmsArr={alarmsArr} />
                             </div>
                         ))}
 
