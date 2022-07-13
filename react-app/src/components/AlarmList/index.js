@@ -17,6 +17,7 @@ const AlarmList = () => {
 
     const { alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn } = useToggleContext()
     const [openTab, setOpenTab] = useState(false)
+    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
 
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId))
@@ -31,8 +32,6 @@ const AlarmList = () => {
         setAlarmlistOn(alarmlistOn)
         setAlarmOn(alarmOn)
     }, [])
-
-    console.log('here is the alarmlistOn', alarmlistOn)
 
 
     return (
@@ -54,7 +53,11 @@ const AlarmList = () => {
                 </div> */}
             </div>
             <div id='alarmlist-alarms'>
-                <Alarm alarmlist={alarmlist[id]} />
+                <Alarm
+                    alarmlist={alarmlist[id]}
+                    mainAlarmlistSwitch={mainAlarmlistSwitch}
+                    setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+                />
             </div>
         </div>
     )

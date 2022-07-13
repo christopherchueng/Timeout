@@ -7,7 +7,7 @@ import AlarmToggle from "./AlarmToggle"
 import { useToggleContext } from "../../context/ToggleContext"
 import './Alarm.css'
 
-const Alarm = ({ alarmlist }) => {
+const Alarm = ({ alarmlist, mainAlarmlistSwitch, setMainAlarmlistSwitch }) => {
     const dispatch = useDispatch()
     // Only use this id below for when you are on the alarmlists/:id page! DO NOT USE WHEN ON DASHBOARD
     const { id } = useParams()
@@ -30,7 +30,12 @@ const Alarm = ({ alarmlist }) => {
 
     return (
         <div className="toggle-alarms">
-            <AlarmlistToggle alarmlist={alarmlist} alarmsArr={alarmsArr} />
+            <AlarmlistToggle
+                alarmlist={alarmlist}
+                alarmsArr={alarmsArr}
+                mainAlarmlistSwitch={mainAlarmlistSwitch}
+                setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+            />
             <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
                 <i className="fa-solid fa-angle-right"></i>
             </button>
@@ -41,7 +46,15 @@ const Alarm = ({ alarmlist }) => {
                             alarm.alarmlistId === alarmlist?.id &&
                             <div className='alarm-toggle-ctn'>
                                 {/* <AlarmToggle alarm={alarm} id={id} key={alarm.id} alarmOn={alarmOn} setAlarmOn={setAlarmOn} /> */}
-                                <AlarmToggle alarm={alarm} id={id} key={alarm.id} alarmlist={alarmlist} alarmsArr={alarmsArr} />
+                                <AlarmToggle
+                                    alarm={alarm}
+                                    id={id}
+                                    key={alarm.id}
+                                    alarmlist={alarmlist}
+                                    alarmsArr={alarmsArr}
+                                    mainAlarmlistSwitch={mainAlarmlistSwitch}
+                                    setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+                                />
                             </div>
                         ))}
 

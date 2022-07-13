@@ -20,6 +20,7 @@ const Dashboard = () => {
     // console.log('default Alarmlist here', typeof Object.values(defaultAlarmlist))
 
     const {alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn} = useToggleContext()
+    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
@@ -42,7 +43,7 @@ const Dashboard = () => {
                 {alarmlists && alarmlists.map(alarmlist => (
                     <>
                         <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
-                        <Alarm alarmlist={alarmlist} />
+                        <Alarm alarmlist={alarmlist} mainAlarmlistSwitch={mainAlarmlistSwitch} setMainAlarmlistSwitch={setMainAlarmlistSwitch} />
                     </>
                 ))}
                 {/* <div className='default-alarmlist'>
