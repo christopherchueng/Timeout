@@ -5,15 +5,18 @@ import './index.css';
 import App from './App';
 import { ModalProvider } from './context/Modal';
 import configureStore from './store';
+import ToggleAlarmlistProvider from './context/ToggleAlarmlist';
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ModalProvider>
-        <App />
-      </ModalProvider>
+      <ToggleAlarmlistProvider>
+        <ModalProvider>
+          <App />
+        </ModalProvider>
+      </ToggleAlarmlistProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
