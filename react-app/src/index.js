@@ -12,11 +12,11 @@ const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToggleAlarmlistProvider>
-        <ModalProvider>
+      <ModalProvider>
+        <ToggleAlarmlistProvider>
           <App />
-        </ModalProvider>
-      </ToggleAlarmlistProvider>
+        </ToggleAlarmlistProvider>
+      </ModalProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

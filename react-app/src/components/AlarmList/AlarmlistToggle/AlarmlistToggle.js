@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react"
 import Alarm from "../../Alarm"
+import { useToggleAlarmlist } from "../../../context/ToggleAlarmlist"
 
-const AlarmlistToggle = ({ alarmlist, alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn }) => {
+const AlarmlistToggle = ({ alarmlist, alarmOn, setAlarmOn }) => {
     // const [alarmOn, setAlarmOn] = useState(false)
+    const {alarmlistOn, setAlarmlistOn} = useToggleAlarmlist()
+
+    useEffect(() => {
+        setAlarmlistOn(alarmlistOn)
+    }, [])
 
     return (
         <>
@@ -12,7 +18,7 @@ const AlarmlistToggle = ({ alarmlist, alarmlistOn, setAlarmlistOn, alarmOn, setA
                     // value={alarmlistOn || alarmOn}
                     onClick={() => setAlarmlistOn(!alarmlistOn)}
                     className='alarmlist-radio-box'
-                    // checked={alarmOn}
+                    checked={alarmlistOn}
                 />
                 <div className='alarmlist-slider alarmlist-ball'>
                 </div>

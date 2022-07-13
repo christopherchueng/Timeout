@@ -4,7 +4,7 @@ import { getAlarms } from "../../store/alarm"
 import { useParams, Link, useHistory } from "react-router-dom"
 import AlarmlistToggle from "../AlarmList/AlarmlistToggle/AlarmlistToggle"
 import AlarmToggle from "./AlarmToggle"
-
+import { useToggleAlarmlist } from "../../context/ToggleAlarmlist"
 import './Alarm.css'
 
 const Alarm = ({ alarmlist }) => {
@@ -14,7 +14,7 @@ const Alarm = ({ alarmlist }) => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
 
-    const [alarmlistOn, setAlarmlistOn] = useState(false)
+    const { alarmlistOn, setAlarmlistOn } = useToggleAlarmlist()
     const [alarmOn, setAlarmOn] = useState(false)
     const [openTab, setOpenTab] = useState(false)
 
@@ -31,7 +31,7 @@ const Alarm = ({ alarmlist }) => {
 
     return (
         <div className="toggle-alarms">
-            <AlarmlistToggle alarmlist={alarmlist} alarmlistOn={alarmlistOn} setAlarmlistOn={setAlarmlistOn} alarmOn={alarmOn} setAlarmOn={setAlarmOn} />
+            <AlarmlistToggle alarmlist={alarmlist} alarmOn={alarmOn} setAlarmOn={setAlarmOn} />
             <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
                 <i className="fa-solid fa-angle-right"></i>
             </button>

@@ -5,6 +5,7 @@ import { getAlarmlists, getDefaultAlarmlist } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import InlineAlarmlistEdit from "../AlarmList/InlineAlarmlistEdit/InlineAlarmlistEdit"
+import { useToggleAlarmlist } from "../../context/ToggleAlarmlist"
 import Alarm from "../Alarm"
 import './Dashboard.css'
 
@@ -18,12 +19,18 @@ const Dashboard = () => {
     // const independentAlarmsArr = Object.values(independentAlarmsObj)
     // console.log('default Alarmlist here', typeof Object.values(defaultAlarmlist))
 
+    const {alarmlistOn, setAlarmlistOn} = useToggleAlarmlist()
+
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
         // dispatch(getDefaultAlarmlist())
         dispatch(getAlarms(1))
     }, [dispatch])
+
+    useEffect(() => {
+        setAlarmlistOn(alarmlistOn)
+    }, [])
 
     return (
         <div id='dashboard'>
