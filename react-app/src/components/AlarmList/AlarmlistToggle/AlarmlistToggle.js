@@ -2,9 +2,10 @@ import { useState, useEffect } from "react"
 import Alarm from "../../Alarm"
 import { useToggleContext } from "../../../context/ToggleContext"
 
-const AlarmlistToggle = ({ alarmlist, alarmOn, setAlarmOn, alarmsArr }) => {
+const AlarmlistToggle = ({ alarmlist, alarmsArr }) => {
     // const [alarmOn, setAlarmOn] = useState(false)
-    const {alarmlistOn, setAlarmlistOn} = useToggleContext()
+    const [alarmlistOn, setAlarmlistOn] = useState(false)
+    const { alarmOn, setAlarmOn } = useToggleContext()
 
     // const onChange = () => {
     //     for (let alarm of alarmsArr) {
@@ -14,18 +15,28 @@ const AlarmlistToggle = ({ alarmlist, alarmOn, setAlarmOn, alarmsArr }) => {
     //     }
     // }
 
+    // ALARMLIST SHOULD ONLY BE ON IF ALLLLL ALARMS ARE ON
+    // ALARMLIST OFF SHOULD HAVE 2 OPERATIONS:
+    // TURN OFF ALL ALARMS IF ALL ALARMS WERE ON TO BEGIN WITH
+    // ALARMLIST TOGGLE SHOULD REMAIN OFF UNLESS ALL ALARMS UNDER ALARMLIST ARE ON.
     const onChange = () => {
-        for (let alarm of alarmsArr) {
+        let onCount = 0
+        // If alarms have a toggle boolean in models, I can keep a count of the "True" elements
+        // If the count === selectedAlarms.length, then alarmlist should be on. Otherwise stay off.
+        let selectedAlarms = alarmsArr.filter(alarm => alarmlist?.id === alarm?.alarmlistId)
+        for (let alarm of selectedAlarms) {
             if (alarm?.alarmlistId === alarmlist?.id) {
-                setAlarmOn(!alarmOn)
+                setAlarmlistOn(!alarmlistOn)
             }
         }
+        // setAlarmOn(!alarmOn)
         // alarmOn ? setAlarmOn(!alarmOn) : setAlarmOn(alarmOn)
         // !alarmlistOn ? setAlarmlistOn(alarmlistOn) : setAlarmlistOn(!alarmlistOn)
     }
 
     useEffect(() => {
         setAlarmlistOn(alarmlistOn)
+        setAlarmOn(alarmOn)
     }, [])
 
     return (
@@ -36,7 +47,7 @@ const AlarmlistToggle = ({ alarmlist, alarmOn, setAlarmOn, alarmsArr }) => {
                     value={alarmlistOn}
                     onChange={onChange}
                     className='alarmlist-radio-box'
-                    checked={alarmOn || alarmlistOn}
+                    checked={alarmlistOn}
                 />
                 <div className='alarmlist-slider alarmlist-ball'>
                 </div>

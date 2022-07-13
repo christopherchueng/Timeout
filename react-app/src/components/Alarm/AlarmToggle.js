@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
@@ -7,9 +7,14 @@ import { useToggleContext } from "../../context/ToggleContext"
 const AlarmToggle = ({ alarm, id, alarmlist, alarmsArr }) => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const [alarmOn, setAlarmOn] = useState(false)
-    const { alarmlistOn, setAlarmlistOn } = useToggleContext()
+    // const [alarmOn, setAlarmOn] = useState(false)
+    // const { alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn } = useToggleContext()
+    const { alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn } = useToggleContext()
 
+    useEffect(() => {
+        setAlarmlistOn(alarmlistOn)
+        setAlarmOn(alarmOn)
+    }, [])
 
     const onDelete = (e, alarm) => {
         e.preventDefault()
@@ -25,13 +30,27 @@ const AlarmToggle = ({ alarm, id, alarmlist, alarmsArr }) => {
     //     // !alarmlistOn ? setAlarmlistOn(alarmlistOn) : setAlarmlistOn(!alarmlistOn)
     // }
 
+    // ALARM CAN BE ON OR OFF AND SHOULD NOT AFFECT THE ALARMLIST TOGGLE NOR OTHER ALARMS.
+    // UNLESS YOU ARE TURNING ON THE LAST ALARM IN THE ALARMLIST.
+    // EX: 9/10 OF THE ALARMS IN THE ALARMLIST ARE ON. IF I TURN ON THE 10TH ALARM,
+    // THE ALARMLIST TOGGLE SHOULD BE ON BECAUSE NOW ALL ALARMS ARE ON.
     const onChange = () => {
-        for (let alarm of alarmsArr) {
-            if (alarmlist?.id === alarm?.alarmlistId) {
-                setAlarmOn(!alarmOn)
+        let onCount = 0
+        let selectedAlarms = alarmsArr.filter(alarm => alarmlist?.id === alarm?.alarmlistId)
+        // if (alarmOn) {
+        //     onCount -= 1
+        // }
+        // if (!alarmOn) {
+        //     onCount += 1
+        // }
+        for (let alarm of selectedAlarms) {
+            if (onCount === selectedAlarms.length) {
+                setAlarmlistOn(true)
             }
         }
     }
+
+    console.log('here is alarmOn', alarmOn)
 
     return (
         <>
@@ -58,10 +77,10 @@ const AlarmToggle = ({ alarm, id, alarmlist, alarmsArr }) => {
             <label className='alarm-switch'>
                 <input
                     type='checkbox'
-                    value={alarmOn || alarmlistOn}
+                    value={alarmOn}
                     onChange={onChange}
                     className='alarm-radio-box'
-                    checked={alarmlistOn || alarmOn}
+                    // checked={alarmOn}
                 />
                 <div className='alarm-slider alarm-ball'>
                 </div>

@@ -14,7 +14,7 @@ const Alarm = ({ alarmlist }) => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
 
-    const { alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn } = useToggleContext()
+    const { alarmlistOn, setAlarmlistOn } = useToggleContext()
     const [openTab, setOpenTab] = useState(false)
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const Alarm = ({ alarmlist }) => {
 
     return (
         <div className="toggle-alarms">
-            <AlarmlistToggle alarmlist={alarmlist} alarmOn={alarmOn} setAlarmOn={setAlarmOn} alarmsArr={alarmsArr} />
+            <AlarmlistToggle alarmlist={alarmlist} alarmsArr={alarmsArr} />
             <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
                 <i className="fa-solid fa-angle-right"></i>
             </button>
