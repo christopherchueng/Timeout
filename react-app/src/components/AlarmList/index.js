@@ -7,6 +7,7 @@ import EditAlarmlistForm from "./EditAlarmlistForm"
 import DeleteAlarmlistModal from "./DeleteAlarmlistModal"
 import { useToggleContext } from "../../context/ToggleContext"
 import Alarm from "../Alarm"
+import './AlarmList.css'
 
 
 const AlarmList = ({ dashAlarmlist }) => {
@@ -22,8 +23,6 @@ const AlarmList = ({ dashAlarmlist }) => {
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
-    // console.log("here is the alarmsArr", alarmsArr)
-
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
         dispatch(getAlarms(alarmlistId || dashAlarmlist?.id))
@@ -33,20 +32,26 @@ const AlarmList = ({ dashAlarmlist }) => {
         // Sometimes, the page renders at the bottom first,
         // so this will force the page to scroll up on mount
         window.scrollTo(0, 0)
-        setOpenTab(true)
-        // setAlarmlistOn(alarmlistOn)
-        // setAlarmOn(alarmOn)
+
+        if (id) {
+            setOpenTab(true)
+        }
+        if (dashAlarmlist?.id === 1) {
+            setOpenTab(true)
+        }
+
+        setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
 
     return (
-        <div id='alarmlists' key={alarmlistId || dashAlarmlist?.id}>
+        <div id='alarmlists'>
             {isEditing
             ?
             <div id={'edit-alarmlist-form'}>
                 <EditAlarmlistForm isEditing={isEditing} setIsEditing={setIsEditing} alarmlist={alarmlistId ? alarmlist[alarmlistId] : dashAlarmlist} />
             </div>
             :
-            <div className='alarmlist-header'>
+            <div className='alarmlist-header' key={dashAlarmlist?.id || alarmlistId}>
                 <div className='alarmlist-name'>
                     <h1>{dashAlarmlist ? <Link to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlist[id]?.name}</h1>
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
@@ -64,24 +69,13 @@ const AlarmList = ({ dashAlarmlist }) => {
                     </div>
                     : ""}
                 </div>
-                {/* <div className='alarmlist-toggle'>
-                    <label className='alarm-switch'>
-                        <input
-                            type='checkbox'
-                            // onClick={}
-                            className='alarm-radio-box'
-                        />
-                        <div className='alarm-slider alarm-ball'>
-                        </div>
-                    </label>
-                </div> */}
             </div>}
             <div id='alarmlist-alarms'>
                 <label className='alarmlist-switch'>
                     <input
                         type='checkbox'
                         value={mainAlarmlistSwitch}
-                        onClick={() => setMainAlarmlistSwitch(!mainAlarmlistSwitch)}
+                        onChange={() => setMainAlarmlistSwitch(!mainAlarmlistSwitch)}
                         className='alarmlist-radio-box'
                         checked={mainAlarmlistSwitch}
                     />
@@ -92,14 +86,16 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <i className="fa-solid fa-angle-right"></i>
                 </button>
                 {filteredAlarms && filteredAlarms.map(alarm => (
-                    <Alarm
-                        alarm={alarm}
-                        openTab={openTab}
-                        setOpenTab={setOpenTab}
-                        alarmlist={alarmlist[id] || dashAlarmlist}
-                        mainAlarmlistSwitch={mainAlarmlistSwitch}
-                        setMainAlarmlistSwitch={setMainAlarmlistSwitch}
-                    />
+                    <div className='alarm-ctn' key={alarm.id}>
+                        <Alarm
+                            alarm={alarm}
+                            openTab={openTab}
+                            setOpenTab={setOpenTab}
+                            alarmlist={alarmlist[id] || dashAlarmlist}
+                            mainAlarmlistSwitch={mainAlarmlistSwitch}
+                            setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+                        />
+                    </div>
                 ))}
             </div>
         </div>
