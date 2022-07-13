@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import Alarm from "../../Alarm"
-import { useToggleAlarmlist } from "../../../context/ToggleAlarmlist"
+import { useToggleContext } from "../../../context/ToggleContext"
 
 const AlarmlistToggle = ({ alarmlist, alarmOn, setAlarmOn, alarmsArr }) => {
     // const [alarmOn, setAlarmOn] = useState(false)
-    const {alarmlistOn, setAlarmlistOn} = useToggleAlarmlist()
+    const {alarmlistOn, setAlarmlistOn} = useToggleContext()
 
     // const onChange = () => {
     //     for (let alarm of alarmsArr) {
@@ -33,7 +33,7 @@ const AlarmlistToggle = ({ alarmlist, alarmOn, setAlarmOn, alarmsArr }) => {
             <label className='alarmlist-switch'>
                 <input
                     type='checkbox'
-                    value={alarmlistOn || alarmOn}
+                    value={alarmlistOn}
                     onChange={onChange}
                     className='alarmlist-radio-box'
                     checked={alarmOn || alarmlistOn}

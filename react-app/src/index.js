@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import { ModalProvider } from './context/Modal';
 import configureStore from './store';
-import ToggleAlarmlistProvider from './context/ToggleAlarmlist';
+import ToggleProvider from './context/ToggleContext';
 
 const store = configureStore();
 
@@ -13,9 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ModalProvider>
-        <ToggleAlarmlistProvider>
+        <ToggleProvider>
           <App />
-        </ToggleAlarmlistProvider>
+        </ToggleProvider>
       </ModalProvider>
     </Provider>
   </React.StrictMode>,

@@ -2,13 +2,13 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
-import { useToggleAlarmlist } from "../../context/ToggleAlarmlist"
+import { useToggleContext } from "../../context/ToggleContext"
 
 const AlarmToggle = ({ alarm, id, alarmlist, alarmsArr }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [alarmOn, setAlarmOn] = useState(false)
-    const { alarmlistOn, setAlarmlistOn } = useToggleAlarmlist()
+    const { alarmlistOn, setAlarmlistOn } = useToggleContext()
 
 
     const onDelete = (e, alarm) => {

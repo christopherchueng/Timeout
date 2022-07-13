@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getAlarmlist } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
-import { useToggleAlarmlist } from "../../context/ToggleAlarmlist"
+import { useToggleContext } from "../../context/ToggleContext"
 import Alarm from "../Alarm"
 
 
@@ -15,7 +15,7 @@ const AlarmList = () => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
 
-    const {alarmlistOn, setAlarmlistOn} = useToggleAlarmlist()
+    const { alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn } = useToggleContext()
     const [openTab, setOpenTab] = useState(false)
 
     useEffect(() => {
@@ -24,20 +24,16 @@ const AlarmList = () => {
     }, [dispatch])
 
     useEffect(() => {
+        // Sometimes, the page renders at the bottom first,
+        // so this will force the page to scroll up on mount
+        window.scrollTo(0, 0)
         setOpenTab(true)
-    }, [])
-
-    useEffect(() => {
         setAlarmlistOn(alarmlistOn)
+        setAlarmOn(alarmOn)
     }, [])
 
     console.log('here is the alarmlistOn', alarmlistOn)
 
-    // Sometimes, the page renders at the bottom first,
-    // so this will force the page to scroll up on mount
-    useEffect(() => {
-        window.scrollTo(0, 0)
-      }, [])
 
     return (
         <div id='alarmlists'>

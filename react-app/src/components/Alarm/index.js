@@ -4,7 +4,7 @@ import { getAlarms } from "../../store/alarm"
 import { useParams, Link, useHistory } from "react-router-dom"
 import AlarmlistToggle from "../AlarmList/AlarmlistToggle/AlarmlistToggle"
 import AlarmToggle from "./AlarmToggle"
-import { useToggleAlarmlist } from "../../context/ToggleAlarmlist"
+import { useToggleContext } from "../../context/ToggleContext"
 import './Alarm.css'
 
 const Alarm = ({ alarmlist }) => {
@@ -14,8 +14,7 @@ const Alarm = ({ alarmlist }) => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
 
-    // const { alarmlistOn, setAlarmlistOn } = useToggleAlarmlist()
-    const [alarmOn, setAlarmOn] = useState(false)
+    const { alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn } = useToggleContext()
     const [openTab, setOpenTab] = useState(false)
 
     useEffect(() => {
