@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAlarms } from "../../store/alarm"
 import { useParams, Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
+import AlarmlistToggle from "../AlarmList/AlarmlistToggle/AlarmlistToggle"
+import AlarmToggle from "./AlarmToggle"
 
 import './Alarm.css'
 
-const Alarm = ({ alarmlist }) => {
+const Alarm = ({ alarmlist, alarmOn, setAlarmOn }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     // Only use this id below for when you are on the alarmlists/:id page! DO NOT USE WHEN ON DASHBOARD
@@ -53,16 +55,7 @@ const Alarm = ({ alarmlist }) => {
                     </div>
                     : ""}
                     <div className='alarm-toggle-ctn'>
-                        <label className='alarm-switch'>
-                            <input
-                                type='checkbox'
-                                // onClick={() => setAlarmlistOn(!alarmlistOn) && setAlarmOn(!alarmOn)}
-                                className='alarm-radio-box'
-                                // checked={alarmlistOn || alarmOn}
-                            />
-                            <div className='alarm-slider alarm-ball'>
-                            </div>
-                        </label>
+                        <AlarmToggle alarmOn={alarmOn} setAlarmOn={setAlarmOn} />
                     </div>
                 </div>
             ))}

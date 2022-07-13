@@ -1,9 +1,10 @@
 import { useState } from "react"
 import Alarm from "../../Alarm"
 
-const AlarmlistToggle = ({ alarmOn, setAlarmOn, openTab, alarmlist, setOpenTab }) => {
+const AlarmlistToggle = ({ alarmlist }) => {
     const [alarmlistOn, setAlarmlistOn] = useState(false)
-    // const [alarmOn, setAlarmOn] = useState(false)
+    const [alarmOn, setAlarmOn] = useState(false)
+    const [openTab, setOpenTab] = useState(false)
 
     return (
         <>
@@ -24,7 +25,7 @@ const AlarmlistToggle = ({ alarmOn, setAlarmOn, openTab, alarmlist, setOpenTab }
             {openTab ?
                 <div id='dashboard-alarms'>
                     {/* <Alarm alarmlist={alarmlist} key={alarmlist.id} alarmOn={alarmOn} setAlarmOn={setAlarmOn} /> */}
-                    <Alarm alarmlist={alarmlist} key={alarmlist.id} />
+                    <Alarm alarmlist={alarmlist} key={alarmlist.id} alarmOn={alarmOn} setAlarmOn={setAlarmOn} />
                 </div>
             : ""}
         </>

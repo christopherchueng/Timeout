@@ -5,6 +5,7 @@ import { getAlarmlists, getDefaultAlarmlist } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import InlineAlarmlistEdit from "../AlarmList/InlineAlarmlistEdit/InlineAlarmlistEdit"
+import AlarmlistToggle from "../AlarmList/AlarmlistToggle/AlarmlistToggle"
 import './Dashboard.css'
 
 const Dashboard = () => {
@@ -33,6 +34,7 @@ const Dashboard = () => {
                 {alarmlists && alarmlists.map(alarmlist => (
                     <>
                         <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
+                        <AlarmlistToggle alarmlist={alarmlist} />
                     </>
                 ))}
                 {/* <div className='default-alarmlist'>
