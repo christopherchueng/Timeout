@@ -8,6 +8,7 @@ import InlineAlarmlistEdit from "../AlarmList/InlineAlarmlistEdit/InlineAlarmlis
 import { useToggleContext } from "../../context/ToggleContext"
 import Alarm from "../Alarm"
 import './Dashboard.css'
+import AlarmList from "../AlarmList"
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -19,9 +20,6 @@ const Dashboard = () => {
     // const independentAlarmsArr = Object.values(independentAlarmsObj)
     // console.log('default Alarmlist here', typeof Object.values(defaultAlarmlist))
 
-    const {alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn} = useToggleContext()
-    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
-
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
@@ -29,10 +27,10 @@ const Dashboard = () => {
         dispatch(getAlarms(1))
     }, [dispatch])
 
-    useEffect(() => {
-        setAlarmlistOn(alarmlistOn)
-        setAlarmOn(alarmOn)
-    }, [])
+    // useEffect(() => {
+    //     setAlarmlistOn(alarmlistOn)
+    //     setAlarmOn(alarmOn)
+    // }, [])
 
     return (
         <div id='dashboard'>
@@ -42,29 +40,11 @@ const Dashboard = () => {
             <div className='alarmlist-content'>
                 {alarmlists && alarmlists.map(alarmlist => (
                     <>
-                        <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
-                        <Alarm alarmlist={alarmlist} mainAlarmlistSwitch={mainAlarmlistSwitch} setMainAlarmlistSwitch={setMainAlarmlistSwitch} />
+                        <AlarmList dashAlarmlist={alarmlist} />
+                        {/* <InlineAlarmlistEdit alarmlist={alarmlist} key={alarmlist.id} />
+                        <Alarm alarmlist={alarmlist} /> */}
                     </>
                 ))}
-                {/* <div className='default-alarmlist'>
-                    <div className='default-alarmlist-name'>
-                        <Link to={`/alarmlists/${defaultAlarmlist['1']?.id}`}>
-                            {defaultAlarmlist[1]?.name}
-                        </Link>
-                    </div>
-                    <div className='default-alarmlist-alarms'>
-                        {independentAlarmsArr && independentAlarmsArr.map(alarm => (
-                            <div key={alarm.id} className='independent-alarm-content'>
-                                <div className='independent-alarm-name'>
-                                    {alarm.name}
-                                </div>
-                                <div className='independent-alarm-time'>
-                                    {alarm.hour}:{alarm.minutes < 10 ? '0' + alarm.minutes : alarm.minutes} {alarm.meridiem}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
             </div>
         </div>
     )

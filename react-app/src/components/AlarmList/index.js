@@ -7,7 +7,7 @@ import { useToggleContext } from "../../context/ToggleContext"
 import Alarm from "../Alarm"
 
 
-const AlarmList = () => {
+const AlarmList = ({ dashAlarmlist }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const alarmlistId = parseInt(id)
@@ -15,9 +15,12 @@ const AlarmList = () => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
 
-    const { alarmlistOn, setAlarmlistOn, alarmOn, setAlarmOn } = useToggleContext()
     const [openTab, setOpenTab] = useState(false)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+
+    console.log('here is the alarmlist', alarmlist)
+    console.log('here is the dashboard alarmlist', dashAlarmlist)
 
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId))
@@ -29,8 +32,8 @@ const AlarmList = () => {
         // so this will force the page to scroll up on mount
         window.scrollTo(0, 0)
         setOpenTab(true)
-        setAlarmlistOn(alarmlistOn)
-        setAlarmOn(alarmOn)
+        // setAlarmlistOn(alarmlistOn)
+        // setAlarmOn(alarmOn)
     }, [])
 
 
@@ -38,7 +41,7 @@ const AlarmList = () => {
         <div id='alarmlists'>
             <div className='alarmlist-header'>
                 <div className='alarmlist-name'>
-                    <h1>{alarmlist[id]?.name}</h1>
+                    <h1>{alarmlist[id]?.name || dashAlarmlist?.name}</h1>
                 </div>
                 {/* <div className='alarmlist-toggle'>
                     <label className='alarm-switch'>
@@ -54,7 +57,7 @@ const AlarmList = () => {
             </div>
             <div id='alarmlist-alarms'>
                 <Alarm
-                    alarmlist={alarmlist[id]}
+                    alarmlist={alarmlist[id] || dashAlarmlist}
                     mainAlarmlistSwitch={mainAlarmlistSwitch}
                     setMainAlarmlistSwitch={setMainAlarmlistSwitch}
                 />
