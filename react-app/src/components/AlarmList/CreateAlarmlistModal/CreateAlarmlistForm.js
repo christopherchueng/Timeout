@@ -60,6 +60,7 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
                         value={name}
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
+                        style={{backgroundColor: errors['name'] && isSubmitted ? '#FFA194' : ""}}
                     />
                     <div className='alarmlist-formError-ctn'>
                         {isSubmitted && <ErrorMessage error={errors?.name} setClassName="alarmlist-error" />}
