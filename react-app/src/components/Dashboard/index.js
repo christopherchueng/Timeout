@@ -41,19 +41,21 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className='global-dashboard-time'>
-                <div className='splash-hour'>
-                    {hour}
-                </div>
-                <div className='splash-second-colon'>
-                    {seconds % 2 === 0 ? ":" : ""}
-                    {/* {seconds} */}
-                </div>
-                <div className='splash-minutes'>
-                    {minutes < 10 ? '0' + minutes : minutes}
-                </div>
-                <div className='meridiem-ctn'>
-                    <div className='splash-meridiem'>
-                        {meridiem}
+                <div className='dashboard-time-ctn'>
+                    <div className='splash-hour'>
+                        {hour}
+                    </div>
+                    <div className='splash-second-colon'>
+                        {seconds % 2 === 0 ? ":" : ""}
+                        {/* {seconds} */}
+                    </div>
+                    <div className='splash-minutes'>
+                        {minutes < 10 ? '0' + minutes : minutes}
+                    </div>
+                    <div className='meridiem-ctn'>
+                        <div className='splash-meridiem'>
+                            {meridiem}
+                        </div>
                     </div>
                 </div>
             </div>
