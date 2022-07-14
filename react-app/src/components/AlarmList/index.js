@@ -17,35 +17,37 @@ const AlarmList = ({ dashAlarmlist }) => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
     const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
-    const alarmlistToggle = JSON.parse(localStorage.getItem('alarmlistToggle'))
 
     const [openTab, setOpenTab] = useState(false)
-    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(alarmlistToggle[id || `${dashAlarmlist?.id}`] || false)
+    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [localToggle, setLocalToggle] = useState({})
+
+    const localStorageToggle = localStorage.getItem('alarmlistToggle')
 
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
         dispatch(getAlarms(alarmlistId || dashAlarmlist?.id))
     }, [dispatch])
 
-    useEffect(() => {
-        let toggleCopy = {...localToggle}
+    // useEffect(() => {
+    //     let toggleCopy = {...localToggle}
 
-        // If alarmlistId exists in toggle copy, then update the value.
-        // Otherwise, create a new instance and set to true
-        if (toggleCopy[id || `${dashAlarmlist?.id}`]) {
-            // setMainAlarmlistSwitch(mainAlarmlistSwitch)
-            toggleCopy[id || `${dashAlarmlist?.id}`] = mainAlarmlistSwitch
-        } else {
-            toggleCopy[id || `${dashAlarmlist?.id}`] = true
-        }
+    //     // If alarmlistId exists in toggle copy, then update the value.
+    //     // Otherwise, create a new instance and set to true
+    //     if (toggleCopy[id || `${dashAlarmlist?.id}`]) {
+    //         // setMainAlarmlistSwitch(mainAlarmlistSwitch)
+    //         toggleCopy[id || `${dashAlarmlist?.id}`] = mainAlarmlistSwitch
+    //         console.log('what is this toggleCopy', toggleCopy)
+    //     } else {
+    //         toggleCopy[id || `${dashAlarmlist?.id}`] = true
+    //     }
 
-        // Set the local toggle object to the new toggle copy
-        setLocalToggle(toggleCopy)
-        // Register the newly updated toggleCopy into local storage
-        localStorage.setItem('alarmlistToggle', JSON.stringify(localToggle))
-    }, [mainAlarmlistSwitch])
+    //     // Set the local toggle object to the new toggle copy
+    //     setLocalToggle(toggleCopy)
+    //     // Register the newly updated toggleCopy into local storage
+    //     localStorage.setItem('alarmlistToggle', JSON.stringify(localToggle))
+    // }, [mainAlarmlistSwitch])
 
     useEffect(() => {
         // Sometimes, the page renders at the bottom first,
@@ -54,7 +56,11 @@ const AlarmList = ({ dashAlarmlist }) => {
 
         // On mount, grab the object stored as a value in local storage under the key 'alarmlistToggle'
         // { {'3' : true}, {'2' : false} }
-        const alarmlistToggle = JSON.parse(localStorage.getItem('alarmlistToggle'))
+        const alarmlistToggle = JSON.parse(localStorageToggle)
+
+        if (alarmlistToggle) {
+            setLocalToggle(alarmlistToggle)
+        }
         // If object exists in local storage, set the 'master toggle' to that value under the correct alarmlistId.
         // let toggleCopy = {...localToggle}
 
@@ -74,26 +80,30 @@ const AlarmList = ({ dashAlarmlist }) => {
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
 
+    let toggleCopy = {...localToggle}
 
-    // const onChange = () => {
-    //     setMainAlarmlistSwitch(!mainAlarmlistSwitch)
-    //     // Make a copy of the localToggle state
-    //     let toggleCopy = {...localToggle}
+    const onChange = (e) => {
+        e.preventDefault()
+        // Make a copy of the localToggle state
 
-    //     // If alarmlistId exists in toggle copy, then update the value.
-    //     // Otherwise, create a new instance and set to true
-    //     if (toggleCopy[id || `${dashAlarmlist?.id}`]) {
-    //         // setMainAlarmlistSwitch(mainAlarmlistSwitch)
-    //         toggleCopy[id || `${dashAlarmlist?.id}`] = mainAlarmlistSwitch
-    //     } else {
-    //         toggleCopy[id || `${dashAlarmlist?.id}`] = !mainAlarmlistSwitch
-    //     }
+        // If alarmlistId exists in toggle copy, then update the value.
+        // Otherwise, create a new instance and set to true
+        if (toggleCopy[id || `${dashAlarmlist?.id}`]) {
+            // setMainAlarmlistSwitch(mainAlarmlistSwitch)
+            toggleCopy[id || `${dashAlarmlist?.id}`] = mainAlarmlistSwitch
+            setMainAlarmlistSwitch(toggleCopy[id || `${dashAlarmlist?.id}`])
+        } else {
+            toggleCopy[id || `${dashAlarmlist?.id}`] = mainAlarmlistSwitch
+            setMainAlarmlistSwitch(toggleCopy[id || `${dashAlarmlist?.id}`])
+        }
 
-    //     // Set the local toggle object to the new toggle copy
-    //     setLocalToggle(toggleCopy)
-    //     // Register the newly updated toggleCopy into local storage
-    //     localStorage.setItem('alarmlistToggle', JSON.stringify(localToggle))
-    // }
+
+        // Set the local toggle object to the new toggle copy
+        setLocalToggle(toggleCopy)
+        // Register the newly updated toggleCopy into local storage
+        localStorage.setItem('alarmlistToggle', JSON.stringify(localToggle))
+    }
+    console.log('here is the alarmlist toggle', toggleCopy)
 
     return (
         <div id='alarmlists'>
@@ -127,7 +137,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <input
                         type='checkbox'
                         value={mainAlarmlistSwitch}
-                        onChange={() => setMainAlarmlistSwitch(!mainAlarmlistSwitch)}
+                        onChange={onChange}
                         className='alarmlist-radio-box'
                         checked={mainAlarmlistSwitch}
                     />
