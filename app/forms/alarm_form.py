@@ -8,6 +8,8 @@ def name_exists(form, field):
     name = field.data
     if len(name) > 150:
         raise ValidationError('Please provide a name that is at most 150 characters long.')
+    elif len(name) <= 0:
+        raise ValidationError('Please provide an alarm name.')
 
 def check_hour(form, field):
     hour = field.data

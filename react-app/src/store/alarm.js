@@ -80,9 +80,7 @@ export const createAlarm = (payload) => async (dispatch) => {
         dispatch(addAlarm(alarm))
     } else if (response.status < 500) {
         const alarm = await response.json();
-        if (alarm.errors) {
-            return alarm.errors;
-        }
+        return alarm;
     } else {
         return ['An error occurred. Please try again.']
     }
@@ -100,9 +98,7 @@ export const updateAlarm = (payload) => async (dispatch) => {
         dispatch(editAlarm(alarm))
     } else if (response.status < 500) {
         const alarm = await response.json();
-        if (alarm.errors) {
-            return alarm.errors;
-        }
+        return alarm;
     } else {
         return ['An error occurred. Please try again.']
     }

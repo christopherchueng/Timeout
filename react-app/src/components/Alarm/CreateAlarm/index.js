@@ -73,7 +73,6 @@ const CreateAlarm = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        setIsSubmitted(true)
 
         const payload = {
             name,
@@ -87,11 +86,9 @@ const CreateAlarm = () => {
         }
 
         const errorData = await dispatch(createAlarm(payload))
-        if (errorData) {
+        if (errorData && errorData.errors) {
             setErrors(errorData)
-        }
-
-        if (newAlarm) {
+        } else {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
@@ -99,10 +96,10 @@ const CreateAlarm = () => {
             setRepeat([])
             setSnooze(false)
             setAlarmlist(1)
-            setIsSubmitted(false)
             setErrors({})
             history.push(`/alarmlists/${alarmlist}`)
         }
+
     }
 
     return (
@@ -224,6 +221,7 @@ const CreateAlarm = () => {
                             onChange={e => setName(e.target.value)}
                             onClick={() => setNameFocus(true)}
                             onBlur={() => setNameFocus(false)}
+                            style={{backgroundColor: errors['name'] ? '#FFA194' : ""}}
                         />
                     </div>
                     <div className='name-char-count'>
@@ -243,7 +241,7 @@ const CreateAlarm = () => {
                     </div>
                 </div>
                 <div className='alarm-formError-ctn'>
-                    {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-name-error" />}
+                    {<ErrorMessage error={errors.name} setClassName="alarmlist-name-error" />}
                 </div>
                 {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
                 <div className='add-to-alarmlist'>

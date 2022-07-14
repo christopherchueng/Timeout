@@ -105,7 +105,6 @@ const EditAlarm = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        setIsSubmitted(true)
 
         const payload = {
             alarmId,
@@ -120,22 +119,19 @@ const EditAlarm = () => {
         }
 
         const errorData = await dispatch(updateAlarm(payload))
-        if (errorData) {
+        if (errorData && errorData.errors) {
             setErrors(errorData)
+        } else {
+            setName('Alarm')
+            setHour((todaysDate.getHours() + 24) % 12 || 12)
+            setMinutes(todaysDate.getMinutes())
+            setSound('')
+            setRepeat([])
+            setSnooze(false)
+            setAlarmlist(1)
+            setErrors({})
+            history.push(`/alarmlists/${alarmlist}`)
         }
-
-        // Will always return true will need to refactor
-        setName('Alarm')
-        setHour((todaysDate.getHours() + 24) % 12 || 12)
-        setMinutes(todaysDate.getMinutes())
-        setSound('')
-        setRepeat([])
-        setSnooze(false)
-        setAlarmlist(1)
-        setIsSubmitted(false)
-        setErrors({})
-
-        history.push(`/alarmlists/${parseInt(alarmlist)}`)
     }
 
     return (
@@ -258,6 +254,7 @@ const EditAlarm = () => {
                             onChange={e => setName(e.target.value)}
                             onClick={() => setNameFocus(true)}
                             onBlur={() => setNameFocus(false)}
+                            style={{backgroundColor: errors['name'] ? '#FFA194' : ""}}
                         />
                         <div className='name-char-count'>
                             {nameFocus && name
@@ -277,7 +274,7 @@ const EditAlarm = () => {
                     </div>
                 </div>
                 <div className='alarm-formError-ctn'>
-                    {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-name-error" />}
+                    {<ErrorMessage error={errors.name} setClassName="alarmlist-name-error" />}
                 </div>
                 {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
                 <div className='add-to-alarmlist'>
