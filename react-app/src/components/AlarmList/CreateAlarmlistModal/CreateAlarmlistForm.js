@@ -41,19 +41,13 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
         const data = await dispatch(createAlarmlist(payload))
 
         if (data && data.errors) {
-            setErrors(data)
-            // setShowModal(true)
+            setErrors(data.errors)
+            setShowModal(true)
+        } else {
+            setShowModal(false)
+            setIsSubmitted(false)
+            history.push('/dashboard')
         }
-        console.log('ERRORS HERE', errors)
-        // console.log('ERRRORSSS LENGYTH', errors.length)
-
-        // if (errors.length) {
-        //     setName('')
-            // setShowModal(!showModal)
-        //     setErrors({})
-        //     setIsSubmitted(false)
-        //     history.push('/dashboard')
-        // }
     }
 
     return (
