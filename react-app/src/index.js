@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import { ModalProvider } from './context/Modal';
 import configureStore from './store';
-import ToggleProvider from './context/ToggleContext';
+import TimeProvider from './context/TimeContext';
 
 const store = configureStore();
 
@@ -13,9 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ModalProvider>
-        <ToggleProvider>
+        <TimeProvider>
           <App />
-        </ToggleProvider>
+        </TimeProvider>
       </ModalProvider>
     </Provider>
   </React.StrictMode>,
