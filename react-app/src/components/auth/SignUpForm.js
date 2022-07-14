@@ -36,6 +36,10 @@ const SignUpForm = () => {
       validationErrors['repeatPassword'] = "'Password' and 'Repeat Password' fields did not match."
     }
 
+    if (password.length === 0) {
+      validationErrors['password'] = 'Please provide a password.'
+    }
+
     if (repeatPassword.length === 0) {
       validationErrors['repeatPassword'] = 'Please provide a password.'
     }
@@ -153,7 +157,11 @@ const SignUpForm = () => {
               value={password}
               placeholder='••••••••'
               className='password-input'
+              style={{backgroundColor: errors['password'] && isSubmitted ? '#FFA194' : ""}}
             />
+            <div className='register-password-error-ctn'>
+              {isSubmitted && <ErrorMessage error={errors.password} setClassName="register-password-error" />}
+            </div>
           </div>
           {/* --------------------------- REPEAT PASSWORD --------------------------- */}
           <div className='register-repeat'>

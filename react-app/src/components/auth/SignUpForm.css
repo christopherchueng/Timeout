@@ -64,6 +64,7 @@
 .firstName-error-ctn,
 .lastName-error-ctn,
 .register-email-error-ctn,
+.register-password-error-ctn,
 .register-pwRepeat-error-ctn {
     height: 40px;
     color: red;
@@ -72,6 +73,7 @@
 .firstName-error,
 .lastName-error,
 .register-email-error,
+.register-password-error,
 .register-pwRepeat-error {
     margin: 10px 0 0 0;
     font-size: 10pt;

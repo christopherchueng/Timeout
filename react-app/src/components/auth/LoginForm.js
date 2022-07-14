@@ -66,6 +66,7 @@ const LoginForm = () => {
             value={email}
             onChange={updateEmail}
             className='email-input'
+            style={{backgroundColor: errors['email'] && isSubmitted ? '#FFA194' : ""}}
           />
         </div>
         <div className='login-emailError-ctn'>
@@ -83,6 +84,7 @@ const LoginForm = () => {
             value={password}
             onChange={updatePassword}
             className='password-input'
+            style={{backgroundColor: errors['password'] && isSubmitted ? '#FFA194' : ""}}
           />
         </div>
         <div className='login-pwError-ctn'>
