@@ -112,6 +112,7 @@
 
 .toggle-register:hover {
     background-color: #3478F6;
+    border: 1px solid #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s ease-out;
 }

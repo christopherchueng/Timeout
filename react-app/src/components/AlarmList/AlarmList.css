@@ -46,6 +46,7 @@ so that whereever you click the slider, the radio box will be (un)checked */
 
 .alarmlist-radio-box:checked + .alarmlist-slider {
     background-color: #3478F6;
+    border: 1px solid #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s
 }
