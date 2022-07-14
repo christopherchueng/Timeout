@@ -12,12 +12,12 @@ const Dashboard = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj)
     const alarmlists = alarmlistsArr.reverse()
-    const [localToggle, setLocalToggle] = useState({})
+    const [lsToggle, setLsToggle] = useState({})
 
-    const localStorageData = localStorage.getItem('alarmlistToggle')
+    const localStorageData = JSON.parse(localStorage.getItem('alarmlistToggle'))
 
-    // Make a copy of the localToggle state
-    let toggleCopy = {...localToggle}
+    // Make a copy of the lsToggle state
+    let dashToggleCopy = {...lsToggle}
 
 
     useEffect(() => {
@@ -27,9 +27,9 @@ const Dashboard = () => {
     }, [dispatch])
 
     useEffect(() => {
-        const AlarmlistBooleans = JSON.parse(localStorageData)
-        if (AlarmlistBooleans) {
-            setLocalToggle(AlarmlistBooleans)
+        // Allows localStorage to persist on mount
+        if (localStorageData) {
+            setLsToggle(localStorageData)
         }
     }, [])
 
@@ -41,7 +41,7 @@ const Dashboard = () => {
             <div className='alarmlist-content'>
                 {alarmlists && alarmlists.map(alarmlist => (
                     <div key={alarmlist.id}>
-                        <AlarmList dashAlarmlist={alarmlist} localToggle={localToggle} setLocalToggle={setLocalToggle} toggleCopy={toggleCopy} />
+                        <AlarmList dashAlarmlist={alarmlist} lsToggle={lsToggle} setLsToggle={setLsToggle} dashToggleCopy={dashToggleCopy} />
                     </div>
                 ))}
             </div>
