@@ -19,9 +19,9 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
         if (name === 'Default') {
             validationErrors.name = 'Please choose a different alarmlist name.'
         }
-        if (!name) {
-            validationErrors.name = 'Please provide an alarmlist name.'
-        }
+        // if (!name) {
+        //     validationErrors.name = 'Please provide an alarmlist name.'
+        // }
         if (name.length > 100) {
             validationErrors.name = 'Please select a name up to 100 characters long.'
         }
@@ -46,7 +46,6 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
         } else {
             setShowModal(false)
             setIsSubmitted(false)
-            history.push('/dashboard')
         }
     }
 

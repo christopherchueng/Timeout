@@ -18,8 +18,11 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
         if (name === 'Default') {
             validationErrors.name = 'Please choose a different alarmlist name.'
         }
-        if (!name) {
-            validationErrors.name = 'Please provide an alarmlist name.'
+        // if (!name) {
+        //     validationErrors.name = 'Please provide an alarmlist name.'
+        // }
+        if (name.length > 100) {
+            validationErrors.name = 'Please select a name up to 100 characters long.'
         }
 
         setErrors(validationErrors);
@@ -43,7 +46,6 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
         } else {
             setIsSubmitted(false)
             setIsEditing(!isEditing)
-            history.push('/dashboard')
         }
 
     }
