@@ -52,11 +52,17 @@ const AlarmList = ({ dashAlarmlist, lsToggle, setLsToggle, dashToggleCopy }) => 
             setAlarmlistLsToggle(alarmlistLsToggleCopy)
             localStorage.setItem('alarmlistToggle', JSON.stringify(alarmlistLsToggleCopy))
         } else {
-            dashToggleCopy[`${dashAlarmlist?.id}`] = !mainAlarmlistSwitch
-            // Set the local toggle object to the new toggle copy
-            setLsToggle(dashToggleCopy)
-            // Register the newly updated dashToggleCopy into local storage
-            localStorage.setItem('alarmlistToggle', JSON.stringify(dashToggleCopy))
+            if (!mainAlarmlistSwitch) {
+                dashToggleCopy[`${dashAlarmlist?.id}`] = !mainAlarmlistSwitch
+                // Set the local toggle object to the new toggle copy
+                setLsToggle(dashToggleCopy)
+                // Register the newly updated dashToggleCopy into local storage
+                localStorage.setItem('alarmlistToggle', JSON.stringify(dashToggleCopy))
+            } else {
+                delete dashToggleCopy[`${dashAlarmlist?.id}`]
+                setLsToggle(dashToggleCopy)
+                localStorage.setItem('alarmlistToggle', JSON.stringify(dashToggleCopy))
+            }
         }
     }
 
