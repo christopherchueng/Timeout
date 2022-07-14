@@ -132,46 +132,20 @@ const alarmReducer = (state = initialState, action) => {
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             action.alarms.forEach(alarm => {
                 newState.entries[alarm.id] = alarm
-
-                // if (alarm.alarmlistId === 1) {
-                //     newState.independent[alarm.id] = alarm
-                //     return newState
-                // } else {
-                //     newState.entries[alarm.id] = alarm
-                // }
             })
             return newState
         case ADD_ALARM:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             newState.entries[action.alarm.id] = action.alarm
-            // if (action.alarm.alarmlistId === 1) {
-            //     newState.independent[action.alarm.id] = action.alarm
-            //     return newState
-            // } else {
-            //     newState.entries[action.alarm.id] = action.alarm
-            // }
             return newState
         case EDIT_ALARM:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             newState.entries[action.alarm.id] = action.alarm
-            // if (action.alarm.alarmlistId === 1) {
-            //     newState.independent[action.alarm.id] = action.alarm
-            //     return newState
-            // } else {
-            //     newState.entries[action.alarm.id] = action.alarm
-            // }
             return newState
         case REMOVE_ALARM:
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             delete newState.entries[action.alarmId]
             return newState
-            // if (action.alarmId === 1) {
-            //     delete newState.independent[action.alarmId]
-            //     return newState
-            // } else {
-            //     delete newState.entries[action.alarmId]
-            //     return newState
-            // }
         default:
             return state
     }
