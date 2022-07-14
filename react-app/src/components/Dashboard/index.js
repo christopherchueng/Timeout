@@ -14,6 +14,8 @@ const Dashboard = () => {
     const alarmlists = alarmlistsArr.reverse()
     const [localToggle, setLocalToggle] = useState({})
 
+    const localStorageData = localStorage.getItem('alarmlistToggle')
+
     // Make a copy of the localToggle state
     let toggleCopy = {...localToggle}
 
@@ -24,14 +26,12 @@ const Dashboard = () => {
         // dispatch(getAlarms(1))
     }, [dispatch])
 
-    // useEffect(() => {
-    //     setAlarmlistOn(alarmlistOn)
-    //     setAlarmOn(alarmOn)
-    // }, [])
-
     useEffect(() => {
-        localStorage.setItem('alarmlistToggle', JSON.stringify(toggleCopy))
-    }, [toggleCopy])
+        const AlarmlistBooleans = JSON.parse(localStorageData)
+        if (AlarmlistBooleans) {
+            setLocalToggle(AlarmlistBooleans)
+        }
+    }, [])
 
     return (
         <div id='dashboard'>
