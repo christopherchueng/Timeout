@@ -1,4 +1,4 @@
-import React, { useEffect} from "react"
+import React, { useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getAlarmlists } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
@@ -12,6 +12,11 @@ const Dashboard = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj)
     const alarmlists = alarmlistsArr.reverse()
+    const [localToggle, setLocalToggle] = useState({})
+
+    // Make a copy of the localToggle state
+    let toggleCopy = {...localToggle}
+
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
@@ -24,6 +29,10 @@ const Dashboard = () => {
     //     setAlarmOn(alarmOn)
     // }, [])
 
+    useEffect(() => {
+        localStorage.setItem('alarmlistToggle', JSON.stringify(toggleCopy))
+    }, [toggleCopy])
+
     return (
         <div id='dashboard'>
             <div className='create-alarmlist-modal'>
@@ -32,7 +41,7 @@ const Dashboard = () => {
             <div className='alarmlist-content'>
                 {alarmlists && alarmlists.map(alarmlist => (
                     <div key={alarmlist.id}>
-                        <AlarmList dashAlarmlist={alarmlist} />
+                        <AlarmList dashAlarmlist={alarmlist} localToggle={localToggle} setLocalToggle={setLocalToggle} toggleCopy={toggleCopy} />
                     </div>
                 ))}
             </div>
