@@ -6,6 +6,22 @@ from app.forms import AlarmlistForm
 alarmlist_routes = Blueprint('alarmlists', __name__)
 
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = {}
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages[field] = error
+    return errorMessages
+    # errorMessages = []
+    # for field in validation_errors:
+    #     for error in validation_errors[field]:
+    #         errorMessages.append(f'{field} : {error}')
+    # return errorMessages
+
+
 @alarmlist_routes.route('/<int:alarmlist_id>')
 @login_required
 def get_one_alarmlist_no_default(alarmlist_id):
@@ -42,6 +58,8 @@ def post_alarmlist():
         db.session.add(new_alarmlist)
         db.session.commit()
         return new_alarmlist.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @alarmlist_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
@@ -56,6 +74,8 @@ def update_alarmlist(id):
 
         db.session.commit()
         return alarmlist.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 @alarmlist_routes.route('/<int:id>', methods=['DELETE'])
 @login_required

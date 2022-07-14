@@ -22,30 +22,38 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
         if (!name) {
             validationErrors.name = 'Please provide an alarmlist name.'
         }
+        if (name.length > 100) {
+            validationErrors.name = 'Please select a name up to 100 characters long.'
+        }
 
         setErrors(validationErrors);
 
     }, [name])
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         setIsSubmitted(true)
-
         const payload = {
             name,
             user_id: currentUser?.id
         }
 
-        const alarmlist = dispatch(createAlarmlist(payload))
+        const data = await dispatch(createAlarmlist(payload))
 
-        if (alarmlist) {
-            setName('')
-            setErrors({})
-            setShowModal(!showModal)
-            setIsSubmitted(false)
-            history.push('/dashboard')
+        if (data && data.errors) {
+            setErrors(data)
+            // setShowModal(true)
         }
+        console.log('ERRORS HERE', errors)
+        // console.log('ERRRORSSS LENGYTH', errors.length)
 
+        // if (errors.length) {
+        //     setName('')
+            // setShowModal(!showModal)
+        //     setErrors({})
+        //     setIsSubmitted(false)
+        //     history.push('/dashboard')
+        // }
     }
 
     return (
@@ -60,11 +68,11 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
                     />
+                    <div className='alarmlist-formError-ctn'>
+                        {isSubmitted && <ErrorMessage error={errors?.name} setClassName="alarmlist-error" />}
+                    </div>
                     <div className='submit-alarmlist'>
                         <button type='submit'><span className="fa-solid fa-check"></span></button>
-                    </div>
-                    <div className='alarmlist-formError-ctn'>
-                        {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-error" />}
                     </div>
                 </div>
             </form>

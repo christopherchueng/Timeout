@@ -80,6 +80,13 @@ export const createAlarmlist = payload => async (dispatch) => {
         const alarmlist = await response.json()
         dispatch(postAlarmlist(alarmlist))
         return alarmlist
+    } else if (response.status < 500) {
+        const alarmlist = await response.json();
+        if (alarmlist.errors) {
+            return alarmlist.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
     }
 }
 
@@ -94,6 +101,13 @@ export const updateAlarmlist = payload => async (dispatch) => {
         const alarmlist = await response.json()
         dispatch(editAlarmlist(alarmlist))
         return alarmlist
+    } else if (response.status < 500) {
+        const alarmlist = await response.json();
+        if (alarmlist.errors) {
+            return alarmlist.errors;
+        }
+    } else {
+        return ['An error occurred. Please try again.']
     }
 }
 

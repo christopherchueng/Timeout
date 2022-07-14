@@ -27,7 +27,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
 
     }, [name])
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         setIsSubmitted(true)
 
@@ -36,15 +36,19 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
             name
         }
 
-        const updatedAlarmlist = dispatch(updateAlarmlist(payload))
+        const updatedAlarmlist = await dispatch(updateAlarmlist(payload))
 
         if (updatedAlarmlist) {
-            setName('')
-            setErrors({})
-            setIsSubmitted(false)
-            setIsEditing(!isEditing)
-            history.push('/dashboard')
+            setErrors(updatedAlarmlist)
+            setIsSubmitted(true)
+            setIsEditing(true)
         }
+
+        setName('')
+        setErrors({})
+        setIsSubmitted(false)
+        setIsEditing(!isEditing)
+        history.push('/dashboard')
 
     }
 

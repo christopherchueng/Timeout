@@ -1,9 +1,17 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, ValidationError
 from app.models import Alarmlist
 
+def alarmlist_name_validators(form, field):
+    # Checking if alarmlist name exists
+    name = field.data
+    alarmlist = Alarmlist.query.filter(Alarmlist.name == name).first()
+    if alarmlist:
+        raise ValidationError(f"'{name}' is already in use.")
+    elif len(name) > 100:
+        raise ValidationError('Please select a name up to 100 characters long.')
 
 class AlarmlistForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired(), alarmlist_name_validators])
     user_id = IntegerField('user_id')
