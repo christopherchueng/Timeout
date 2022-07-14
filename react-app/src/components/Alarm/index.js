@@ -75,6 +75,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                             : ""}
                             <label className='alarm-switch'>
                                 <input
+                                    id={alarm?.id}
                                     type='checkbox'
                                     value={alarmOn}
                                     onChange={() => setAlarmOn(!alarmOn)}
