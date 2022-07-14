@@ -5,7 +5,6 @@ import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
 const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
-    console.log('here in edit alarmlist form', alarmlist)
     const dispatch = useDispatch()
     const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
@@ -36,19 +35,16 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
             name
         }
 
-        const updatedAlarmlist = await dispatch(updateAlarmlist(payload))
+        const data = await dispatch(updateAlarmlist(payload))
 
-        if (updatedAlarmlist) {
-            setErrors(updatedAlarmlist)
-            setIsSubmitted(true)
+        if (data && data.errors) {
+            setErrors(data.errors)
             setIsEditing(true)
+        } else {
+            setIsSubmitted(false)
+            setIsEditing(!isEditing)
+            history.push('/dashboard')
         }
-
-        setName('')
-        setErrors({})
-        setIsSubmitted(false)
-        setIsEditing(!isEditing)
-        history.push('/dashboard')
 
     }
 
@@ -64,6 +60,9 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
                     />
+                    <div className='alarmlist-formError-ctn'>
+                        {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-error" />}
+                    </div>
                     <div className='edit-alarmlist-form-btns'>
                         <div className='submit-alarmlist'>
                             <button type='submit'><span className="fa-solid fa-check"></span></button>
@@ -71,9 +70,6 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
                         <div className='cancel-alarmlist'>
                             <button type='button' onClick={() => setIsEditing(!isEditing)}><span className="fa-solid fa-xmark"></span></button>
                         </div>
-                    </div>
-                    <div className='alarmlist-formError-ctn'>
-                        {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-error" />}
                     </div>
                 </div>
             </form>
