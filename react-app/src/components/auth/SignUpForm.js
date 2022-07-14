@@ -172,7 +172,7 @@ const SignUpForm = () => {
               onChange={updateRepeatPassword}
               value={repeatPassword}
               placeholder='Repeat password'
-              required={true}
+              // required={true}
               className='password-input'
               style={{backgroundColor: errors['repeatPassword'] && isSubmitted ? '#FFA194' : ""}}
             />

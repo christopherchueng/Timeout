@@ -1,0 +1,11 @@
+.alarm-formError-ctn {
+    height: 40px;
+    color: red;
+    font-family: 'Lexend Deca';
+}
+
+.alarmlist-name-error {
+    margin: 10px 0 0 0;
+    font-size: 10pt;
+    padding-left: 15px;
+}
