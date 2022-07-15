@@ -83,7 +83,7 @@ def update_alarmlist(id):
 
         db.session.commit()
         return alarmlist.to_dict()
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @alarmlist_routes.route('/<int:id>', methods=['DELETE'])

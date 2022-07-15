@@ -24,7 +24,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         // For all other cases, don't show alarms
         alarmlist?.id === 1 ? setOpenTab(true) : (id ? setOpenTab(true) : setOpenTab(false))
 
-        setMainAlarmlistSwitch(mainAlarmlistSwitch)
+        setMainAlarmlistSwitch(alarmlist?.toggle)
     }, [])
 
     useEffect(() => {
