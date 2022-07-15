@@ -6,6 +6,7 @@ def seed_alarms():
         hour=9,
         minutes=0,
         meridiem='PM',
+        repeat='',
         snooze=False,
         toggle=False,
         alarmlist_id=1
@@ -15,6 +16,7 @@ def seed_alarms():
         hour=1,
         minutes=15,
         meridiem='PM',
+        repeat='',
         snooze=False,
         toggle=False,
         alarmlist_id=1
@@ -24,6 +26,7 @@ def seed_alarms():
         hour=7,
         minutes=0,
         meridiem='AM',
+        repeat='',
         snooze=False,
         toggle=False,
         alarmlist_id=1
@@ -223,6 +226,7 @@ def seed_alarms():
         hour=3,
         minutes=30,
         meridiem='PM',
+        repeat='',
         snooze=False,
         toggle=False,
         alarmlist_id=1
@@ -232,6 +236,7 @@ def seed_alarms():
         hour=1,
         minutes=0,
         meridiem='PM',
+        repeat='',
         snooze=False,
         toggle=False,
         alarmlist_id=1

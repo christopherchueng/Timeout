@@ -16,15 +16,15 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     // const alarmsArr = Object.values(alarmsObj)
 
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
-    const [name, setName] = useState(alarm?.name)
-    const [alarmHour, setAlarmHour] = useState(alarm?.hour)
-    const [alarmMinutes, setAlarmMinutes] = useState(alarm?.minutes)
-    const [alarmMeridiem, setAlarmMeridiem] = useState(alarm?.meridiem)
-    const [sound, setSound] = useState(alarm?.sound)
-    const [repeat, setRepeat] = useState(alarm?.repeat)
-    const [snooze, setSnooze] = useState(alarm?.snooze)
-    const [alarmOn, setAlarmOn] = useState(alarm?.toggle)
-    const [alarmlistId, setAlarmlistId] = useState(alarm?.alarmlistId)
+    const [name, setName] = useState('')
+    const [alarmHour, setAlarmHour] = useState(0)
+    const [alarmMinutes, setAlarmMinutes] = useState(0)
+    const [alarmMeridiem, setAlarmMeridiem] = useState('')
+    const [sound, setSound] = useState('')
+    const [repeat, setRepeat] = useState('')
+    const [snooze, setSnooze] = useState('')
+    const [alarmOn, setAlarmOn] = useState(false)
+    const [alarmlistId, setAlarmlistId] = useState(0)
 
 
     useEffect(() => {
@@ -44,6 +44,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         setSound(alarm?.sound)
         setSnooze(alarm?.snooze)
         setRepeat(alarm?.repeat)
+        setAlarmOn(alarm?.toggle)
         setAlarmlistId(alarm?.alarmlistId)
     }, [alarm, alarm?.toggle])
 
@@ -80,9 +81,9 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     }, [hour, minutes, meridiem])
 
     const onChange = async (e) => {
-        let repeatPayload = []
         e.preventDefault()
         setAlarmOn(!alarmOn)
+        let repeatPayload = []
         for (let day of alarm?.repeat) {
             repeatPayload.push(day.id)
         }
@@ -90,11 +91,11 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         const payload = {
             'alarmId': alarm?.id,
             name,
-            hour,
-            minutes,
-            meridiem,
+            'hour': alarmHour,
+            'minutes': alarmMinutes,
+            'meridiem': alarmMeridiem,
             sound,
-            'repeat': `${repeatPayload}`,
+            'repeat': repeatPayload.length !== 0 ? `${repeatPayload}` : '',
             snooze,
             'toggle': !alarmOn,
             'alarmlist_id': alarm?.alarmlistId
@@ -171,7 +172,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                                 <input
                                     type='checkbox'
                                     value={alarmOn}
-                                    onChange={(e) => onChange(e)}
+                                    onChange={onChange}
                                     className='alarm-radio-box'
                                     checked={alarmOn}
                                 />
