@@ -35,4 +35,5 @@ class AlarmForm(FlaskForm):
     sound = StringField('sound')
     repeat = StringField('repeat')
     snooze = BooleanField('snooze')
+    toggle = BooleanField('toggle')
     alarmlist_id = IntegerField('alarmlist_id')

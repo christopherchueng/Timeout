@@ -14,4 +14,5 @@ def alarmlist_name_validators(form, field):
 
 class AlarmlistForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), alarmlist_name_validators])
+    toggle = BooleanField('toggle')
     user_id = IntegerField('user_id')

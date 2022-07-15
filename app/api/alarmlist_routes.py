@@ -52,6 +52,7 @@ def post_alarmlist():
     if form.validate_on_submit():
         new_alarmlist = Alarmlist(
             name=form.data['name'],
+            toggle=False,
             user_id=form.data['user_id']
         )
 
@@ -71,6 +72,7 @@ def update_alarmlist(id):
 
     if form.validate_on_submit():
         alarmlist.name = form.data['name']
+        alarmlist.toggle = form.data['toggle']
 
         db.session.commit()
         return alarmlist.to_dict()

@@ -46,6 +46,7 @@ def add_alarm():
             meridiem=form.data['meridiem'],
             repeat=form.data['repeat'],
             snooze=form.data['snooze'],
+            toggle=True,
             alarmlist_id=form.data['alarmlist_id']
         )
 
@@ -70,6 +71,7 @@ def update_alarm(alarm_id):
         alarm.repeat=form.data['repeat']
         alarm.snooze=form.data['snooze']
         alarm.sound=form.data['sound']
+        alarm.toggle=form.data['toggle']
         alarm.alarmlist_id=form.data['alarmlist_id']
 
         db.session.commit()
