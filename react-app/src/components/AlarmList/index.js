@@ -18,8 +18,9 @@ const AlarmList = ({ dashAlarmlist }) => {
     const alarmsArr = Object.values(alarmsObj)
     const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
 
-    const [openTab, setOpenTab] = useState(false)
+    const [name, setName] = useState(alarmlists[id]?.name || dashAlarmlist?.name)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
+    const [openTab, setOpenTab] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
@@ -38,14 +39,18 @@ const AlarmList = ({ dashAlarmlist }) => {
 
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
-    console.log('here is alarmlist', alarmlists[alarmlistId]?.id)
+
+    useEffect(() => {
+        setName(alarmlists[id]?.name || dashAlarmlist?.name)
+        setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
+    }, [dashAlarmlist, id])
 
     const onChange = async (e) => {
         e.preventDefault()
         setMainAlarmlistSwitch(!mainAlarmlistSwitch)
 
         const payload = {
-            'name': alarmlists[id]?.name || dashAlarmlist?.name,
+            name,
             'toggle': !mainAlarmlistSwitch,
             'id': alarmlistId || dashAlarmlist?.id,
         }

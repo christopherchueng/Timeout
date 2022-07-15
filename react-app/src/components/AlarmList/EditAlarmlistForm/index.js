@@ -36,8 +36,8 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
 
         const payload = {
             'id': alarmlist?.id,
-            'name': alarmlist?.name,
-            'toggle': true
+            'name': name,
+            'toggle': toggle
         }
 
         const data = await dispatch(updateAlarmlist(payload))
