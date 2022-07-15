@@ -48,7 +48,7 @@ const Dashboard = () => {
                     </div>
                     <div className='meridiem-ctn'>
                         <div className='splash-meridiem'>
-                            {meridiem}
+                            {hour >= 12 ? 'PM' : 'AM'}
                         </div>
                     </div>
                 </div>
