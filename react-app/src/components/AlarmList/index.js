@@ -13,23 +13,23 @@ const AlarmList = ({ dashAlarmlist }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const alarmlistId = parseInt(id)
-    const alarmlist = useSelector(state => state?.alarmlist?.entries)
+    const alarmlists = useSelector(state => state?.alarmlist?.entries)
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
     const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
 
     const [openTab, setOpenTab] = useState(false)
-    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(alarmlist[id]?.toggle || dashAlarmlist?.toggle)
+    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
     const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
         dispatch(getAlarms(alarmlistId || dashAlarmlist?.id))
-    }, [dispatch, alarmlist[id]?.toggle, dashAlarmlist?.toggle])
+    }, [dispatch, alarmlists[id]?.toggle, dashAlarmlist?.toggle])
 
     useEffect(() => {
-        setMainAlarmlistSwitch(alarmlist[id]?.toggle || dashAlarmlist?.toggle)
-    }, [alarmlist[id]?.toggle, dashAlarmlist?.toggle])
+        setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
+    }, [alarmlists[id]?.toggle, dashAlarmlist?.toggle])
 
     useEffect(() => {
         // Sometimes, the page renders at the bottom first,
@@ -38,13 +38,14 @@ const AlarmList = ({ dashAlarmlist }) => {
 
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
+    console.log('here is alarmlist', alarmlists[alarmlistId]?.id)
 
     const onChange = async (e) => {
         e.preventDefault()
         setMainAlarmlistSwitch(!mainAlarmlistSwitch)
 
         const payload = {
-            'name': alarmlist[id]?.name || dashAlarmlist?.name,
+            'name': alarmlists[id]?.name || dashAlarmlist?.name,
             'toggle': !mainAlarmlistSwitch,
             'id': alarmlistId || dashAlarmlist?.id,
         }
@@ -57,18 +58,18 @@ const AlarmList = ({ dashAlarmlist }) => {
             {isEditing
             ?
             <div id={'edit-alarmlist-form'}>
-                <EditAlarmlistForm isEditing={isEditing} setIsEditing={setIsEditing} alarmlist={alarmlistId ? alarmlist[alarmlistId] : dashAlarmlist} />
+                <EditAlarmlistForm isEditing={isEditing} setIsEditing={setIsEditing} alarmlist={alarmlistId ? alarmlists[alarmlistId] : dashAlarmlist} />
             </div>
             :
             <div className='alarmlist-header' key={dashAlarmlist?.id || alarmlistId}>
                 <div className='alarmlist-name'>
-                    <h1>{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlist[id]?.name}</h1>
+                    <h1>{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1>
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
-                    {alarmlist.id !== 1
+                    {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
                     ?
                     <div className='alarmlist-btn-settings'>
                         <div className='edit-alarmlist'>
-                            <button type='button' className={`alarmlist-edit-btn-${alarmlist.id}`} onClick={() => setIsEditing(!isEditing)}>
+                            <button type='button' className={`alarmlist-edit-btn-${alarmlists.id}`} onClick={() => setIsEditing(!isEditing)}>
                                 <span className="fa-solid fa-pen"></span>
                             </button>
                         </div>
@@ -100,7 +101,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                             alarm={alarm}
                             openTab={openTab}
                             setOpenTab={setOpenTab}
-                            alarmlist={alarmlist[id] || dashAlarmlist}
+                            alarmlist={alarmlists[id] || dashAlarmlist}
                             mainAlarmlistSwitch={mainAlarmlistSwitch}
                             setMainAlarmlistSwitch={setMainAlarmlistSwitch}
                         />
