@@ -5,9 +5,10 @@
 }
 
 .alarmlist-menu {
-    width: 20vw;
+    width: 25vw;
     /* height: 100vh; */
-    border: 1px solid black;
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     overflow: scroll;
     /* height: 100vh; */
 }
@@ -18,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80vw;
+    width: 75vw;
 }
 
 .dashboard-time-ctn {

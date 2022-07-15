@@ -1,3 +1,7 @@
+#navbar {
+    border-bottom: 1px solid lightgray;
+}
+
 #navbar,
 #navbar > ul,
 #navbar-right {
