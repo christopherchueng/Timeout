@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
+import { useTimeContext } from "../../context/TimeContext"
 import './Alarm.css'
 
 const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, setMainAlarmlistSwitch }) => {
@@ -12,7 +13,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     // const alarmsObj = useSelector(state => state?.alarm?.entries)
     // const alarmsArr = Object.values(alarmsObj)
 
-    // const [openTab, setOpenTab] = useState(false)
+    const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
     const [alarmOn, setAlarmOn] = useState(false)
 
     useEffect(() => {
@@ -33,6 +34,38 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         }
 
     }, [mainAlarmlistSwitch])
+
+    useEffect(() => {
+        // WILL NEED TO REFACTOR THIS IF PLANNING TO REFACTOR DATABASE TO INCLUDE A TOGGLE BOOLEAN.
+        if (alarm.repeat.length !== 0) {
+            for (let day of alarm.repeat) {
+                if (alarm.hour === hour && alarm.minutes == minutes && alarm.meridiem === meridiem && day.id === currentTime.getDay() && currentTime.getSeconds() === 0) {
+                    alert('TESTING THIS!')
+                }
+            }
+        } else {
+            if (alarm.hour === hour && alarm.minutes == minutes && alarm.meridiem === meridiem && currentTime.getSeconds() === 0) {
+                alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
+            }
+        }
+    }, [hour, minutes, meridiem])
+
+    // {alarmlistId: 3
+        // hour: 11
+        // id: 9
+        // meridiem: "AM"
+        // minutes: 0
+        // name: "Check in"
+        // repeat: [
+        //     {id: 1, name: 'Monday'}
+        //     {id: 2, name: 'Tuesday'}
+        //     {id: 3, name: 'Wednesday'}
+        //     {id: 4, name: 'Thursday'}
+        //     {id: 5, name: 'Friday'}
+        // }
+        // snooze: false
+        // sound: null
+    // }
 
     // useEffect(() => {
     //     // Need the or statement here because Alarm is used in alarmlist/:id AND dashboard
