@@ -11,8 +11,7 @@ import AlarmList from "../AlarmList"
 const Dashboard = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const alarmlistsArr = Object.values(alarmlistsObj)
-    const alarmlists = alarmlistsArr.reverse()
+    const alarmlists = Object.values(alarmlistsObj)
     const { hour, minutes, seconds, meridiem } = useTimeContext()
 
     useEffect(() => {
@@ -20,11 +19,6 @@ const Dashboard = () => {
         dispatch(getAlarmlists())
         // dispatch(getAlarms(1))
     }, [dispatch])
-
-    // useEffect(() => {
-    //     setAlarmlistOn(alarmlistOn)
-    //     setAlarmOn(alarmOn)
-    // }, [])
 
     return (
         <div id='dashboard'>
