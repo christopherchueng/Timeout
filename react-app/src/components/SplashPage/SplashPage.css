@@ -103,8 +103,8 @@
     color: rgba(0, 0, 0, 0.4)
 }
 
-/* Div that houses the ball */
-.switch {
+/* Div that houses the splash-ball */
+.splash-switch {
     position: relative;
     display: block;
     border: 1px lightgray solid;
@@ -115,8 +115,8 @@
     cursor: pointer;
 }
 
-/* Creates the ball that will turn 'on' and 'off' */
-.ball:before {
+/* Creates the splash-ball that will turn 'on' and 'off' */
+.splash-ball:before {
     content: '';
     position: absolute;
     width: 35px;
@@ -129,14 +129,14 @@
     left: 2.5px;
 }
 
-/* When mouse is hovered, the ball will move from left to right */
-.switch:hover .ball:before {
-    transform: translateX(35px);
+/* When mouse is hovered, the splash-ball will move from left to right */
+.splash-switch:hover .splash-ball:before {
+    transform: translateX(33.5px);
     transition: 0.2s;
 }
 
 /* When mouse is hovered on div, change div background to hex code color. */
-.switch:hover {
+.splash-switch:hover {
     background-color: #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s

@@ -44,8 +44,7 @@
     padding-left: 20px;
 }
 
-.toggle-login,
-.toggle-create-account {
+.toggle-login {
     position: relative;
     display: block;
     border: 1px lightgray solid;
@@ -57,8 +56,7 @@
     padding: 0;
 }
 
-.signin-ball:before,
-.create-account-ball:before {
+.signin-ball:before {
     content: '';
     position: absolute;
     width: 36px;
@@ -82,30 +80,26 @@
     margin: 10px 0 0 0;
 }
 
-.toggle-login:hover .signin-ball:before,
-.toggle-create-account:hover .create-account-ball:before {
+.toggle-login:hover .signin-ball:before {
     transform: translateX(379px);
     transition: 0.2s;
 }
 
-.toggle-login:hover,
-.toggle-create-account:hover {
+.toggle-login:hover {
     background-color: #3478F6;
     border: 1px solid #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s ease-out;
 }
 
-.login-span,
-.create-account {
+.login-span {
     opacity: 1;
     font-family: 'Lexend Deca';
     /* padding-left: 25px; */
     /* color: white; */
 }
 
-.toggle-login:hover .login-span,
-.toggle-create-account:hover .create-account {
+.toggle-login:hover .login-span {
     opacity: 0;
     transition: all 0.2s ease-out;
 }
@@ -114,8 +108,7 @@
 .password-input::placeholder {
 } */
 
-.login-btn,
-.create-account-ctn {
+.login-btn {
     display: flex;
     justify-content: center;
     width: 500px;
@@ -139,4 +132,68 @@
 
 .create-account {
     color: black;
+}
+
+/* SIGN IN/SIGN UP  */
+.toggle-create-account {
+    position: relative;
+    display: block;
+    /* border: 1px lightgray solid; */
+    border-radius: 25px;
+    background-color: lightgray;
+    width: 424px;
+    height: 44px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.create-account-ball:before {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.2s;
+    cursor: pointer;
+    top: 4px;
+    left: 3.5px;
+}
+
+.toggle-create-account:hover .create-account-ball:before {
+    transform: translateX(379px);
+    transition: 0.2s;
+}
+
+.toggle-create-account:hover {
+    background-color: #3478F6;
+    /* border: 1px solid #3478F6; */
+    /* background-color: lightgreen; */
+    transition: 0.2s ease-out;
+}
+
+.create-account {
+    opacity: 1;
+    font-family: 'Lexend Deca';
+    /* padding-left: 25px; */
+    /* color: white; */
+}
+
+.toggle-create-account:hover .create-account {
+    opacity: 0;
+    transition: all 0.2s ease-out;
+}
+
+.create-account-ctn {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+}
+
+.create-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 424px;
+    height: 44px;
 }

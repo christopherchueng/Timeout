@@ -79,8 +79,8 @@ const SplashPage = () => {
                     </div>
                     {/* ---------------------------- LOGIN SWITCH & BALL ---------------------------- */}
                     <Link to='/login'>
-                        <div className='switch'>
-                            <div className='ball'>
+                        <div className='splash-switch'>
+                            <div className='splash-ball'>
                             </div>
                         </div>
                     </Link>
@@ -91,8 +91,8 @@ const SplashPage = () => {
                     </div>
                     {/* ---------------------------- REGISTER SWITCH & BALL ---------------------------- */}
                     <Link to='/register'>
-                        <div className='switch'>
-                            <div className='ball'>
+                        <div className='splash-switch'>
+                            <div className='splash-ball'>
                             </div>
                         </div>
                     </Link>

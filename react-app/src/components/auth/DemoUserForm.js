@@ -14,8 +14,8 @@ const DemoUserForm = () => {
     }
 
     return (
-        <div className='switch' onClick={onSubmit}>
-            <div className='ball'>
+        <div className='splash-switch' onClick={onSubmit}>
+            <div className='splash-ball'>
             </div>
         </div>
     )
