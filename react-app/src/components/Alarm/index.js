@@ -4,6 +4,7 @@ import { useParams, Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
 import './Alarm.css'
+import DisplayDays from "./DisplayDays"
 
 const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, setMainAlarmlistSwitch }) => {
     const dispatch = useDispatch()
@@ -86,9 +87,16 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                 <div id='dashboard-alarms'>
                     <div className='alarm-info'>
                         <div className='alarm-toggle-ctn'>
-                            <div>
+                            <div className='alarm-content'>
                                 <div className='alarm-name'>
-                                    {alarm?.name}
+                                    {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
+                                </div>
+                                <div className='alarm-days'>
+                                    {alarm.repeat.length === 0 ?
+                                    ""
+                                    :
+                                    <DisplayDays alarmDays={alarm.repeat} />
+                                    }
                                 </div>
                                 <div className='alarm-time'>
                                     {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes} {alarm?.meridiem}

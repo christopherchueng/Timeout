@@ -15,7 +15,7 @@ def convert_repeat(day_str):
     for num in day_str:
         for i, day in enumerate(weekdays_mapping):
             if int(num) == i:
-                repeat_days.append({'name': day, 'id': i})
+                repeat_days.append({'name': day, 'id': i, 'short': day[0:3]})
     return repeat_days
 
 
