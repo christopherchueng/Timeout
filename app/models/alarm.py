@@ -30,6 +30,7 @@ class Alarm(db.Model):
     sound = db.Column(db.String(255))
     repeat = db.Column(db.String(255))
     snooze = db.Column(db.Boolean)
+    toggle = db.Column(db.Boolean)
     alarmlist_id = db.Column(db.Integer, db.ForeignKey('alarmlists.id'), nullable=False)
 
 
@@ -47,6 +48,7 @@ class Alarm(db.Model):
             'sound': self.sound,
             'repeat': convert_repeat(self.repeat),
             'snooze': self.snooze,
+            'toggle': self.toggle,
             'alarmlistId': self.alarmlist_id
         }
 

@@ -7,6 +7,7 @@ def seed_alarms():
         minutes=0,
         meridiem='PM',
         snooze=False,
+        toggle=False,
         alarmlist_id=1
     )
     alarm2 = Alarm(
@@ -15,6 +16,7 @@ def seed_alarms():
         minutes=15,
         meridiem='PM',
         snooze=False,
+        toggle=False,
         alarmlist_id=1
     )
     alarm3 = Alarm(
@@ -23,6 +25,7 @@ def seed_alarms():
         minutes=0,
         meridiem='AM',
         snooze=False,
+        toggle=False,
         alarmlist_id=1
     )
     alarm4 = Alarm(
@@ -32,6 +35,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=2
     )
     alarm5 = Alarm(
@@ -41,6 +45,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=2
     )
     alarm6 = Alarm(
@@ -50,6 +55,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=2
     )
     alarm7 = Alarm(
@@ -59,6 +65,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=2
     )
     alarm8 = Alarm(
@@ -68,6 +75,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=2
     )
     alarm9 = Alarm(
@@ -77,6 +85,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=3
     )
     alarm10 = Alarm(
@@ -86,6 +95,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=3
     )
     alarm11 = Alarm(
@@ -95,6 +105,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=3
     )
     alarm12 = Alarm(
@@ -104,6 +115,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=3
     )
     alarm13 = Alarm(
@@ -113,6 +125,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=3
     )
     alarm14 = Alarm(
@@ -122,6 +135,7 @@ def seed_alarms():
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=3
     )
     alarm15 = Alarm(
@@ -131,6 +145,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=4
     )
     alarm16 = Alarm(
@@ -140,6 +155,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=4
     )
     alarm17 = Alarm(
@@ -149,6 +165,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=4
     )
     alarm18 = Alarm(
@@ -158,6 +175,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=4
     )
     alarm19 = Alarm(
@@ -167,6 +185,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=4
     )
     alarm20 = Alarm(
@@ -176,6 +195,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=4
     )
     alarm21 = Alarm(
@@ -185,6 +205,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
+        toggle=False,
         alarmlist_id=4
     )
     alarm22 = Alarm(
@@ -194,6 +215,7 @@ def seed_alarms():
         meridiem='AM',
         repeat="0",
         snooze=False,
+        toggle=False,
         alarmlist_id=1
     )
     alarm23 = Alarm(
@@ -202,6 +224,7 @@ def seed_alarms():
         minutes=30,
         meridiem='PM',
         snooze=False,
+        toggle=False,
         alarmlist_id=1
     )
     alarm24 = Alarm(
@@ -210,6 +233,7 @@ def seed_alarms():
         minutes=0,
         meridiem='PM',
         snooze=False,
+        toggle=False,
         alarmlist_id=1
     )
 
