@@ -71,7 +71,7 @@ def update_alarm(alarm_id):
         alarm.repeat=form.data['repeat']
         alarm.snooze=form.data['snooze']
         alarm.sound=form.data['sound']
-        alarm.toggle=form.data['toggle']
+        alarm.toggle=True
         alarm.alarmlist_id=form.data['alarmlist_id']
 
         db.session.commit()
