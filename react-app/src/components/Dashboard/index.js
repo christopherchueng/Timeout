@@ -41,7 +41,6 @@ const Dashboard = () => {
                     </div>
                     <div className='splash-second-colon'>
                         {seconds % 2 === 0 ? ":" : ""}
-                        {/* {seconds} */}
                     </div>
                     <div className='splash-minutes'>
                         {minutes < 10 ? '0' + minutes : minutes}

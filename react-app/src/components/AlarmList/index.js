@@ -26,24 +26,49 @@ const AlarmList = ({ dashAlarmlist }) => {
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
         dispatch(getAlarms(alarmlistId || dashAlarmlist?.id))
-    }, [dispatch, alarmlists[id]?.toggle, dashAlarmlist?.toggle])
+    }, [dispatch])
 
     useEffect(() => {
         // Sometimes, the page renders at the bottom first,
         // so this will force the page to scroll up on mount
         window.scrollTo(0, 0)
 
-        setMainAlarmlistSwitch(mainAlarmlistSwitch)
+        // setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
 
     useEffect(() => {
-        setName(alarmlists[id]?.name || dashAlarmlist?.name)
-        setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
-    }, [dashAlarmlist, alarmlists, id])
+        if (
+            (alarmlists && Object.values(alarmlists).length !== 0) ||
+            (dashAlarmlist && Object.values(dashAlarmlist).length !== 0)
+            ) {
+            setName(alarmlists[id]?.name || dashAlarmlist?.name)
+            setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
+        }
 
+        // if (alarmlists && Object.values(alarmlists).length !== 0) {
+        //     setName(alarmlists[id]?.name)
+        //     setMainAlarmlistSwitch(alarmlists[id]?.toggle)
+        // }
+        // else if (dashAlarmlist && Object.values(dashAlarmlist).length !== 0) {
+        //     setName(dashAlarmlist?.name)
+        //     setMainAlarmlistSwitch(dashAlarmlist?.toggle)
+        // }
+    }, [dashAlarmlist, alarmlists])
+
+    // console.log('HERE IS THE ALARMLIST TOGGGLLEEEEE', mainAlarmlistSwitch)
     const onChange = async (e) => {
         e.preventDefault()
-        setMainAlarmlistSwitch(!mainAlarmlistSwitch)
+        // setMainAlarmlistSwitch(!mainAlarmlistSwitch)
+
+        // if (mainAlarmlistSwitch) {
+        //     setMainAlarmlistSwitch('LALALALALALALLA')
+        //     console.log('I AM FALSE NOW', mainAlarmlistSwitch)
+        // } else {
+        //     setMainAlarmlistSwitch(true)
+        //     console.log('I AM SOOOOOO TRUEEEEEE.')
+        // }
+
+        console.log('THIS IS THE TOGGLE STATATETETETETETETEET', !mainAlarmlistSwitch)
 
         const payload = {
             name,
@@ -51,7 +76,9 @@ const AlarmList = ({ dashAlarmlist }) => {
             'id': alarmlistId || dashAlarmlist?.id,
         }
 
-        await dispatch(updateAlarmlist(payload))
+        // console.log('HEY PAYLOAD PLEASE BE RIGHT', payload)
+
+        dispatch(updateAlarmlist(payload)).then(res => console.log('RESSSSS', res))
     }
 
     return (
@@ -86,7 +113,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <input
                         type='checkbox'
                         value={mainAlarmlistSwitch}
-                        onChange={(e) => onChange(e)}
+                        onChange={onChange}
                         className='alarmlist-radio-box'
                         checked={mainAlarmlistSwitch}
                     />

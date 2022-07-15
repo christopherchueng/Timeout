@@ -33,7 +33,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         // For all other cases, don't show alarms
         alarmlist?.id === 1 ? setOpenTab(true) : (id ? setOpenTab(true) : setOpenTab(false))
 
-        setMainAlarmlistSwitch(alarmlist?.toggle)
+        // setMainAlarmlistSwitch(alarmlist?.toggle)
     }, [])
 
     useEffect(() => {
@@ -89,13 +89,13 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
 
         const payload = {
             'alarmId': alarm?.id,
-            'name': alarm?.name,
-            'hour': alarm?.hour,
-            'minutes': alarm?.minutes,
-            'meridiem': alarm?.meridiem,
-            'sound': alarm?.sound,
+            name,
+            hour,
+            minutes,
+            meridiem,
+            sound,
             'repeat': `${repeatPayload}`,
-            'snooze': alarm?.snooze,
+            snooze,
             'toggle': !alarmOn,
             'alarmlist_id': alarm?.alarmlistId
         }
