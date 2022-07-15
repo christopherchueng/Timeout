@@ -16,7 +16,6 @@ import EditAlarm from './components/Alarm/EditAlarm'
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state?.session?.user)
 
 
   useEffect(() => {
@@ -32,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {currentUser ? <NavBar /> : ""}
+      <NavBar />
       <Switch>
         <Route exact path='/'>
           <SplashPage />
