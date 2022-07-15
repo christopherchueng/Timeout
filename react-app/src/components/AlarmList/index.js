@@ -18,8 +18,8 @@ const AlarmList = ({ dashAlarmlist }) => {
     const alarmsArr = Object.values(alarmsObj)
     const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
 
-    const [name, setName] = useState(alarmlists[id]?.name || dashAlarmlist?.name)
-    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
+    const [name, setName] = useState(0)
+    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState('')
     const [openTab, setOpenTab] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
 
@@ -55,7 +55,6 @@ const AlarmList = ({ dashAlarmlist }) => {
         // }
     }, [dashAlarmlist, alarmlists])
 
-    // console.log('HERE IS THE ALARMLIST TOGGGLLEEEEE', mainAlarmlistSwitch)
     const onChange = async (e) => {
         e.preventDefault()
         // setMainAlarmlistSwitch(!mainAlarmlistSwitch)
@@ -68,17 +67,14 @@ const AlarmList = ({ dashAlarmlist }) => {
         //     console.log('I AM SOOOOOO TRUEEEEEE.')
         // }
 
-        console.log('THIS IS THE TOGGLE STATATETETETETETETEET', !mainAlarmlistSwitch)
-
         const payload = {
             name,
             'toggle': !mainAlarmlistSwitch,
             'id': alarmlistId || dashAlarmlist?.id,
         }
 
-        // console.log('HEY PAYLOAD PLEASE BE RIGHT', payload)
 
-        dispatch(updateAlarmlist(payload)).then(res => console.log('RESSSSS', res))
+        await dispatch(updateAlarmlist(payload))
     }
 
     return (
