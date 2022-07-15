@@ -16,7 +16,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     // const alarmsArr = Object.values(alarmsObj)
 
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
-    const [alarmOn, setAlarmOn] = useState(alarm.toggle)
+    const [alarmOn, setAlarmOn] = useState(alarm?.toggle)
 
     useEffect(() => {
         // If alarmlist is default, display all alarms.
@@ -28,8 +28,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     }, [])
 
     useEffect(() => {
-        setAlarmOn(alarm.toggle)
-    }, [alarm.toggle])
+        setAlarmOn(alarm?.toggle)
+    }, [alarm?.toggle])
 
     useEffect(() => {
         if (mainAlarmlistSwitch) {
@@ -66,6 +66,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     const onChange = async (e) => {
         e.preventDefault()
         setAlarmOn(!alarmOn)
+        console.log('here is the alarm status', !alarmOn)
 
         const payload = {
             'alarmId': alarm?.id,

@@ -62,7 +62,7 @@ def post_alarmlist():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@alarmlist_routes.route('/<int:id>', methods=['PATCH'])
+@alarmlist_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_alarmlist(id):
     form = AlarmlistForm()

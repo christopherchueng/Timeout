@@ -62,6 +62,7 @@ def update_alarm(alarm_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     alarm = Alarm.query.get(alarm_id)
+    print('-'*50, form.data['toggle'])
 
     if form.validate_on_submit():
         alarm.name=form.data['name']
