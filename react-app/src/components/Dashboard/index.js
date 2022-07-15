@@ -12,7 +12,7 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlists = Object.values(alarmlistsObj)
-    const { hour, minutes, seconds, meridiem } = useTimeContext()
+    const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
@@ -48,7 +48,7 @@ const Dashboard = () => {
                     </div>
                     <div className='meridiem-ctn'>
                         <div className='splash-meridiem'>
-                            {hour >= 12 ? 'PM' : 'AM'}
+                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 ? 'PM' : 'AM'}
                         </div>
                     </div>
                 </div>

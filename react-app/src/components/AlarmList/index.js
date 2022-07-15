@@ -29,10 +29,6 @@ const AlarmList = ({ dashAlarmlist }) => {
     }, [dispatch, alarmlists[id]?.toggle, dashAlarmlist?.toggle])
 
     useEffect(() => {
-        setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
-    }, [alarmlists[id]?.toggle, dashAlarmlist?.toggle])
-
-    useEffect(() => {
         // Sometimes, the page renders at the bottom first,
         // so this will force the page to scroll up on mount
         window.scrollTo(0, 0)
@@ -43,7 +39,7 @@ const AlarmList = ({ dashAlarmlist }) => {
     useEffect(() => {
         setName(alarmlists[id]?.name || dashAlarmlist?.name)
         setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
-    }, [dashAlarmlist, id])
+    }, [dashAlarmlist, alarmlists, id])
 
     const onChange = async (e) => {
         e.preventDefault()

@@ -8,6 +8,8 @@ import './SplashPage.css'
 const SplashPage = () => {
     const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
     const currentUser = useSelector(state => state.session.user)
+
+    // console.log('the day', currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Sat'))
     // const currentTime = new Date()
     // const [hour, setHour] = useState((currentTime.getHours()))
     // const [minutes, setMinutes] = useState(currentTime.getMinutes())
@@ -57,19 +59,19 @@ const SplashPage = () => {
                     </div>
                     <div className='meridiem-ctn'>
                         <div className='splash-meridiem'>
-                            {hour >= 12 ? 'PM' : 'AM'}
+                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 ? 'PM' : 'AM'}
                         </div>
                     </div>
                 </div>
             </div>
             <div className='splash-days'>
-                <div className='splash-sun' style={{color: currentTime.getDay() === 0 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SUN</div>
-                <div className='splash-mon' style={{color: currentTime.getDay() === 1 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>MON</div>
-                <div className='splash-tue' style={{color: currentTime.getDay() === 2 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>TUE</div>
-                <div className='splash-wed' style={{color: currentTime.getDay() === 3 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>WED</div>
-                <div className='splash-thu' style={{color: currentTime.getDay() === 4 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>THU</div>
-                <div className='splash-fri' style={{color: currentTime.getDay() === 5 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>FRI</div>
-                <div className='splash-sat' style={{color: currentTime.getDay() === 6 ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SAT</div>
+                <div className='splash-sun' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Sun') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SUN</div>
+                <div className='splash-mon' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Mon') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>MON</div>
+                <div className='splash-tue' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Tue') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>TUE</div>
+                <div className='splash-wed' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Wed') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>WED</div>
+                <div className='splash-thu' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Thu') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>THU</div>
+                <div className='splash-fri' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Fri') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>FRI</div>
+                <div className='splash-sat' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Sat') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SAT</div>
             </div>
             {/* ---------------------------- ENTRIES ---------------------------- */}
             <div className='splash-entries'>
