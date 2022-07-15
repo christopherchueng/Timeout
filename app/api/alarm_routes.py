@@ -70,13 +70,13 @@ def update_alarm(alarm_id):
         alarm.meridiem=form.data['meridiem']
         alarm.repeat=form.data['repeat']
         alarm.snooze=form.data['snooze']
-        alarm.sound=form.data['sound']
-        alarm.toggle=True
+        # alarm.sound=form.data['sound']
+        alarm.toggle=form.data['toggle']
         alarm.alarmlist_id=form.data['alarmlist_id']
 
         db.session.commit()
         return alarm.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @alarm_routes.route('/<int:id>', methods=['DELETE'])
 @login_required

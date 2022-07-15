@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
+import { updateAlarm } from "../../store/alarm"
 import './Alarm.css'
 import DisplayDays from "./DisplayDays"
 
@@ -15,7 +16,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     // const alarmsArr = Object.values(alarmsObj)
 
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
-    const [alarmOn, setAlarmOn] = useState(false)
+    const [alarmOn, setAlarmOn] = useState(alarm.toggle)
 
     useEffect(() => {
         // If alarmlist is default, display all alarms.
@@ -24,8 +25,11 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         alarmlist?.id === 1 ? setOpenTab(true) : (id ? setOpenTab(true) : setOpenTab(false))
 
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
-        setAlarmOn(alarmOn)
     }, [])
+
+    useEffect(() => {
+        setAlarmOn(alarm.toggle)
+    }, [alarm.toggle])
 
     useEffect(() => {
         if (mainAlarmlistSwitch) {
@@ -37,19 +41,48 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     }, [mainAlarmlistSwitch])
 
     useEffect(() => {
-        // WILL NEED TO REFACTOR THIS IF PLANNING TO REFACTOR DATABASE TO INCLUDE A TOGGLE BOOLEAN.
         if (alarm.repeat.length !== 0) {
             for (let day of alarm.repeat) {
-                if (alarm.hour === hour && alarm.minutes == minutes && alarm.meridiem === meridiem && day.id === currentTime.getDay() && currentTime.getSeconds() === 0) {
+                if (alarm.hour === hour &&
+                    alarm.minutes == minutes &&
+                    alarm.meridiem === meridiem &&
+                    day.id === currentTime.getDay() &&
+                    currentTime.getSeconds() === 0 &&
+                    alarm.toggle === true) {
                     alert('TESTING THIS!')
                 }
             }
         } else {
-            if (alarm.hour === hour && alarm.minutes == minutes && alarm.meridiem === meridiem && currentTime.getSeconds() === 0) {
+            if (alarm.hour === hour &&
+                alarm.minutes == minutes &&
+                alarm.meridiem === meridiem &&
+                currentTime.getSeconds() === 0 &&
+                alarm.toggle === true) {
                 alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
             }
         }
     }, [hour, minutes, meridiem])
+
+    const onChange = async (e) => {
+        e.preventDefault()
+        setAlarmOn(!alarmOn)
+
+        const payload = {
+            'alarmId': alarm?.id,
+            'name': alarm?.name,
+            'hour': alarm?.hour,
+            'minutes': alarm?.minutes,
+            'meridiem': alarm?.meridiem,
+            'sound': alarm?.sound,
+            'repeat': alarm?.repeat,
+            'snooze': alarm?.snooze,
+            'toggle': !alarmOn,
+            'alarmlist_id': alarm?.alarmlistId
+        }
+
+        await dispatch(updateAlarm(payload))
+
+    }
 
     // {alarmlistId: 3
         // hour: 11
@@ -119,7 +152,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                                     id={alarm?.id}
                                     type='checkbox'
                                     value={alarmOn}
-                                    onChange={() => setAlarmOn(!alarmOn)}
+                                    onChange={(e) => onChange(e)}
                                     className='alarm-radio-box'
                                     checked={alarmOn}
                                 />

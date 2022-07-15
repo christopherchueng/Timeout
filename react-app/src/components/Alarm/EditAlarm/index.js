@@ -115,6 +115,7 @@ const EditAlarm = () => {
             sound,
             repeat: `${repeat}`,
             snooze,
+            'toggle': true,
             alarmlist_id: parseInt(alarmlist)
         }
 
