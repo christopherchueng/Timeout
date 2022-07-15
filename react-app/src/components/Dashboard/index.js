@@ -13,7 +13,7 @@ const Dashboard = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj)
     const alarmlists = alarmlistsArr.reverse()
-    const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
+    const { hour, minutes, seconds, meridiem } = useTimeContext()
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
