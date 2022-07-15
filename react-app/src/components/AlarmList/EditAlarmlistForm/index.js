@@ -10,6 +10,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
     const currentUser = useSelector(state => state?.session?.user)
 
     const [name, setName] = useState(alarmlist.name)
+    const [toggle, setToggle] = useState(alarmlist.toggle)
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [errors, setErrors] = useState({});
 
@@ -34,8 +35,9 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
         setIsSubmitted(true)
 
         const payload = {
-            id: alarmlist?.id,
-            name
+            'id': alarmlist?.id,
+            'name': alarmlist?.name,
+            'toggle': true,
         }
 
         const data = await dispatch(updateAlarmlist(payload))

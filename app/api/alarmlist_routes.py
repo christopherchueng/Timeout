@@ -70,13 +70,17 @@ def update_alarmlist(id):
 
     alarmlist = Alarmlist.query.get(id)
 
+    # print('-'*50, form.data[id])
+    print('-'*50, form.data['name'])
+    print('-'*50, form.data['toggle'])
+
     if form.validate_on_submit():
         alarmlist.name = form.data['name']
         alarmlist.toggle = form.data['toggle']
 
         db.session.commit()
         return alarmlist.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @alarmlist_routes.route('/<int:id>', methods=['DELETE'])

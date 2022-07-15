@@ -80,9 +80,10 @@ const CreateAlarm = () => {
             minutes,
             meridiem,
             sound,
-            repeat: repeat.toString(),
+            'repeat': repeat.toString(),
             snooze,
-            alarmlist_id: parseInt(alarmlist)
+            'toggle': true,
+            'alarmlist_id': parseInt(alarmlist)
         }
 
         const errorData = await dispatch(createAlarm(payload))

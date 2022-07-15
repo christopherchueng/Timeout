@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
-import { getAlarmlist } from "../../store/alarmlist"
+import { getAlarmlist, updateAlarmlist } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
 import EditAlarmlistForm from "./EditAlarmlistForm"
 import DeleteAlarmlistModal from "./DeleteAlarmlistModal"
@@ -19,7 +19,7 @@ const AlarmList = ({ dashAlarmlist }) => {
     const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
 
     const [openTab, setOpenTab] = useState(false)
-    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(false)
+    const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState(alarmlist[id]?.toggle || dashAlarmlist?.toggle)
     const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
@@ -28,12 +28,30 @@ const AlarmList = ({ dashAlarmlist }) => {
     }, [dispatch])
 
     useEffect(() => {
+        setMainAlarmlistSwitch(alarmlist[id]?.toggle || dashAlarmlist?.toggle)
+    }, [mainAlarmlistSwitch])
+
+    useEffect(() => {
         // Sometimes, the page renders at the bottom first,
         // so this will force the page to scroll up on mount
         window.scrollTo(0, 0)
 
         setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
+
+    const onChange = async (e) => {
+        e.preventDefault()
+        setMainAlarmlistSwitch(!mainAlarmlistSwitch)
+
+        const payload = {
+            'name': alarmlist[id].name || dashAlarmlist?.name,
+            'toggle': !mainAlarmlistSwitch,
+            'id': alarmlistId || dashAlarmlist?.id,
+        }
+        console.log('alarmlist id', payload.toggle)
+
+        await dispatch(updateAlarmlist(payload))
+    }
 
     return (
         <div id='alarmlists'>
@@ -67,7 +85,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <input
                         type='checkbox'
                         value={mainAlarmlistSwitch}
-                        onChange={() => setMainAlarmlistSwitch(!mainAlarmlistSwitch)}
+                        onChange={(e) => onChange(e)}
                         className='alarmlist-radio-box'
                         checked={mainAlarmlistSwitch}
                     />

@@ -35,7 +35,8 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
         setIsSubmitted(true)
         const payload = {
             name,
-            user_id: currentUser?.id
+            'toggle': true,
+            'user_id': currentUser?.id
         }
 
         const data = await dispatch(createAlarmlist(payload))

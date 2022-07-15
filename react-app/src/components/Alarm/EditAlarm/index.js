@@ -113,10 +113,10 @@ const EditAlarm = () => {
             minutes,
             meridiem,
             sound,
-            repeat: `${repeat}`,
+            'repeat': `${repeat}`,
             snooze,
             'toggle': true,
-            alarmlist_id: parseInt(alarmlist)
+            'alarmlist_id': parseInt(alarmlist)
         }
 
         const errorData = await dispatch(updateAlarm(payload))
