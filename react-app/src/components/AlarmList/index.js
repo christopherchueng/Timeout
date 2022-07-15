@@ -25,11 +25,11 @@ const AlarmList = ({ dashAlarmlist }) => {
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
         dispatch(getAlarms(alarmlistId || dashAlarmlist?.id))
-    }, [dispatch, mainAlarmlistSwitch])
+    }, [dispatch, alarmlist[id]?.toggle, dashAlarmlist?.toggle])
 
     useEffect(() => {
         setMainAlarmlistSwitch(alarmlist[id]?.toggle || dashAlarmlist?.toggle)
-    }, [mainAlarmlistSwitch])
+    }, [alarmlist[id]?.toggle, dashAlarmlist?.toggle])
 
     useEffect(() => {
         // Sometimes, the page renders at the bottom first,
@@ -48,7 +48,6 @@ const AlarmList = ({ dashAlarmlist }) => {
             'toggle': !mainAlarmlistSwitch,
             'id': alarmlistId || dashAlarmlist?.id,
         }
-        console.log('alarmlist id', payload.toggle)
 
         await dispatch(updateAlarmlist(payload))
     }
