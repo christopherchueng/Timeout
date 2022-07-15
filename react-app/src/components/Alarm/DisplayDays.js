@@ -5,6 +5,7 @@ const DisplayDays = ({ alarmDays }) => {
     for (let day of alarmDays) {
         dayNums.push(day.id)
     }
+    if (alarmDays.length === 1) return `every ${alarmDays[0].name}`
     if (dayNums.every(day => weekdays.includes(day))) return 'every weekday'
     if (dayNums.every(day => weekends.includes(day))) return 'every weekend'
     if (dayNums.length === 7) return 'every day'
@@ -13,7 +14,8 @@ const DisplayDays = ({ alarmDays }) => {
         <div>
             {alarmDays && alarmDays.map(day => (
                 <div key={day.id}>
-                    {(alarmDays.every(day => weekdays.includes(day)) ? 'every weekday' : '') ||
+                    {(alarmDays.length === 1) ? `every ${day.name}` : '' ||
+                    (alarmDays.every(day => weekdays.includes(day)) ? 'every weekday' : '') ||
                     (alarmDays.every(day => weekends.includes(day))) ? 'every weekend' : '' ||
                     (alarmDays.length === 7) ? 'every day' : '' ||
                     (day.short)}
