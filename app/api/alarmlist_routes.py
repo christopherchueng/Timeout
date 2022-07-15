@@ -73,10 +73,13 @@ def update_alarmlist(id):
     # print('-'*50, form.data[id])
     print('-'*50, form.data['name'])
     print('-'*50, form.data['toggle'])
+    print('-'*50, int(current_user.get_id()))
+    print('HERE IS THE OOOLLLLLLDDDDD ALARMLIST', alarmlist)
 
     if form.validate_on_submit():
         alarmlist.name = form.data['name']
         alarmlist.toggle = form.data['toggle']
+        alarmlist.user_id = int(current_user.get_id())
 
         db.session.commit()
         return alarmlist.to_dict()

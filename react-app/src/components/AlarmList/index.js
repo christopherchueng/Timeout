@@ -25,7 +25,7 @@ const AlarmList = ({ dashAlarmlist }) => {
     useEffect(() => {
         dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
         dispatch(getAlarms(alarmlistId || dashAlarmlist?.id))
-    }, [dispatch])
+    }, [dispatch, mainAlarmlistSwitch])
 
     useEffect(() => {
         setMainAlarmlistSwitch(alarmlist[id]?.toggle || dashAlarmlist?.toggle)
@@ -44,7 +44,7 @@ const AlarmList = ({ dashAlarmlist }) => {
         setMainAlarmlistSwitch(!mainAlarmlistSwitch)
 
         const payload = {
-            'name': alarmlist[id].name || dashAlarmlist?.name,
+            'name': alarmlist[id]?.name || dashAlarmlist?.name,
             'toggle': !mainAlarmlistSwitch,
             'id': alarmlistId || dashAlarmlist?.id,
         }

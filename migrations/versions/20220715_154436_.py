@@ -1,8 +1,8 @@
-"""refactored_alarmlists_and_alarms_table
+"""revised_database_tables
 
-Revision ID: 52f6e288937b
-Revises: 
-Create Date: 2022-07-15 12:37:13.523017
+Revision ID: 1e6e44cadd62
+Revises:
+Create Date: 2022-07-15 15:44:36.291517
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '52f6e288937b'
+revision = '1e6e44cadd62'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,8 +33,7 @@ def upgrade():
     sa.Column('toggle', sa.Boolean(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('alarms',
     sa.Column('id', sa.Integer(), nullable=False),

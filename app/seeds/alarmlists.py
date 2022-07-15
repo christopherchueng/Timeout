@@ -2,7 +2,7 @@ from app.models import db, Alarmlist
 
 def seed_alarmlists():
     independent_alarms = Alarmlist(
-        name='Default',
+        name='Other',
         toggle=False,
         user_id=1
     )

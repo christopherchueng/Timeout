@@ -7,9 +7,9 @@ def alarmlist_name_validators(form, field):
     # Checking if alarmlist name exists
     name = field.data
     alarmlist = Alarmlist.query.filter(Alarmlist.name == name).first()
-    if alarmlist:
-        raise ValidationError(f"'{name}' is already in use.")
-    elif len(name) > 100:
+    # if alarmlist:
+    #     raise ValidationError(f"'{name}' is already in use.")
+    if len(name) > 100:
         raise ValidationError('Please select a name up to 100 characters long.')
 
 class AlarmlistForm(FlaskForm):
