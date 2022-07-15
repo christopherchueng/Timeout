@@ -131,13 +131,14 @@
 
 /* When mouse is hovered, the splash-ball will move from left to right */
 .splash-switch:hover .splash-ball:before {
-    transform: translateX(33.5px);
+    transform: translateX(34px);
     transition: 0.2s;
 }
 
 /* When mouse is hovered on div, change div background to hex code color. */
 .splash-switch:hover {
     background-color: #3478F6;
+    border: 1px solid #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s
 }
