@@ -17,14 +17,14 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
 
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
     const [name, setName] = useState('')
-    const [alarmHour, setAlarmHour] = useState(0)
-    const [alarmMinutes, setAlarmMinutes] = useState(0)
+    const [alarmHour, setAlarmHour] = useState('')
+    const [alarmMinutes, setAlarmMinutes] = useState('')
     const [alarmMeridiem, setAlarmMeridiem] = useState('')
     const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState('')
     const [snooze, setSnooze] = useState('')
     const [alarmOn, setAlarmOn] = useState(false)
-    const [alarmlistId, setAlarmlistId] = useState(0)
+    const [alarmlistId, setAlarmlistId] = useState('')
 
 
     useEffect(() => {
@@ -44,9 +44,12 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         setSound(alarm?.sound)
         setSnooze(alarm?.snooze)
         setRepeat(alarm?.repeat)
-        setAlarmOn(alarm?.toggle)
         setAlarmlistId(alarm?.alarmlistId)
     }, [alarm, alarm?.toggle])
+
+    useEffect(() => {
+        setAlarmOn(alarm?.toggle)
+    }, [alarm?.toggle])
 
     useEffect(() => {
         if (mainAlarmlistSwitch) {
@@ -65,7 +68,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                     alarm.meridiem === meridiem &&
                     day.id === currentTime.getDay() &&
                     currentTime.getSeconds() === 0 &&
-                    alarm.toggle === true) {
+                    alarm?.toggle === true) {
                     alert('TESTING THIS!')
                 }
             }
@@ -74,7 +77,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                 alarm.minutes == minutes &&
                 alarm.meridiem === meridiem &&
                 currentTime.getSeconds() === 0 &&
-                alarm.toggle === true) {
+                alarm?.toggle === true) {
                 alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
             }
         }
@@ -84,22 +87,27 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         e.preventDefault()
         setAlarmOn(!alarmOn)
         let repeatPayload = []
-        for (let day of alarm?.repeat) {
+        for (let day of repeat) {
             repeatPayload.push(day.id)
         }
+        console.log('here is repeatPayload', repeatPayload)
 
         const payload = {
-            'alarmId': alarm?.id,
+            'alarm_id': alarm?.id,
             name,
             'hour': alarmHour,
             'minutes': alarmMinutes,
             'meridiem': alarmMeridiem,
             sound,
-            'repeat': repeatPayload.length !== 0 ? `${repeatPayload}` : '',
+            // 'repeat': repeatPayload.length !== 0 ? `${repeatPayload}` : '',
+            'repeat': `${repeatPayload}`,
             snooze,
             'toggle': !alarmOn,
             'alarmlist_id': alarm?.alarmlistId
         }
+
+        console.log('here is payload REPEAT', payload.repeat)
+        console.log('here is payload', payload)
 
         await dispatch(updateAlarm(payload))
 

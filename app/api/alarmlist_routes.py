@@ -40,7 +40,7 @@ def get_alarmlists():
 @login_required
 def get_default_alarmlist():
     # Get default alarmlist
-    default_alarmlist = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id(), Alarmlist.name == 'Default').first()
+    default_alarmlist = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id(), Alarmlist.name == 'Other').first()
     return default_alarmlist.to_dict()
 
 @alarmlist_routes.route('/', methods=['POST'])
@@ -69,12 +69,6 @@ def update_alarmlist(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     alarmlist = Alarmlist.query.get(id)
-
-    # print('-'*50, form.data[id])
-    print('-'*50, form.data['name'])
-    print('-'*50, form.data['toggle'])
-    print('-'*50, int(current_user.get_id()))
-    print('HERE IS THE OOOLLLLLLDDDDD ALARMLIST', alarmlist)
 
     if form.validate_on_submit():
         alarmlist.name = form.data['name']

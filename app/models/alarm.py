@@ -3,7 +3,6 @@ from datetime import datetime
 
 
 def convert_repeat(day_str):
-    print('HERE IS DAY_STRRRRRRRRRRRRRRRR', day_str)
     weekdays_mapping = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     repeat_days = []
     if day_str == None or len(day_str) == 0:

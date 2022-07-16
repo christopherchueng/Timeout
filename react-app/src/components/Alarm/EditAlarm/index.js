@@ -107,7 +107,7 @@ const EditAlarm = () => {
         e.preventDefault()
 
         const payload = {
-            alarmId,
+            'alarm_id': alarmId,
             name,
             hour,
             minutes,
