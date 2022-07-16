@@ -7,7 +7,7 @@ import { updateAlarm } from "../../store/alarm"
 import './Alarm.css'
 import DisplayDays from "./DisplayDays"
 
-const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, setMainAlarmlistSwitch }) => {
+const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlistSwitch, setMainAlarmlistSwitch }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     // Only use this id below for when you are on the alarmlists/:id page! DO NOT USE WHEN ON DASHBOARD
@@ -23,7 +23,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
     const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState('')
     const [snooze, setSnooze] = useState('')
-    const [alarmOn, setAlarmOn] = useState(false)
+    const [alarmOn, setAlarmOn] = useState('')
     const [alarmlistId, setAlarmlistId] = useState('')
 
 
@@ -33,7 +33,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         // For all other cases, don't show alarms
         alarmlist?.id === 1 ? setOpenTab(true) : (id ? setOpenTab(true) : setOpenTab(false))
 
-        // setMainAlarmlistSwitch(alarmlist?.toggle)
+        setMainAlarmlistSwitch(alarmlist?.toggle)
     }, [])
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
 
     useEffect(() => {
         setAlarmOn(alarm?.toggle)
-    }, [alarm?.toggle])
+    }, [alarm?.toggle, alarmlist, id])
 
     useEffect(() => {
         if (mainAlarmlistSwitch) {
@@ -68,7 +68,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                     alarm.meridiem === meridiem &&
                     day.id === currentTime.getDay() &&
                     currentTime.getSeconds() === 0 &&
-                    alarm?.toggle === true) {
+                    alarmOn) {
                     alert('TESTING THIS!')
                 }
             }
@@ -77,7 +77,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
                 alarm.minutes == minutes &&
                 alarm.meridiem === meridiem &&
                 currentTime.getSeconds() === 0 &&
-                alarm?.toggle === true) {
+                alarmOn) {
                 alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
             }
         }

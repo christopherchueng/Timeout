@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
 import { getAlarmlist, updateAlarmlist } from "../../store/alarmlist"
-import { getAlarms } from "../../store/alarm"
+import { getAlarms, updateAlarm } from "../../store/alarm"
 import EditAlarmlistForm from "./EditAlarmlistForm"
 import DeleteAlarmlistModal from "./DeleteAlarmlistModal"
 import Alarm from "../Alarm"
@@ -65,6 +65,27 @@ const AlarmList = ({ dashAlarmlist }) => {
         }
 
         await dispatch(updateAlarmlist(payload))
+        alarmsArr.forEach(async alarm => {
+            if (alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) {
+                let repeatPayload = []
+                for (let day of alarm.repeat) {
+                    repeatPayload.push(day.id)
+                }
+                const alarmPayload = {
+                    'alarm_id': alarm.id,
+                    'name': alarm.name,
+                    'hour': alarm.hour,
+                    'minutes': `${alarm.minutes}`,
+                    'meridiem': alarm.meridiem,
+                    'sound': alarm.sound,
+                    'repeat': `${repeatPayload}`,
+                    'snooze': alarm.snooze,
+                    'toggle': !alarm.toggle,
+                    'alarmlist_id': alarm.alarmlistId
+                }
+                await dispatch(updateAlarm(alarmPayload))
+            }
+        })
     }
 
     return (
@@ -115,7 +136,8 @@ const AlarmList = ({ dashAlarmlist }) => {
                             alarm={alarm}
                             openTab={openTab}
                             setOpenTab={setOpenTab}
-                            alarmlist={alarmlists[id] || dashAlarmlist}
+                            alarmsArr={alarmsArr}
+                            alarmlist={id ? alarmlists[id] : dashAlarmlist}
                             mainAlarmlistSwitch={mainAlarmlistSwitch}
                             setMainAlarmlistSwitch={setMainAlarmlistSwitch}
                         />
