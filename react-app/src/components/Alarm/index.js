@@ -51,14 +51,14 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
         setAlarmOn(alarm?.toggle)
     }, [alarm?.toggle, alarmlist, id])
 
-    useEffect(() => {
-        if (mainAlarmlistSwitch) {
-            setAlarmOn(true)
-        } else {
-            setAlarmOn(false)
-        }
+    // useEffect(() => {
+    //     if (mainAlarmlistSwitch) {
+    //         setAlarmOn(true)
+    //     } else {
+    //         setAlarmOn(false)
+    //     }
 
-    }, [mainAlarmlistSwitch])
+    // }, [mainAlarmlistSwitch])
 
     useEffect(() => {
         if (alarm.repeat.length !== 0) {
