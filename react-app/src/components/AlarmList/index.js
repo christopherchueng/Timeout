@@ -53,7 +53,7 @@ const AlarmList = ({ dashAlarmlist }) => {
         //     setName(dashAlarmlist?.name)
         //     setMainAlarmlistSwitch(dashAlarmlist?.toggle)
         // }
-    }, [dashAlarmlist, alarmlists])
+    }, [dashAlarmlist, alarmlists, id])
 
     const onChange = async (e) => {
         e.preventDefault()
@@ -67,6 +67,7 @@ const AlarmList = ({ dashAlarmlist }) => {
         await dispatch(updateAlarmlist(payload))
         alarmsArr.forEach(async alarm => {
             // If main toggle is OFF and is clicked, TURN OFF ALL ALARMS
+            console.log('here is alarmlist id', !mainAlarmlistSwitch)
             if ((alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) && mainAlarmlistSwitch === true) {
                 let repeatPayload = []
                 for (let day of alarm.repeat) {
@@ -86,7 +87,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                 }
                 await dispatch(updateAlarm(alarmPayload))
             // If main toggle is OFF and is clicked, TURN ON ALL ALARMS
-            } else if ((alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) && mainAlarmlistSwitch === false) {
+            } else if ((alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) && (mainAlarmlistSwitch === false || mainAlarmlistSwitch === undefined)) {
                 let repeatPayload = []
                 for (let day of alarm.repeat) {
                     repeatPayload.push(day.id)
