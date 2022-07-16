@@ -57,22 +57,12 @@ const AlarmList = ({ dashAlarmlist }) => {
 
     const onChange = async (e) => {
         e.preventDefault()
-        // setMainAlarmlistSwitch(!mainAlarmlistSwitch)
-
-        // if (mainAlarmlistSwitch) {
-        //     setMainAlarmlistSwitch('LALALALALALALLA')
-        //     console.log('I AM FALSE NOW', mainAlarmlistSwitch)
-        // } else {
-        //     setMainAlarmlistSwitch(true)
-        //     console.log('I AM SOOOOOO TRUEEEEEE.')
-        // }
 
         const payload = {
             name,
             'toggle': !mainAlarmlistSwitch,
             'id': alarmlistId || dashAlarmlist?.id,
         }
-
 
         await dispatch(updateAlarmlist(payload))
     }

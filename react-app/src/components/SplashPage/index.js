@@ -45,14 +45,12 @@ const SplashPage = () => {
             </div>
             {/* ---------------------------- TIME ---------------------------- */}
             <div className='splash-full-time'>
-                {/* {time} */}
                 <div className='splash-time-ctn'>
                     <div className='splash-hour'>
                         {hour}
                     </div>
                     <div className='splash-second-colon'>
                         {seconds % 2 === 0 ? ":" : ""}
-                        {/* {seconds} */}
                     </div>
                     <div className='splash-minutes'>
                         {minutes < 10 ? '0' + minutes : minutes}

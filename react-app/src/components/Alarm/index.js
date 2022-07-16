@@ -90,7 +90,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
         for (let day of repeat) {
             repeatPayload.push(day.id)
         }
-        console.log('here is repeatPayload', repeatPayload)
 
         const payload = {
             'alarm_id': alarm?.id,
@@ -99,15 +98,11 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
             'minutes': `${alarmMinutes}`,
             'meridiem': alarmMeridiem,
             sound,
-            // 'repeat': repeatPayload.length !== 0 ? `${repeatPayload}` : '',
             'repeat': `${repeatPayload}`,
             snooze,
             'toggle': !alarmOn,
             'alarmlist_id': alarm?.alarmlistId
         }
-
-        console.log('here is payload REPEAT', payload.repeat)
-        console.log('here is payload', payload)
 
         await dispatch(updateAlarm(payload))
 
