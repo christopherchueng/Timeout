@@ -69,6 +69,7 @@ export const getIndependentAlarms = (alarmlist_id) => async (dispatch) => {
 }
 
 export const createAlarm = (payload) => async (dispatch) => {
+    console.log('what is this payload in create alarm thunk', payload)
     const response = await fetch('/api/alarms/create', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -87,6 +88,7 @@ export const createAlarm = (payload) => async (dispatch) => {
 }
 
 export const updateAlarm = (payload) => async (dispatch) => {
+    console.log('what is this payload in UPDATE alarm thunk', payload)
     const response = await fetch(`/api/alarms/${payload.alarm_id}/edit`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},

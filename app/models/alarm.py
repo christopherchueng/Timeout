@@ -1,6 +1,6 @@
 from .db import db
 from datetime import datetime
-
+from flask import jsonify
 
 def convert_repeat(day_str):
     weekdays_mapping = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -18,7 +18,7 @@ def convert_repeat(day_str):
         for num in day_str:
             for i in range(len(weekdays_mapping)):
                 day = weekdays_mapping[i]
-                if int(num) == i:
+                if int(float(num)) == i:
                     repeat_days.append({'name': day, 'id': i, 'short': day[0:3]})
     else:
         return ''

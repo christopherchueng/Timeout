@@ -22,15 +22,15 @@ const EditAlarm = () => {
     const alarmArr = Object.values(alarmObj)
     const alarm = alarmObj[alarmId]
 
-    const [name, setName] = useState(alarm?.name)
-    const [hour, setHour] = useState(alarm?.hour)
-    const [minutes, setMinutes] = useState(alarm?.minutes)
-    const [meridiem, setMeridiem] = useState(alarm?.meridiem)
-    const [sound, setSound] = useState(alarm?.sound)
-    const [repeat, setRepeat] = useState(alarm?.repeat)
-    const [snooze, setSnooze] = useState(alarm?.snooze)
+    const [name, setName] = useState('')
+    const [hour, setHour] = useState(0)
+    const [minutes, setMinutes] = useState(0)
+    const [meridiem, setMeridiem] = useState('')
+    const [sound, setSound] = useState('')
+    const [repeat, setRepeat] = useState([])
+    const [snooze, setSnooze] = useState('')
     // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
-    const [alarmlist, setAlarmlist] = useState(alarm?.alarmlistId)
+    const [alarmlist, setAlarmlist] = useState(0)
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
@@ -227,7 +227,6 @@ const EditAlarm = () => {
                         <option value='57'>57</option>
                         <option value='58'>58</option>
                         <option value='59'>59</option>
-                        <option value='60'>60</option>
                     </select>
                 </div>
                 {/* ------------------------- MERIDIEM ------------------------- */}

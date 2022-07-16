@@ -17,15 +17,15 @@ const CreateAlarm = () => {
     // const defaultAlarmlistArr = Object.values(defaultAlarmlist)
     const newAlarm = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
 
-    const [name, setName] = useState('Alarm')
-    const [hour, setHour] = useState((todaysDate.getHours() + 24) % 12 || 12)
-    const [minutes, setMinutes] = useState(todaysDate.getMinutes())
-    const [meridiem, setMeridiem] = useState(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
+    const [name, setName] = useState('')
+    const [hour, setHour] = useState('')
+    const [minutes, setMinutes] = useState('')
+    const [meridiem, setMeridiem] = useState('')
     const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState('')
-    const [snooze, setSnooze] = useState(false)
+    const [snooze, setSnooze] = useState('')
     // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
-    const [alarmlist, setAlarmlist] = useState(1)
+    const [alarmlist, setAlarmlist] = useState('')
     const [errors, setErrors] = useState({})
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
@@ -35,6 +35,15 @@ const CreateAlarm = () => {
         dispatch(getAlarmlists())
         // dispatch(getDefaultAlarmlist())
     }, [dispatch])
+
+    useEffect(() => {
+        setName('Alarm')
+        setHour((todaysDate.getHours() + 24) % 12 || 12)
+        setMinutes(todaysDate.getMinutes())
+        setMeridiem(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
+        setSnooze(false)
+        setAlarmlist(1)
+    }, [])
 
     useEffect(() => {
         const validationErrors = {}
@@ -194,7 +203,6 @@ const CreateAlarm = () => {
                         <option value='57'>57</option>
                         <option value='58'>58</option>
                         <option value='59'>59</option>
-                        <option value='60'>60</option>
                     </select>
                 </div>
                 {/* ------------------------- MERIDIEM ------------------------- */}
