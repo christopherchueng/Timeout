@@ -77,7 +77,7 @@ const CreateAlarm = () => {
         const payload = {
             name,
             hour,
-            minutes,
+            'minutes': `${minutes}`,
             meridiem,
             sound,
             'repeat': repeat.toString(),

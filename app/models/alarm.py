@@ -25,7 +25,7 @@ class Alarm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     hour = db.Column(db.Integer, nullable=False)
-    minutes = db.Column(db.Integer, nullable=False)
+    minutes = db.Column(db.String(10), nullable=False)
     meridiem = db.Column(db.String(10), nullable=False)
     sound = db.Column(db.String(255))
     repeat = db.Column(db.String(255))
@@ -43,7 +43,7 @@ class Alarm(db.Model):
             'id': self.id,
             'name': self.name,
             'hour': self.hour,
-            'minutes': self.minutes,
+            'minutes': int(self.minutes),
             'meridiem': self.meridiem,
             'sound': self.sound,
             'repeat': convert_repeat(self.repeat),

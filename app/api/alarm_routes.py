@@ -62,19 +62,8 @@ def update_alarm(alarm_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     alarm = Alarm.query.get(alarm_id)
-    print('WHY IS THIS GETTING UNDEFINEDEEDEFDOUJGBSKFNKJKABJKGNF', alarm.name)
-    print('-'*50, 'NAME', form.data['name'])
-    print('-'*50, 'HOUR', form.data['hour'])
-    print('-'*50, 'MINUTES', type(form.data['minutes']))
-    print('-'*50, 'SOUND', form.data['sound'])
-    print('-'*50, 'MERIDIEM', form.data['meridiem'])
-    print('-'*50, 'REPEAT', form.data['repeat'])
-    print('-'*50, 'SNOOZE', form.data['snooze'])
-    print('-'*50, 'TOGGLE', form.data['toggle'])
-    print('-'*50, 'ALARMLISTID', form.data['alarmlist_id'])
 
     if form.validate_on_submit():
-        print('HI THIS IS ME IN VALIDATE FORM CONIDITONAL WHY YOU NO WORK.')
         alarm.name = form.data['name']
         alarm.hour = form.data['hour']
         alarm.minutes = form.data['minutes']

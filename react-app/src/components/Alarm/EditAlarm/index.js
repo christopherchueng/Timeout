@@ -110,7 +110,7 @@ const EditAlarm = () => {
             'alarm_id': alarmId,
             name,
             hour,
-            minutes,
+            'minutes': `${minutes}`,
             meridiem,
             sound,
             'repeat': `${repeat}`,

@@ -1,8 +1,8 @@
-"""revised_database_tables
+"""edit_alarm_minutes_field
 
-Revision ID: 1e6e44cadd62
-Revises:
-Create Date: 2022-07-15 15:44:36.291517
+Revision ID: d88df3e6d514
+Revises: 
+Create Date: 2022-07-15 20:56:34.316209
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1e6e44cadd62'
+revision = 'd88df3e6d514'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,7 +39,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=150), nullable=False),
     sa.Column('hour', sa.Integer(), nullable=False),
-    sa.Column('minutes', sa.Integer(), nullable=False),
+    sa.Column('minutes', sa.String(length=10), nullable=False),
     sa.Column('meridiem', sa.String(length=10), nullable=False),
     sa.Column('sound', sa.String(length=255), nullable=True),
     sa.Column('repeat', sa.String(length=255), nullable=True),

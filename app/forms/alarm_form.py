@@ -18,7 +18,7 @@ def check_hour(form, field):
 
 def check_minutes(form, field):
     minutes = field.data
-    if minutes > 60 or minutes < 0:
+    if int(minutes) > 60 or int(minutes) < 0:
         raise ValidationError('Please provide a number between 0 and 60.')
 
 def check_meridiem(form, field):
@@ -30,7 +30,7 @@ def check_meridiem(form, field):
 class AlarmForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), name_exists])
     hour = IntegerField('hour', validators=[DataRequired(), check_hour])
-    minutes = IntegerField('minutes', validators=[DataRequired(), check_minutes])
+    minutes = StringField('minutes', validators=[InputRequired(), check_minutes])
     meridiem = StringField('meridiem', validators=[DataRequired()])
     sound = StringField('sound')
     repeat = StringField('repeat')

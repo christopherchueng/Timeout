@@ -96,7 +96,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, mainAlarmlistSwitch, set
             'alarm_id': alarm?.id,
             name,
             'hour': alarmHour,
-            'minutes': alarmMinutes,
+            'minutes': `${alarmMinutes}`,
             'meridiem': alarmMeridiem,
             sound,
             // 'repeat': repeatPayload.length !== 0 ? `${repeatPayload}` : '',

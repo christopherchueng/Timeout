@@ -4,7 +4,7 @@ def seed_alarms():
     alarm1 = Alarm(
         name='Alarm',
         hour=9,
-        minutes=0,
+        minutes="0",
         meridiem='PM',
         repeat='',
         snooze=False,
@@ -14,7 +14,7 @@ def seed_alarms():
     alarm2 = Alarm(
         name='Laundry',
         hour=1,
-        minutes=15,
+        minutes="15",
         meridiem='PM',
         repeat='',
         snooze=False,
@@ -24,7 +24,7 @@ def seed_alarms():
     alarm3 = Alarm(
         name='Pick friend up from airport',
         hour=7,
-        minutes=0,
+        minutes="0",
         meridiem='AM',
         repeat='',
         snooze=False,
@@ -34,7 +34,7 @@ def seed_alarms():
     alarm4 = Alarm(
         name='Wake up!',
         hour=7,
-        minutes=0,
+        minutes="0",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -44,7 +44,7 @@ def seed_alarms():
     alarm5 = Alarm(
         name='Clock in',
         hour=8,
-        minutes=30,
+        minutes="30",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -54,7 +54,7 @@ def seed_alarms():
     alarm6 = Alarm(
         name='Break',
         hour=12,
-        minutes=30,
+        minutes="30",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -64,7 +64,7 @@ def seed_alarms():
     alarm7 = Alarm(
         name='Break over',
         hour=1,
-        minutes=30,
+        minutes="30",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -74,7 +74,7 @@ def seed_alarms():
     alarm8 = Alarm(
         name='Clock out',
         hour=5,
-        minutes=30,
+        minutes="30",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -84,7 +84,7 @@ def seed_alarms():
     alarm9 = Alarm(
         name='Check in',
         hour=11,
-        minutes=0,
+        minutes="0",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -94,7 +94,7 @@ def seed_alarms():
     alarm10 = Alarm(
         name='Break',
         hour=2,
-        minutes=15,
+        minutes="15",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -104,7 +104,7 @@ def seed_alarms():
     alarm11 = Alarm(
         name='Check in',
         hour=3,
-        minutes=30,
+        minutes="30",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -114,7 +114,7 @@ def seed_alarms():
     alarm12 = Alarm(
         name='Break',
         hour=5,
-        minutes=45,
+        minutes="45",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -124,7 +124,7 @@ def seed_alarms():
     alarm13 = Alarm(
         name='Check in',
         hour=6,
-        minutes=0,
+        minutes="0",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -134,7 +134,7 @@ def seed_alarms():
     alarm14 = Alarm(
         name='Evening report',
         hour=8,
-        minutes=0,
+        minutes="0",
         meridiem='PM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -144,7 +144,7 @@ def seed_alarms():
     alarm15 = Alarm(
         name='First wake up',
         hour=6,
-        minutes=0,
+        minutes="0",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -154,7 +154,7 @@ def seed_alarms():
     alarm16 = Alarm(
         name="Second call!",
         hour=6,
-        minutes=5,
+        minutes="5",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -164,7 +164,7 @@ def seed_alarms():
     alarm17 = Alarm(
         name="3rd time's the charm",
         hour=6,
-        minutes=10,
+        minutes="10",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -174,7 +174,7 @@ def seed_alarms():
     alarm18 = Alarm(
         name="YOURE KIDDING",
         hour=6,
-        minutes=15,
+        minutes="15",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -184,7 +184,7 @@ def seed_alarms():
     alarm19 = Alarm(
         name="I can't help you at this point",
         hour=6,
-        minutes=20,
+        minutes="20",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -194,7 +194,7 @@ def seed_alarms():
     alarm20 = Alarm(
         name="You're definitely going to be late",
         hour=6,
-        minutes=25,
+        minutes="25",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -204,7 +204,7 @@ def seed_alarms():
     alarm21 = Alarm(
         name="Last chance",
         hour=6,
-        minutes=30,
+        minutes="30",
         meridiem='AM',
         repeat="1,2,3,4,5",
         snooze=False,
@@ -214,7 +214,7 @@ def seed_alarms():
     alarm22 = Alarm(
         name="Basketball",
         hour=9,
-        minutes=0,
+        minutes="0",
         meridiem='AM',
         repeat="0",
         snooze=False,
@@ -224,7 +224,7 @@ def seed_alarms():
     alarm23 = Alarm(
         name="Stretch break",
         hour=3,
-        minutes=30,
+        minutes="30",
         meridiem='PM',
         repeat='',
         snooze=False,
@@ -234,7 +234,7 @@ def seed_alarms():
     alarm24 = Alarm(
         name="Nap time!",
         hour=1,
-        minutes=0,
+        minutes="0",
         meridiem='PM',
         repeat='',
         snooze=False,
