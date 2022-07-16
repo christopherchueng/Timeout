@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal } from '../../../context/Modal'
 import DeleteAlarmlistForm from "./DeleteAlarmlistForm";
 
-const DeleteAlarmlistModal = ({ dashAlarmlist }) => {
+const DeleteAlarmlistModal = ({ alarmlist }) => {
     const [showModal, setShowModal] = useState(false)
 
     return (
@@ -12,7 +12,7 @@ const DeleteAlarmlistModal = ({ dashAlarmlist }) => {
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <DeleteAlarmlistForm dashAlarmlist={dashAlarmlist} setShowModal={setShowModal} showModal={showModal} />
+                    <DeleteAlarmlistForm alarmlist={alarmlist} setShowModal={setShowModal} showModal={showModal} />
                 </Modal>
             )}
         </>

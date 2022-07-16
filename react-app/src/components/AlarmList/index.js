@@ -130,7 +130,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                             </button>
                         </div>
                         <div className='delete-alarmlist'>
-                            <DeleteAlarmlistModal dashAlarmlist={dashAlarmlist} />
+                            <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} />
                         </div>
                     </div>
                     : ""}
