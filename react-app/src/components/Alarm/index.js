@@ -64,26 +64,28 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     useEffect(() => {
         if (alarm.repeat.length !== 0) {
             for (let day of alarm.repeat) {
-                // console.log('do hours match', currentTime.toLocaleDateString('en-US', {second: 'numeric'}).split(',')[1])
-                if (alarm.hour === hour &&
-                    alarm.minutes == minutes &&
-                    alarm.meridiem === meridiem &&
-                    day.id === currentTime.getDay() &&
+                // If alarm time matches with currentTime, date and toggle is on, then alert.
+                if (alarm.hour === (parseInt(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
+                    alarm.minutes === parseInt(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
+                    alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
+                    day.short === currentTime.toLocaleTimeString('en-US', {weekday: 'short'}) &&
                     parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0 &&
-                    alarmOn) {
+                    alarm.toggle === true) {
                     alert('TESTING THIS!')
                 }
             }
         } else {
-            if (alarm.hour === hour &&
-                alarm.minutes == minutes &&
-                alarm.meridiem === meridiem &&
-                currentTime.getSeconds() === 0 &&
-                alarmOn) {
-                alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
+            // These are for non repeated alarms.
+            // If alarm time matches with currentTime and toggle is on, then alert.
+            if (alarm.hour === (parseInt(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
+                alarm.minutes == parseInt(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
+                alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
+                parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0 &&
+                alarm.toggle === true) {
+                alert(`Alarm at ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem} went off!`)
             }
         }
-    }, [hour, minutes, meridiem])
+    }, [currentTime, alarm])
 
     const onChange = async (e) => {
         e.preventDefault()
