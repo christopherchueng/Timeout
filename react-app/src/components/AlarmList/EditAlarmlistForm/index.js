@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 
-const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
+const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, setOpenSettings }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
@@ -57,6 +57,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
         } else {
             setIsSubmitted(false)
             setIsEditing(!isEditing)
+            setOpenSettings(false)
         }
 
     }

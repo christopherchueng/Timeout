@@ -22,6 +22,7 @@ const AlarmList = ({ dashAlarmlist }) => {
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState('')
     const [openTab, setOpenTab] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
+    const [openSettings, setOpenSettings] = useState(false)
 
     useEffect(() => {
         dispatch(getAlarmlist(id ? alarmlistId : dashAlarmlist?.id))
@@ -113,7 +114,13 @@ const AlarmList = ({ dashAlarmlist }) => {
             {isEditing
             ?
             <div id={'edit-alarmlist-form'}>
-                <EditAlarmlistForm isEditing={isEditing} setIsEditing={setIsEditing} alarmlist={alarmlistId ? alarmlists[alarmlistId] : dashAlarmlist} />
+                <EditAlarmlistForm
+                    isEditing={isEditing}
+                    setIsEditing={setIsEditing}
+                    alarmlist={alarmlistId ? alarmlists[alarmlistId] : dashAlarmlist}
+                    openSettings={openSettings}
+                    setOpenSettings={setOpenSettings}
+                />
             </div>
             :
             <div className='alarmlist-header' key={dashAlarmlist?.id || alarmlistId}>
@@ -122,16 +129,21 @@ const AlarmList = ({ dashAlarmlist }) => {
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                     {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
                     ?
-                    <div className='alarmlist-btn-settings'>
-                        <div className='edit-alarmlist'>
-                            <button type='button' className={`alarmlist-edit-btn-${alarmlists.id}`} onClick={() => setIsEditing(!isEditing)}>
-                                <span className="fa-solid fa-pen"></span>
-                            </button>
-                        </div>
-                        <div className='delete-alarmlist'>
-                            <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} />
-                        </div>
-                    </div>
+                    <>
+                        <button onClick={() => setOpenSettings(!openSettings)}>
+                            <i className="fa-solid fa-ellipsis"></i>
+                        </button>
+                        {openSettings && <div className='alarmlist-btn-settings'>
+                            <div className='edit-alarmlist'>
+                                <button type='button' className={`alarmlist-edit-btn-${alarmlists.id}`} onClick={() => setIsEditing(!isEditing)}>
+                                    <span className="fa-solid fa-pen"></span>
+                                </button>
+                            </div>
+                            <div className='delete-alarmlist'>
+                                <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} />
+                            </div>
+                        </div>}
+                    </>
                     : ""}
                 </div>
             </div>}
