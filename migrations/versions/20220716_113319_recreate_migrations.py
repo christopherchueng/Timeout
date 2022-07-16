@@ -1,8 +1,8 @@
-"""edit_alarm_minutes_field
+"""recreate_migrations
 
-Revision ID: d88df3e6d514
+Revision ID: f0199e41cba5
 Revises: 
-Create Date: 2022-07-15 20:56:34.316209
+Create Date: 2022-07-16 11:33:19.408470
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd88df3e6d514'
+revision = 'f0199e41cba5'
 down_revision = None
 branch_labels = None
 depends_on = None
