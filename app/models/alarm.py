@@ -3,19 +3,25 @@ from datetime import datetime
 
 
 def convert_repeat(day_str):
-    weekdays_mapping = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+    weekdays_mapping = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     repeat_days = []
     if day_str == None or len(day_str) == 0:
-        day_str = ''
+        day_str = []
+        # return day_str
     elif len(day_str) == 1:
         day_str = [day_str]
+        # return day_str
     else:
         day_str = day_str.split(',')
 
-    for num in day_str:
-        for i, day in enumerate(weekdays_mapping):
-            if int(num) == i:
-                repeat_days.append({'name': day, 'id': i, 'short': day[0:3]})
+    if len(day_str) != 0:
+        for num in day_str:
+            for i in range(len(weekdays_mapping)):
+                day = weekdays_mapping[i]
+                if int(num) == i:
+                    repeat_days.append({'name': day, 'id': i, 'short': day[0:3]})
+    else:
+        return ''
     return repeat_days
 
 

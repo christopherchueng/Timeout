@@ -64,11 +64,12 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     useEffect(() => {
         if (alarm.repeat.length !== 0) {
             for (let day of alarm.repeat) {
+                // console.log('do hours match', currentTime.toLocaleDateString('en-US', {second: 'numeric'}).split(',')[1])
                 if (alarm.hour === hour &&
                     alarm.minutes == minutes &&
                     alarm.meridiem === meridiem &&
                     day.id === currentTime.getDay() &&
-                    currentTime.getSeconds() === 0 &&
+                    parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0 &&
                     alarmOn) {
                     alert('TESTING THIS!')
                 }

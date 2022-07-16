@@ -22,7 +22,7 @@ const CreateAlarm = () => {
     const [minutes, setMinutes] = useState(todaysDate.getMinutes())
     const [meridiem, setMeridiem] = useState(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
     const [sound, setSound] = useState('')
-    const [repeat, setRepeat] = useState([])
+    const [repeat, setRepeat] = useState('')
     const [snooze, setSnooze] = useState(false)
     // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
     const [alarmlist, setAlarmlist] = useState(1)
@@ -70,7 +70,6 @@ const CreateAlarm = () => {
         setRepeat(daysSelected)
     }
     /* ---------------------- END MULTISELECT INFO ---------------------- */
-
     const onSubmit = async (e) => {
         e.preventDefault()
 
@@ -80,7 +79,7 @@ const CreateAlarm = () => {
             'minutes': `${minutes}`,
             meridiem,
             sound,
-            'repeat': repeat.toString(),
+            'repeat': `${repeat}`,
             snooze,
             'toggle': true,
             'alarmlist_id': parseInt(alarmlist)
