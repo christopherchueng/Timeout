@@ -9,10 +9,19 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist }) => {
     const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
 
-    const [name, setName] = useState(alarmlist.name)
-    const [toggle, setToggle] = useState(alarmlist.toggle)
+    const [name, setName] = useState('')
+    const [toggle, setToggle] = useState('')
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [errors, setErrors] = useState({});
+    // const [name, setName] = useState(alarmlist.name)
+    // const [toggle, setToggle] = useState(alarmlist.toggle)
+    // const [isSubmitted, setIsSubmitted] = useState(false)
+    // const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        setName(alarmlist?.name)
+        setToggle(alarmlist?.toggle)
+    }, [])
 
     useEffect(() => {
         const validationErrors = {};

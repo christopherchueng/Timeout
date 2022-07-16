@@ -4,6 +4,7 @@ import { useParams, Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
 import { updateAlarm } from "../../store/alarm"
+import { updateAlarmlist } from "../../store/alarmlist"
 import './Alarm.css'
 import DisplayDays from "./DisplayDays"
 
@@ -105,7 +106,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
         }
 
         await dispatch(updateAlarm(payload))
-
     }
 
     // {alarmlistId: 3
