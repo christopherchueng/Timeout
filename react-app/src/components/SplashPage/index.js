@@ -57,7 +57,9 @@ const SplashPage = () => {
                     </div>
                     <div className='meridiem-ctn'>
                         <div className='splash-meridiem'>
-                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 ? 'PM' : 'AM'}
+                            {/* If hour is in between 12 and 23 inclusive, then show PM.
+                            24 === 12 AM and anything less than 12 is before noon, so show AM */}
+                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM'}
                         </div>
                     </div>
                 </div>

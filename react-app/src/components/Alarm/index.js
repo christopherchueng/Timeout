@@ -108,30 +108,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
         await dispatch(updateAlarm(payload))
     }
 
-    // {alarmlistId: 3
-        // hour: 11
-        // id: 9
-        // meridiem: "AM"
-        // minutes: 0
-        // name: "Check in"
-        // repeat: [
-        //     {id: 1, name: 'Monday'}
-        //     {id: 2, name: 'Tuesday'}
-        //     {id: 3, name: 'Wednesday'}
-        //     {id: 4, name: 'Thursday'}
-        //     {id: 5, name: 'Friday'}
-        // }
-        // snooze: false
-        // sound: null
-    // }
-
-    // useEffect(() => {
-    //     // Need the or statement here because Alarm is used in alarmlist/:id AND dashboard
-    //     // parseInt(id) will be used for when user is on the alarmlist page
-    //     // alarmlist?.id is used for dashboard because parseInt(id) will be rendered as NaN.
-    //     dispatch(getAlarms(parseInt(id) || alarmlist?.id))
-    // }, [dispatch])
-
     const onDelete = (e, alarm) => {
         e.preventDefault()
         dispatch(deleteAlarm(alarm.id))

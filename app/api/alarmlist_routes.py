@@ -52,7 +52,7 @@ def post_alarmlist():
     if form.validate_on_submit():
         new_alarmlist = Alarmlist(
             name=form.data['name'],
-            toggle=False,
+            toggle=True,
             user_id=form.data['user_id']
         )
 

@@ -47,7 +47,7 @@ const Dashboard = () => {
                     </div>
                     <div className='meridiem-ctn'>
                         <div className='splash-meridiem'>
-                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 ? 'PM' : 'AM'}
+                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM'}
                         </div>
                     </div>
                 </div>

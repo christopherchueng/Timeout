@@ -24,8 +24,8 @@ const AlarmList = ({ dashAlarmlist }) => {
     const [isEditing, setIsEditing] = useState(false)
 
     useEffect(() => {
-        dispatch(getAlarmlist(alarmlistId || dashAlarmlist?.id))
-        dispatch(getAlarms(alarmlistId || dashAlarmlist?.id))
+        dispatch(getAlarmlist(id ? alarmlistId : dashAlarmlist?.id))
+        dispatch(getAlarms(id ? alarmlistId : dashAlarmlist?.id))
     }, [dispatch])
 
     useEffect(() => {
