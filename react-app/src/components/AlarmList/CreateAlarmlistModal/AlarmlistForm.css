@@ -1,21 +1,22 @@
 .create-alarmlist {
-    width: 400px;
-    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 300px;
 }
 
 .alarmlist-formError-ctn {
     height: 40px;
     color: red;
     font-family: 'Lexend Deca';
+    padding: 15px 0;
 }
 
 .alarmlist-error {
     margin: 10px 0 0 0;
-    font-size: 10pt;
+    font-size: 14pt;
     padding-left: 15px;
-}
-.create-alarmlist-modal-ctn {
-    /* padding-top: 10px; */
 }
 
 .alarmlist-btn {
@@ -24,4 +25,68 @@
     border: 1px solid gray;
     border-radius: 50px;
     cursor: pointer;
+}
+
+.alarmlist-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+}
+
+.alarmlist-textbox {
+    width: 250px;
+    height: 30px;
+    border-radius: 25px;
+    padding: 0 15px;
+    border: 1px solid lightgray;
+}
+
+.submit-alarmlist-switch {
+    position: relative;
+    display: block;
+    border: 1px lightgray solid;
+    border-radius: 25px;
+    background-color: lightgray;
+    width: 100px;
+    height: 44px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.submit-alarmlist-ball:before {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.2s;
+    cursor: pointer;
+    top: 3px;
+    left: 2.5px;
+}
+
+.submit-alarmlist-switch:hover .submit-alarmlist-ball:before {
+    transform: translateX(56px);
+    transition: 0.2s;
+}
+
+.submit-alarmlist-switch:hover {
+    background-color: #3478F6;
+    border: 1px solid #3478F6;
+    /* background-color: lightgreen; */
+    transition: 0.2s ease-out;
+}
+
+.submit-alarmlist-span {
+    opacity: 1;
+    font-family: 'Lexend Deca';
+    padding-left: 35px;
+}
+
+.submit-alarmlist-switch:hover .submit-alarmlist-span {
+    opacity: 0;
+    transition: all 0.2s ease-out;
 }
