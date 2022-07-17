@@ -2,8 +2,13 @@ import { useState } from "react";
 import { Modal } from '../../../context/Modal'
 import DeleteAlarmlistForm from "./DeleteAlarmlistForm";
 
-const DeleteAlarmlistModal = ({ alarmlist }) => {
+const DeleteAlarmlistModal = ({ alarmlist, openSettings, setOpenSettings }) => {
     const [showModal, setShowModal] = useState(false)
+
+    const onClose = () => {
+        setShowModal(false)
+        setOpenSettings(false)
+    }
 
     return (
         <>
@@ -12,8 +17,8 @@ const DeleteAlarmlistModal = ({ alarmlist }) => {
                 <span className="delete-alarmlist-label">Delete</span>
             </button>
             {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <DeleteAlarmlistForm alarmlist={alarmlist} setShowModal={setShowModal} showModal={showModal} />
+                <Modal onClose={onClose}>
+                    <DeleteAlarmlistForm alarmlist={alarmlist} setShowModal={setShowModal} showModal={showModal} openSettings={openSettings} setOpenSettings={setOpenSettings} />
                 </Modal>
             )}
         </>

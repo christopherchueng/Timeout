@@ -1,0 +1,18 @@
+.delete-alarmlist-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 300px;
+}
+
+.confirm-delete {
+    font-family: 'Lexend Deca';
+    font-weight: 700;
+    padding-bottom: 20px;
+}
+
+.confirm-delete > p {
+    padding: 5px;
+}
