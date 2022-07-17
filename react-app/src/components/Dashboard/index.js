@@ -23,8 +23,12 @@ const Dashboard = () => {
     return (
         <div id='dashboard'>
             <div className='alarmlist-menu'>
-                <div className='create-alarmlist-modal'>
-                    <CreateAlarmlistModal />
+                <div id='sidebar-top'>
+                    <h1 className='alarmlist-title'>Alarmlists</h1>
+                    <div className='create-alarmlist-modal'>
+                        <CreateAlarmlistModal />
+                    </div>
+
                 </div>
                 <div className='alarmlist-content'>
                     {alarmlists && alarmlists.map(alarmlist => (

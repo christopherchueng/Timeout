@@ -4,6 +4,18 @@
     height: 100vh;
 }
 
+#sidebar-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.alarmlist-title {
+    font-family: 'Readex Pro';
+    font-size: 36pt;
+}
+
 .alarmlist-menu {
     width: 25vw;
     /* height: 100vh; */

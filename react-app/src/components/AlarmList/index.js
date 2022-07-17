@@ -135,7 +135,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                         </button>
                         {openSettings && <div className='alarmlist-btn-settings'>
                             <div className='edit-alarmlist'>
-                                <button type='button' className={`alarmlist-edit-btn-${alarmlists.id}`} onClick={() => setIsEditing(!isEditing)}>
+                                <button type='button' className={`alarmlist-edit-btn`} onClick={() => setIsEditing(!isEditing)}>
                                     <span className="fa-solid fa-pen"></span>
                                 </button>
                             </div>

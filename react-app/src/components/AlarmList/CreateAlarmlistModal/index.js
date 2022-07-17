@@ -8,7 +8,7 @@ const CreateAlarmlistModal = () => {
     return (
         <>
             <button className='alarmlist-btn' onClick={() => setShowModal(true)}>
-                <img className='add-alarmlist-icon' title='Upload' src='../../../../static/add-alarm-icon.png'></img>
+                <span className="fa-solid fa-plus fa-2x"></span>
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
