@@ -53,7 +53,7 @@ def add_alarm():
         db.session.add(new_alarm)
         db.session.commit()
         return new_alarm.to_dict()
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @alarm_routes.route('/<int:alarm_id>/edit', methods=['PUT'])
 @login_required
@@ -75,9 +75,8 @@ def update_alarm(alarm_id):
         alarm.alarmlist_id = form.data['alarmlist_id']
 
         db.session.commit()
-        print('THIS IS THE REPEAT I AM SENDING BACK TO THE FRONTEND', alarm.to_dict())
         return alarm.to_dict()
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @alarm_routes.route('/<int:id>', methods=['DELETE'])
 @login_required

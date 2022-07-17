@@ -74,10 +74,8 @@ const CreateAlarm = () => {
 
     const onSelect = (selectedList, selectedItem) => {
         const daysSelected = selectedList.map(day => day.id)
-        console.log('IS THIS THE REASON WHY WERE GETTING AN OBJECT OBJECT', daysSelected)
         setRepeat(daysSelected)
     }
-    console.log('here are the days that I selected', repeat)
     /* ---------------------- END MULTISELECT INFO ---------------------- */
     const onSubmit = async (e) => {
         e.preventDefault()
