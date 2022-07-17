@@ -116,7 +116,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     const onDelete = (e, alarm) => {
         e.preventDefault()
         dispatch(deleteAlarm(alarm.id))
-        history.push(`/alarmlists/${id}`)
+        history.push(`/dashboard`)
     }
 
     return (
@@ -145,7 +145,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                         {/* {id ? */}
                         <div className='alarm-setting-btns'>
                             <div className='alarm-edit-btn'>
-                                    <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
+                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
                             </div>
                             <div className='alarm-delete-btn'>
                                 <button type='button' onClick={e => onDelete(e, alarm)}>

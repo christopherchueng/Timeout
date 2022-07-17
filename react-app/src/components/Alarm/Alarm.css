@@ -8,6 +8,8 @@
 
 .alarm-content {
     font-family: 'Lexend Deca';
+    display: flex;
+    flex-direction: row;
 }
 
 .alarm-time {
@@ -28,6 +30,23 @@
     font-size: 8pt;
     padding: 0 0 5px 3px;
     font-weight: 1000;
+}
+
+.alarm-setting-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alarm-edit-btn > a {
+    color: black;
+}
+
+.alarm-delete-btn > button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 }
 
 .alarm-switch {

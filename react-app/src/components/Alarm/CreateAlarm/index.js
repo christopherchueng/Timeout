@@ -106,7 +106,8 @@ const CreateAlarm = () => {
             setSnooze(false)
             setAlarmlist(1)
             setErrors({})
-            history.push(`/alarmlists/${alarmlist}`)
+            history.push(`/dashboard`)
+            // history.push(`/alarmlists/${alarmlist}`)
         }
 
     }

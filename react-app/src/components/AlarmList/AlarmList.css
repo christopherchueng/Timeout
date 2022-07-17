@@ -21,7 +21,7 @@
     flex-direction: row;
     height: 110px;
     width: 250px;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 }
 
 .alarmlist-heading-ctn > h1 {
@@ -40,7 +40,10 @@
 
 .alarmlist-name-heading {
     margin: 15px 0;
-    overflow-x: hidden;
+    width: 150px;
+    height: 50px;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 .settings-menu {
