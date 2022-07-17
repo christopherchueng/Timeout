@@ -1,0 +1,23 @@
+.alarmlist-input,
+.edit-alarmlist-form-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.update-alarmlist-textbox {
+    height: 50px;
+    width: 250px;
+    font-family: 'Lexend Deca';
+    font-size: 24pt;
+    color: #3478F6;
+    border: 1px solid lightgray;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.alarmlist-error {
+    font-size: 12pt;
+}

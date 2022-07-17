@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
+import './EditAlarmlistForm.css'
 
 const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, setOpenSettings }) => {
     const dispatch = useDispatch()
@@ -62,6 +63,11 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
 
     }
 
+    const onClick = () => {
+        setIsEditing(!isEditing)
+        setOpenSettings(false)
+    }
+
     return (
         <>
             <form onSubmit={onSubmit}>
@@ -73,19 +79,20 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
                         value={name}
                         placeholder='Name'
                         onChange={(e) => setName(e.target.value)}
+                        className='update-alarmlist-textbox'
                         style={{backgroundColor: errors['name'] && isSubmitted ? '#FFA194' : ""}}
                     />
-                    <div className='alarmlist-formError-ctn'>
-                        {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-error" />}
-                    </div>
                     <div className='edit-alarmlist-form-btns'>
                         <div className='submit-alarmlist'>
                             <button type='submit'><span className="fa-solid fa-check"></span></button>
                         </div>
                         <div className='cancel-alarmlist'>
-                            <button type='button' onClick={() => setIsEditing(!isEditing)}><span className="fa-solid fa-xmark"></span></button>
+                            <button type='button' onClick={onClick}><span className="fa-solid fa-xmark"></span></button>
                         </div>
                     </div>
+                </div>
+                <div className='alarmlist-formError-ctn'>
+                    {isSubmitted && <ErrorMessage error={errors.name} setClassName="alarmlist-error" />}
                 </div>
             </form>
         </>

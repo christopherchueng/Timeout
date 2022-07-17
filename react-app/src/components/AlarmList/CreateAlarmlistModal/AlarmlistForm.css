@@ -35,6 +35,10 @@
     width: 300px;
 }
 
+.alarmlist-toggle {
+    padding-top: 15px;
+}
+
 .alarmlist-textbox {
     width: 250px;
     height: 30px;

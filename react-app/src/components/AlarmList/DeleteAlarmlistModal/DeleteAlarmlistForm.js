@@ -16,7 +16,7 @@ const DeleteAlarmlistForm = ({ alarmlist, showModal, setShowModal }) => {
     }
 
     return (
-        <div className='delete-alarmlist'>
+        <div className='delete-alarmlist-modal'>
             <div className='confirm-delete'>
                 <p>{`Are you sure you want to delete '${alarmlist?.name}'?`}</p>
                 <p>{`All alarms under '${alarmlist?.name}' will be deleted.`}</p>

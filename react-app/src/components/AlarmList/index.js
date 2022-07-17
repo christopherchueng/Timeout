@@ -127,6 +127,9 @@ const AlarmList = ({ dashAlarmlist }) => {
                 <div className='alarmlist-name'>
                     <div className='alarmlist-heading-ctn'>
                         <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1>
+                        <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
+                            <i className="fa-solid fa-angle-right"></i>
+                        </button>
                     </div>
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                     {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
@@ -154,22 +157,21 @@ const AlarmList = ({ dashAlarmlist }) => {
                     </div>
                     : ""}
                 </div>
+                <div className='alarmlist-toggle'>
+                    <label className='alarmlist-switch'>
+                        <input
+                            type='checkbox'
+                            value={mainAlarmlistSwitch}
+                            onChange={onChange}
+                            className='alarmlist-radio-box'
+                            checked={mainAlarmlistSwitch}
+                        />
+                        <div className='alarmlist-slider alarmlist-ball'>
+                        </div>
+                    </label>
+                </div>
             </div>}
             <div id='alarmlist-alarms'>
-                <label className='alarmlist-switch'>
-                    <input
-                        type='checkbox'
-                        value={mainAlarmlistSwitch}
-                        onChange={onChange}
-                        className='alarmlist-radio-box'
-                        checked={mainAlarmlistSwitch}
-                    />
-                    <div className='alarmlist-slider alarmlist-ball'>
-                    </div>
-                </label>
-                <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
-                    <i className="fa-solid fa-angle-right"></i>
-                </button>
                 {filteredAlarms && filteredAlarms.map(alarm => (
                     <div className='alarm-ctn' key={alarm.id}>
                         <Alarm
