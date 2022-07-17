@@ -52,8 +52,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
         setAlarmOn(alarm?.toggle)
     }, [alarm?.toggle, alarmlist, id])
 
-    console.log('WHAT IS THE ALARM REPEAT JHERE DID IT CONVERT', alarm.repeat)
-
     // useEffect(() => {
     //     if (mainAlarmlistSwitch) {
     //         setAlarmOn(true)
@@ -73,7 +71,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                     // day.short === currentTime.toLocaleTimeString('en-US', {weekday: 'short'}) &&
                     parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0 &&
                     alarm.toggle === true) {
-                    alert('TESTING THIS!')
+                    alarm.minutes < 10 ? alert(`Alarm at ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem} went off!`) : alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
                 }
             }
         } else {
