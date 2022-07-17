@@ -14,3 +14,14 @@
     font-size: 10pt;
     padding-left: 15px;
 }
+.create-alarmlist-modal-ctn {
+    /* padding-top: 10px; */
+}
+
+.alarmlist-btn {
+    background-color: transparent;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 50px;
+    cursor: pointer;
+}
