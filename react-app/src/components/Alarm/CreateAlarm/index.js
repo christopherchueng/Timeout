@@ -271,12 +271,12 @@ const CreateAlarm = () => {
                 </div>
                 {/* ------------------------- SOUND ------------------------- */}
                 <div className='alarm-sound-form'>
-                    <div className='alarm-sound-label'>
+                    {/* <div className='alarm-sound-label'>
                         <label htmlFor='sound'>Sound</label>
                     </div>
                     <div className='alarm-sound-input'>
                         sound AWS here...
-                    </div>
+                    </div> */}
                 </div>
                 {/* ------------------------- REPEAT ------------------------- */}
                 <div className='alarm-repeat-form'>
@@ -300,7 +300,7 @@ const CreateAlarm = () => {
                 {/* ------------------------- SNOOZE ------------------------- */}
                 <div className='alarm-snooze-form'>
                     <div className='alarm-snooze-label'>
-                        <label htmlFor='snooze'>Snooze</label>
+                        <label hidden htmlFor='snooze'>Snooze</label>
                     </div>
                     <div className='alarm-snooze-input'>
                         <input
@@ -308,6 +308,7 @@ const CreateAlarm = () => {
                             type='checkbox'
                             value={snooze}
                             onClick={() => setSnooze(!snooze)}
+                            hidden
                         />
                     </div>
                 </div>
