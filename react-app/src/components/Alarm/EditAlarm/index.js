@@ -140,7 +140,7 @@ const EditAlarm = () => {
             <h1>Edit Alarm</h1>
             <form onSubmit={onSubmit}>
                 {/* ------------------------- HOUR ------------------------- */}
-                <div className='alarm-hour'>
+                <div className='alarm-hour-form'>
                     <select
                         name='hour'
                         value={hour}
@@ -161,7 +161,7 @@ const EditAlarm = () => {
                     </select>
                 </div>
                 {/* ------------------------- MINUTES ------------------------- */}
-                <div className='alarm-minutes'>
+                <div className='alarm-minutes-form'>
                     <select
                         name='minutes'
                         value={minutes}
@@ -230,7 +230,7 @@ const EditAlarm = () => {
                     </select>
                 </div>
                 {/* ------------------------- MERIDIEM ------------------------- */}
-                <div className='alarm-meridiem'>
+                <div className='alarm-meridiem-form'>
                     <select
                         name='meridiem'
                         value={meridiem}
@@ -241,7 +241,7 @@ const EditAlarm = () => {
                     </select>
                 </div>
                 {/* ------------------------- NAME ------------------------- */}
-                <div className='alarm-name'>
+                <div className='alarm-name-form'>
                     <div className='alarm-name-label'>
                         <label htmlFor='name'>Name</label>
                     </div>
@@ -277,7 +277,7 @@ const EditAlarm = () => {
                     {<ErrorMessage error={errors.name} setClassName="alarmlist-name-error" />}
                 </div>
                 {/* ------------------------- ADD TO ALARMLIST ------------------------- */}
-                <div className='add-to-alarmlist'>
+                <div className='add-to-alarmlist-form'>
                     <div className='alarm-alarmlist-label'>
                         <label htmlFor='alarmlist'>Add to Alarmlist</label>
                     </div>
@@ -294,7 +294,7 @@ const EditAlarm = () => {
                     </div>
                 </div>
                 {/* ------------------------- SOUND ------------------------- */}
-                <div className='alarm-sound'>
+                <div className='alarm-sound-form'>
                     <div className='alarm-sound-label'>
                         <label htmlFor='sound'>Sound</label>
                     </div>
@@ -303,7 +303,7 @@ const EditAlarm = () => {
                     </div>
                 </div>
                 {/* ------------------------- REPEAT ------------------------- */}
-                <div className='alarm-repeat'>
+                <div className='alarm-repeat-form'>
                     <div className='alarm-repeat-label'>
                         <label htmlFor='repeat'>Repeat</label>
                     </div>
@@ -335,7 +335,7 @@ const EditAlarm = () => {
                     </div>
                 </div>
                 {/* ------------------------- SNOOZE ------------------------- */}
-                <div className='alarm-snooze'>
+                <div className='alarm-snooze-form'>
                     <div className='alarm-snooze-label'>
                         <label htmlFor='snooze'>Snooze</label>
                     </div>

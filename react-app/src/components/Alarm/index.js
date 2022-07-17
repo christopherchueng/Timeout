@@ -124,35 +124,37 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
             {openTab ?
                 <div className='hidden-alarm-toggle-ctn'>
                     <div className='alarm-content'>
-                        <div className='alarm-time'>
-                            {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
-                            <div className='alarm-meridiem'>
-                                {alarm?.meridiem}
+                        <div className='alarm-content-ctn'>
+                            <div className='alarm-time'>
+                                {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
+                                <div className='alarm-meridiem'>
+                                    {alarm?.meridiem}
+                                </div>
+                            </div>
+                            <div className='alarm-name'>
+                                {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
+                            </div>
+                            <div className='alarm-days'>
+                                {alarm.repeat.length === 0 ?
+                                ""
+                                :
+                                <DisplayDays alarmDays={alarm.repeat} />
+                                }
                             </div>
                         </div>
-                        <div className='alarm-name'>
-                            {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
+                        {/* {id ? */}
+                        <div className='alarm-setting-btns'>
+                            <div className='alarm-edit-btn'>
+                                    <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
+                            </div>
+                            <div className='alarm-delete-btn'>
+                                <button type='button' onClick={e => onDelete(e, alarm)}>
+                                    <span className="fa-solid fa-trash"></span>
+                                </button>
+                            </div>
                         </div>
-                        <div className='alarm-days'>
-                            {alarm.repeat.length === 0 ?
-                            ""
-                            :
-                            <DisplayDays alarmDays={alarm.repeat} />
-                            }
-                        </div>
+                        {/* : ""} */}
                     </div>
-                    {id ?
-                    <div className='alarm-setting-btns'>
-                        <div className='alarm-edit-btn'>
-                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
-                        </div>
-                        <div className='alarm-delete-btn'>
-                            <button type='button' onClick={e => onDelete(e, alarm)}>
-                                <span className="fa-solid fa-trash"></span>
-                            </button>
-                        </div>
-                    </div>
-                    : ""}
                     <label className='alarm-switch'>
                         <input
                             type='checkbox'
