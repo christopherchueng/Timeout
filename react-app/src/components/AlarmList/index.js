@@ -177,7 +177,7 @@ const AlarmList = ({ dashAlarmlist }) => {
             </div>}
             <div id='alarmlist-alarms'>
                 {filteredAlarms && filteredAlarms.map(alarm => (
-                    <div className='alarm-ctn' key={alarm.id}>
+                    <div className='alarm-toggle-ctn' key={alarm.id}>
                         <Alarm
                             alarm={alarm}
                             openTab={openTab}

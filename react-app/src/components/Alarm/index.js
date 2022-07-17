@@ -120,54 +120,53 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     }
 
     return (
-        <div className="toggle-alarms">
+        <>
             {openTab ?
-                <div id='dashboard-alarms'>
-                    <div className='alarm-info'>
-                        <div className='alarm-toggle-ctn'>
-                            <div className='alarm-content'>
-                                <div className='alarm-name'>
-                                    {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
-                                </div>
-                                <div className='alarm-days'>
-                                    {alarm.repeat.length === 0 ?
-                                    ""
-                                    :
-                                    <DisplayDays alarmDays={alarm.repeat} />
-                                    }
-                                </div>
-                                <div className='alarm-time'>
-                                    {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes} {alarm?.meridiem}
-                                </div>
+                <div className='hidden-alarm-toggle-ctn'>
+                    <div className='alarm-content'>
+                        <div className='alarm-time'>
+                            {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
+                            <div className='alarm-meridiem'>
+                                {alarm?.meridiem}
                             </div>
-                            {id ?
-                            <div className='alarm-setting-btns'>
-                                <div className='alarm-edit-btn'>
-                                        <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
-                                </div>
-                                <div className='alarm-delete-btn'>
-                                    <button type='button' onClick={e => onDelete(e, alarm)}>
-                                        <span className="fa-solid fa-trash"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            : ""}
-                            <label className='alarm-switch'>
-                                <input
-                                    type='checkbox'
-                                    value={alarmOn}
-                                    onChange={onChange}
-                                    className='alarm-radio-box'
-                                    checked={alarmOn}
-                                />
-                                <div className='alarm-slider alarm-ball'>
-                                </div>
-                            </label>
+                        </div>
+                        <div className='alarm-name'>
+                            {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
+                        </div>
+                        <div className='alarm-days'>
+                            {alarm.repeat.length === 0 ?
+                            ""
+                            :
+                            <DisplayDays alarmDays={alarm.repeat} />
+                            }
                         </div>
                     </div>
+                    {id ?
+                    <div className='alarm-setting-btns'>
+                        <div className='alarm-edit-btn'>
+                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
+                        </div>
+                        <div className='alarm-delete-btn'>
+                            <button type='button' onClick={e => onDelete(e, alarm)}>
+                                <span className="fa-solid fa-trash"></span>
+                            </button>
+                        </div>
+                    </div>
+                    : ""}
+                    <label className='alarm-switch'>
+                        <input
+                            type='checkbox'
+                            value={alarmOn}
+                            onChange={onChange}
+                            className='alarm-radio-box'
+                            checked={alarmOn}
+                        />
+                        <div className='alarm-slider alarm-ball'>
+                        </div>
+                    </label>
                 </div>
             : ""}
-        </div>
+        </>
     )
 }
 
