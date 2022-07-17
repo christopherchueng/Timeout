@@ -51,9 +51,9 @@ function App() {
         <ProtectedRoute path='/alarms/:id/edit'>
           <EditAlarm />
         </ProtectedRoute>
-        <ProtectedRoute path='/alarmlists/:id'>
+        {/* <ProtectedRoute path='/alarmlists/:id'>
           <AlarmList />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
       </Switch>
     </BrowserRouter>
   );
