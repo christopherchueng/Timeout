@@ -127,7 +127,11 @@ const AlarmList = ({ dashAlarmlist }) => {
                 <div className='alarmlist-name'>
                     <div className='alarmlist-heading-ctn'>
                         <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1>
-                        <button className='toggle-alarms-view' onClick={() => setOpenTab(!openTab)}>
+                        <button
+                            className='toggle-alarms-view'
+                            onClick={() => setOpenTab(!openTab)}
+                            style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
+                        >
                             <i className="fa-solid fa-angle-right"></i>
                         </button>
                     </div>

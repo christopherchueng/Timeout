@@ -94,3 +94,9 @@
     opacity: 0;
     transition: all 0.2s ease-out;
 }
+
+.toggle-alarms-view {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
