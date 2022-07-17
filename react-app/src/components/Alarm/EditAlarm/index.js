@@ -76,8 +76,7 @@ const EditAlarm = () => {
     }, [name, id])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
-    let days = {
-        options: [
+    let days = [
             {name: 'Sunday', id: 0, short: 'Sun'},
             {name: 'Monday', id: 1, short: 'Mon'},
             {name: 'Tuesday', id: 2, short: 'Tue'},
@@ -86,12 +85,13 @@ const EditAlarm = () => {
             {name: 'Friday', id: 5, short: 'Fri'},
             {name: 'Saturday', id: 6, short: 'Sat'}
         ]
-    }
 
     const onSelect = (selectedList, selectedItem) => {
         const daysSelected = selectedList.map(day => day.id)
+        console.log('IS THIS THE REASON WHY WERE GETTING AN OBJECT OBJECT', daysSelected)
         setRepeat(daysSelected)
     }
+    console.log('here are the days that I selected WHEN EDITING', repeat)
 
     // let selectedDays = []
 
@@ -106,6 +106,15 @@ const EditAlarm = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
+        const newRepeat = repeat.map(day => {
+            if (typeof day === 'object') {
+                return day.id
+            }
+            if (typeof day === 'number') {
+                return day
+            }
+        })
+
         const payload = {
             'alarm_id': alarmId,
             name,
@@ -113,7 +122,7 @@ const EditAlarm = () => {
             'minutes': `${minutes}`,
             meridiem,
             sound,
-            'repeat': `${repeat}`,
+            'repeat': JSON.stringify(newRepeat).replace(/[\[\]']+/g,''),
             snooze,
             'toggle': true,
             'alarmlist_id': parseInt(alarmlist)
@@ -314,7 +323,7 @@ const EditAlarm = () => {
                     </div>
                     <div className='alarm-repeat-select'>
                         <Multiselect
-                            options={days.options}
+                            options={days}
                             onSelect={onSelect}
                             onRemove={onSelect}
                             showCheckbox={true}

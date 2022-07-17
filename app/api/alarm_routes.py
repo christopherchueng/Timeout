@@ -75,6 +75,7 @@ def update_alarm(alarm_id):
         alarm.alarmlist_id = form.data['alarmlist_id']
 
         db.session.commit()
+        print('THIS IS THE REPEAT I AM SENDING BACK TO THE FRONTEND', alarm.to_dict())
         return alarm.to_dict()
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

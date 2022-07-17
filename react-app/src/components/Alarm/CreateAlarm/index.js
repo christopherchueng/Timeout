@@ -62,8 +62,7 @@ const CreateAlarm = () => {
     }, [name])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
-    let days = {
-        options: [
+    let days = [
             {name: 'Sunday', id: 0, short: 'Sun'},
             {name: 'Monday', id: 1, short: 'Mon'},
             {name: 'Tuesday', id: 2, short: 'Tue'},
@@ -72,12 +71,13 @@ const CreateAlarm = () => {
             {name: 'Friday', id: 5, short: 'Fri'},
             {name: 'Saturday', id: 6, short: 'Sat'}
         ]
-    }
 
     const onSelect = (selectedList, selectedItem) => {
         const daysSelected = selectedList.map(day => day.id)
+        console.log('IS THIS THE REASON WHY WERE GETTING AN OBJECT OBJECT', daysSelected)
         setRepeat(daysSelected)
     }
+    console.log('here are the days that I selected', repeat)
     /* ---------------------- END MULTISELECT INFO ---------------------- */
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -88,7 +88,7 @@ const CreateAlarm = () => {
             'minutes': `${minutes}`,
             meridiem,
             sound,
-            'repeat': `${repeat}`,
+            'repeat': JSON.stringify(repeat).replace(/[\[\]']+/g,''),
             snooze,
             'toggle': true,
             'alarmlist_id': parseInt(alarmlist)
@@ -288,7 +288,7 @@ const CreateAlarm = () => {
                     </div>
                     <div className='alarm-repeat-select'>
                         <Multiselect
-                            options={days.options}
+                            options={days}
                             onSelect={onSelect}
                             onRemove={onSelect}
                             showCheckbox={true}
