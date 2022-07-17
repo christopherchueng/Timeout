@@ -71,7 +71,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
     return (
         <>
             <form onSubmit={onSubmit}>
-                <div className='alarmlist-input'>
+                <div className='dashboard-alarmlist-input'>
                     {/* -------------------- NAME -------------------- */}
                     <input
                         name={'name'}
