@@ -1,3 +1,52 @@
+#alarmlists {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* width: 250px; */
+    margin: 0;
+}
+
+.alarmlist-comp {
+    padding: 0 20px;
+}
+
+.alarmlist-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.alarmlist-name > h1 {
+    font-family: 'Lexend Deca';
+}
+
+.alarmlist-name-heading > a {
+    text-decoration: none;
+    color: #3478F6;
+}
+
+.alarmlist-settings-ctn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40px;
+    height: 60px;
+}
+
+.ellipsis-settings {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    padding: 0;
+}
+
+.fa-ellipsis {
+    background-color: none;
+    border: none;
+    color: gray;
+}
+
 .alarmlist-toggle-ctn {
     width: 75px;
 }

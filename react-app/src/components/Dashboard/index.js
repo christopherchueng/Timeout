@@ -5,8 +5,8 @@ import { getAlarms } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import Alarm from "../Alarm"
-import './Dashboard.css'
 import AlarmList from "../AlarmList"
+import './Dashboard.css'
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -30,9 +30,9 @@ const Dashboard = () => {
                     </div>
 
                 </div>
-                <div className='alarmlist-content'>
+                <div id='alarmlists'>
                     {alarmlists && alarmlists.map(alarmlist => (
-                        <div key={alarmlist.id}>
+                        <div className='alarmlist-comp' key={alarmlist.id}>
                             <AlarmList dashAlarmlist={alarmlist} />
                         </div>
                     ))}

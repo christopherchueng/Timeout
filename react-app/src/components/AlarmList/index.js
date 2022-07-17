@@ -110,10 +110,10 @@ const AlarmList = ({ dashAlarmlist }) => {
     }
 
     return (
-        <div id='alarmlists'>
+        <div className='alarmlist-content'>
             {isEditing
             ?
-            <div id={'edit-alarmlist-form'}>
+            <div id='edit-alarmlist-form'>
                 <EditAlarmlistForm
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
@@ -125,14 +125,16 @@ const AlarmList = ({ dashAlarmlist }) => {
             :
             <div className='alarmlist-header' key={dashAlarmlist?.id || alarmlistId}>
                 <div className='alarmlist-name'>
-                    <h1>{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1>
+                    <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1>
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                     {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
                     ?
                     <>
-                        <button onClick={() => setOpenSettings(!openSettings)}>
-                            <i className="fa-solid fa-ellipsis"></i>
-                        </button>
+                        <div className='alarmlist-settings-ctn'>
+                            <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
+                                <i className="fa-solid fa-ellipsis fa-2x"></i>
+                            </button>
+                        </div>
                         {openSettings && <div className='alarmlist-btn-settings'>
                             <div className='edit-alarmlist'>
                                 <button type='button' className={`alarmlist-edit-btn`} onClick={() => setIsEditing(!isEditing)}>
