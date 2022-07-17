@@ -61,7 +61,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
 
     // }, [mainAlarmlistSwitch])
 
-    useEffect(() => {
+    useEffect(async () => {
         if (alarm.repeat.length !== 0) {
             for (let day of alarm.repeat) {
                 // console.log('Do these match?', day.short)
@@ -84,7 +84,27 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                 alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
                 parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0 &&
                 alarm.toggle === true) {
-                alarm.minutes < 10 ? alert(`Alarm at ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem} went off!`) : alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
+                    setAlarmOn(!alarmOn)
+                    let repeatPayload = []
+                    for (let day of repeat) {
+                        repeatPayload.push(day.id)
+                    }
+
+                    const payload = {
+                        'alarm_id': alarm?.id,
+                        name,
+                        'hour': alarmHour,
+                        'minutes': `${alarmMinutes}`,
+                        'meridiem': alarmMeridiem,
+                        sound,
+                        'repeat': `${repeatPayload}`,
+                        snooze,
+                        'toggle': !alarmOn,
+                        'alarmlist_id': alarm?.alarmlistId
+                    }
+
+                    await dispatch(updateAlarm(payload))
+                    alarm.minutes < 10 ? alert(`${alarm.name} ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem}`) : alert(`${alarm.name} ${alarm.hour}:${alarm.minutes} ${alarm.meridiem}`)
             }
         }
     }, [currentTime, alarm])

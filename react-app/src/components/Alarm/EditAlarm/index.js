@@ -104,7 +104,8 @@ const EditAlarm = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        const newRepeat = repeat.map(day => {
+        const newRepeat = repeat ?
+        repeat.map(day => {
             if (typeof day === 'object') {
                 return day.id
             }
@@ -112,6 +113,7 @@ const EditAlarm = () => {
                 return day
             }
         })
+        : []
 
         const payload = {
             'alarm_id': alarmId,

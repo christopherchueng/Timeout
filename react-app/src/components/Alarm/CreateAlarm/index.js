@@ -86,7 +86,7 @@ const CreateAlarm = () => {
             'minutes': `${minutes}`,
             meridiem,
             sound,
-            'repeat': JSON.stringify(repeat).replace(/[\[\]']+/g,''),
+            'repeat': `${repeat}`,
             snooze,
             'toggle': true,
             'alarmlist_id': parseInt(alarmlist)
