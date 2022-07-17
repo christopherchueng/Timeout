@@ -9,6 +9,7 @@ const DeleteAlarmlistModal = ({ alarmlist }) => {
         <>
             <button className='delete-alarmlist-btn' onClick={() => setShowModal(true)}>
                 <span className="fa-solid fa-trash"></span>
+                <span className="delete-alarmlist-label">Delete</span>
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>

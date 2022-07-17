@@ -129,23 +129,27 @@ const AlarmList = ({ dashAlarmlist }) => {
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                     {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
                     ?
-                    <>
-                        <div className='alarmlist-settings-ctn'>
+                    <div className='settings-menu'>
+                        <div className='alarmlist-toggle-settings'>
                             <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
                                 <i className="fa-solid fa-ellipsis fa-2x"></i>
                             </button>
                         </div>
-                        {openSettings && <div className='alarmlist-btn-settings'>
-                            <div className='edit-alarmlist'>
-                                <button type='button' className={`alarmlist-edit-btn`} onClick={() => setIsEditing(!isEditing)}>
-                                    <span className="fa-solid fa-pen"></span>
-                                </button>
-                            </div>
-                            <div className='delete-alarmlist'>
-                                <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} />
-                            </div>
-                        </div>}
-                    </>
+                        <div className='alarmlist-btn-settings'>
+                            {openSettings &&
+                            <div className='settings-ctn'>
+                                <div className='edit-alarmlist'>
+                                    <button type='button' className={`alarmlist-edit-btn`} onClick={() => setIsEditing(!isEditing)}>
+                                        <span className="fa-solid fa-pen"></span>
+                                        <span className="edit-alarmlist-label">Edit</span>
+                                    </button>
+                                </div>
+                                <div className='delete-alarmlist'>
+                                    <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} />
+                                </div>
+                            </div>}
+                        </div>
+                    </div>
                     : ""}
                 </div>
             </div>}
