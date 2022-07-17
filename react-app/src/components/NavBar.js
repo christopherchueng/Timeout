@@ -18,6 +18,16 @@ const NavBar = () => {
                   <img className='home-logo' src={process.env.PUBLIC_URL + '../../../static/timeout-black.png'}></img>
                 </NavLink>
               </div>
+              <div className='github-logo-ctn'>
+                <a href='https://github.com/christopherchueng/Timeout'>
+                  <img className='github-logo' src={process.env.PUBLIC_URL + '../../../static/github-logo.png'}></img>
+                </a>
+              </div>
+              <div className='linkedin-logo-ctn'>
+                <a href='https://www.linkedin.com/in/christopher-chueng/'>
+                  <img className='linkedin-logo' src={process.env.PUBLIC_URL + '../../../static/linkedin-logo.png'}></img>
+                </a>
+              </div>
             </li>
             <li id='navbar-right'>
               <div className='navbar-create-alarm'>
@@ -33,6 +43,18 @@ const NavBar = () => {
         </ul>
         :
         <div className='auth-home-ctn'>
+          <div className='splash-left'>
+            <div className='github-logo-ctn'>
+              <a href='https://github.com/christopherchueng/Timeout'>
+                <img className='github-logo' src={process.env.PUBLIC_URL + '../../../static/github-logo.png'}></img>
+              </a>
+            </div>
+            <div className='linkedin-logo-ctn'>
+              <a href='https://www.linkedin.com/in/christopher-chueng/'>
+                <img className='linkedin-logo' src={process.env.PUBLIC_URL + '../../../static/linkedin-logo.png'}></img>
+              </a>
+            </div>
+          </div>
           <div className='auth-home'>
             <NavLink to='/'>
               <div className='toggle-home'>

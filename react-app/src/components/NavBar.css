@@ -95,11 +95,34 @@
 /* SPLASH PAGE HOME BUTTON SECTION */
 .auth-home-ctn {
     display: flex;
+    /* flex-direction: row; */
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100vw;
     padding: 5px;
     margin: 15px 0;
+}
+
+.splash-left,
+#navbar-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.splash-left {
+    padding-left: 80px;
+}
+
+.github-logo-ctn,
+.linkedin-logo-ctn {
+    padding-left: 30px;
+}
+
+.github-logo,
+.linkedin-logo {
+    width: 42px;
+    height: 42px;
 }
 
 .auth-home {
