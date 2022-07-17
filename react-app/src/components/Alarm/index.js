@@ -84,7 +84,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                 alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
                 parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0 &&
                 alarm.toggle === true) {
-                alert(`Alarm at ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem} went off!`)
+                alarm.minutes < 10 ? alert(`Alarm at ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem} went off!`) : alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
             }
         }
     }, [currentTime, alarm])
