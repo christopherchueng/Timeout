@@ -83,11 +83,11 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
                         style={{backgroundColor: errors['name'] && isSubmitted ? '#FFA194' : ""}}
                     />
                     <div className='edit-alarmlist-form-btns'>
-                        <div className='submit-alarmlist'>
-                            <button type='submit'><span className="fa-solid fa-check"></span></button>
+                        <div className='submit-alarmlist-edit'>
+                            <button type='submit' className='submit-alarmlist-edit-btn'><span className="fa-solid fa-check fa-xl"></span></button>
                         </div>
-                        <div className='cancel-alarmlist'>
-                            <button type='button' onClick={onClick}><span className="fa-solid fa-xmark"></span></button>
+                        <div className='cancel-alarmlist-edit'>
+                            <button type='button' className="cancel-alarmlist-edit-btn" onClick={onClick}><span className="fa-solid fa-xmark fa-xl"></span></button>
                         </div>
                     </div>
                 </div>

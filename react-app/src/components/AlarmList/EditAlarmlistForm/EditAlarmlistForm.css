@@ -1,5 +1,4 @@
-.dashboard-alarmlist-input,
-.edit-alarmlist-form-btns {
+.dashboard-alarmlist-input {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -20,4 +19,31 @@
 
 .alarmlist-error {
     font-size: 12pt;
+}
+
+.submit-alarmlist-edit-btn,
+.cancel-alarmlist-edit-btn {
+    background-color: transparent;
+    border: 0;
+}
+
+.submit-alarmlist-edit {
+    padding-bottom: 5px;
+}
+
+.edit-alarmlist-form-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.submit-alarmlist-edit-btn {
+    color: green;
+    cursor: pointer;
+}
+
+.cancel-alarmlist-edit-btn {
+    color: red;
+    cursor: pointer;
 }
