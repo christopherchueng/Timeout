@@ -128,13 +128,6 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <div className='alarmlist-heading-ctn'>
                         {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
                         <h1 className="alarmlist-name-heading">{dashAlarmlist?.name}</h1>
-                        <button
-                            className='toggle-alarms-view'
-                            onClick={() => setOpenTab(!openTab)}
-                            style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
-                        >
-                            <i className="fa-solid fa-angle-right"></i>
-                        </button>
                     </div>
                     {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                     {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
@@ -177,19 +170,32 @@ const AlarmList = ({ dashAlarmlist }) => {
                 </div>
             </div>}
             <div id='alarmlist-alarms'>
-                {filteredAlarms && filteredAlarms.map(alarm => (
-                    <div className='alarm-toggle-ctn' key={alarm.id}>
-                        <Alarm
-                            alarm={alarm}
-                            openTab={openTab}
-                            setOpenTab={setOpenTab}
-                            alarmsArr={alarmsArr}
-                            alarmlist={id ? alarmlists[id] : dashAlarmlist}
-                            mainAlarmlistSwitch={mainAlarmlistSwitch}
-                            setMainAlarmlistSwitch={setMainAlarmlistSwitch}
-                        />
-                    </div>
-                ))}
+                {filteredAlarms.length === 0 ?
+                <div className='no-alarms-ctn'>
+                    <p className='no-alarms'>{`You have no alarms under '${dashAlarmlist?.name}.' Create a new alarm in the top right corner!`}</p>
+                </div>
+                :
+                <>
+                    <button
+                        className='toggle-alarms-view'
+                        onClick={() => setOpenTab(!openTab)}
+                        style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
+                    >
+                        <i className="fa-solid fa-angle-right"></i>
+                    </button>
+                    {filteredAlarms && filteredAlarms.map(alarm => (
+                        <div className='alarm-toggle-ctn' key={alarm.id}>
+                            <Alarm
+                                alarm={alarm}
+                                openTab={openTab}
+                                setOpenTab={setOpenTab}
+                                alarmsArr={alarmsArr}
+                                alarmlist={id ? alarmlists[id] : dashAlarmlist}
+                                mainAlarmlistSwitch={mainAlarmlistSwitch}
+                                setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+                            />
+                        </div>))}
+                </>}
             </div>
         </div>
     )

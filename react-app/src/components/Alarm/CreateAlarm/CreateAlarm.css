@@ -75,6 +75,10 @@ select {
     /* width: 500px; */
 }
 
+.alarm-name-input {
+    flex-direction: column;
+}
+
 .alarm-name-input > input {
     width: 460px;
     height: 40px;
