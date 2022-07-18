@@ -16,9 +16,9 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
 
     useEffect(() => {
         const validationErrors = {};
-        if (name === 'Default') {
-            validationErrors.name = 'Please choose a different alarmlist name.'
-        }
+        // if (name === 'Other') {
+        //     validationErrors.name = 'Please choose a different alarmlist name.'
+        // }
         // if (!name) {
         //     validationErrors.name = 'Please provide an alarmlist name.'
         // }

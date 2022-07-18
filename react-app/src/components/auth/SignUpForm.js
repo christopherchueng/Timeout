@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { createAlarmlist } from '../../store/alarmlist';
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -59,9 +60,19 @@ const SignUpForm = () => {
         password: password
       }
       const data = await dispatch(signUp(payload));
+
       if (data) {
         setErrors(data)
       }
+      // const alarmlistPayload = {
+      //   'name': 'Other',
+      //   'toggle': true,
+      //   'user_id': user?.id
+      // }
+
+      // if (user && Object.values(user).length !== 0) {
+      //   await dispatch(createAlarmlist(alarmlistPayload))
+      // }
     }
 
       // await dispatch(signUp(firstName, lastName, email, password));
