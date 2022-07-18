@@ -53,9 +53,12 @@ const CreateAlarm = () => {
         if (name.length > 150) {
             validationErrors.name = 'Please provide a name that is at most 150 characters long.'
         }
+        if (!alarmlistsArr.length) {
+            validationErrors.alarmlist = 'You currently do not have any alarmlists! Please create an alarmlist first!'
+        }
 
         setErrors(validationErrors)
-    }, [name])
+    }, [name, alarmlist])
 
     useEffect(() => {
         setMessageCount(name.length)
@@ -272,12 +275,16 @@ const CreateAlarm = () => {
                             value={alarmlist}
                             onChange={e => setAlarmlist(e.target.value)}
                             className='alarmlist-selection-form'
+                            style={{backgroundColor: errors['alarmlist'] ? '#FFA194' : ""}}
                         >
                             {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                                 <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
                             ))}
                         </select>
                     </div>
+                </div>
+                <div className='alarm-formError-ctn'>
+                    {<ErrorMessage error={errors.alarmlist} setClassName="select-alarmlist-error" />}
                 </div>
                 {/* ------------------------- SOUND ------------------------- */}
                 <div className='alarm-sound-form'>
