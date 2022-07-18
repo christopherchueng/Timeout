@@ -4,6 +4,12 @@
     height: 100vh;
 }
 
+.no-alarmlists-ctn {
+    font-family: 'Lexend Deca';
+    font-weight: 1000;
+    padding: 0 20px;
+}
+
 #sidebar-top {
     display: flex;
     flex-direction: row;

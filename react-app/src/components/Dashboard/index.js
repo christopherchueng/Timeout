@@ -32,11 +32,19 @@ const Dashboard = () => {
 
                 </div>
                 <div id='alarmlists'>
-                    {alarmlists && alarmlists.map(alarmlist => (
-                        <div className='alarmlist-comp' key={alarmlist.id}>
-                            <AlarmList dashAlarmlist={alarmlist} />
-                        </div>
-                    ))}
+                    {alarmlists.length === 0 ?
+                    <div className='no-alarmlists-ctn'>
+                        <p className='no-alarmlists'>You currently do not have any alarmlists. Create a new alarmlist above!</p>
+                    </div>
+                    :
+                    <>
+                        {alarmlists && alarmlists.map(alarmlist => (
+                            <div className='alarmlist-comp' key={alarmlist.id}>
+                                <AlarmList dashAlarmlist={alarmlist} />
+                            </div>
+                        ))}
+                    </>
+                }
                 </div>
             </div>
             <div className='global-dashboard-time'>
