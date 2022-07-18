@@ -4,6 +4,7 @@ const LOAD_DEFAULT_ALARMLIST = 'alarmlist/LOAD_DEFAULT_ALARMLIST'
 const POST_ALARMLIST = 'alarmlist/POST_ALARMLIST'
 const EDIT_ALARMLIST = 'alarmlist/EDIT_ALARMLIST'
 const REMOVE_ALARMLIST = 'alarmlist/REMOVE_ALARMLIST'
+const CLEAR_ALARMLISTS = 'alarmlist/CLEAR_ALARMLISTS'
 
 
 export const loadOneAlarmlist = (alarmlist) => {
@@ -45,6 +46,13 @@ export const removeAlarmlist = (alarmlistId) => {
     return {
         type: REMOVE_ALARMLIST,
         alarmlistId
+    }
+}
+
+export const clearAlarmlists = (alarmlists) => {
+    return {
+        type: CLEAR_ALARMLISTS,
+        alarmlists
     }
 }
 
@@ -119,6 +127,11 @@ export const deleteAlarmlist = (alarmlistId) => async (dispatch) => {
     }
 }
 
+export const clearAllAlarmlists = () => async (dispatch) => {
+    dispatch(clearAlarmlists)
+    return {}
+}
+
 const initialState = { entries: {}, default: {}, isLoading: true }
 
 const alarmlistReducer = (state = initialState, action) => {
@@ -148,6 +161,8 @@ const alarmlistReducer = (state = initialState, action) => {
             newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             delete newState.entries[action.alarmlistId]
             return newState
+        case CLEAR_ALARMLISTS:
+            return { entries: {}, isLoading: true}
         default:
             return state
     }

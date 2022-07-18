@@ -11,6 +11,7 @@ import './Dashboard.css'
 const Dashboard = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
+    const currentUser = useSelector(state => state?.session?.user)
     const alarmlists = Object.values(alarmlistsObj)
     const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
 
@@ -18,7 +19,7 @@ const Dashboard = () => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
         // dispatch(getAlarms(1))
-    }, [dispatch])
+    }, [dispatch, currentUser])
 
     return (
         <div id='dashboard'>

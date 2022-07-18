@@ -34,6 +34,7 @@ def get_one_alarmlist_no_default(alarmlist_id):
 def get_alarmlists():
     # Get all of the current user's alarmlists (no default)
     alarmlists = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id()).all()
+    print('I THOUGHT I FILTERED THESE IN ACCORDING TO THE USER ID SO WHY ARE YOU SHOWING ALARMLISTS', alarmlists)
     return jsonify([alarmlist.to_dict() for alarmlist in alarmlists])
 
 @alarmlist_routes.route('/default')

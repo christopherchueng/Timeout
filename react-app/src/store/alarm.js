@@ -4,6 +4,7 @@ const LOAD_INDEPENDENT_ALARMS = 'alarm/loadIndependentAlarms'
 const ADD_ALARM = 'alarm/addAlarm'
 const EDIT_ALARM = 'alarm/editAlarm'
 const REMOVE_ALARM = 'alarm/removeAlarm'
+const CLEAR_ALARMS = 'alarm/clearAlarms'
 
 export const loadOneAlarm = (alarm) => {
     return {
@@ -44,6 +45,13 @@ export const removeAlarm = (alarmId) => {
     return {
         type: REMOVE_ALARM,
         alarmId
+    }
+}
+
+export const clearAlarms = (alarms) => {
+    return {
+        type: CLEAR_ALARMS,
+        alarms
     }
 }
 
@@ -115,6 +123,11 @@ export const deleteAlarm = (alarmId) => async (dispatch) => {
     }
 }
 
+export const clearAllAlarms = () => async (dispatch) => {
+    dispatch(clearAlarms())
+    return {}
+}
+
 const initialState = { entries: {}, independent: {}, isLoading: true }
 
 const alarmReducer = (state = initialState, action) => {
@@ -142,6 +155,8 @@ const alarmReducer = (state = initialState, action) => {
             newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
             delete newState.entries[action.alarmId]
             return newState
+        case CLEAR_ALARMS:
+            return { entries: {}, isLoading: true }
         default:
             return state
     }
