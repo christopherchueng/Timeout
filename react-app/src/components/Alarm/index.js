@@ -99,7 +99,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                         sound,
                         'repeat': `${repeatPayload}`,
                         snooze,
-                        'toggle': !alarmOn,
+                        'toggle': false,
                         'alarmlist_id': alarm?.alarmlistId
                     }
 

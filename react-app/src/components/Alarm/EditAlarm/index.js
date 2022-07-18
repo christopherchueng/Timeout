@@ -333,6 +333,7 @@ const EditAlarm = () => {
                             avoidHighlightFirstOption={true}
                             showArrow={true}
                             hidePlaceholder={repeat?.length}
+                            style={{searchBox: {width: '500px'}, optionContainer: {fontFamily: 'Lexend Deca', fontWeight: 1000}}}
                         />
                         {/* <select
                             name='repeat'

@@ -63,14 +63,23 @@ const CreateAlarm = () => {
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
     let days = [
-            {name: 'Sunday', id: 0, short: 'Sun'},
-            {name: 'Monday', id: 1, short: 'Mon'},
-            {name: 'Tuesday', id: 2, short: 'Tue'},
-            {name: 'Wednesday', id: 3, short: 'Wed'},
-            {name: 'Thursday', id: 4, short: 'Thu'},
-            {name: 'Friday', id: 5, short: 'Fri'},
-            {name: 'Saturday', id: 6, short: 'Sat'}
-        ]
+        {name: 'Sunday', id: 0, short: 'Sun'},
+        {name: 'Monday', id: 1, short: 'Mon'},
+        {name: 'Tuesday', id: 2, short: 'Tue'},
+        {name: 'Wednesday', id: 3, short: 'Wed'},
+        {name: 'Thursday', id: 4, short: 'Thu'},
+        {name: 'Friday', id: 5, short: 'Fri'},
+        {name: 'Saturday', id: 6, short: 'Sat'}
+    ]
+
+    let style = {
+        searchBox: {
+            width: '500px'
+        },
+        inputField: {
+            backgroundColor: 'red'
+        }
+    }
 
     const onSelect = (selectedList, selectedItem) => {
         const daysSelected = selectedList.map(day => day.id)
@@ -295,6 +304,7 @@ const CreateAlarm = () => {
                             hidePlaceholder={repeat.length}
                             avoidHighlightFirstOption={true}
                             showArrow={true}
+                            style={{searchBox: {width: '500px'}, optionContainer: {fontFamily: 'Lexend Deca', fontWeight: 1000}}}
                         />
                     </div>
                 </div>

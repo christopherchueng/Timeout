@@ -19,7 +19,7 @@ const Dashboard = () => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
         // dispatch(getAlarms(1))
-    }, [dispatch, currentUser])
+    }, [dispatch])
 
     return (
         <div id='dashboard'>

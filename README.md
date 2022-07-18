@@ -1,5 +1,5 @@
 # Timeout
-It's a Friday, and you have a three day weekend (Monday is a holiday). However, you have all of these alarms set for the weekday to wake yourself help. Because school/work has been stressing you out, you decide you would like to sleep in on Monday, which means you'll need to go through the excruciating pain of having to manually turn off all your alarms one by one... Based on this true story, Timeout was created.
+It's a Friday, and you have a three day weekend (Monday is a holiday). However, you have all of these alarms set for the weekday to wake yourself help. Because school/work has been stressing you out, you decide you would like to sleep in on Monday, which means you'll need to go through the excruciating pain of having to manually turn off all your alarms one by one... Based on this true story, [Timeout](https://app-timeout.herokuapp.com/) was created.
 
 Inspired and frustrated by Apple's Clock mobile app, Timeout allows you to create, read, update, and delete your own custom alarm, just like Apple's Clock app. However, Timeout provides an additional feature, `Alarmlists`, that allow users to compartmentalize alarms so that they can toggle all alarms under that specific alarmlist on or off with the touch of a button. No more manual labor!
 
