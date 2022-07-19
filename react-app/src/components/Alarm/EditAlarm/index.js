@@ -358,7 +358,7 @@ const EditAlarm = () => {
                 {/* ------------------------- SNOOZE ------------------------- */}
                 <div className='alarm-snooze-form'>
                     <div className='alarm-snooze-label'>
-                        <label hidden htmlFor='snooze'>Snooze</label>
+                        <label htmlFor='snooze'>Snooze</label>
                     </div>
                     <div className='alarm-snooze-input'>
                         <input
@@ -367,7 +367,6 @@ const EditAlarm = () => {
                             value={snooze}
                             defaultChecked={snooze}
                             onClick={() => setSnooze(!snooze)}
-                            hidden
                         />
                     </div>
                 </div>

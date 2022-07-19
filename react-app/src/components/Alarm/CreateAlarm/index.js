@@ -75,15 +75,6 @@ const CreateAlarm = () => {
         {name: 'Saturday', id: 6, short: 'Sat'}
     ]
 
-    let style = {
-        searchBox: {
-            width: '500px'
-        },
-        inputField: {
-            backgroundColor: 'red'
-        }
-    }
-
     const onSelect = (selectedList, selectedItem) => {
         const daysSelected = selectedList.map(day => day.id)
         setRepeat(daysSelected)
@@ -318,7 +309,7 @@ const CreateAlarm = () => {
                 {/* ------------------------- SNOOZE ------------------------- */}
                 <div className='alarm-snooze-form'>
                     <div className='alarm-snooze-label'>
-                        <label hidden htmlFor='snooze'>Snooze</label>
+                        <label htmlFor='snooze'>Snooze</label>
                     </div>
                     <div className='alarm-snooze-input'>
                         <input
@@ -326,7 +317,6 @@ const CreateAlarm = () => {
                             type='checkbox'
                             value={snooze}
                             onClick={() => setSnooze(!snooze)}
-                            hidden
                         />
                     </div>
                 </div>
