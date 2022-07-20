@@ -24,14 +24,14 @@ export function ModalProvider({ children }) {
   );
 }
 
-export function Modal({ onClose, children }) {
+export function Modal({ onClose, onChange, children }) {
   const modalNode = useContext(ModalContext);
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
     // Divs must come first to get elements to show up in the ModalProvider component
     <div id="modal">
-      <div id="modal-background" onClick={onClose} />
+      <div id="modal-background" onClick={onClose} onChange={onChange} />
       <div id="modal-content">
         {children}
       </div>

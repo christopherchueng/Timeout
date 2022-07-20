@@ -5,6 +5,7 @@ import { deleteAlarm } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
 import { updateAlarm } from "../../store/alarm"
 import { updateAlarmlist } from "../../store/alarmlist"
+import SnoozeModal from "../Snooze"
 import './Alarm.css'
 import DisplayDays from "./DisplayDays"
 
@@ -26,7 +27,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     const [snooze, setSnooze] = useState('')
     const [alarmOn, setAlarmOn] = useState('')
     const [alarmlistId, setAlarmlistId] = useState('')
-
+    const [showSnoozeModal, setShowSnoozeModal] = useState(false)
 
     useEffect(() => {
         // If alarmlist is default, display all alarms.
@@ -72,8 +73,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                     day.short === currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).split(' ')[0] &&
                     parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) < 2 &&
                     alarm.toggle === true) {
-                    // alarm.minutes < 10 ? alert(`Alarm at ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem} went off!`) : alert(`Alarm at ${alarm.hour}:${alarm.minutes} ${alarm.meridiem} went off!`)
-                    alarm.minutes < 10 ? alert(`${alarm.name} ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem}`) : alert(`${alarm.name} ${alarm.hour}:${alarm.minutes} ${alarm.meridiem}`)
+                    // alarm.minutes < 10 ? alert(`${alarm.name} ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem}`) : alert(`${alarm.name} ${alarm.hour}:${alarm.minutes} ${alarm.meridiem}`)
+                    setShowSnoozeModal(true);
                 }
             }
         } else {
@@ -188,6 +189,13 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                     </label>
                 </div>
             : ""}
+            {showSnoozeModal ? <SnoozeModal
+                alarm={alarm}
+                alarmOn={alarmOn}
+                setAlarmOn={setAlarmOn}
+                showSnoozeModal={showSnoozeModal}
+                setShowSnoozeModal={setShowSnoozeModal}
+            /> : ''}
         </>
     )
 }
