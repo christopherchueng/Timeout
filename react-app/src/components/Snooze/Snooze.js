@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Modal } from "../../context/Modal"
+import { useTimeContext } from "../../context/TimeContext"
 
-const Snooze = ({ showSnoozeModal, setShowSnoozeModal }) => {
+const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal }) => {
+    const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
 
     // 2 cases: For repeated days
     // If click on Snooze, then settimeout for 10 min
@@ -18,22 +20,36 @@ const Snooze = ({ showSnoozeModal, setShowSnoozeModal }) => {
 
     const snoozeAlarm = () => {
         setShowSnoozeModal(false)
-        const snoozeInterval = setInterval(() => {
-            setShowSnoozeModal(true)
-        }, 5000)
-
-        return () => clearInterval(snoozeInterval)
+        let snoozeMin = 1;
+        if (alarm.minutes < 50) {
+            snoozeMin += parseInt(minutes)
+            alarm.minutes = snoozeMin
+        } else if (alarm.minutes >= 50) {
+            snoozeMin = (parseInt(minutes) + snoozeMin) - 60
+            if (snoozeMin < 10) {
+                alarm.minutes = '0' + snoozeMin
+            }
+        }
     }
 
     return (
-        <div className="snooze-content">
-            <button className='snooze' onClick={snoozeAlarm}>
-                Snooze
-            </button>
-            <button className="turn-off-btn" type='submit' onClick={onClick}>
-                Stop
-            </button>
-        </div>
+        <>
+            {alarm.snooze ?
+            <div className="snooze-content">
+                <button className='snooze' onClick={snoozeAlarm}>
+                    Snooze
+                </button>
+                <button className="turn-off-btn" type='submit' onClick={onClick}>
+                    Stop
+                </button>
+            </div>
+            :
+            <div>
+                <button className="turn-off-btn" type='submit' onClick={onClick}>
+                    Stop
+                </button>
+            </div>}
+        </>
     )
 }
 
