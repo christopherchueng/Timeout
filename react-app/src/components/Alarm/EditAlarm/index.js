@@ -72,7 +72,7 @@ const EditAlarm = () => {
         }
 
         setErrors(validationErrors)
-    }, [name, alarmlist])
+    }, [name, alarmlist, alarmlistsObj])
 
     useEffect(() => {
         setMessageCount(name?.length)
@@ -140,7 +140,7 @@ const EditAlarm = () => {
             setMinutes(todaysDate.getMinutes())
             setSound('')
             setRepeat([])
-            setSnooze(false)
+            setSnooze('')
             setAlarmlist(1)
             setErrors({})
             history.push(`/dashboard`)
@@ -365,8 +365,8 @@ const EditAlarm = () => {
                             name='snooze'
                             type='checkbox'
                             value={snooze}
-                            defaultChecked={snooze}
-                            onClick={() => setSnooze(!snooze)}
+                            checked={snooze}
+                            onChange={() => setSnooze(!snooze)}
                         />
                     </div>
                 </div>
