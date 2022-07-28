@@ -3,26 +3,11 @@ import { useSelector, useDispatch } from "react-redux"
 import { Modal } from "../../context/Modal"
 import { useTimeContext } from "../../context/TimeContext"
 
-const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCountdown }) => {
+const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCountdown, snoozeOn, setSnoozeOn }) => {
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
 
     // const initialTimer = () => Number(window.localStorage.getItem('snooze') || 0)
     // const [countdown, setCountdown] = useState(60)
-
-    useEffect(() => {
-        const timer = setInterval(() => setCountdown(prev => {
-            if (prev > 1) {
-                setCountdown(prev - 1)
-                window.localStorage.setItem('snooze', countdown)
-            } else {
-                // setCountdown(0)
-                setShowSnoozeModal(true)
-                // window.localStorage.setItem('snooze', countdown)
-                window.localStorage.removeItem('snooze')
-            }
-        }), 1000)
-        return () => clearInterval(timer)
-    }, [countdown, seconds])
 
     // 2 cases: For repeated days
     // If click on Snooze, then settimeout for 10 min
@@ -31,15 +16,20 @@ const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCoun
     // No repeats
     // Only turn off will be allowed. Just close modal.
 
+    // If stop button is clicked, close the snooze modal, snooze will be turned off, and countdown will be removed from local storage
     const onClick = (e) => {
         e.preventDefault()
         setShowSnoozeModal(false)
+        setSnoozeOn(false)
         window.localStorage.removeItem('snooze')
     }
 
+    // If snooze button is clicked, modal will close, snooze will be turned on, and countdown will be set in state and in local storage
     const snoozeAlarm = () => {
         setShowSnoozeModal(false)
+        setSnoozeOn(true)
         setCountdown(10)
+        console.log('snooze clicked!', countdown)
         window.localStorage.setItem('snooze', countdown)
     }
 

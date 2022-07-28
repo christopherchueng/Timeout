@@ -16,7 +16,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     const { id } = useParams()
     // const alarmsObj = useSelector(state => state?.alarm?.entries)
     // const alarmsArr = Object.values(alarmsObj)
-    const initialTimer = () => Number(window.localStorage.getItem('snooze') || 0)
+    const initialTimer = () => Number(window.localStorage.getItem('snooze'))
 
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
     const [name, setName] = useState('')
@@ -29,8 +29,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     const [alarmOn, setAlarmOn] = useState('')
     const [alarmlistId, setAlarmlistId] = useState('')
     const [showSnoozeModal, setShowSnoozeModal] = useState(false)
-
-    const [countdown, setCountdown] = useState(10)
+    const [snoozeOn, setSnoozeOn] = useState(false)
+    const [countdown, setCountdown] = useState(initialTimer)
 
     useEffect(() => {
         // If alarmlist is default, display all alarms.
@@ -113,6 +113,25 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
             }
         }
     }, [currentTime, alarm])
+
+    useEffect(() => {
+        // If snooze is clicked and turned on, then start the snooze countdown
+        if (snoozeOn) {
+            // This updates the countdown in local storage every second
+            const timer = setInterval(() => setCountdown(prev => {
+                if (prev > 0) {
+                    setCountdown(prev - 1)
+                    console.log('here is the countdown', countdown)
+                    window.localStorage.setItem('snooze', countdown)
+                } else if (countdown <= 0) {
+                    // If countdown hits 0, then show the snooze modal.
+                    setShowSnoozeModal(true)
+                    setSnoozeOn(false)
+                }
+            }), 1000)
+            return () => clearInterval(timer)
+        }
+    }, [countdown, seconds])
 
     const onChange = async (e) => {
         e.preventDefault()
@@ -199,6 +218,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                 setAlarmOn={setAlarmOn}
                 countdown={countdown}
                 setCountdown={setCountdown}
+                snoozeOn={snoozeOn}
+                setSnoozeOn={setSnoozeOn}
                 showSnoozeModal={showSnoozeModal}
                 setShowSnoozeModal={setShowSnoozeModal}
             /> : ''}
