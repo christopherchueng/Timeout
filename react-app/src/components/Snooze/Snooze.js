@@ -29,7 +29,6 @@ const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCoun
         setShowSnoozeModal(false)
         setSnoozeOn(true)
         setCountdown(10)
-        console.log('snooze clicked!', countdown)
         window.localStorage.setItem('snooze', countdown)
     }
 

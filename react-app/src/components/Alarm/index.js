@@ -121,7 +121,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
             const timer = setInterval(() => setCountdown(prev => {
                 if (prev > 0) {
                     setCountdown(prev - 1)
-                    console.log('here is the countdown', countdown)
                     window.localStorage.setItem('snooze', countdown)
                 } else if (countdown <= 0) {
                     // If countdown hits 0, then show the snooze modal.
