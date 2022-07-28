@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Modal } from "../../context/Modal"
 import { useTimeContext } from "../../context/TimeContext"
+import './Snooze.css'
 
 const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCountdown, snoozeOn, setSnoozeOn }) => {
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
@@ -52,23 +53,28 @@ const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCoun
                 <div className='snooze-name'>
                     {alarm.name}
                 </div>
+                {alarm.snooze ?
                 <div className='snooze-buttons'>
-                    {alarm.snooze ?
-                    <>
+                    <div className='center-button'>
                         <button className='snooze' onClick={snoozeAlarm}>
-                            Snooze
+                            <span className="snooze-span">Snooze</span>
+                            <div className='snooze-ball'></div>
                         </button>
+                    </div>
+                    <div className='turn-off-snooze'>
                         <button className="turn-off-btn" type='submit' onClick={onClick}>
-                            Stop
+                            <span className='turn-off-span'>Stop</span>
+                            <div className='turn-off-ball'></div>
                         </button>
-                    </>
-                    :
-                    <div>
-                        <button className="turn-off-btn" type='submit' onClick={onClick}>
-                            Stop
-                        </button>
-                    </div>}
+                    </div>
                 </div>
+                :
+                <div className='center-button'>
+                    <button className="turn-off-btn" type='submit' onClick={onClick}>
+                        <span className='turn-off-span'>Stop</span>
+                        <div className='turn-off-ball'></div>
+                    </button>
+                </div>}
             </div>
         </>
     )

@@ -1,0 +1,92 @@
+.snooze-content,
+.snooze-name,
+.snooze-buttons,
+.center-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.snooze-content {
+    justify-content: center;
+    width: 300px;
+    height: auto;
+}
+
+.snooze-name {
+    font-family: 'Readex Pro';
+    font-weight: 1000;
+    font-size: 16pt;
+    text-align: center;
+    margin: 40px 20px 0 20px;
+
+}
+
+.snooze-buttons {
+    justify-content: space-around;
+    padding: 20px 0;
+    height: 150px;
+}
+
+.turn-off-snooze {
+    margin-bottom: 20px;
+}
+
+.center-button {
+    height: 75px;
+    padding: 20px 0;
+}
+
+.snooze,
+.turn-off-btn {
+    position: relative;
+    display: block;
+    border: 1px lightgray solid;
+    border-radius: 25px;
+    background-color: lightgray;
+    width: 100px;
+    height: 44px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.snooze-ball:before,
+.turn-off-ball:before {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.2s;
+    cursor: pointer;
+    top: 3px;
+    left: 2.5px;
+}
+
+.snooze:hover .snooze-ball:before,
+.turn-off-btn:hover .turn-off-ball:before {
+    transform: translateX(56px);
+    transition: 0.2s;
+}
+
+.snooze:hover,
+.turn-off-btn:hover {
+    background-color: #3478F6;
+    border: 1px solid #3478F6;
+    /* background-color: lightgreen; */
+    transition: 0.2s ease-out;
+}
+
+.snooze-span,
+.turn-off-span {
+    opacity: 1;
+    font-family: 'Lexend Deca';
+    padding-left: 35px;
+}
+
+.snooze:hover .snooze-span,
+.turn-off-btn:hover .turn-off-span {
+    opacity: 0;
+    transition: all 0.2s ease-out;
+}
