@@ -48,21 +48,28 @@ const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCoun
 
     return (
         <>
-            {alarm.snooze ?
             <div className="snooze-content">
-                <button className='snooze' onClick={snoozeAlarm}>
-                    Snooze
-                </button>
-                <button className="turn-off-btn" type='submit' onClick={onClick}>
-                    Stop
-                </button>
+                <div className='snooze-name'>
+                    {alarm.name}
+                </div>
+                <div className='snooze-buttons'>
+                    {alarm.snooze ?
+                    <>
+                        <button className='snooze' onClick={snoozeAlarm}>
+                            Snooze
+                        </button>
+                        <button className="turn-off-btn" type='submit' onClick={onClick}>
+                            Stop
+                        </button>
+                    </>
+                    :
+                    <div>
+                        <button className="turn-off-btn" type='submit' onClick={onClick}>
+                            Stop
+                        </button>
+                    </div>}
+                </div>
             </div>
-            :
-            <div>
-                <button className="turn-off-btn" type='submit' onClick={onClick}>
-                    Stop
-                </button>
-            </div>}
         </>
     )
 }
