@@ -16,6 +16,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     const { id } = useParams()
     // const alarmsObj = useSelector(state => state?.alarm?.entries)
     // const alarmsArr = Object.values(alarmsObj)
+    const initialTimer = () => Number(window.localStorage.getItem('snooze') || 0)
 
     const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
     const [name, setName] = useState('')
@@ -28,6 +29,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     const [alarmOn, setAlarmOn] = useState('')
     const [alarmlistId, setAlarmlistId] = useState('')
     const [showSnoozeModal, setShowSnoozeModal] = useState(false)
+
+    const [countdown, setCountdown] = useState(10)
 
     useEffect(() => {
         // If alarmlist is default, display all alarms.
@@ -194,6 +197,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                 alarm={alarm}
                 alarmOn={alarmOn}
                 setAlarmOn={setAlarmOn}
+                countdown={countdown}
+                setCountdown={setCountdown}
                 showSnoozeModal={showSnoozeModal}
                 setShowSnoozeModal={setShowSnoozeModal}
             /> : ''}

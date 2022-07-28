@@ -3,7 +3,7 @@ import { Modal } from "../../context/Modal";
 import Snooze from "./Snooze";
 import './Snooze.css'
 
-const SnoozeModal = ({ alarm, alarmOn, setAlarmOn, showSnoozeModal, setShowSnoozeModal }) => {
+const SnoozeModal = ({ alarm, alarmOn, setAlarmOn, showSnoozeModal, setShowSnoozeModal, countdown, setCountdown }) => {
     return (
         <div className='snooze-modal-ctn'>
             <Modal onClose={() => setShowSnoozeModal(false)} onChange={() => setShowSnoozeModal(false)}>
@@ -13,6 +13,8 @@ const SnoozeModal = ({ alarm, alarmOn, setAlarmOn, showSnoozeModal, setShowSnooz
                     alarm={alarm}
                     alarmOn={alarmOn}
                     setAlarmOn={setAlarmOn}
+                    countdown={countdown}
+                    setCountdown={setCountdown}
                 />
             </Modal>
         </div>
