@@ -77,6 +77,7 @@ export const getIndependentAlarms = (alarmlist_id) => async (dispatch) => {
 }
 
 export const createAlarm = (payload) => async (dispatch) => {
+    console.log('here in createAlarm')
     const {
         name,
         hour,
@@ -89,6 +90,8 @@ export const createAlarm = (payload) => async (dispatch) => {
         alarmlist_id
     } = payload
 
+    console.log('here is sound in create thunk', sound)
+
     const formData = new FormData()
     formData.append('name', name)
     formData.append('hour', hour)
@@ -100,9 +103,11 @@ export const createAlarm = (payload) => async (dispatch) => {
     formData.append('toggle', toggle)
     formData.append('alarmlist_id', alarmlist_id)
 
+    console.log('here is sound after formData', formData)
+
     const response = await fetch('/api/alarms/create', {
         method: 'POST',
-        body: JSON.stringify(formData)
+        body: formData
     })
 
     if (response.ok) {
@@ -142,7 +147,7 @@ export const updateAlarm = (payload) => async (dispatch) => {
 
     const response = await fetch(`/api/alarms/${payload.alarm_id}/edit`, {
         method: 'PUT',
-        body: JSON.stringify(formData)
+        body: formData
     })
 
     if (response.ok) {

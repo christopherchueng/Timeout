@@ -39,6 +39,9 @@ def add_alarm():
     form = AlarmForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    if "sound" not in request.files:
+        return {"errors": "sound required"}, 400
+
     sound = request.files["sound"]
 
     # Deals with incorrect file format/type
