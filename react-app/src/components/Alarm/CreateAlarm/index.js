@@ -113,6 +113,11 @@ const CreateAlarm = () => {
 
     }
 
+    const updateSound = e => {
+        const file = e.target.files[0]
+        setSound(file)
+    }
+
     return (
         <div id='create-alarm'>
             <h1 className='alarm-form-title'>Add Alarm</h1>
@@ -279,12 +284,18 @@ const CreateAlarm = () => {
                 </div>
                 {/* ------------------------- SOUND ------------------------- */}
                 <div className='alarm-sound-form'>
-                    {/* <div className='alarm-sound-label'>
+                    <div className='alarm-sound-label'>
                         <label htmlFor='sound'>Sound</label>
                     </div>
                     <div className='alarm-sound-input'>
-                        sound AWS here...
-                    </div> */}
+                        <input
+                            className='sound-link'
+                            name='sound'
+                            accept='sound/*'
+                            onChange={updateSound}
+                            type='file'
+                        />
+                    </div>
                 </div>
                 {/* ------------------------- REPEAT ------------------------- */}
                 <div className='alarm-repeat-form'>
