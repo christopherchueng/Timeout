@@ -17,7 +17,7 @@ const AlarmList = ({ dashAlarmlist }) => {
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
     const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
-
+    // const filteredAlarms = alarmsArr.filter(alarm => alarm?.alarmlistId === dashAlarmlist?.id)
     const [name, setName] = useState(0)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState('')
     const [openTab, setOpenTab] = useState(false)
