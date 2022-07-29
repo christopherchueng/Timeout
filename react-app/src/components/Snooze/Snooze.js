@@ -51,23 +51,28 @@ const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCoun
         <>
             <div className="snooze-content">
                 <div className='snooze-name'>
-                    {alarm.name}
+                    <span>{alarm.name}</span>
                 </div>
                 {alarm.snooze ?
-                <div className='snooze-buttons'>
-                    <div className='center-button'>
-                        <button className='snooze' onClick={snoozeAlarm}>
-                            <span className="snooze-span">Snooze</span>
-                            <div className='snooze-ball'></div>
-                        </button>
+                <>
+                    <div className="snooze-disclaimer">
+                        <p>For demo purposes, the snooze alarm will go off in 10 seconds.</p>
                     </div>
-                    <div className='turn-off-snooze'>
-                        <button className="turn-off-btn" type='submit' onClick={onClick}>
-                            <span className='turn-off-span'>Stop</span>
-                            <div className='turn-off-ball'></div>
-                        </button>
+                    <div className='snooze-buttons'>
+                        <div className='center-button'>
+                            <button className='snooze' onClick={snoozeAlarm}>
+                                <span className="snooze-span">Snooze</span>
+                                <div className='snooze-ball'></div>
+                            </button>
+                        </div>
+                        <div className='turn-off-snooze'>
+                            <button className="turn-off-btn" type='submit' onClick={onClick}>
+                                <span className='turn-off-span'>Stop</span>
+                                <div className='turn-off-ball'></div>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </>
                 :
                 <div className='center-button'>
                     <button className="turn-off-btn" type='submit' onClick={onClick}>
