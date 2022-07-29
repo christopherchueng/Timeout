@@ -19,12 +19,24 @@
     font-size: 16pt;
     text-align: center;
     margin: 40px 20px 0 20px;
+}
 
+.snooze-name > span {
+    word-break: break-all;
+}
+
+.snooze-disclaimer {
+    font-family: 'Lexend Deca';
+    font-weight: 1000;
+    font-size: 10pt;
+    text-align: center;
+    font-style: italic;
+    padding: 0 40px;
 }
 
 .snooze-buttons {
     justify-content: space-around;
-    padding: 20px 0;
+    padding-bottom: 20px;
     height: 150px;
 }
 
