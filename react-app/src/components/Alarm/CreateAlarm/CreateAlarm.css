@@ -51,7 +51,8 @@ select {
 .alarm-alarmlist-label,
 .alarm-sound-label,
 .alarm-repeat-label,
-.alarm-snooze-label {
+.alarm-snooze-label,
+.alarm-sound-input {
     font-family: 'Lexend Deca';
     font-weight: 1000;
 }
@@ -120,8 +121,20 @@ select {
     padding-top: 30px;
 }
 
-.alarm-sound-input > input {
+.alarm-sound-input {
+    border-bottom: 1px solid black;
+    text-align: right;
     cursor: pointer;
+    /* width: auto; */
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ellipsis from right to left text*/
+.rtl {
+    direction: rtl
 }
 
 #file-upload-button {

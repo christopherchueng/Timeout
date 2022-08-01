@@ -70,9 +70,17 @@ const EditAlarm = () => {
         if (!alarmlistsArr.length) {
             validationErrors.alarmlist = 'You currently do not have any alarmlists! Please create an alarmlist first!'
         }
+        if (sound.name &&
+            !sound?.name?.endsWith('mp3') &&
+            !sound?.name?.endsWith('mp4') &&
+            !sound?.name?.endsWith('aac') &&
+            !sound?.name?.endsWith('wma') &&
+            !sound?.name?.endsWith('flac')) {
+            validationErrors.sound = "Please provide a valid file ('mp3', 'mp4', 'aac', 'wma', 'flac')."
+        }
 
         setErrors(validationErrors)
-    }, [name, alarmlist, alarmlistsObj])
+    }, [name, alarmlist, alarmlistsObj, sound])
 
     useEffect(() => {
         setMessageCount(name?.length)
@@ -310,7 +318,7 @@ const EditAlarm = () => {
                             className='alarmlist-selection-form'
                         >
                             {alarmlistsArr && alarmlistsArr.map(alarmlist => (
-                                <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
+                                <option value={parseInt(alarmlist?.id)} key={parseInt(alarmlist?.id)}>{alarmlist?.name}</option>
                             ))}
                         </select>
                     </div>
@@ -323,15 +331,20 @@ const EditAlarm = () => {
                     <div className='alarm-sound-label'>
                         <label htmlFor='sound'>Sound</label>
                     </div>
-                    <div className='alarm-sound-input'>
+                    <label className='alarm-sound-input rtl'>
+                        {/* 3 cases: If uploading a new sound, display name of upload (newly updated sound comes in an object)
+                        If user didn't upload new sound to begin with, display the default
+                        If user uploaded a sound when creating an alarm, display the tail of the link. */}
+                        {typeof sound === 'object' ? sound?.name : sound?.endsWith('Daybreak.mp3') ? 'Default' : sound}
                         <input
                             className='sound-link'
                             name='sound'
                             accept='sound/*'
                             onChange={updateSound}
                             type='file'
+                            hidden={true}
                         />
-                    </div>
+                    </label>
                 </div>
                 {/* ------------------------- REPEAT ------------------------- */}
                 <div className='alarm-repeat-form'>

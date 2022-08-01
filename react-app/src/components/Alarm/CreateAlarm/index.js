@@ -57,9 +57,17 @@ const CreateAlarm = () => {
         if (!alarmlistsArr.length) {
             validationErrors.alarmlist = 'You currently do not have any alarmlists! Please create an alarmlist first!'
         }
+        if (sound &&
+            !sound.name.endsWith('mp3') &&
+            !sound.name.endsWith('mp4') &&
+            !sound.name.endsWith('aac') &&
+            !sound.name.endsWith('wma') &&
+            !sound.name.endsWith('flac')) {
+            validationErrors.sound = "Please provide a valid file ('mp3', 'mp4', 'aac', 'wma', 'flac')."
+        }
 
         setErrors(validationErrors)
-    }, [name, alarmlist])
+    }, [name, alarmlist, sound])
 
     useEffect(() => {
         setMessageCount(name.length)
@@ -288,15 +296,20 @@ const CreateAlarm = () => {
                     <div className='alarm-sound-label'>
                         <label htmlFor='sound'>Sound</label>
                     </div>
-                    <div className='alarm-sound-input'>
+                    <label className='alarm-sound-input'>
+                        {!sound ? 'Default' : sound.name}
                         <input
                             className='sound-link'
                             name='sound'
                             accept='sound/*'
                             onChange={updateSound}
                             type='file'
+                            hidden={true}
                         />
-                    </div>
+                    </label>
+                </div>
+                <div className='alarm-formError-ctn'>
+                    {<ErrorMessage error={errors.sound} setClassName="alarm-sound-error" />}
                 </div>
                 {/* ------------------------- REPEAT ------------------------- */}
                 <div className='alarm-repeat-form'>
