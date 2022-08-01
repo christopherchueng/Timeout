@@ -361,13 +361,17 @@ const EditAlarm = () => {
                         <label htmlFor='snooze'>Snooze</label>
                     </div>
                     <div className='alarm-snooze-input'>
-                        <input
-                            name='snooze'
-                            type='checkbox'
-                            value={snooze}
-                            checked={snooze}
-                            onChange={() => setSnooze(!snooze)}
-                        />
+                        <label className='snooze-switch'>
+                            <input
+                                name='snooze'
+                                type='checkbox'
+                                value={snooze}
+                                className='snooze-radio-box'
+                                onClick={() => setSnooze(!snooze)}
+                            />
+                            <div className='snooze-slider snooze-ball'>
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div className='create-alarm-submit'>
