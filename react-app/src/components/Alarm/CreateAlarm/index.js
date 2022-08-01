@@ -31,6 +31,7 @@ const CreateAlarm = () => {
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(0)
 
+
     useEffect(() => {
         dispatch(getAlarmlists())
         // dispatch(getDefaultAlarmlist())
@@ -42,7 +43,7 @@ const CreateAlarm = () => {
         setMinutes(todaysDate.getMinutes())
         setMeridiem(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
         setSnooze(false)
-        setAlarmlist(1)
+        setAlarmlist(alarmlistsArr[0]?.id)
     }, [])
 
     useEffect(() => {
@@ -105,7 +106,7 @@ const CreateAlarm = () => {
             setSound('')
             setRepeat([])
             setSnooze(false)
-            setAlarmlist(1)
+            setAlarmlist(alarmlistsArr[0]?.id)
             setErrors({})
             history.push(`/dashboard`)
             // history.push(`/alarmlists/${alarmlist}`)
@@ -323,12 +324,17 @@ const CreateAlarm = () => {
                         <label htmlFor='snooze'>Snooze</label>
                     </div>
                     <div className='alarm-snooze-input'>
-                        <input
-                            name='snooze'
-                            type='checkbox'
-                            value={snooze}
-                            onClick={() => setSnooze(!snooze)}
-                        />
+                        <label className='snooze-switch'>
+                            <input
+                                name='snooze'
+                                type='checkbox'
+                                value={snooze}
+                                className='snooze-radio-box'
+                                onClick={() => setSnooze(!snooze)}
+                            />
+                            <div className='snooze-slider snooze-ball'>
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div className='create-alarm-submit'>

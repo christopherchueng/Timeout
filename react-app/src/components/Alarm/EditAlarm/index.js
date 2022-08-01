@@ -40,7 +40,7 @@ const EditAlarm = () => {
         // const asyncDispatch = async () => {
         dispatch(getAlarm(alarmId))
         dispatch(getAlarmlists())
-        dispatch(getDefaultAlarmlist())
+        // dispatch(getDefaultAlarmlist())
         // }
         // asyncDispatch()
         // if (alarm === undefined) {
@@ -141,7 +141,7 @@ const EditAlarm = () => {
             setSound('')
             setRepeat([])
             setSnooze('')
-            setAlarmlist(1)
+            setAlarmlist(alarmlistsArr[0]?.id)
             setErrors({})
             history.push(`/dashboard`)
             // history.push(`/alarmlists/${alarmlist}`)
@@ -372,13 +372,18 @@ const EditAlarm = () => {
                         <label htmlFor='snooze'>Snooze</label>
                     </div>
                     <div className='alarm-snooze-input'>
-                        <input
-                            name='snooze'
-                            type='checkbox'
-                            value={snooze}
-                            checked={snooze}
-                            onChange={() => setSnooze(!snooze)}
-                        />
+                        <label className='snooze-switch'>
+                            <input
+                                name='snooze'
+                                type='checkbox'
+                                value={snooze}
+                                checked={snooze}
+                                className='snooze-radio-box'
+                                onChange={() => setSnooze(!snooze)}
+                            />
+                            <div className='snooze-slider snooze-ball'>
+                            </div>
+                        </label>
                     </div>
                 </div>
                 <div className='create-alarm-submit'>
