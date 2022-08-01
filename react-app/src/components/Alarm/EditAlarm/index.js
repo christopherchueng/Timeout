@@ -40,7 +40,7 @@ const EditAlarm = () => {
         // const asyncDispatch = async () => {
         dispatch(getAlarm(alarmId))
         dispatch(getAlarmlists())
-        dispatch(getDefaultAlarmlist())
+        // dispatch(getDefaultAlarmlist())
         // }
         // asyncDispatch()
         // if (alarm === undefined) {
