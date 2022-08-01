@@ -141,7 +141,7 @@ const EditAlarm = () => {
             setSound('')
             setRepeat([])
             setSnooze('')
-            setAlarmlist(1)
+            setAlarmlist(alarmlistsArr[0]?.id)
             setErrors({})
             history.push(`/dashboard`)
             // history.push(`/alarmlists/${alarmlist}`)
@@ -366,8 +366,9 @@ const EditAlarm = () => {
                                 name='snooze'
                                 type='checkbox'
                                 value={snooze}
+                                checked={snooze}
                                 className='snooze-radio-box'
-                                onClick={() => setSnooze(!snooze)}
+                                onChange={() => setSnooze(!snooze)}
                             />
                             <div className='snooze-slider snooze-ball'>
                             </div>
