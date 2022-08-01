@@ -89,8 +89,6 @@ export const createAlarm = (payload) => async (dispatch) => {
         alarmlist_id
     } = payload
 
-    console.log('here in create alarm thunk', payload.sound)
-
     const formData = new FormData()
     formData.append('name', name)
     formData.append('hour', hour)

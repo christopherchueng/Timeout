@@ -153,8 +153,6 @@ const EditAlarm = () => {
         setSound(file)
     }
 
-    console.log('here is the sound link', sound)
-
     return (
         <div id='edit-alarm'>
             <h1 className='alarm-form-title'>Edit Alarm</h1>

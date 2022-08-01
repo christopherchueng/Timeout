@@ -84,7 +84,6 @@ def update_alarm(alarm_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     alarm = Alarm.query.get(alarm_id)
-    print('-'*50, form.data['sound'])
 
     if "sound" in request.files:
         sound = request.files["sound"]
