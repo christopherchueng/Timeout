@@ -33,26 +33,13 @@ const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCoun
         window.localStorage.setItem('snooze', countdown)
     }
 
-    // const snoozeAlarm = () => {
-    //     setShowSnoozeModal(false)
-    //     let snoozeMin = 1;
-    //     if (alarm.minutes < 50) {
-    //         snoozeMin += parseInt(minutes)
-    //         alarm.minutes = snoozeMin
-    //     } else if (alarm.minutes >= 50) {
-    //         snoozeMin = (parseInt(minutes) + snoozeMin) - 60
-    //         if (snoozeMin < 10) {
-    //             alarm.minutes = '0' + snoozeMin
-    //         }
-    //     }
-    // }
-
     return (
         <>
             <div className="snooze-content">
                 <div className='snooze-name'>
                     <span>{alarm.name}</span>
                 </div>
+                <audio src={alarm.sound} hidden={true} autoPlay loop></audio>
                 {alarm.snooze ?
                 <>
                     <div className="snooze-disclaimer">
