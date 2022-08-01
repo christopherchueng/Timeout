@@ -39,25 +39,25 @@ def add_alarm():
     form = AlarmForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if "sound" not in request.files:
-        return {"errors": "sound required"}, 400
+    if "sound" in request.files:
+        sound = request.files["sound"]
 
-    sound = request.files["sound"]
+        # Deals with incorrect file format/type
+        if not allowed_file(sound.filename):
+            return {"errors": "file type not permitted"}, 400
 
-    # Deals with incorrect file format/type
-    if not allowed_file(sound.filename):
-        return {"errors": "file type not permitted"}, 400
+        sound.filename = get_unique_filename(sound.filename)
 
-    sound.filename = get_unique_filename(sound.filename)
+        upload = upload_file_to_s3(sound)
 
-    upload = upload_file_to_s3(sound)
+        # if no url key in dictionary
+        # then an error occurred when uploading
+        if "url" not in upload:
+            return upload, 400
 
-    # if no url key in dictionary
-    # then an error occurred when uploading
-    if "url" not in upload:
-        return upload, 400
-
-    url = upload["url"]
+        url = upload["url"]
+    else:
+        url = ''
 
     if form.validate_on_submit():
         new_alarm = Alarm(
@@ -65,8 +65,9 @@ def add_alarm():
             hour=form.data['hour'],
             minutes=form.data['minutes'],
             meridiem=form.data['meridiem'],
+            sound=url,
             repeat=form.data['repeat'],
-            snooze=url,
+            snooze=form.data['snooze'],
             toggle=True,
             alarmlist_id=form.data['alarmlist_id']
         )
@@ -83,23 +84,27 @@ def update_alarm(alarm_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     alarm = Alarm.query.get(alarm_id)
+    print('-'*50, form.data['sound'])
 
-    sound = request.files["sound"]
+    if "sound" in request.files:
+        sound = request.files["sound"]
 
-    # Deals with incorrect file format/type
-    if not allowed_file(sound.filename):
-        return {"errors": "file type not permitted"}, 400
+        # Deals with incorrect file format/type
+        if not allowed_file(sound.filename):
+            return {"errors": "file type not permitted"}, 400
 
-    sound.filename = get_unique_filename(sound.filename)
+        sound.filename = get_unique_filename(sound.filename)
 
-    upload = upload_file_to_s3(sound)
+        upload = upload_file_to_s3(sound)
 
-    # if no url key in dictionary
-    # then an error occurred when uploading
-    if "url" not in upload:
-        return upload, 400
+        # if no url key in dictionary
+        # then an error occurred when uploading
+        if "url" not in upload:
+            return upload, 400
 
-    url = upload["url"]
+        url = upload["url"]
+    else:
+        url = alarm.sound
 
     if form.validate_on_submit():
         alarm.name = form.data['name']
