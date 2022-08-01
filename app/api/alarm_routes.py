@@ -57,7 +57,7 @@ def add_alarm():
 
         url = upload["url"]
     else:
-        url = ''
+        url = 'https://timeout-jingles.s3.amazonaws.com/Daybreak.mp3'
 
     if form.validate_on_submit():
         new_alarm = Alarm(
