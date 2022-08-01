@@ -106,7 +106,7 @@ const CreateAlarm = () => {
             setSound('')
             setRepeat([])
             setSnooze(false)
-            setAlarmlist(1)
+            setAlarmlist(alarmlistsArr[0]?.id)
             setErrors({})
             history.push(`/dashboard`)
             // history.push(`/alarmlists/${alarmlist}`)
