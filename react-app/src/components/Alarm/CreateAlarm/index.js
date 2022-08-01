@@ -31,6 +31,7 @@ const CreateAlarm = () => {
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(0)
 
+
     useEffect(() => {
         dispatch(getAlarmlists())
         // dispatch(getDefaultAlarmlist())
@@ -42,7 +43,7 @@ const CreateAlarm = () => {
         setMinutes(todaysDate.getMinutes())
         setMeridiem(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
         setSnooze(false)
-        setAlarmlist(1)
+        setAlarmlist(alarmlistsArr[0]?.id)
     }, [])
 
     useEffect(() => {
