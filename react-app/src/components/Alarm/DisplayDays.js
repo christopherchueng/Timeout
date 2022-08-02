@@ -14,10 +14,10 @@ const DisplayDays = ({ alarmDays }) => {
         <>
             {alarmDays && alarmDays.map(day => (
                 <div className='selected-day' key={day.id}>
-                    {(alarmDays.length === 1) ? `every ${day.name}` : '' ||
-                    (alarmDays.length === 5 && alarmDays.every(day => weekdays.includes(day)) ? 'every weekday' : '') ||
-                    (alarmDays.length === 2 && alarmDays.every(day => weekends.includes(day))) ? 'every weekend' : '' ||
-                    (alarmDays.length === 7) ? 'every day' : '' ||
+                    {(alarmDays.length === 1) ||
+                    (alarmDays.length === 5 && alarmDays.every(day => weekdays.includes(day))) ||
+                    (alarmDays.length === 2 && alarmDays.every(day => weekends.includes(day))) ||
+                    (alarmDays.length === 7) ||
                     (day.short)}
                 </div>
             ))}

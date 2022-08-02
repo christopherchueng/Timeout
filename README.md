@@ -11,6 +11,7 @@ Inspired and frustrated by Apple's Clock mobile app, Timeout allows you to creat
 * SQLAlchemy
 * PostgreSQL
 * Docker
+* AWS
 
 ![Screen Shot 2022-07-18 at 1 07 48 AM](https://user-images.githubusercontent.com/78316838/179451478-f14c4279-8155-4b44-8ccd-5c28fb10aa13.png)
 
@@ -27,8 +28,77 @@ As a signed in user, you will be able to create, read, update, and delete their 
 ![Screen Shot 2022-07-18 at 1 09 03 AM](https://user-images.githubusercontent.com/78316838/179451527-dc60ca48-e5ba-4c2f-a15d-49fcf3b709bd.png)
 ![Screen Shot 2022-07-18 at 1 09 39 AM](https://user-images.githubusercontent.com/78316838/179451530-0679352b-8362-48ce-88d7-6cf288f926b5.png)
 
+## Snooze
+Once an alarm has been set, wait and see what happens (this should be no surprise)! This was probably one of the trickiest parts of the projects due to the many cases I had to consider. However, with the help of local storage and context, I was able to implement a timer and have the alarm go off at the right day and time. The below code exhibits an extensive snooze boolean condition: when the snooze checkbox is on, then display the snooze modal. Otherwise, have the alarm go off and turn off the alarm toggle. The worst part about this feature was having to wait for the currentTime to match the alarm set. If only there was a way to fast forward time!
+
+## AWS
+Personalize the way your alarms sound by uploading your own jingles/sounds/songs to an alarm!
+
+## Honorable Mentions
+## Days of the Week
+When a user selects specific repeated days, pay attention to the days displayed on the dashboard that was implemented by the code below!
+
+## Minutes as a String?!
+When creating/editing an alarm and trying to enter the integer 0 as a value under the minutes column, I kept receiving an invalid input because the DataRequired validator in wtforms considers 0 as an erroneous/falsey input. To accommodate for this, I had to change the minutes field into a StringField and use the InputRequired validator.
+
+## Converting Repeated Days
+Since the repeated days field can take in a collection of data, I had to find a way that would allow the frontend and backend to communicate and deliver information to each other. When a user submits a form with repeated days selected, this will send over a string of number(s) to the backend. When the payload gets to the backend, I created a function that extracts the data, converts the numbers into a dictionary that includes the name, id, and shortened name, and then deliver the conversion to the frontend.
+
+# Run App Locally
+
+1. Clone the repository
+
+```
+git clone git@https://github.com/christopherchueng/Timeout.git
+```
+
+2. Install dependencies
+
+- In root folder, install Python server.
+
+```
+pipenv install
+```
+
+- Navigate to react-app folder, run npm install
+
+```
+cd react-app
+npm install
+```
+
+3. Setup your PostgreSQL user, password and database
+
+```
+CREATE USER timeout_user WITH PASSWORD 'password';
+CREATE DATABASE timeout_dev WITH OWNER timeout_user;
+```
+
+4. create a .env file in root folder, based on the .env.example with proper settings for your development environment
+
+5. Migrate and seed your database in root folder
+
+```
+pipenv run flask db upgrade
+pipenv run flask seed all
+```
+
+6. Start the server
+
+- In root folder
+
+```
+pipenv shell
+flask run
+```
+
+- Navigate to react-app folder
+
+```
+npm start
+```
+
 # Upcoming features
-* AWS alarm jingle uploads
 * Stopwatch
 * Timer
 * International times
