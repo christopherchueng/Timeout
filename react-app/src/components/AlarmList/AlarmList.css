@@ -37,7 +37,7 @@
     display: flex;
     flex-direction: row;
     height: 50px;
-    width: 250px;
+    width: 200px;
     /* overflow-x: auto; */
 }
 
@@ -235,4 +235,8 @@ so that whereever you click the slider, the radio box will be (un)checked */
     border: 1px solid #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s
+}
+
+.alarm-toggle-ctn {
+    padding-right: 35px;
 }
