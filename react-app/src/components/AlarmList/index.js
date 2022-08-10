@@ -204,13 +204,14 @@ const AlarmList = ({ dashAlarmlist }) => {
                 </div>
                 :
                 <>
-                    <button
-                        className='toggle-alarms-view'
-                        onClick={() => setOpenTab(!openTab)}
-                        style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
-                    >
-                        <i className="fa-solid fa-angle-right"></i>
-                    </button>
+                    <div className="dropdown-alarms" onClick={() => setOpenTab(!openTab)}>
+                        <button
+                            className='toggle-alarms-view'
+                            style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
+                        >
+                            <i className="fa-solid fa-angle-right"></i>
+                        </button>
+                    </div>
                     {filteredAlarms && filteredAlarms.map(alarm => (
                         <div className='alarm-toggle-ctn' key={alarm.id}>
                             <Alarm

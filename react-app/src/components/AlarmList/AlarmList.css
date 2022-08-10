@@ -165,6 +165,14 @@
     padding: 0 0 0 20px;
 }
 
+.dropdown-alarms {
+    cursor: pointer;
+}
+
+.dropdown-alarms:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .update-alarmlist-icon,
 .delete-alarmlist-icon {
     padding-left: 10px;
