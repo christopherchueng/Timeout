@@ -10,6 +10,7 @@
     font-family: 'Lexend Deca';
     display: flex;
     flex-direction: row;
+    width: 200px;
 }
 
 .alarm-time {

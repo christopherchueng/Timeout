@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { login } from '../../store/session';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { createAlarmlist } from '../../store/alarmlist';
 import './SignUpForm.css'
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+  const history = useHistory()
+
   const [errors, setErrors] = useState({});
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -15,7 +19,6 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false)
   const user = useSelector(state => state.session.user);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const validationErrors = {}
@@ -100,6 +103,13 @@ const SignUpForm = () => {
 
   if (user) {
     return <Redirect to='/dashboard' />;
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    await dispatch(login('demo@aa.io', 'password'))
+    history.push('/dashboard')
   }
 
   return (
@@ -206,6 +216,12 @@ const SignUpForm = () => {
               <div className='create-account-ball'></div>
             </div>
           </Link>
+        </div>
+        <div className='login-demo-ctn'>
+          <button className='toggle-login' onClick={onSubmit}>
+            <span className='login-span'>Demo</span>
+            <div className='signin-ball'></div>
+          </button>
         </div>
       </form>
     </div>

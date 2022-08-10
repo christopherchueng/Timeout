@@ -23,6 +23,7 @@ const AlarmList = ({ dashAlarmlist }) => {
     const [openTab, setOpenTab] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [openSettings, setOpenSettings] = useState(false)
+    const [showEllipsis, setShowEllipsis] = useState(false)
 
     useEffect(() => {
         dispatch(getAlarmlist(id ? alarmlistId : dashAlarmlist?.id))
@@ -123,50 +124,77 @@ const AlarmList = ({ dashAlarmlist }) => {
                 />
             </div>
             :
-            <div className='alarmlist-header' key={dashAlarmlist?.id || alarmlistId}>
-                <div className='alarmlist-name'>
-                    <div className='alarmlist-heading-ctn'>
-                        {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
-                        <h1 className="alarmlist-name-heading">{dashAlarmlist?.name}</h1>
+            <div className='alarmlist-top'
+            style={{
+                transform: openSettings ? 'translateX(-100px)' : '',
+                transition: '0.2s'
+            }}
+            >
+                <div
+                    className='alarmlist-header'
+                    key={dashAlarmlist?.id || alarmlistId}
+                    onMouseEnter={() => setShowEllipsis(true)}
+                    onMouseLeave={() => setShowEllipsis(false)}
+                    onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
+                    style={{cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''}}
+                >
+                    <div className='alarmlist-name'>
+                        <div className='alarmlist-heading-ctn'>
+                            {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
+                            <h1 className="alarmlist-name-heading">{dashAlarmlist?.name}</h1>
+                        </div>
                     </div>
-                    {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
-                    {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
-                    ?
-                    <div className='settings-menu'>
-                        <div className='alarmlist-toggle-settings'>
-                            <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
-                                <i className="fa-solid fa-ellipsis fa-2x"></i>
+                    <div className='toggle-and-settings'>
+                        <div
+                            className='alarmlist-toggle'
+                            style={{paddingRight: dashAlarmlist?.id === 1 ? '25px' : ''}}
+                        >
+                            <label className='alarmlist-switch'>
+                                <input
+                                    type='checkbox'
+                                    value={mainAlarmlistSwitch}
+                                    onChange={onChange}
+                                    className='alarmlist-radio-box'
+                                    checked={mainAlarmlistSwitch}
+                                />
+                                <div className='alarmlist-slider alarmlist-ball'>
+                                </div>
+                            </label>
+                        </div>
+                        {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
+                        {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
+                            ?
+                            <div className='settings-menu'>
+                                <div className='alarmlist-toggle-settings' onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}>
+                                    {showEllipsis &&
+                                    <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
+                                        <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                                    </button>}
+                                </div>
+                            </div>
+                        : ""}
+                    </div>
+                </div>
+                <div
+                    className='alarmlist-btn-settings'
+                    style={{
+                        transform: openSettings ? 'translateX(-12px)' : '',
+                        width: '0',
+                        padding: !openSettings && '0'
+                    }}
+                >
+                    {openSettings &&
+                    <div className='settings-ctn'>
+                        <div className='edit-alarmlist'>
+                            <button type='button' className='alarmlist-edit-btn' onClick={() => setIsEditing(!isEditing)}>
+                                {/* <span className="fa-solid fa-pen update-alarmlist-icon"></span> */}
+                                <span className="edit-alarmlist-label">Edit</span>
                             </button>
                         </div>
-                        <div className='alarmlist-btn-settings'>
-                            {openSettings &&
-                            <div className='settings-ctn'>
-                                <div className='edit-alarmlist'>
-                                    <button type='button' className={`alarmlist-edit-btn`} onClick={() => setIsEditing(!isEditing)}>
-                                        <span className="fa-solid fa-pen update-alarmlist-icon"></span>
-                                        <span className="edit-alarmlist-label">Edit</span>
-                                    </button>
-                                </div>
-                                <div className='delete-alarmlist'>
-                                    <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} openSettings={openSettings} setOpenSettings={setOpenSettings} />
-                                </div>
-                            </div>}
+                        <div className='delete-alarmlist'>
+                            <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} openSettings={openSettings} setOpenSettings={setOpenSettings} />
                         </div>
-                    </div>
-                    : ""}
-                </div>
-                <div className='alarmlist-toggle'>
-                    <label className='alarmlist-switch'>
-                        <input
-                            type='checkbox'
-                            value={mainAlarmlistSwitch}
-                            onChange={onChange}
-                            className='alarmlist-radio-box'
-                            checked={mainAlarmlistSwitch}
-                        />
-                        <div className='alarmlist-slider alarmlist-ball'>
-                        </div>
-                    </label>
+                    </div>}
                 </div>
             </div>}
             <div id='alarmlist-alarms'>
@@ -194,7 +222,8 @@ const AlarmList = ({ dashAlarmlist }) => {
                                 mainAlarmlistSwitch={mainAlarmlistSwitch}
                                 setMainAlarmlistSwitch={setMainAlarmlistSwitch}
                             />
-                        </div>))}
+                        </div>))
+                    }
                 </>}
             </div>
         </div>
