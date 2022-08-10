@@ -197,7 +197,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     </div>}
                 </div>
             </div>}
-            <div id='alarmlist-alarms'>
+            <div id='alarmlist-alarms' onClick={() => setOpenTab(!openTab)}>
                 {filteredAlarms.length === 0 ?
                 <div className='no-alarms-ctn'>
                     <p className='no-alarms'>{`You have no alarms under '${dashAlarmlist?.name}.' Create a new alarm in the top right corner!`}</p>
@@ -206,7 +206,6 @@ const AlarmList = ({ dashAlarmlist }) => {
                 <>
                     <button
                         className='toggle-alarms-view'
-                        onClick={() => setOpenTab(!openTab)}
                         style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
                     >
                         <i className="fa-solid fa-angle-right"></i>
