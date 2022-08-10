@@ -10,18 +10,25 @@
     padding: 0 20px;
 }
 
+.toggle-and-settings {
+    display: flex;
+    flex-direction: row;
+}
+
 .alarmlist-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-top: 20px;
-    height: 100px;
+    height: 75px;
+    position: relative;
+    z-index: 3;
 }
 
 .alarmlist-name {
     display: flex;
     flex-direction: row;
-    height: 100px;
+    height: 50px;
     width: 250px;
     /* overflow-x: auto; */
 }
@@ -41,8 +48,8 @@
 }
 
 .alarmlist-name-heading {
-    margin: 15px 0;
-    width: 150px;
+    margin: 15px 10px 0 0;
+    max-width: 150px;
     height: 50px;
     overflow-x: auto;
     overflow-y: auto;
@@ -58,8 +65,9 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    width: 25px;
+    width: 15px;
     height: 50px;
+    margin-left: 10px;
 }
 
 .ellipsis-settings {
@@ -67,26 +75,33 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    padding-bottom: 5px;
 }
 
-.fa-ellipsis {
+.fa-ellipsis-vertical {
     background-color: none;
     border: none;
     color: gray;
 }
 
 .alarmlist-btn-settings {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    position: relative;
+    float: left;
     width: 100px;
     height: 65px;
-    padding: 32px 10px 0 0;
+    top: 40px;
+    left: 5px;
+    z-index: 10;
+    /* padding: 32px 10px 0 0; */
 
 }
 
 .settings-ctn {
     border: 1px solid lightgray;
     border-radius: 5px;
+    /* z-index: 3; */
 }
 
 .edit-alarmlist,
@@ -94,6 +109,7 @@
     display: flex;
     height: 30px;
     width: 98px;
+    /* z-index: 3; */
 }
 
 .alarmlist-edit-btn,

@@ -31,6 +31,8 @@
     border-bottom: 1px solid lightgray;
     overflow: scroll;
     padding-bottom: 40px;
+    position: relative;
+    z-index: 1;
     /* height: 100vh; */
 }
 
@@ -41,6 +43,8 @@
     justify-content: center;
     align-items: center;
     width: 75vw;
+    position: relative;
+    z-index: -1;
 }
 
 .dashboard-time-ctn {
