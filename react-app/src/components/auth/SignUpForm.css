@@ -129,6 +129,10 @@
     transition: all 0.2s ease-in-out;
 }
 
+.login-ctn {
+    padding-top: 20px;
+}
+
 .login-ctn > a {
     text-decoration: none;
 }

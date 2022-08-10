@@ -18,7 +18,7 @@
     justify-content: center;
     flex-direction: column;
     width: 600px;
-    height: 400px;
+    height: 360px;
     font-family: 'Lexend Deca'
 }
 
@@ -115,8 +115,7 @@
     width: 500px;
 }
 
-.login-btn,
-.create-account-ctn {
+.login-demo-ctn {
     padding-top: 20px;
 }
 

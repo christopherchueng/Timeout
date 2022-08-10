@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import DemoUserForm from './DemoUserForm';
 import './LoginForm.css'
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const history = useHistory()
+
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const validationErrors = {}
@@ -50,6 +53,13 @@ const LoginForm = () => {
 
   if (user) {
     return <Redirect to='/dashboard' />;
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    await dispatch(login('demo@aa.io', 'password'))
+    history.push('/dashboard')
   }
 
   return (
@@ -96,15 +106,21 @@ const LoginForm = () => {
             <div className='signin-ball'></div>
           </button>
         </div>
-        <div className='create-account-ctn'>
-          <Link to='/register'>
-            <div className='toggle-create-account'>
-              <span className='create-account'>Create an account</span>
-              <div className='create-account-ball'></div>
-            </div>
-          </Link>
-        </div>
       </form>
+      <div className='create-account-ctn'>
+        <Link to='/register'>
+          <div className='toggle-create-account'>
+            <span className='create-account'>Create an account</span>
+            <div className='create-account-ball'></div>
+          </div>
+        </Link>
+      </div>
+      <div className='login-demo-ctn'>
+        <button className='toggle-login' onClick={onSubmit}>
+          <span className='login-span'>Demo</span>
+          <div className='signin-ball'></div>
+        </button>
+      </div>
     </div>
   );
 };
