@@ -197,19 +197,21 @@ const AlarmList = ({ dashAlarmlist }) => {
                     </div>}
                 </div>
             </div>}
-            <div id='alarmlist-alarms' onClick={() => setOpenTab(!openTab)}>
+            <div id='alarmlist-alarms'>
                 {filteredAlarms.length === 0 ?
                 <div className='no-alarms-ctn'>
                     <p className='no-alarms'>{`You have no alarms under '${dashAlarmlist?.name}.' Create a new alarm in the top right corner!`}</p>
                 </div>
                 :
                 <>
-                    <button
-                        className='toggle-alarms-view'
-                        style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
-                    >
-                        <i className="fa-solid fa-angle-right"></i>
-                    </button>
+                    <div className="dropdown-alarms" onClick={() => setOpenTab(!openTab)}>
+                        <button
+                            className='toggle-alarms-view'
+                            style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
+                        >
+                            <i className="fa-solid fa-angle-right"></i>
+                        </button>
+                    </div>
                     {filteredAlarms && filteredAlarms.map(alarm => (
                         <div className='alarm-toggle-ctn' key={alarm.id}>
                             <Alarm
