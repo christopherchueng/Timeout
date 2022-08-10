@@ -246,3 +246,7 @@ so that whereever you click the slider, the radio box will be (un)checked */
 .alarm-toggle-ctn {
     padding-right: 35px;
 }
+
+.no-alarms-ctn {
+    padding: 0 20px;
+}
