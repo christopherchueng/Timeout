@@ -136,6 +136,8 @@ const AlarmList = ({ dashAlarmlist }) => {
                     key={dashAlarmlist?.id || alarmlistId}
                     onMouseEnter={() => setShowEllipsis(true)}
                     onMouseLeave={() => setShowEllipsis(false)}
+                    onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
+                    style={{cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''}}
                     // style={{
                     //     transform: openSettings ? 'translateX(-100px)' : '',
                     //     // left: openSettings ? '-100px' : '',
@@ -182,10 +184,11 @@ const AlarmList = ({ dashAlarmlist }) => {
                 <div
                     className='alarmlist-btn-settings'
                     style={{
-                        transform: openSettings ? 'translateX(-12px)' : 'translateX(12px)',
+                        transform: openSettings ? 'translateX(-12px)' : '',
                         // left: openSettings ? '-100px' : '',
-                        transition: '0.2s',
-                        width: '0'
+                        // transition: '0.2s',
+                        width: '0',
+                        padding: !openSettings && '0'
                     }}
                     // hidden={!openSettings}
                 >
