@@ -135,13 +135,6 @@
     }
 }
 
-/* @media (min-width: 799px) {
-    .edit-alarmlist,
-    .delete-alarmlist {
-        width: 56px;
-    }
-} */
-
 .edit-alarmlist {
     background-color: #3478F6;
 }
