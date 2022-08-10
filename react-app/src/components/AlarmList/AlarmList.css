@@ -161,8 +161,9 @@
     transition: 0.2s;
 }
 
-#alarmlist-alarms {
-    padding: 0 0 0 20px;
+.dropdown-alarms,
+.alarm-toggle-ctn {
+    padding-left: 20px;
 }
 
 .dropdown-alarms {
@@ -244,4 +245,8 @@ so that whereever you click the slider, the radio box will be (un)checked */
 
 .alarm-toggle-ctn {
     padding-right: 35px;
+}
+
+.no-alarms-ctn {
+    padding: 0 20px;
 }
