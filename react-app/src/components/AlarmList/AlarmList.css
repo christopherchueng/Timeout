@@ -2,13 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* width: 250px; */
     margin: 0;
 }
-
-/* .alarmlist-content {
-    padding: 0 0 0 20px;
-} */
 
 .toggle-and-settings {
     display: flex;
@@ -44,7 +39,6 @@
     height: 50px;
     width: 200px;
     padding: 0 0 0 20px;
-    /* overflow-x: auto; */
 }
 
 .alarmlist-heading-ctn > h1 {
@@ -73,6 +67,7 @@
 .settings-menu {
     display: flex;
     flex-direction: row;
+    padding-right: 10px;
 }
 
 .alarmlist-toggle-settings {
@@ -102,16 +97,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* position: absolute; */
-    /* float: left; */
-    /* width: 100%; */
     height: 100%;
-    /* top: 40px;
-    right: -75px;
-    z-index: 10; */
-    /* overflow: visible; */
-    /* padding: 32px 10px 0 0; */
-    padding: 20px 0 0 10px;
+    padding-top: 20px;
 
 }
 
@@ -130,15 +117,7 @@
 .delete-alarmlist {
     display: flex;
     height: 75px;
-    width: 52px;
-    /* z-index: 3; */
-}
-
-@media (min-width: 1524px) {
-    .edit-alarmlist,
-    .delete-alarmlist {
-        width: 56px;
-    }
+    width: 56px;
 }
 
 .edit-alarmlist {

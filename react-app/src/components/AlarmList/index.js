@@ -127,7 +127,6 @@ const AlarmList = ({ dashAlarmlist }) => {
             <div className='alarmlist-top'
             style={{
                 transform: openSettings ? 'translateX(-100px)' : '',
-                // left: openSettings ? '-100px' : '',
                 transition: '0.2s'
             }}
             >
@@ -138,11 +137,6 @@ const AlarmList = ({ dashAlarmlist }) => {
                     onMouseLeave={() => setShowEllipsis(false)}
                     onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
                     style={{cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''}}
-                    // style={{
-                    //     transform: openSettings ? 'translateX(-100px)' : '',
-                    //     // left: openSettings ? '-100px' : '',
-                    //     transition: '0.2s'
-                    // }}
                 >
                     <div className='alarmlist-name'>
                         <div className='alarmlist-heading-ctn'>
@@ -171,7 +165,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                         {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
                             ?
                             <div className='settings-menu'>
-                                <div className='alarmlist-toggle-settings'>
+                                <div className='alarmlist-toggle-settings' onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}>
                                     {showEllipsis &&
                                     <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
                                         <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
@@ -185,12 +179,9 @@ const AlarmList = ({ dashAlarmlist }) => {
                     className='alarmlist-btn-settings'
                     style={{
                         transform: openSettings ? 'translateX(-12px)' : '',
-                        // left: openSettings ? '-100px' : '',
-                        // transition: '0.2s',
                         width: '0',
                         padding: !openSettings && '0'
                     }}
-                    // hidden={!openSettings}
                 >
                     {openSettings &&
                     <div className='settings-ctn'>
