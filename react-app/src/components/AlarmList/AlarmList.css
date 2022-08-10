@@ -161,8 +161,9 @@
     transition: 0.2s;
 }
 
-#alarmlist-alarms {
-    padding: 0 0 0 20px;
+.dropdown-alarms,
+.alarm-toggle-ctn {
+    padding-left: 20px;
 }
 
 .dropdown-alarms {
