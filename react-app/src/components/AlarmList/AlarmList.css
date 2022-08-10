@@ -7,7 +7,7 @@
 }
 
 .alarmlist-comp {
-    padding: 0 20px;
+    padding: 0 0 0 20px;
 }
 
 .toggle-and-settings {
@@ -15,14 +15,22 @@
     flex-direction: row;
 }
 
+.alarmlist-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
 .alarmlist-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-top: 20px;
+    width: 100%;
     height: 75px;
-    position: relative;
-    z-index: 3;
 }
 
 .alarmlist-name {
@@ -85,41 +93,80 @@
 }
 
 .alarmlist-btn-settings {
-    /* display: flex;
-    flex-direction: column; */
-    position: relative;
-    float: left;
-    width: 100px;
-    height: 65px;
-    top: 40px;
-    left: 5px;
-    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* position: absolute; */
+    /* float: left; */
+    /* width: 100%; */
+    height: 100%;
+    /* top: 40px;
+    right: -75px;
+    z-index: 10; */
+    /* overflow: visible; */
     /* padding: 32px 10px 0 0; */
+    padding: 20px 0 0 10px;
 
 }
 
 .settings-ctn {
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    /* z-index: 3; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* border: 1px solid lightgray; */
+    /* border-radius: 5px; */
+    /* width: 100%; */
+    width: 200px;
+    height: 100%;
 }
 
 .edit-alarmlist,
 .delete-alarmlist {
     display: flex;
-    height: 30px;
-    width: 98px;
+    height: 65px;
+    width: 52px;
     /* z-index: 3; */
+}
+
+@media (min-width: 1524px) {
+    .edit-alarmlist,
+    .delete-alarmlist {
+        width: 56px;
+    }
+}
+
+/* @media (min-width: 799px) {
+    .edit-alarmlist,
+    .delete-alarmlist {
+        width: 56px;
+    }
+} */
+
+.edit-alarmlist {
+    background-color: #3478F6;
+}
+
+.delete-alarmlist {
+    background-color: red;
 }
 
 .alarmlist-edit-btn,
 .delete-alarmlist-btn {
     display: flex;
+    justify-content: center;
     align-items: center;
-    width: 102px;
+    width: 100%;
+    height: 100%;
     background-color: transparent;
     border: 0;
     padding: 0;
+    color: white;
+    font-weight: 1000;
+    cursor: pointer;
+}
+
+.alarmlist-edit-btn {
+    border-right: 1px solid black;
 }
 
 .edit-alarmlist:hover,
@@ -135,7 +182,6 @@
 
 .edit-alarmlist-label,
 .delete-alarmlist-label {
-    padding-left: 10px;
     font-family: 'Lexend Deca'
 }
 
