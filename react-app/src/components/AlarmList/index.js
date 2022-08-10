@@ -147,7 +147,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <div className='toggle-and-settings'>
                         <div
                             className='alarmlist-toggle'
-                            style={{paddingRight: dashAlarmlist?.id === 1 ? '25px' : ''}}
+                            style={{paddingRight: dashAlarmlist?.id === 1 ? '35px' : ''}}
                         >
                             <label className='alarmlist-switch'>
                                 <input
