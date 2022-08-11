@@ -188,6 +188,7 @@
     margin: 0;
     font-family: 'Lexend Deca';
     font-weight: 1000;
+    word-break: break-word;
 }
 
 .alarmlist-toggle-ctn {
