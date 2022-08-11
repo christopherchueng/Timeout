@@ -204,7 +204,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                 </div>
                 :
                 <>
-                    <div className="dropdown-alarms" onClick={() => setOpenTab(!openTab)}>
+                    <div className="dropdown-alarm-btn" onClick={() => setOpenTab(!openTab)}>
                         <button
                             className='toggle-alarms-view'
                             style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
@@ -212,19 +212,21 @@ const AlarmList = ({ dashAlarmlist }) => {
                             <i className="fa-solid fa-angle-right"></i>
                         </button>
                     </div>
-                    {filteredAlarms && filteredAlarms.map(alarm => (
-                        <div className='alarm-toggle-ctn' key={alarm.id}>
-                            <Alarm
-                                alarm={alarm}
-                                openTab={openTab}
-                                setOpenTab={setOpenTab}
-                                alarmsArr={alarmsArr}
-                                alarmlist={id ? alarmlists[id] : dashAlarmlist}
-                                mainAlarmlistSwitch={mainAlarmlistSwitch}
-                                setMainAlarmlistSwitch={setMainAlarmlistSwitch}
-                            />
-                        </div>))
-                    }
+                    <div className='dropdown-alarms'>
+                        {filteredAlarms && filteredAlarms.map(alarm => (
+                            <div className='alarm-toggle-ctn' key={alarm.id}>
+                                <Alarm
+                                    alarm={alarm}
+                                    openTab={openTab}
+                                    setOpenTab={setOpenTab}
+                                    alarmsArr={alarmsArr}
+                                    alarmlist={id ? alarmlists[id] : dashAlarmlist}
+                                    mainAlarmlistSwitch={mainAlarmlistSwitch}
+                                    setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+                                />
+                            </div>))
+                        }
+                    </div>
                 </>}
             </div>
         </div>

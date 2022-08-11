@@ -161,16 +161,16 @@
     transition: 0.2s;
 }
 
-.dropdown-alarms,
+.dropdown-alarm-btn,
 .alarm-toggle-ctn {
     padding-left: 20px;
 }
 
-.dropdown-alarms {
+.dropdown-alarm-btn {
     cursor: pointer;
 }
 
-.dropdown-alarms:hover {
+.dropdown-alarm-btn:hover {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
