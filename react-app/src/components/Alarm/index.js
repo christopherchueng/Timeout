@@ -31,6 +31,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     const [showSnoozeModal, setShowSnoozeModal] = useState(false)
     const [snoozeOn, setSnoozeOn] = useState(false)
     const [countdown, setCountdown] = useState(initialTimer)
+    const [openSettings, setOpenSettings] = useState(false)
+    const [showEllipsis, setShowEllipsis] = useState(false)
 
     useEffect(() => {
         // If alarmlist is default, display all alarms.
@@ -166,63 +168,83 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     return (
         <>
             {openTab ?
-                <div className='hidden-alarm-toggle-ctn'>
-                    <div className='alarm-content'>
-                        <div className='alarm-content-ctn'>
-                            <div className='alarm-time'>
-                                {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
-                                <div className='alarm-meridiem'>
-                                    {alarm?.meridiem}
+                <div
+                    className="alarm-hover-ellipsis"
+                    onMouseEnter={() => setShowEllipsis(true)}
+                    onMouseLeave={() => setShowEllipsis(false)}
+                    onClick={() => setOpenSettings(!openSettings)}
+                >
+                    <div className='hidden-alarm-toggle-ctn'>
+                        <div className='alarm-content'>
+                            <div className='alarm-content-ctn'>
+                                <div className='alarm-time'>
+                                    {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
+                                    <div className='alarm-meridiem'>
+                                        {alarm?.meridiem}
+                                    </div>
+                                </div>
+                                <div className='alarm-name'>
+                                    {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
+                                </div>
+                                <div className='alarm-days'>
+                                    {alarm.repeat.length === 0 ?
+                                    ""
+                                    :
+                                    <DisplayDays alarmDays={alarm.repeat} />
+                                    }
                                 </div>
                             </div>
-                            <div className='alarm-name'>
-                                {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
-                            </div>
-                            <div className='alarm-days'>
-                                {alarm.repeat.length === 0 ?
-                                ""
-                                :
-                                <DisplayDays alarmDays={alarm.repeat} />
-                                }
-                            </div>
                         </div>
-                        {/* {id ? */}
-                        <div className='alarm-setting-btns'>
-                            <div className='alarm-edit-btn'>
-                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
-                            </div>
-                            <div className='alarm-delete-btn'>
-                                <button type='button' onClick={e => onDelete(e, alarm)}>
-                                    <span className="fa-solid fa-trash"></span>
-                                </button>
-                            </div>
+                        <div className="alarm-right">
+                            <label className='alarm-switch'>
+                                <input
+                                    type='checkbox'
+                                    value={alarmOn}
+                                    onChange={onChange}
+                                    className='alarm-radio-box'
+                                    checked={alarmOn}
+                                />
+                                <div className='alarm-slider alarm-ball'>
+                                </div>
+                            </label>
                         </div>
-                        {/* : ""} */}
+                        <div className="alarm-ellipsis">
+                            {showEllipsis &&
+                            <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
+                                <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                            </button>}
+                        </div>
                     </div>
-                    <label className='alarm-switch'>
-                        <input
-                            type='checkbox'
-                            value={alarmOn}
-                            onChange={onChange}
-                            className='alarm-radio-box'
-                            checked={alarmOn}
-                        />
-                        <div className='alarm-slider alarm-ball'>
+                    <div
+                        className='alarm-setting-btns'
+                        style={{
+                            transform: openSettings ? 'translateX(-12px)' : '',
+                            width: '0',
+                            padding: !openSettings && '0'
+                        }}
+                    >
+                        <div className='alarm-edit-btn'>
+                            <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
                         </div>
-                    </label>
+                        <div className='alarm-delete-btn'>
+                            <button type='button' onClick={e => onDelete(e, alarm)}>
+                                <span className="fa-solid fa-trash"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            : ""}
-            {showSnoozeModal ? <SnoozeModal
-                alarm={alarm}
-                alarmOn={alarmOn}
-                setAlarmOn={setAlarmOn}
-                countdown={countdown}
-                setCountdown={setCountdown}
-                snoozeOn={snoozeOn}
-                setSnoozeOn={setSnoozeOn}
-                showSnoozeModal={showSnoozeModal}
-                setShowSnoozeModal={setShowSnoozeModal}
-            /> : ''}
+                : ""}
+                {showSnoozeModal ? <SnoozeModal
+                    alarm={alarm}
+                    alarmOn={alarmOn}
+                    setAlarmOn={setAlarmOn}
+                    countdown={countdown}
+                    setCountdown={setCountdown}
+                    snoozeOn={snoozeOn}
+                    setSnoozeOn={setSnoozeOn}
+                    showSnoozeModal={showSnoozeModal}
+                    setShowSnoozeModal={setShowSnoozeModal}
+                /> : ''}
         </>
     )
 }

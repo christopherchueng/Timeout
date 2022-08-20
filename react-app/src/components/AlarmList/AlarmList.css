@@ -161,8 +161,7 @@
     transition: 0.2s;
 }
 
-.dropdown-alarm-btn,
-.alarm-toggle-ctn {
+.dropdown-alarm-btn {
     padding-left: 20px;
 }
 
@@ -242,10 +241,6 @@ so that whereever you click the slider, the radio box will be (un)checked */
     border: 1px solid #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s
-}
-
-.alarm-toggle-ctn {
-    padding-right: 35px;
 }
 
 .no-alarms-ctn {

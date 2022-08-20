@@ -1,9 +1,16 @@
+.alarm-hover-ellipsis {
+    display: flex;
+    flex-direction: row;
+    padding-left: 35px;
+}
+
 .hidden-alarm-toggle-ctn {
     border-bottom: 1px solid lightgray;
     padding: 5px 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 .alarm-content {
@@ -38,6 +45,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-right: 10px;
+    width: 110px;
 }
 
 .alarm-edit-btn > a {
@@ -99,4 +108,9 @@ so that whereever you click the slider, the radio box will be (un)checked */
     border: 1px solid #3478F6;
     /* background-color: lightgreen; */
     transition: 0.2s
+}
+
+.alarm-right {
+    display: flex;
+    flex-direction: row;
 }
