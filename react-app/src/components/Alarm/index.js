@@ -207,12 +207,12 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                                 <div className='alarm-slider alarm-ball'>
                                 </div>
                             </label>
-                        </div>
-                        <div className="alarm-ellipsis">
-                            {showEllipsis &&
-                            <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
-                                <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
-                            </button>}
+                            <div className="alarm-ellipsis">
+                                {showEllipsis &&
+                                <button className='alarm-ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
+                                    <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                                </button>}
+                            </div>
                         </div>
                     </div>
                     <div
@@ -223,14 +223,17 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                             padding: !openSettings && '0'
                         }}
                     >
-                        <div className='alarm-edit-btn'>
-                            <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
-                        </div>
-                        <div className='alarm-delete-btn'>
-                            <button type='button' onClick={e => onDelete(e, alarm)}>
-                                <span className="fa-solid fa-trash"></span>
-                            </button>
-                        </div>
+                        {openSettings &&
+                        <div className="alarm-edit-delete">
+                            <div className='alarm-edit-btn'>
+                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
+                            </div>
+                            <div className='alarm-delete-btn'>
+                                <button type='button' onClick={e => onDelete(e, alarm)}>
+                                    <span className="fa-solid fa-trash"></span>
+                                </button>
+                            </div>
+                        </div>}
                     </div>
                 </div>
                 : ""}

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     padding-left: 35px;
+    cursor: pointer;
 }
 
 .hidden-alarm-toggle-ctn {
@@ -113,4 +114,18 @@ so that whereever you click the slider, the radio box will be (un)checked */
 .alarm-right {
     display: flex;
     flex-direction: row;
+}
+
+.alarm-ellipsis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    padding-right: 10px;
+}
+
+.alarm-ellipsis-settings {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
