@@ -168,11 +168,16 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
     return (
         <>
             {openTab ?
+            <>
                 <div
                     className="alarm-hover-ellipsis"
                     onMouseEnter={() => setShowEllipsis(true)}
                     onMouseLeave={() => setShowEllipsis(false)}
                     onClick={() => setOpenSettings(!openSettings)}
+                    style={{
+                        transform: openSettings ? 'translateX(-100px)' : '',
+                        transition: '0.2s'
+                    }}
                 >
                     <div className='hidden-alarm-toggle-ctn'>
                         <div className='alarm-content'>
@@ -215,27 +220,27 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                             </div>
                         </div>
                     </div>
-                    <div
-                        className='alarm-setting-btns'
-                        style={{
-                            transform: openSettings ? 'translateX(-12px)' : '',
-                            width: '0',
-                            padding: !openSettings && '0'
-                        }}
-                    >
-                        {openSettings &&
-                        <div className="alarm-edit-delete">
-                            <div className='alarm-edit-btn'>
-                                <Link to={`/alarms/${alarm?.id}/edit`}><span className="fa-solid fa-pen"></span></Link>
-                            </div>
-                            <div className='alarm-delete-btn'>
-                                <button type='button' onClick={e => onDelete(e, alarm)}>
-                                    <span className="fa-solid fa-trash"></span>
-                                </button>
-                            </div>
-                        </div>}
-                    </div>
                 </div>
+                {openSettings && <div
+                    className='alarm-setting-btns'
+                    style={{
+                        transform: openSettings ? 'translateX(-12px)' : '',
+                        width: '0',
+                        padding: !openSettings && '0'
+                    }}
+                >
+                    <div className="alarm-edit-delete">
+                        <div className='alarm-edit-btn'>
+                            <Link to={`/alarms/${alarm?.id}/edit`}><span className="edit-alarm-label">Edit</span></Link>
+                        </div>
+                        <div className='alarm-delete-btn'>
+                            <button type='button' onClick={e => onDelete(e, alarm)}>
+                                <span className="delete-alarm">Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>}
+            </>
                 : ""}
                 {showSnoozeModal ? <SnoozeModal
                     alarm={alarm}

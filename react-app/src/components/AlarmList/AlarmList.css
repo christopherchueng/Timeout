@@ -163,14 +163,19 @@
 
 .dropdown-alarm-btn {
     padding-left: 20px;
-}
-
-.dropdown-alarm-btn {
     cursor: pointer;
 }
 
 .dropdown-alarm-btn:hover {
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.alarm-toggle-ctn {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    padding-left: 27px;
+    /* width: 100%; */
 }
 
 .update-alarmlist-icon,
