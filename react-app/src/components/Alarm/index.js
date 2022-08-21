@@ -175,7 +175,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                     onMouseLeave={() => setShowEllipsis(false)}
                     onClick={() => setOpenSettings(!openSettings)}
                     style={{
-                        transform: openSettings ? 'translateX(-100px)' : '',
+                        transform: openSettings ? 'translateX(-90px)' : '',
                         transition: '0.2s'
                     }}
                 >
@@ -221,15 +221,15 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                         </div>
                     </div>
                 </div>
-                {openSettings && <div
+                <div
                     className='alarm-setting-btns'
                     style={{
-                        transform: openSettings ? 'translateX(-12px)' : '',
+                        transform: openSettings ? 'translateX(-45px)' : '',
                         width: '0',
                         padding: !openSettings && '0'
                     }}
                 >
-                    <div className="alarm-edit-delete">
+                    {openSettings && <div className="alarm-edit-delete">
                         <div className='alarm-edit-btn'>
                             <Link to={`/alarms/${alarm?.id}/edit`}><span className="edit-alarm-label">Edit</span></Link>
                         </div>
@@ -238,8 +238,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                                 <span className="delete-alarm">Delete</span>
                             </button>
                         </div>
-                    </div>
-                </div>}
+                    </div>}
+                </div>
             </>
                 : ""}
                 {showSnoozeModal ? <SnoozeModal

@@ -44,12 +44,9 @@
 
 .alarm-setting-btns {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
-    align-items: stretch;
     padding-right: 10px;
-    height: 60px;
-    /* width: auto; */
+    transition-duration: 0.2s;
 }
 
 .alarm-edit-btn > a {
@@ -138,8 +135,6 @@ so that whereever you click the slider, the radio box will be (un)checked */
 .alarm-edit-delete {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
-    /* height: 100%; */
 }
 
 .alarm-edit-btn,

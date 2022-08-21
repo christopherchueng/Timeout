@@ -173,9 +173,7 @@
 .alarm-toggle-ctn {
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
     padding-left: 27px;
-    /* width: 100%; */
 }
 
 .update-alarmlist-icon,
