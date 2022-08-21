@@ -181,7 +181,10 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlist
                 >
                     <div className='hidden-alarm-toggle-ctn'>
                         <div className='alarm-content'>
-                            <div className='alarm-content-ctn'>
+                            <div
+                                className='alarm-content-ctn'
+                                style={{color: alarmOn ? 'black' : '#a5a5a5'}}
+                            >
                                 <div className='alarm-time'>
                                     {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
                                     <div className='alarm-meridiem'>
