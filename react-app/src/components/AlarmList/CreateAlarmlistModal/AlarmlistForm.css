@@ -1,9 +1,16 @@
 .create-alarmlist {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 500px;
     height: 300px;
+}
+
+.alarmlist-form-title {
+    font-size: 28pt;
+    font-family: 'Readex Pro';
+    margin-top: 0;
 }
 
 .alarmlist-formError-ctn {

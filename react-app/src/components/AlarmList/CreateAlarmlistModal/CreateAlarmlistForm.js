@@ -52,29 +52,30 @@ const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
 
     return (
         <div className='create-alarmlist'>
-                <form onSubmit={onSubmit}>
-                    <div className='alarmlist-input'>
-                        {/* -------------------- NAME -------------------- */}
-                        <input
-                            name='name'
-                            type='text'
-                            className='alarmlist-textbox'
-                            value={name}
-                            placeholder='Name'
-                            onChange={(e) => setName(e.target.value)}
-                            style={{backgroundColor: errors['name'] && isSubmitted ? '#FFA194' : ""}}
-                        />
-                        <div className='alarmlist-formError-ctn'>
-                            {isSubmitted && <ErrorMessage error={errors?.name} setClassName="alarmlist-error" />}
-                        </div>
-                        <div className='submit-alarmlist'>
-                            <button type='submit' className='submit-alarmlist-switch'>
-                                <span className="submit-alarmlist-span">Save</span>
-                                <div className='submit-alarmlist-ball'></div>
-                            </button>
-                        </div>
+            <h1 className='alarmlist-form-title'>Add Alarmlist</h1>
+            <form onSubmit={onSubmit}>
+                <div className='alarmlist-input'>
+                    {/* -------------------- NAME -------------------- */}
+                    <input
+                        name='name'
+                        type='text'
+                        className='alarmlist-textbox'
+                        value={name}
+                        placeholder='Name'
+                        onChange={(e) => setName(e.target.value)}
+                        style={{backgroundColor: errors['name'] && isSubmitted ? '#FFA194' : ""}}
+                    />
+                    <div className='alarmlist-formError-ctn'>
+                        {isSubmitted && <ErrorMessage error={errors?.name} setClassName="alarmlist-error" />}
                     </div>
-                </form>
+                    <div className='submit-alarmlist'>
+                        <button type='submit' className='submit-alarmlist-switch'>
+                            <span className="submit-alarmlist-span">Save</span>
+                            <div className='submit-alarmlist-ball'></div>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     )
 }
