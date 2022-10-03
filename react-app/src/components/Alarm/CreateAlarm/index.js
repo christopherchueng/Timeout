@@ -137,6 +137,7 @@ const CreateAlarm = () => {
                         <select
                             name='hour'
                             value={hour}
+                            size='7'
                             onChange={e => setHour(parseInt(e.target.value))}
                         >
                             <option value='1'>1</option>
@@ -158,6 +159,7 @@ const CreateAlarm = () => {
                         <select
                             name='minutes'
                             value={minutes}
+                            size='7'
                             onChange={e => setMinutes(parseInt(e.target.value))}
                         >
                             <option value='0'>00</option>
@@ -227,6 +229,7 @@ const CreateAlarm = () => {
                         <select
                             name='meridiem'
                             value={meridiem}
+                            size='2'
                             onChange={e => setMeridiem(e.target.value)}
                         >
                             <option value='AM'>AM</option>

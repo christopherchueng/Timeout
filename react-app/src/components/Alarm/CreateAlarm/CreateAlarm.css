@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 650px;
+    height: auto;
 }
 
 .alarm-form-title {
@@ -21,11 +21,59 @@
 .select-times-and-meridiem {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+    height: 500px;
 }
 
 .select-times-and-meridiem > div {
     padding: 0 20px;
+}
+
+.alarm-meridiem-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.alarm-hour-form > select,
+.alarm-minutes-form > select,
+.alarm-meridiem-form > select {
+    width: auto;
+    overflow: scroll;
+    display: flex;
+    justify-content: center;
+    text-align-last:center;
+
+}
+
+.alarm-hour-form > select,
+.alarm-minutes-form > select {
+    height: 500px;
+    font-size: 200pt;
+}
+
+.alarm-meridiem-form > select {
+    font-size: 100pt;
+    height: auto;
+}
+
+.alarm-hour-form > select > option:checked,
+.alarm-minutes-form > select > option:checked,
+.alarm-meridiem-form > select > option:checked {
+    border-radius: 25px;
+    /* background-color: #3478F6; */
+}
+
+.alarm-hour-form > select::-webkit-scrollbar,
+.alarm-minutes-form > select::-webkit-scrollbar,
+.alarm-meridiem-form > select::-webkit-scrollbar {
+    display: none;
+}
+
+.alarm-hour-form > select:focus,
+.alarm-minutes-form > select:focus,
+.alarm-meridiem-form > select:focus {
+    outline: none;
 }
 
 .alarm-formError-ctn {
@@ -38,7 +86,6 @@ select {
     width: 100px;
     height: 40px;
     border: 0;
-    border-bottom: 1px solid lightgray;
     font-family: 'Lexend Deca';
     text-align: center;
     font-size: 24pt;
@@ -58,7 +105,7 @@ select {
 }
 
 .alarmlist-selection-form {
-    width: 500px;
+    width: 1000px;
 }
 
 .alarm-name-form {
