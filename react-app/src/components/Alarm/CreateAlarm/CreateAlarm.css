@@ -8,7 +8,7 @@
 #create-alarm > form,
 #edit-alarm > form {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     height: auto;
 }
@@ -104,8 +104,12 @@ select {
     font-weight: 1000;
 }
 
-.alarmlist-selection-form {
+/* .alarmlist-selection-form {
     width: 1000px;
+} */
+
+.create-right {
+    width: 600px;
 }
 
 .alarm-name-form {
