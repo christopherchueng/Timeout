@@ -57,7 +57,7 @@ const AlarmList = ({ dashAlarmlist }) => {
         // }
     }, [dashAlarmlist, alarmlists, id])
 
-    const toggleAlarmlist = async (e) => {
+    const toggleAlarmlist = (e) => {
         e.preventDefault()
 
         const payload = {
@@ -66,54 +66,42 @@ const AlarmList = ({ dashAlarmlist }) => {
             'id': alarmlistId || dashAlarmlist?.id,
         }
 
-        await dispatch(updateAlarmlist(payload))
-        alarmsArr.forEach(async alarm => {
-            // If main toggle is OFF and is clicked, TURN OFF ALL ALARMS
-            if ((alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) && mainAlarmlistSwitch === true) {
+        dispatch(updateAlarmlist(payload)).then(
+
+            alarmsArr.forEach(async alarm => {
                 let repeatPayload = []
 
                 for (let day of alarm.repeat) {
                     repeatPayload.push(day.id)
                 }
 
-                const alarmPayload = {
-                    'alarm_id': alarm.id,
-                    'name': alarm.name,
-                    'hour': alarm.hour,
-                    'minutes': `${alarm.minutes}`,
-                    'meridiem': alarm.meridiem,
-                    'sound': alarm.sound,
-                    'repeat': `${repeatPayload}`,
-                    'snooze': alarm.snooze,
-                    'toggle': false,
-                    'alarmlist_id': alarm.alarmlistId
+                if (alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) {
+
+                    const alarmPayload = {
+                        'alarm_id': alarm.id,
+                        'name': alarm.name,
+                        'hour': alarm.hour,
+                        'minutes': `${alarm.minutes}`,
+                        'meridiem': alarm.meridiem,
+                        'sound': alarm.sound,
+                        'repeat': `${repeatPayload}`,
+                        'snooze': alarm.snooze,
+                        'alarmlist_id': alarm.alarmlistId
+                    }
+
+                    // If main toggle is ON and is clicked, TURN OFF ALL ALARMS
+                    if (mainAlarmlistSwitch === true) {
+                        alarmPayload['toggle'] = false
+
+                    // If main toggle is OFF and is clicked, TURN ON ALL ALARMS
+                    } else {
+                        alarmPayload['toggle'] = true
+                    }
+
+                    await dispatch(updateAlarm(alarmPayload))
                 }
-
-                await dispatch(updateAlarm(alarmPayload))
-            // If main toggle is OFF and is clicked, TURN ON ALL ALARMS
-            } else if ((alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) && (mainAlarmlistSwitch === false || mainAlarmlistSwitch === undefined)) {
-                let repeatPayload = []
-
-                for (let day of alarm.repeat) {
-                    repeatPayload.push(day.id)
-                }
-
-                const alarmPayload = {
-                    'alarm_id': alarm.id,
-                    'name': alarm.name,
-                    'hour': alarm.hour,
-                    'minutes': `${alarm.minutes}`,
-                    'meridiem': alarm.meridiem,
-                    'sound': alarm.sound,
-                    'repeat': `${repeatPayload}`,
-                    'snooze': alarm.snooze,
-                    'toggle': true,
-                    'alarmlist_id': alarm.alarmlistId
-                }
-
-                await dispatch(updateAlarm(alarmPayload))
-            }
-        })
+            })
+        )
     }
 
     return (
