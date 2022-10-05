@@ -57,7 +57,7 @@ const AlarmList = ({ dashAlarmlist }) => {
         // }
     }, [dashAlarmlist, alarmlists, id])
 
-    const onChange = async (e) => {
+    const toggleAlarmlist = async (e) => {
         e.preventDefault()
 
         const payload = {
@@ -71,9 +71,11 @@ const AlarmList = ({ dashAlarmlist }) => {
             // If main toggle is OFF and is clicked, TURN OFF ALL ALARMS
             if ((alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) && mainAlarmlistSwitch === true) {
                 let repeatPayload = []
+
                 for (let day of alarm.repeat) {
                     repeatPayload.push(day.id)
                 }
+
                 const alarmPayload = {
                     'alarm_id': alarm.id,
                     'name': alarm.name,
@@ -86,13 +88,16 @@ const AlarmList = ({ dashAlarmlist }) => {
                     'toggle': false,
                     'alarmlist_id': alarm.alarmlistId
                 }
+
                 await dispatch(updateAlarm(alarmPayload))
             // If main toggle is OFF and is clicked, TURN ON ALL ALARMS
             } else if ((alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) && (mainAlarmlistSwitch === false || mainAlarmlistSwitch === undefined)) {
                 let repeatPayload = []
+
                 for (let day of alarm.repeat) {
                     repeatPayload.push(day.id)
                 }
+
                 const alarmPayload = {
                     'alarm_id': alarm.id,
                     'name': alarm.name,
@@ -105,6 +110,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     'toggle': true,
                     'alarmlist_id': alarm.alarmlistId
                 }
+
                 await dispatch(updateAlarm(alarmPayload))
             }
         })
@@ -153,7 +159,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                                 <input
                                     type='checkbox'
                                     value={mainAlarmlistSwitch}
-                                    onChange={onChange}
+                                    onChange={toggleAlarmlist}
                                     className='alarmlist-radio-box'
                                     checked={mainAlarmlistSwitch}
                                 />
