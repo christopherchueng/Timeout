@@ -49,17 +49,21 @@
     transition-duration: 0.2s;
 }
 
-.alarm-edit-btn > a {
-    color: white;
-    font-family: 'Lexend Deca';
+.alarm-edit-delete > a {
     text-decoration: none;
-    font-size: 10pt;
 }
 
-.alarm-delete-btn > button {
+.alarm-edit-delete > button {
     background-color: transparent;
     border: 0;
     cursor: pointer;
+    padding: 0;
+}
+
+.alarm-edit-btn {
+    color: white;
+    font-family: 'Lexend Deca';
+    font-size: 10pt;
 }
 
 .alarm-switch {

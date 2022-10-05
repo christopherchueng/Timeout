@@ -234,14 +234,14 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                     }}
                 >
                     {openSettings && <div className="alarm-edit-delete">
-                        <div className='alarm-edit-btn'>
-                            <Link to={`/alarms/${alarm?.id}/edit`}><span className="edit-alarm-label">Edit</span></Link>
-                        </div>
-                        <div className='alarm-delete-btn'>
-                            <button type='button' onClick={e => onDelete(e, alarm)}>
-                                <span className="delete-alarm">Delete</span>
-                            </button>
-                        </div>
+                        <Link to={`/alarms/${alarm?.id}/edit`}><div className='alarm-edit-btn'>
+                            <span className="edit-alarm-label">Edit</span>
+                        </div></Link>
+                        <button type='button' onClick={e => onDelete(e, alarm)}>
+                            <div className='alarm-delete-btn'>
+                                    <span className="delete-alarm">Delete</span>
+                            </div>
+                        </button>
                     </div>}
                 </div>
             </>
