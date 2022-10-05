@@ -12,7 +12,7 @@ import './AlarmList.css'
 const AlarmList = ({ dashAlarmlist }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
-    const alarmlistId = parseInt(id)
+    const alarmlistId = +id
     const alarmlists = useSelector(state => state?.alarmlist?.entries)
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)

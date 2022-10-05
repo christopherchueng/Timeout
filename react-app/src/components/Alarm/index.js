@@ -58,20 +58,11 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         setAlarmOn(alarm?.toggle)
     }, [alarm?.toggle, alarmlist, id])
 
-    // useEffect(() => {
-    //     if (mainAlarmlistSwitch) {
-    //         setAlarmOn(true)
-    //     } else {
-    //         setAlarmOn(false)
-    //     }
-
-    // }, [mainAlarmlistSwitch])
-
     useEffect(async () => {
 
         const checkHourMinMeridiem = (alarm) => {
-            return alarm.hour === (parseInt(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
-            alarm.minutes === parseInt(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
+            return alarm.hour === (+(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
+            alarm.minutes === +(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
             alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 &&
                                 currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
             alarm.toggle === true
@@ -80,7 +71,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         // If alarm time matches with currentTime and toggle is on, then show modal AND TURN TOGGLE OFF.
         if (alarm.repeat.length === 0) {
             if (checkHourMinMeridiem(alarm) &&
-                parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0) {
+                +((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0) {
                     setShowSnoozeModal(true);
                     setAlarmOn(!alarmOn)
 
@@ -112,7 +103,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         for (let day of alarm.repeat) {
             if (checkHourMinMeridiem(alarm) &&
                 day.short === currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).split(' ')[0] &&
-                parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) < 2) {
+                +((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) < 2) {
                     setShowSnoozeModal(true)
             }
         }
@@ -136,10 +127,13 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         }
     }, [countdown, seconds])
 
-    const onChange = async (e) => {
+    const toggleAlarm = async (e) => {
         e.preventDefault()
+
         setAlarmOn(!alarmOn)
+
         let repeatPayload = []
+
         for (let day of repeat) {
             repeatPayload.push(day.id)
         }
@@ -160,7 +154,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         await dispatch(updateAlarm(payload))
     }
 
-    const onDelete = (e, alarm) => {
+    const deleteAlarm = (e, alarm) => {
         e.preventDefault()
         dispatch(deleteAlarm(alarm.id))
         history.push(`/dashboard`)
@@ -209,7 +203,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                                 <input
                                     type='checkbox'
                                     value={alarmOn}
-                                    onChange={onChange}
+                                    onChange={toggleAlarm}
                                     className='alarm-radio-box'
                                     checked={alarmOn}
                                 />
@@ -237,7 +231,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                         <Link to={`/alarms/${alarm?.id}/edit`}><div className='alarm-edit-btn'>
                             <span className="edit-alarm-label">Edit</span>
                         </div></Link>
-                        <button type='button' onClick={e => onDelete(e, alarm)}>
+                        <button type='button' onClick={e => deleteAlarm(e, alarm)}>
                             <div className='alarm-delete-btn'>
                                     <span className="delete-alarm">Delete</span>
                             </div>

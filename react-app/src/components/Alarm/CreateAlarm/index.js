@@ -101,7 +101,7 @@ const CreateAlarm = () => {
             'repeat': `${repeat}`,
             snooze,
             'toggle': true,
-            'alarmlist_id': parseInt(alarmlist)
+            'alarmlist_id': +alarmlist
         }
 
         const errorData = await dispatch(createAlarm(payload))
@@ -139,7 +139,7 @@ const CreateAlarm = () => {
                                 name='hour'
                                 value={hour}
                                 size='7'
-                                onChange={e => setHour(parseInt(e.target.value))}
+                                onChange={e => setHour(+(e.target.value))}
                             >
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
@@ -161,7 +161,7 @@ const CreateAlarm = () => {
                                 name='minutes'
                                 value={minutes}
                                 size='7'
-                                onChange={e => setMinutes(parseInt(e.target.value))}
+                                onChange={e => setMinutes(+(e.target.value))}
                             >
                                 <option value='0'>00</option>
                                 <option value='1'>01</option>
@@ -290,7 +290,7 @@ const CreateAlarm = () => {
                                 style={{backgroundColor: errors['alarmlist'] ? '#FFA194' : ""}}
                             >
                                 {alarmlistsArr && alarmlistsArr.map(alarmlist => (
-                                    <option value={parseInt(alarmlist.id)} key={parseInt(alarmlist.id)}>{alarmlist.name}</option>
+                                    <option value={+(alarmlist.id)} key={+(alarmlist.id)}>{alarmlist.name}</option>
                                 ))}
                             </select>
                         </div>

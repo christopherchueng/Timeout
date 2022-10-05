@@ -9,7 +9,7 @@ import './EditAlarm.css'
 
 const EditAlarm = () => {
     const { id } = useParams()
-    const alarmId = parseInt(id)
+    const alarmId = +id
     let todaysDate = new Date()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -136,7 +136,7 @@ const EditAlarm = () => {
             'repeat': JSON.stringify(newRepeat).replace(/[\[\]']+/g,''),
             snooze,
             'toggle': true,
-            'alarmlist_id': parseInt(alarmlist)
+            'alarmlist_id': +alarmlist
         }
 
         const errorData = await dispatch(updateAlarm(payload))
@@ -171,7 +171,7 @@ const EditAlarm = () => {
                         <select
                             name='hour'
                             value={hour}
-                            onChange={e => setHour(parseInt(e.target.value))}
+                            onChange={e => setHour(+(e.target.value))}
 
                         >
                             <option value='1'>1</option>
@@ -193,7 +193,7 @@ const EditAlarm = () => {
                         <select
                             name='minutes'
                             value={minutes}
-                            onChange={e => setMinutes(parseInt(e.target.value))}
+                            onChange={e => setMinutes(+(e.target.value))}
                         >
                             <option value='0'>00</option>
                             <option value='1'>01</option>
@@ -318,7 +318,7 @@ const EditAlarm = () => {
                             className='alarmlist-selection-form'
                         >
                             {alarmlistsArr && alarmlistsArr.map(alarmlist => (
-                                <option value={parseInt(alarmlist?.id)} key={parseInt(alarmlist?.id)}>{alarmlist?.name}</option>
+                                <option value={+(alarmlist?.id)} key={+(alarmlist?.id)}>{alarmlist?.name}</option>
                             ))}
                         </select>
                     </div>
