@@ -68,32 +68,24 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
     // }, [mainAlarmlistSwitch])
 
     useEffect(async () => {
-        if (alarm.repeat.length !== 0) {
-            for (let day of alarm.repeat) {
-                // If alarm time matches with currentTime, date and toggle is on, then alert.
-                if (alarm.hour === (parseInt(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
-                    alarm.minutes === parseInt(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
-                    alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 &&
-                                        currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
-                    day.short === currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).split(' ')[0] &&
-                    parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) < 2 &&
-                    alarm.toggle === true) {
-                    setShowSnoozeModal(true);
-                    // alarm.minutes < 10 ? alert(`${alarm.name} ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem}`) : alert(`${alarm.name} ${alarm.hour}:${alarm.minutes} ${alarm.meridiem}`)
-                }
-            }
-        } else {
-            // These are for non repeated alarms.
-            // If alarm time matches with currentTime and toggle is on, then alert.
-            if (alarm.hour === (parseInt(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
-                alarm.minutes == parseInt(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
-                alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 &&
-                                    currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
-                parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0 &&
-                alarm.toggle === true) {
+
+        const checkHourMinMeridiem = (alarm) => {
+            return alarm.hour === (parseInt(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
+            alarm.minutes === parseInt(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
+            alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 &&
+                                currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
+            alarm.toggle === true
+        }
+
+        // If alarm time matches with currentTime and toggle is on, then show modal AND TURN TOGGLE OFF.
+        if (alarm.repeat.length === 0) {
+            if (checkHourMinMeridiem(alarm) &&
+                parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0) {
                     setShowSnoozeModal(true);
                     setAlarmOn(!alarmOn)
+
                     let repeatPayload = []
+
                     for (let day of repeat) {
                         repeatPayload.push(day.id)
                     }
@@ -113,6 +105,15 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
 
                     await dispatch(updateAlarm(payload))
                     // alarm.minutes < 10 ? alert(`${alarm.name} ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem}`) : alert(`${alarm.name} ${alarm.hour}:${alarm.minutes} ${alarm.meridiem}`)
+            }
+        }
+
+        // If alarm time matches with currentTime, date and toggle is on, then show modal AND LEAVE TOGGLE ON.
+        for (let day of alarm.repeat) {
+            if (checkHourMinMeridiem(alarm) &&
+                day.short === currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).split(' ')[0] &&
+                parseInt((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) < 2) {
+                    setShowSnoozeModal(true)
             }
         }
     }, [currentTime, alarm])
