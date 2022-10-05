@@ -9,7 +9,7 @@ import SnoozeModal from "../Snooze"
 import './Alarm.css'
 import DisplayDays from "./DisplayDays"
 
-const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, alarmsArr, mainAlarmlistSwitch, setMainAlarmlistSwitch }) => {
+const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     // Only use this id below for when you are on the alarmlists/:id page! DO NOT USE WHEN ON DASHBOARD

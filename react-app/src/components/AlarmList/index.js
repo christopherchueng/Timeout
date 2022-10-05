@@ -213,9 +213,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                                     alarm={alarm}
                                     openTab={openTab}
                                     setOpenTab={setOpenTab}
-                                    alarmsArr={alarmsArr}
                                     alarmlist={id ? alarmlists[id] : dashAlarmlist}
-                                    mainAlarmlistSwitch={mainAlarmlistSwitch}
                                     setMainAlarmlistSwitch={setMainAlarmlistSwitch}
                                 />
                             </div>))
