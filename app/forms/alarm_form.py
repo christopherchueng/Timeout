@@ -18,8 +18,8 @@ def check_hour(form, field):
 
 def check_minutes(form, field):
     minutes = field.data
-    if int(minutes) > 60 or int(minutes) < 0:
-        raise ValidationError('Please provide a number between 0 and 60.')
+    if int(minutes) > 59 or int(minutes) < 0:
+        raise ValidationError('Please provide a number between 0 and 59.')
 
 def check_meridiem(form, field):
     meridiem = field.data
