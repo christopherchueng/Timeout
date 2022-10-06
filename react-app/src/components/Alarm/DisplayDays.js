@@ -7,22 +7,19 @@ const DisplayDays = ({ alarmDays }) => {
     const everyWeekend = alarmDays.every(day => weekends.includes(day.id))
     const everyDay = alarmDays.length === 7
 
-    if (oneDay) return `every ${alarmDays[0].name}`
-    if (everyWeekday) return 'every weekday'
-    if (everyWeekend) return 'every weekend'
-    if (everyDay) return 'every day'
-
     return (
         <>
-            {alarmDays && alarmDays.map(day => (
-                <div className='selected-day' key={day.id}>
-                    {oneDay ||
-                    everyWeekday ||
-                    everyWeekend ||
-                    everyDay ||
-                    (day.short)}
-                </div>
-            ))}
+            <div className='selected-day'>
+                {oneDay ? `every ${alarmDays[0].name}` :
+                everyWeekday ? 'every weekday' :
+                everyWeekend ? 'every weekend' :
+                everyDay ? 'every day' :
+                alarmDays && alarmDays.map(day => (
+                    <div key={day.id}>
+                        {day.short}
+                    </div>
+                ))}
+            </div>
         </>
     )
 }
