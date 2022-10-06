@@ -55,12 +55,19 @@
 .alarm-hour-form > select,
 .alarm-minutes-form > select {
     height: 500px;
-    font-size: 200pt;
+    font-size: 100pt;
 }
 
 .alarm-meridiem-form > select {
-    font-size: 100pt;
+    font-size: 50pt;
     height: auto;
+}
+
+.time-colon-ctn {
+    display: flex;
+    align-items: center;
+    height: 500px;
+    font-size: 50pt;
 }
 
 .alarm-hour-form > select > option:checked,
@@ -115,7 +122,7 @@ select {
 } */
 
 .create-right {
-    width: 600px;
+    width: 500px;
 }
 
 .alarm-name-form {

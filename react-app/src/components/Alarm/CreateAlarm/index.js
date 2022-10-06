@@ -142,6 +142,7 @@ const CreateAlarm = () => {
                                 size='7'
                                 onChange={e => setHour(+(e.target.value))}
                             >
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
                                 <option value='3'>3</option>
@@ -154,8 +155,10 @@ const CreateAlarm = () => {
                                 <option value='10'>10</option>
                                 <option value='11'>11</option>
                                 <option value='12'>12</option>
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                             </select>
                         </div>
+                        <div className='time-colon-ctn'><span className='time-colon'>:</span></div>
                         {/* ------------------------- MINUTES ------------------------- */}
                         <div className='alarm-minutes-form'>
                             <select
@@ -164,6 +167,7 @@ const CreateAlarm = () => {
                                 size='7'
                                 onChange={e => setMinutes(+(e.target.value))}
                             >
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                                 <option value='0'>00</option>
                                 <option value='1'>01</option>
                                 <option value='2'>02</option>
@@ -224,6 +228,7 @@ const CreateAlarm = () => {
                                 <option value='57'>57</option>
                                 <option value='58'>58</option>
                                 <option value='59'>59</option>
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                             </select>
                         </div>
                         {/* ------------------------- MERIDIEM ------------------------- */}
