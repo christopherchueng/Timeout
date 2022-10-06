@@ -343,7 +343,6 @@ const CreateAlarm = () => {
                                 hidePlaceholder={repeat.length}
                                 avoidHighlightFirstOption={true}
                                 closeIcon='cancel'
-                                // showArrow={true}
                                 style={{
                                     searchBox: {
                                         width: '150px',
