@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
 import { createAlarm } from '../../../store/alarm'
@@ -252,31 +252,34 @@ const CreateAlarm = () => {
                         <div className='alarm-name-label'>
                             <label htmlFor='name'>Name</label>
                         </div>
-                        <div className='alarm-name-input'>
-                            <input
-                                name='name'
-                                type='text'
-                                value={name}
-                                onChange={e => setName(e.target.value)}
-                                onClick={() => setNameFocus(true)}
-                                onBlur={() => setNameFocus(false)}
-                                style={{backgroundColor: errors['name'] ? '#FFA194' : ""}}
-                            />
-                        </div>
-                        <div className='name-char-count'>
-                            {nameFocus
-                            ?
-                            <div className='char-count-ctn'>
-                                {messageCount > 150
-                                ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
-                                        <span>{messageCount} / 150</span>
-                                    </div>
-                                :   <div className='char-count-cmt'>
-                                        <span>{messageCount} / 150</span>
-                                    </div>}
+                        <div className='alarm-name-and-count'>
+                            <div className='alarm-name-input'>
+                                <input
+                                    name='name'
+                                    type='text'
+                                    className='name-input-box'
+                                    value={name}
+                                    onChange={e => setName(e.target.value)}
+                                    onClick={() => setNameFocus(true)}
+                                    onBlur={() => setNameFocus(false)}
+                                    style={{backgroundColor: errors['name'] ? '#FFA194' : ""}}
+                                />
                             </div>
-                            : ''
-                            }
+                            <div className='name-char-count'>
+                                {nameFocus
+                                ?
+                                <div className='char-count-ctn'>
+                                    {messageCount > 150
+                                    ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
+                                            <span>{messageCount} / 150</span>
+                                        </div>
+                                    :   <div className='char-count-cmt'>
+                                            <span>{messageCount} / 150</span>
+                                        </div>}
+                                </div>
+                                : ''
+                                }
+                            </div>
                         </div>
                     </div>
                     <div className='alarm-formError-ctn'>
@@ -334,13 +337,46 @@ const CreateAlarm = () => {
                                 options={days}
                                 onSelect={onSelect}
                                 onRemove={onSelect}
-                                showCheckbox={true}
+                                // showCheckbox={false}
                                 displayValue="name"
-                                placeholder={'Never'}
+                                placeholder='Never'
                                 hidePlaceholder={repeat.length}
                                 avoidHighlightFirstOption={true}
-                                showArrow={true}
-                                style={{searchBox: {width: '500px'}, optionContainer: {fontFamily: 'Lexend Deca', fontWeight: 1000}}}
+                                closeIcon='cancel'
+                                // showArrow={true}
+                                style={{
+                                    searchBox: {
+                                        width: '400px',
+                                        // border: '1px solid black',
+                                        border: '0',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        textAlign: 'right',
+                                        alignItems: 'flex-end',
+                                    },
+                                    optionContainer: {
+                                        fontFamily: 'Lexend Deca',
+                                        fontWeight: '1000'
+                                    },
+                                    inputField: {
+                                        cursor: 'pointer',
+                                        padding: '0',
+                                        textAlign: 'right',
+                                        fontFamily: 'Lexend Deca',
+                                        fontWeight: '1000',
+                                        color: 'black',
+                                        fontSize: '14pt'
+                                    },
+                                    chips: {
+                                        fontFamily: 'Readex Pro',
+                                        backgroundColor: 'transparent',
+                                        color: '#3478F6',
+                                        paddingRight: '0',
+                                        marginRight: '0',
+                                        fontSize: '12pt'
+                                    },
+                                }}
                             />
                         </div>
                     </div>
