@@ -70,7 +70,7 @@ const EditAlarm = () => {
         if (!alarmlistsArr.length) {
             validationErrors.alarmlist = 'You currently do not have any alarmlists! Please create an alarmlist first!'
         }
-        if (sound.name &&
+        if (sound?.name &&
             !sound?.name?.endsWith('mp3') &&
             !sound?.name?.endsWith('mp4') &&
             !sound?.name?.endsWith('aac') &&
@@ -174,9 +174,11 @@ const EditAlarm = () => {
                             <select
                                 name='hour'
                                 value={hour}
+                                size='7'
                                 onChange={e => setHour(+(e.target.value))}
 
                             >
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                                 <option value='1'>1</option>
                                 <option value='2'>2</option>
                                 <option value='3'>3</option>
@@ -189,15 +191,19 @@ const EditAlarm = () => {
                                 <option value='10'>10</option>
                                 <option value='11'>11</option>
                                 <option value='12'>12</option>
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                             </select>
                         </div>
+                        <div className='time-colon-ctn'><span className='time-colon'>:</span></div>
                         {/* ------------------------- MINUTES ------------------------- */}
                         <div className='alarm-minutes-form'>
                             <select
                                 name='minutes'
                                 value={minutes}
+                                size='7'
                                 onChange={e => setMinutes(+(e.target.value))}
                             >
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                                 <option value='0'>00</option>
                                 <option value='1'>01</option>
                                 <option value='2'>02</option>
@@ -258,6 +264,7 @@ const EditAlarm = () => {
                                 <option value='57'>57</option>
                                 <option value='58'>58</option>
                                 <option value='59'>59</option>
+                                <option disabled style={{'cursor': 'default'}}>-</option>
                             </select>
                         </div>
                         {/* ------------------------- MERIDIEM ------------------------- */}
@@ -265,6 +272,7 @@ const EditAlarm = () => {
                             <select
                                 name='meridiem'
                                 value={meridiem}
+                                size='2'
                                 onChange={e => setMeridiem(e.target.value)}
                             >
                                 <option value='AM'>AM</option>
@@ -280,31 +288,34 @@ const EditAlarm = () => {
                         <div className='alarm-name-label'>
                             <label htmlFor='name'>Name</label>
                         </div>
-                        <div className='alarm-name-input'>
-                            <input
-                                name='name'
-                                type='text'
-                                value={name}
-                                // defaultValue={name}
-                                onChange={e => setName(e.target.value)}
-                                onClick={() => setNameFocus(true)}
-                                onBlur={() => setNameFocus(false)}
-                                style={{backgroundColor: errors['name'] ? '#FFA194' : ""}}
-                            />
-                            <div className='name-char-count'>
-                                {nameFocus && name
-                                ?
-                                <div className='char-count-ctn'>
-                                    {messageCount > 150 && name
-                                    ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
-                                            <span>{name?.length} / 150</span>
-                                        </div>
-                                    :   <div className='char-count-cmt'>
-                                            <span>{name?.length} / 150</span>
-                                        </div>}
+                        <div className='alarm-name-and-count'>
+                            <div className='alarm-name-input'>
+                                <input
+                                    name='name'
+                                    type='text'
+                                    className='name-input-box'
+                                    value={name}
+                                    // defaultValue={name}
+                                    onChange={e => setName(e.target.value)}
+                                    onClick={() => setNameFocus(true)}
+                                    onBlur={() => setNameFocus(false)}
+                                    style={{backgroundColor: errors['name'] ? '#FFA194' : ""}}
+                                />
+                                <div className='name-char-count'>
+                                    {nameFocus && name
+                                    ?
+                                    <div className='char-count-ctn'>
+                                        {messageCount > 150 && name
+                                        ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
+                                                <span>{name?.length} / 150</span>
+                                            </div>
+                                        :   <div className='char-count-cmt'>
+                                                <span>{name?.length} / 150</span>
+                                            </div>}
+                                    </div>
+                                    : ''
+                                    }
                                 </div>
-                                : ''
-                                }
                             </div>
                         </div>
                     </div>
@@ -322,6 +333,7 @@ const EditAlarm = () => {
                                 value={alarmlist}
                                 onChange={e => setAlarmlist(e.target.value)}
                                 className='alarmlist-selection-form'
+                                style={{backgroundColor: errors['alarmlist'] ? '#FFA194' : ""}}
                             >
                                 {alarmlistsArr && alarmlistsArr.map(alarmlist => (
                                     <option value={+(alarmlist?.id)} key={+(alarmlist?.id)}>{alarmlist?.name}</option>
@@ -338,10 +350,14 @@ const EditAlarm = () => {
                             <label htmlFor='sound'>Sound</label>
                         </div>
                         <label className='alarm-sound-input rtl'>
-                            {/* 3 cases: If uploading a new sound, display name of upload (newly updated sound comes in an object)
-                            If user didn't upload new sound to begin with, display the default
-                            If user uploaded a sound when creating an alarm, display the tail of the link. */}
-                            {typeof sound === 'object' ? sound?.name : sound?.endsWith('Daybreak.mp3') ? 'Default' : sound}
+                            {/* 4 cases: If uploading a new sound, display name of upload (newly updated sound comes in an object) */}
+                            {typeof sound === 'object' ? sound?.name :
+                            // If user didn't upload new sound to begin with, display the default
+                            sound?.endsWith('Daybreak.mp3') ? 'Default' :
+                            // If a user uploads a wrong file and decides to not upload a correct one by pressing cancel, display default
+                            sound === undefined ? 'Default' :
+                            // If user uploaded a sound when creating an alarm, display the tail of the link.
+                            sound}
                             <input
                                 className='sound-link'
                                 name='sound'
@@ -351,6 +367,9 @@ const EditAlarm = () => {
                                 hidden={true}
                             />
                         </label>
+                    </div>
+                    <div className='alarm-formError-ctn'>
+                        {<ErrorMessage error={errors.sound} setClassName="alarm-sound-error" />}
                     </div>
                     {/* ------------------------- REPEAT ------------------------- */}
                     <div className='alarm-repeat-form'>
