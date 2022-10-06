@@ -130,6 +130,7 @@ const CreateAlarm = () => {
     return (
         <div id='create-alarm'>
             <h1 className='alarm-form-title'>Add Alarm</h1>
+            {errors.error && <ErrorMessage error={errors.error} setClassName='error-500' />}
             <form onSubmit={onSubmit}>
                 <div className='create-left'>
                     <div className='select-times-and-meridiem'>

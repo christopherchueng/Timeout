@@ -164,6 +164,7 @@ const EditAlarm = () => {
     return (
         <div id='edit-alarm'>
             <h1 className='alarm-form-title'>Edit Alarm</h1>
+            {errors.error && <ErrorMessage error={errors.error} setClassName='error-500' />}
             <form onSubmit={onSubmit}>
                 <div className='select-times-and-meridiem'>
                     {/* ------------------------- HOUR ------------------------- */}

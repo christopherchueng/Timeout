@@ -112,7 +112,7 @@ export const createAlarm = (payload) => async (dispatch) => {
         const alarm = await response.json();
         return alarm;
     } else {
-        return ['An error occurred. Please try again.']
+        return {'error': 'An error occurred. Please try again.'}
     }
 }
 
@@ -152,7 +152,7 @@ export const updateAlarm = (payload) => async (dispatch) => {
         const alarm = await response.json();
         return alarm;
     } else {
-        return ['An error occurred. Please try again.']
+        return {'error': 'An error occurred. Please try again.'}
     }
 }
 
