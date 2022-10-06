@@ -155,9 +155,9 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         await dispatch(updateAlarm(payload))
     }
 
-    const deleteAlarm = (e, alarm) => {
+    const removeAlarm = (e) => {
         e.preventDefault()
-        dispatch(deleteAlarm(alarm.id))
+        dispatch(deleteAlarm(alarm?.id))
         history.push(`/dashboard`)
     }
 
@@ -232,7 +232,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                         <Link to={`/alarms/${alarm?.id}/edit`}><div className='alarm-edit-btn'>
                             <span className="edit-alarm-label">Edit</span>
                         </div></Link>
-                        <button type='button' onClick={e => deleteAlarm(e, alarm)}>
+                        <button type='button' onClick={(e) => removeAlarm(e)}>
                             <div className='alarm-delete-btn'>
                                     <span className="delete-alarm">Delete</span>
                             </div>
