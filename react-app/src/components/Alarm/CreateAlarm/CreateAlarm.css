@@ -236,10 +236,6 @@ select {
     color: #3478F6;
 }
 
-.alarm-sound-input > input {
-
-}
-
 .alarm-repeat-select {
     display: flex;
     align-items: center;
