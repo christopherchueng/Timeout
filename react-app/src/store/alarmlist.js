@@ -21,12 +21,12 @@ export const loadAlarmlists = (alarmlists) => {
     }
 }
 
-export const loadDefaultAlarmlist = (alarmlist) => {
-    return {
-        type: LOAD_DEFAULT_ALARMLIST,
-        alarmlist
-    }
-}
+// export const loadDefaultAlarmlist = (alarmlist) => {
+//     return {
+//         type: LOAD_DEFAULT_ALARMLIST,
+//         alarmlist
+//     }
+// }
 
 export const postAlarmlist = (alarmlist) => {
     return {
@@ -70,12 +70,12 @@ export const getAlarmlists = () => async (dispatch) => {
     dispatch(loadAlarmlists(alarmlists))
 }
 
-export const getDefaultAlarmlist = () => async (dispatch) => {
-    const response = await fetch('/api/alarmlists/default')
+// export const getDefaultAlarmlist = () => async (dispatch) => {
+//     const response = await fetch('/api/alarmlists/default')
 
-    const alarmlists = await response.json()
-    dispatch(loadDefaultAlarmlist(alarmlists))
-}
+//     const alarmlists = await response.json()
+//     dispatch(loadDefaultAlarmlist(alarmlists))
+// }
 
 export const createAlarmlist = payload => async (dispatch) => {
     const response = await fetch('/api/alarmlists/', {
@@ -145,10 +145,10 @@ const alarmlistReducer = (state = initialState, action) => {
             newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             action.alarmlists.forEach(alarmlist => { newState.entries[alarmlist.id] = alarmlist })
             return newState
-        case LOAD_DEFAULT_ALARMLIST:
-            newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
-            newState.default[action.alarmlist.id] = action.alarmlist
-            return newState
+        // case LOAD_DEFAULT_ALARMLIST:
+        //     newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
+        //     newState.default[action.alarmlist.id] = action.alarmlist
+        //     return newState
         case POST_ALARMLIST:
             newState = { ...state, entries: { ...state.entries }, default: { ...state.default }}
             newState.entries[action.alarmlist.id] = action.alarmlist
