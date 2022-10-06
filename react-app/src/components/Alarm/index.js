@@ -58,8 +58,8 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         setAlarmOn(alarm?.toggle)
     }, [alarm?.toggle, alarmlist, id])
 
+    // Alarm goes off
     useEffect(async () => {
-
         const checkHourMinMeridiem = (alarm) => {
             return alarm.hour === (+(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
             alarm.minutes === +(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
@@ -109,6 +109,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         }
     }, [currentTime, alarm])
 
+    // Snooze registered in local storage
     useEffect(() => {
         // If snooze is clicked and turned on, then start the snooze countdown
         if (snoozeOn) {
@@ -239,18 +240,19 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                     </div>}
                 </div>
             </>
-                : ""}
-                {showSnoozeModal ? <SnoozeModal
-                    alarm={alarm}
-                    alarmOn={alarmOn}
-                    setAlarmOn={setAlarmOn}
-                    countdown={countdown}
-                    setCountdown={setCountdown}
-                    snoozeOn={snoozeOn}
-                    setSnoozeOn={setSnoozeOn}
-                    showSnoozeModal={showSnoozeModal}
-                    setShowSnoozeModal={setShowSnoozeModal}
-                /> : ''}
+            : ""}
+            {showSnoozeModal ?
+            <SnoozeModal
+                alarm={alarm}
+                alarmOn={alarmOn}
+                setAlarmOn={setAlarmOn}
+                countdown={countdown}
+                setCountdown={setCountdown}
+                snoozeOn={snoozeOn}
+                setSnoozeOn={setSnoozeOn}
+                showSnoozeModal={showSnoozeModal}
+                setShowSnoozeModal={setShowSnoozeModal}
+            /> : ''}
         </>
     )
 }

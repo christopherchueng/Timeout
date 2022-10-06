@@ -67,7 +67,6 @@ const AlarmList = ({ dashAlarmlist }) => {
         }
 
         dispatch(updateAlarmlist(payload)).then(
-
             alarmsArr.forEach(async alarm => {
                 let repeatPayload = []
 
