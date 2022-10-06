@@ -346,7 +346,7 @@ const CreateAlarm = () => {
                                 // showArrow={true}
                                 style={{
                                     searchBox: {
-                                        width: '400px',
+                                        width: '150px',
                                         // border: '1px solid black',
                                         border: '0',
                                         cursor: 'pointer',
