@@ -23,10 +23,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 20px;
     width: 100%;
     height: 75px;
-    /* cursor: pointer; */
 }
 
 .alarmlist-header:hover {
@@ -103,7 +101,6 @@
     flex-direction: row;
     align-items: center;
     height: 100%;
-    padding-top: 20px;
 
 }
 
@@ -169,6 +166,7 @@
 .dropdown-alarm-btn {
     padding-left: 20px;
     cursor: pointer;
+    border-bottom: 1px solid lightgray;
 }
 
 .dropdown-alarm-btn:hover {
