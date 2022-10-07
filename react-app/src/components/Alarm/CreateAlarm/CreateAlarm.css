@@ -77,10 +77,17 @@
     font-size: 50pt;
 }
 
+.alarm-hour-form > select > option,
+.alarm-minutes-form > select > option,
+.alarm-meridiem-form > select > option {
+    color: #CECECE;
+}
+
 .alarm-hour-form > select > option:checked,
 .alarm-minutes-form > select > option:checked,
 .alarm-meridiem-form > select > option:checked {
     border-radius: 25px;
+    color: black;
     /* background-color: #3478F6; */
 }
 
