@@ -177,7 +177,7 @@ select {
     font-family: 'Lexend Deca';
     font-weight: 1000;
     font-size: 14pt;
-    cursor: pointer;
+    /* cursor: pointer; */
     color: #3478F6;
 }
 
