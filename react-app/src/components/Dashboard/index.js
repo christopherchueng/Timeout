@@ -26,13 +26,13 @@ const Dashboard = () => {
     return (
         <div id='dashboard'>
             <div className='alarmlist-menu' style={{display: isSidebarOpen ? '' : 'none'}}>
-                <div id='sidebar-top'>
+                {/* <div id='sidebar-top'>
                     <h1 className='alarmlist-title'>Alarmlists</h1>
                     <div className='create-alarmlist-modal'>
                         <CreateAlarmlistModal />
                     </div>
 
-                </div>
+                </div> */}
                 <div id='alarmlists'>
                     {alarmlists.length === 0 ?
                     <div className='no-alarmlists-ctn'>

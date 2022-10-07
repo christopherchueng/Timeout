@@ -19,12 +19,6 @@
     border-bottom: 1px solid lightgray;
 }
 
-.alarmlist-title {
-    font-family: 'Readex Pro';
-    font-size: 36pt;
-    margin: 20px 0 20px 0;
-}
-
 .alarmlist-menu {
     width: 25vw;
     /* height: 100vh; */
