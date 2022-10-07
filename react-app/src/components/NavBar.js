@@ -18,8 +18,12 @@ const NavBar = () => {
           <>
             <li id='navbar-left'>
               {subDirectoryURL === '/dashboard' && <div className='sidebar-menu-ctn'>
-                <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                  <i className="fa-solid fa-bars"></i>
+                <button className='toggle-sidebar' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                {isSidebarOpen ?
+                  <i className="fa-solid fa-xmark fa-2x"></i> :
+                  <i className="fa-solid fa-bars fa-2x"></i>
+
+                }
                 </button>
               </div>}
               <div className='home-logo-ctn'>

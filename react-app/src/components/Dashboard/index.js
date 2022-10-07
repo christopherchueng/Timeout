@@ -25,7 +25,7 @@ const Dashboard = () => {
 
     return (
         <div id='dashboard'>
-            {isSidebarOpen && <div className='alarmlist-menu'>
+            <div className='alarmlist-menu' style={{display: isSidebarOpen ? '' : 'none'}}>
                 <div id='sidebar-top'>
                     <h1 className='alarmlist-title'>Alarmlists</h1>
                     <div className='create-alarmlist-modal'>
@@ -48,7 +48,7 @@ const Dashboard = () => {
                     </>
                 }
                 </div>
-            </div>}
+            </div>
             <div className='global-dashboard-time'>
                 <div className='dashboard-time-ctn'>
                     <div className='splash-hour'>
