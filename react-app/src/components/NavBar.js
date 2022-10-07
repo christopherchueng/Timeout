@@ -16,13 +16,13 @@ const NavBar = () => {
     <nav id='navbar'>
       {currentUser ?
         <>
-          {isSidebarOpen && <section className='navbar-alarmlist-heading'>
+          {(isSidebarOpen && subDirectoryURL === '/dashboard') && <section className='navbar-alarmlist-heading'>
             <h1 className='alarmlist-title'>Alarmlists</h1>
             <div className='create-alarmlist-modal'>
                 <CreateAlarmlistModal />
             </div>
           </section>}
-          <ul className={isSidebarOpen ? 'navbar-content-sidebar-open' : 'navbar-content-sidebar-close'}>
+          <ul className={isSidebarOpen && subDirectoryURL === '/dashboard' ? 'navbar-content-sidebar-open' : 'navbar-content-sidebar-close'}>
             <>
               <li id='navbar-left'>
                 {subDirectoryURL === '/dashboard' && <div className='sidebar-menu-ctn'>
