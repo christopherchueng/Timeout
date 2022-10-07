@@ -132,10 +132,8 @@ const AlarmList = ({ dashAlarmlist }) => {
                     style={{cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''}}
                 >
                     <div className='alarmlist-name'>
-                        <div className='alarmlist-heading-ctn'>
-                            {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
-                            <h1 className="alarmlist-name-heading">{dashAlarmlist?.name}</h1>
-                        </div>
+                        {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
+                        <h1 className="alarmlist-name-heading">{dashAlarmlist?.name}</h1>
                     </div>
                     <div className='toggle-and-settings'>
                         <div

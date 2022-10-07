@@ -36,19 +36,21 @@
 .alarmlist-name {
     display: flex;
     flex-direction: row;
-    height: 50px;
+    align-items: center;
+    height: 100%;
     width: 200px;
     padding: 0 0 0 20px;
+    font-family: 'Lexend Deca';
 }
 
-.alarmlist-heading-ctn > h1 {
+/* .alarmlist-heading-ctn > h1 {
     font-family: 'Lexend Deca';
-    font-size: 24pt;
+    font-size: 20pt;
 }
 
 .alarmlist-heading-ctn {
     margin: 0;
-}
+} */
 
 .alarmlist-name-heading > a {
     text-decoration: none;
@@ -56,12 +58,15 @@
 }
 
 .alarmlist-name-heading {
-    margin: 15px 10px 0 0;
+    margin: 19px 10px 0 0;
     max-width: 150px;
-    height: 50px;
+    /* height: 50px; */
     overflow-x: auto;
     overflow-y: auto;
     color: #3478F6;
+    font-size: 20pt;
+    margin: 0;
+
 }
 
 .settings-menu {
@@ -199,6 +204,11 @@
 
 .alarmlist-toggle-ctn {
     width: 75px;
+}
+
+.alarmlist-toggle {
+    display: flex;
+    align-items: center;
 }
 
 .alarmlist-switch {
