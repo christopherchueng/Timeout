@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAlarmlists } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
+import { useSidebarContext } from "../../context/SidebarContext"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import Alarm from "../Alarm"
 import AlarmList from "../AlarmList"
@@ -14,6 +15,7 @@ const Dashboard = () => {
     const currentUser = useSelector(state => state?.session?.user)
     const alarmlists = Object.values(alarmlistsObj)
     const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
+    const { isSidebarOpen, setIsSidebarOpen } = useSidebarContext()
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
@@ -23,7 +25,7 @@ const Dashboard = () => {
 
     return (
         <div id='dashboard'>
-            <div className='alarmlist-menu'>
+            {isSidebarOpen && <div className='alarmlist-menu'>
                 <div id='sidebar-top'>
                     <h1 className='alarmlist-title'>Alarmlists</h1>
                     <div className='create-alarmlist-modal'>
@@ -46,7 +48,7 @@ const Dashboard = () => {
                     </>
                 }
                 </div>
-            </div>
+            </div>}
             <div className='global-dashboard-time'>
                 <div className='dashboard-time-ctn'>
                     <div className='splash-hour'>
