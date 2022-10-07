@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: calc(100vh - 89px)
+    height: calc(100vh - 89px);
 }
 
 .no-alarmlists-ctn {
@@ -28,6 +28,7 @@
     overflow-x: hidden;
     padding-bottom: 40px;
     /* height: 100vh; */
+    transition: margin-left 0.5s;
 }
 
 .global-dashboard-time {
@@ -35,7 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 75vw;
+    width: calc(100vw - 25vw);
 }
 
 .dashboard-time-ctn {

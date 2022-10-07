@@ -16,13 +16,27 @@ const NavBar = () => {
     <nav id='navbar'>
       {currentUser ?
         <>
-          {(isSidebarOpen && subDirectoryURL === '/dashboard') && <section className='navbar-alarmlist-heading'>
+        {/* Only show alarmlist heading on the dashboard */}
+          {(subDirectoryURL === '/dashboard') &&
+          // If sidebar is open, remain in original position. Otherwise, push div to left by -25vw
+          <div className='navbar-alarmlist-heading'
+            style={{
+              // transform: !isSidebarOpen && 'translate(-25vw)',
+              // transition: 'transform 0.5s',
+              marginLeft: isSidebarOpen ? '0' : '-25vw'
+              }}
+          >
             <h1 className='alarmlist-title'>Alarmlists</h1>
             <div className='create-alarmlist-modal'>
                 <CreateAlarmlistModal />
             </div>
-          </section>}
-          <ul className={isSidebarOpen && subDirectoryURL === '/dashboard' ? 'navbar-content-sidebar-open' : 'navbar-content-sidebar-close'}>
+          </div>}
+          {/* If sidebar is open and user is on the dashboard */}
+          <ul className={isSidebarOpen && subDirectoryURL === '/dashboard' ?
+                        'navbar-content-sidebar-open' : 'navbar-content-sidebar-close'}
+              // If sidebar is not open, fill remaining space with width. Transitions on navbar should only take place on dashboard.
+              style={{width: !isSidebarOpen && 'fill-available', transition: subDirectoryURL === '/dashboard' && 'width 0.5s'}}
+          >
             <>
               <li id='navbar-left'>
                 {subDirectoryURL === '/dashboard' && <div className='sidebar-menu-ctn'>

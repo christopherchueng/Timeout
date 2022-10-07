@@ -21,15 +21,16 @@
 }
 
 .navbar-alarmlist-heading {
+    width: 25vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     border-right: 1px solid lightgray;
-    width: 25vw;
     margin-bottom: 0;
     height: 46px;
     padding: 21px 0;
+    transition: margin-left 0.5s;
 }
 
 .alarmlist-title {
@@ -37,6 +38,7 @@
     font-size: 26pt;
     margin: 0;
     padding-left: 30px;
+    width: fill-available;
 }
 
 .create-alarmlist-modal {
@@ -141,6 +143,8 @@
     display: flex;
     align-items: center;
     padding-left: 30px;
+    transition-duration: 0.2s;
+    transition-property: width;
 }
 
 .toggle-sidebar {
