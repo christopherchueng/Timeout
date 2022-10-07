@@ -1,7 +1,3 @@
-#navbar {
-    border-bottom: 1px solid lightgray;
-}
-
 #navbar,
 #navbar > ul,
 #navbar-right {
@@ -12,6 +8,7 @@
 
 #navbar {
     justify-content: space-between;
+    border-bottom: 1px solid lightgray;
 }
 
 .home-logo-ctn {
