@@ -2,10 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import { useSidebarContext } from '../context/SidebarContext';
 import './NavBar.css'
 
 const NavBar = () => {
   const currentUser = useSelector(state => state?.session?.user)
+  const { isSidebarOpen, setIsSidebarOpen } = useSidebarContext()
 
   return (
     <nav id='navbar'>
@@ -13,6 +15,11 @@ const NavBar = () => {
         <ul>
           <>
             <li id='navbar-left'>
+              <div className='sidebar-menu-ctn'>
+                <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                  <i className="fa-solid fa-bars"></i>
+                </button>
+              </div>
               <div className='home-logo-ctn'>
                 <NavLink to='/dashboard' exact={true} activeClassName='active'>
                   <img className='home-logo' src={process.env.PUBLIC_URL + '../../../static/timeout-black.png'}></img>

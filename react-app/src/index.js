@@ -6,17 +6,20 @@ import App from './App';
 import { ModalProvider } from './context/Modal';
 import configureStore from './store';
 import TimeProvider from './context/TimeContext';
+import SidebarProvider from './context/SidebarContext';
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ModalProvider>
-        <TimeProvider>
-          <App />
-        </TimeProvider>
-      </ModalProvider>
+      <SidebarProvider>
+        <ModalProvider>
+          <TimeProvider>
+            <App />
+          </TimeProvider>
+        </ModalProvider>
+      </SidebarProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
