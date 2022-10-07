@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { authenticate } from './store/session';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -16,7 +15,6 @@ import EditAlarm from './components/Alarm/EditAlarm'
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     (async() => {

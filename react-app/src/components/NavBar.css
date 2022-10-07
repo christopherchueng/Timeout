@@ -24,10 +24,11 @@
     align-items: center;
     justify-content: space-between;
     border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
     margin-bottom: 0;
     height: 46px;
     padding: 21px 0;
-    transition: margin-left 0.5s;
+    transition: margin-left 0.3s;
 }
 
 .alarmlist-title {
@@ -42,22 +43,13 @@
     padding-right: 30px;
 }
 
-.navbar-content-sidebar-open {
-    justify-content: space-between;
-    width: 75vw;
-    padding: 5px 0 21px 0;
-}
-
-.navbar-content-sidebar-close {
-    justify-content: space-between;
-    width: 100vw;
-    padding: 5px 0 21px 0;
-    /* padding: 5px 80px 21px 80px; */
-    margin-top: 16px;
-}
-
 #navbar > ul {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 0;
+    margin-top: 16px;
+    padding: 5px 0 21px 0;
+    width: 100vw;
 }
 
 .home-logo {
@@ -140,8 +132,7 @@
     display: flex;
     align-items: center;
     padding-left: 30px;
-    transition-duration: 0.2s;
-    transition-property: width;
+    transition: width 0.3s;
 }
 
 .toggle-sidebar {

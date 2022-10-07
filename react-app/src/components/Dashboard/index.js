@@ -1,39 +1,66 @@
 import React, { useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
 import { getAlarmlists } from "../../store/alarmlist"
 import { getAlarms } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
 import { useSidebarContext } from "../../context/SidebarContext"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
-import Alarm from "../Alarm"
 import AlarmList from "../AlarmList"
 import './Dashboard.css'
+import DashNavBar from "./DashNavBar"
 
 const Dashboard = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const currentUser = useSelector(state => state?.session?.user)
     const alarmlists = Object.values(alarmlistsObj)
     const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
     const { isSidebarOpen } = useSidebarContext()
 
+  const subDirectoryURL = useLocation().pathname
+
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
-        // dispatch(getAlarms(1))
     }, [dispatch])
 
     return (
-        <div id='dashboard'>
-            {/* If sidebar is open, remain in original position. Otherwise, push sidebar to left with marginLeft */}
-            <div className='alarmlist-menu' style={{marginLeft: isSidebarOpen ? '0' : '-50vw'}}>
-                {/* <div id='sidebar-top'>
+        <div id='dashboard--refactored'>
+            {/* If sidebar is open, push dashboard to right.*/}
+            <div id='dashboard' style={{marginLeft: isSidebarOpen ? '25vw' : '0'}}>
+                <div id='dash-navbar'>
+                    <DashNavBar />
+                </div>
+                <div className='global-dashboard-time'>
+                    <div className='dashboard-time-ctn'>
+                        <div className='splash-hour'>
+                            {hour}
+                        </div>
+                        <div className='splash-second-colon'>
+                            {seconds % 2 === 0 ? ":" : ""}
+                        </div>
+                        <div className='splash-minutes'>
+                            {minutes < 10 ? '0' + minutes : minutes}
+                        </div>
+                        <div className='meridiem-ctn'>
+                            <div className='splash-meridiem'>
+                                {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* If sidebar is open, remain in original position. Otherwise, pull sidebar to left (offscreen) with marginLeft */}
+            <div className='alarmlist-menu' style={{marginLeft: isSidebarOpen ? '0' : '-25vw'}}>
+                {/* Only show alarmlist heading on the dashboard */}
+                {(subDirectoryURL === '/dashboard') &&
+                // If sidebar is open, remain in original position. Otherwise, push div to left by -25vw
+                <div className='navbar-alarmlist-heading'>
                     <h1 className='alarmlist-title'>Alarmlists</h1>
                     <div className='create-alarmlist-modal'>
                         <CreateAlarmlistModal />
                     </div>
-
-                </div> */}
+                </div>}
                 <div id='alarmlists'>
                     {alarmlists.length === 0 ?
                     <div className='no-alarmlists-ctn'>
@@ -48,27 +75,6 @@ const Dashboard = () => {
                         ))}
                     </>
                 }
-                </div>
-            </div>
-            {/* If sidebar is open, remain in original position. Otherwise, slide left 12.5vw */}
-            <div
-                className='global-dashboard-time'
-                style={{transform: isSidebarOpen ? 'translate(0)' : 'translate(12.5vw)', transition: 'all 0.5s'}}>
-                <div className='dashboard-time-ctn'>
-                    <div className='splash-hour'>
-                        {hour}
-                    </div>
-                    <div className='splash-second-colon'>
-                        {seconds % 2 === 0 ? ":" : ""}
-                    </div>
-                    <div className='splash-minutes'>
-                        {minutes < 10 ? '0' + minutes : minutes}
-                    </div>
-                    <div className='meridiem-ctn'>
-                        <div className='splash-meridiem'>
-                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM'}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
