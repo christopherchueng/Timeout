@@ -171,10 +171,6 @@
     align-items: center;
 }
 
-.splash-left {
-    padding-left: 80px;
-}
-
 .github-logo-ctn,
 .linkedin-logo-ctn {
     padding-left: 30px;
@@ -187,7 +183,7 @@
 }
 
 .auth-home {
-    padding-right: 80px;
+    padding-right: 30px;
 }
 
 .auth-home > a {
