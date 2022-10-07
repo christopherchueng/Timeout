@@ -48,6 +48,15 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='dashboard-days'>
+                        <div className='dashboard-sun' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Sun') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SUN</div>
+                        <div className='dashboard-mon' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Mon') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>MON</div>
+                        <div className='dashboard-tue' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Tue') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>TUE</div>
+                        <div className='dashboard-wed' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Wed') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>WED</div>
+                        <div className='dashboard-thu' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Thu') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>THU</div>
+                        <div className='dashboard-fri' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Fri') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>FRI</div>
+                        <div className='dashboard-sat' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Sat') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SAT</div>
+                    </div>
                 </div>
             </div>
             {/* If sidebar is open, remain in original position. Otherwise, pull sidebar to left (offscreen) with marginLeft */}

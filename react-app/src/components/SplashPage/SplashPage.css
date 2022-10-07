@@ -79,6 +79,7 @@
 
 .splash-days > div {
     padding: 0 40px 40px 40px;
+    font-weight: 1000;
     color: rgba(0, 0, 0, 0.4)
 }
 
