@@ -25,12 +25,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-right: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
     margin-bottom: 0;
     height: 46px;
     padding: 21px 0;
     transition: margin-left 0.3s;
+    /* background-color: #C0CBEA; */
+    background-color: #E3E7F4;
     /* background-color: rgb(229, 229, 229); */
 }
 
