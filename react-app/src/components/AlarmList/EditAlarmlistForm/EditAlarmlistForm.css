@@ -1,22 +1,22 @@
 .dashboard-alarmlist-input {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: 20px;
-    padding-left: 20px;
+    /* padding-left: 10px; */
 }
 
 .update-alarmlist-textbox {
-    height: 50px;
+    height: 35px;
     width: 80%;
     font-family: 'Lexend Deca';
-    font-size: 24pt;
+    font-size: 14pt;
     color: #3478F6;
     border: 1px solid lightgray;
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 25px;
-    padding: 0 15px;
-    margin-top: 10px;
+    padding: 0 10px;
+    outline: none;
 }
 
 .alarmlist-formError-ctn {
@@ -38,11 +38,12 @@
     padding-bottom: 5px;
 }
 
-.edit-alarmlist-form-btns {
+.edit-alarmlist-form-btns,
+.cancel-alarmlist-edit {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .submit-alarmlist-edit-btn {

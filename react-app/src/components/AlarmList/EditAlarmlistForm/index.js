@@ -72,6 +72,9 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
         <>
             <form onSubmit={onSubmit}>
                 <div className='dashboard-alarmlist-input'>
+                    <div className='cancel-alarmlist-edit'>
+                        <button type='button' className="cancel-alarmlist-edit-btn" onClick={onClick}><span className="fa-solid fa-xmark fa-xl"></span></button>
+                    </div>
                     {/* -------------------- NAME -------------------- */}
                     <input
                         name={'name'}
@@ -85,9 +88,6 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
                     <div className='edit-alarmlist-form-btns'>
                         <div className='submit-alarmlist-edit'>
                             <button type='submit' className='submit-alarmlist-edit-btn'><span className="fa-solid fa-check fa-xl"></span></button>
-                        </div>
-                        <div className='cancel-alarmlist-edit'>
-                            <button type='button' className="cancel-alarmlist-edit-btn" onClick={onClick}><span className="fa-solid fa-xmark fa-xl"></span></button>
                         </div>
                     </div>
                 </div>
