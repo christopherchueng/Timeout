@@ -38,6 +38,9 @@
     padding-bottom: 40px;
     transition: margin-left 0.3s;
     height: 100vh;
+    background-color: #FAFEFF;
+    /* background-color: #F6F9FF; */
+    box-shadow: 1px 0 5px #C0CBEA;
 }
 
 .global-dashboard-time {

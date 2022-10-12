@@ -9,6 +9,8 @@
 #navbar {
     justify-content: space-between;
     border-bottom: 1px solid lightgray;
+    /* background-color: #FFDEE3; */
+    background-color: #C0CBEA;
 }
 
 .home-logo-ctn {
@@ -29,6 +31,7 @@
     height: 46px;
     padding: 21px 0;
     transition: margin-left 0.3s;
+    /* background-color: rgb(229, 229, 229); */
 }
 
 .alarmlist-title {
@@ -70,12 +73,12 @@
 }
 
 .fa-plus {
-    color: #3478F6;
+    color: lightgray;
 }
 
 .fa-plus:hover {
     transition: 0.3s;
-    color: gray;
+    color: #3478F6;
 }
 
 .logout-switch {

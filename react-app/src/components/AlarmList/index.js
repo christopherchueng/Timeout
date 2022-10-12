@@ -118,9 +118,11 @@ const AlarmList = ({ dashAlarmlist }) => {
             </div>
             :
             <div className='alarmlist-top'
+            onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
             style={{
                 transform: openSettings ? 'translateX(-100px)' : '',
-                transition: '0.2s'
+                transition: '0.2s',
+                cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''
             }}
             >
                 <div
@@ -128,12 +130,15 @@ const AlarmList = ({ dashAlarmlist }) => {
                     key={dashAlarmlist?.id || alarmlistId}
                     onMouseEnter={() => setShowEllipsis(true)}
                     onMouseLeave={() => setShowEllipsis(false)}
-                    onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
-                    style={{cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''}}
                 >
                     <div className='alarmlist-name'>
                         {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
-                        <h1 className="alarmlist-name-heading">{dashAlarmlist?.name}</h1>
+                        <h1
+                            className="alarmlist-name-heading"
+                            style={{color: dashAlarmlist?.toggle ? 'black' : '#a5a5a5'}}
+                        >
+                            {dashAlarmlist?.name}
+                        </h1>
                     </div>
                     <div className='toggle-and-settings'>
                         <div
