@@ -11,10 +11,16 @@ import Dashboard from './components/Dashboard';
 import AlarmList from './components/AlarmList';
 import CreateAlarm from './components/Alarm/CreateAlarm';
 import EditAlarm from './components/Alarm/EditAlarm'
+import { useSidebarContext } from './context/SidebarContext';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const { setIsSidebarOpen } = useSidebarContext()
+
+  useEffect(() => {
+    setIsSidebarOpen(true)
+  }, [])
 
   useEffect(() => {
     (async() => {

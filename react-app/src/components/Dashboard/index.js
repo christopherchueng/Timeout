@@ -15,9 +15,9 @@ const Dashboard = () => {
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlists = Object.values(alarmlistsObj)
     const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
-    const { isSidebarOpen } = useSidebarContext()
+    const { isSidebarOpen, setIsSidebarOpen } = useSidebarContext()
 
-  const subDirectoryURL = useLocation().pathname
+    const subDirectoryURL = useLocation().pathname
 
     useEffect(() => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
