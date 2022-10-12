@@ -51,8 +51,8 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 0;
-    margin-top: 16px;
-    padding: 5px 0 21px 0;
+    margin-top: 15px;
+    padding: 5px 0 20px 0;
     width: 100vw;
 }
 
@@ -85,7 +85,7 @@
 .logout-switch {
     position: relative;
     display: block;
-    border: 1px lightgray solid;
+    border: 1px solid rgb(165, 165, 165);
     border-radius: 25px;
     background-color: lightgray;
     width: 100px;
@@ -185,7 +185,7 @@
 .toggle-home {
     position: relative;
     display: block;
-    border: 1px solid lightgray;
+    border: 1px solid rgb(165, 165, 165);
     border-radius: 25px;
     background-color: lightgray;
     width: 100px;
