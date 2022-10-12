@@ -87,16 +87,16 @@ so that whereever you click the slider, the radio box will be (un)checked */
     border: 1px lightgray solid;
     border-radius: 25px;
     background-color: lightgray;
-    width: 75px;
-    height: 40px;
+    width: 50px;
+    height: 30px;
     cursor: pointer;
 }
 
 .alarm-slider:before {
     content: '';
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
     background-color: white;
     border-radius: 25px;
     transition: 0.2s;
@@ -106,7 +106,7 @@ so that whereever you click the slider, the radio box will be (un)checked */
 }
 
 .alarm-radio-box:checked + .alarm-slider:before {
-    transform: translateX(35px);
+    transform: translateX(20px);
     transition: 0.2s;
 }
 
