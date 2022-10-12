@@ -118,12 +118,11 @@ const AlarmList = ({ dashAlarmlist }) => {
             </div>
             :
             <div className='alarmlist-top'
-            onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
-            style={{
-                transform: openSettings ? 'translateX(-100px)' : '',
-                transition: '0.2s',
-                cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''
-            }}
+                style={{
+                    transform: openSettings ? 'translateX(-100px)' : '',
+                    transition: '0.2s',
+                    // cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''
+                }}
             >
                 <div
                     className='alarmlist-header'
@@ -131,7 +130,10 @@ const AlarmList = ({ dashAlarmlist }) => {
                     onMouseEnter={() => setShowEllipsis(true)}
                     onMouseLeave={() => setShowEllipsis(false)}
                 >
-                    <div className='alarmlist-name'>
+                    <div
+                        className='alarmlist-name'
+                        onClick={() => setOpenTab(!openTab)}
+                    >
                         {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
                         <h1
                             className="alarmlist-name-heading"
@@ -139,6 +141,17 @@ const AlarmList = ({ dashAlarmlist }) => {
                         >
                             {dashAlarmlist?.name}
                         </h1>
+                        {filteredAlarms.length ? <div className="dropdown-alarm-btn">
+                            <button
+                                className='toggle-alarms-view'
+                                style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
+                            >
+                                <i
+                                    className="fa-solid fa-angle-right fa-xl"
+                                    style={{color: dashAlarmlist?.toggle ? 'black' : '#a5a5a5'}}
+                                ></i>
+                            </button>
+                        </div> : ''}
                     </div>
                     <div className='toggle-and-settings'>
                         <div
@@ -160,10 +173,13 @@ const AlarmList = ({ dashAlarmlist }) => {
                         {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
                         {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
                             ?
-                            <div className='settings-menu'>
-                                <div className='alarmlist-toggle-settings' onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}>
+                            <div
+                                className='settings-menu'
+                                onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
+                            >
+                                <div className='alarmlist-toggle-settings'>
                                     {showEllipsis &&
-                                    <button className='ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
+                                    <button className='ellipsis-settings'>
                                         <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
                                     </button>}
                                 </div>
@@ -199,29 +215,19 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <p className='no-alarms'>{`You have no alarms under '${dashAlarmlist?.name}.' Create a new alarm in the top right corner!`}</p>
                 </div>
                 :
-                <>
-                    <div className="dropdown-alarm-btn" onClick={() => setOpenTab(!openTab)}>
-                        <button
-                            className='toggle-alarms-view'
-                            style={{transform: openTab ? 'rotate(90deg)' : '', transition: '0.2s ease-out'}}
-                        >
-                            <i className="fa-solid fa-angle-right"></i>
-                        </button>
-                    </div>
-                    <div className='dropdown-alarms'>
-                        {filteredAlarms && filteredAlarms.map(alarm => (
-                            <div className='alarm-toggle-ctn' key={alarm.id}>
-                                <Alarm
-                                    alarm={alarm}
-                                    openTab={openTab}
-                                    setOpenTab={setOpenTab}
-                                    alarmlist={id ? alarmlists[id] : dashAlarmlist}
-                                    setMainAlarmlistSwitch={setMainAlarmlistSwitch}
-                                />
-                            </div>))
-                        }
-                    </div>
-                </>}
+                <div className='dropdown-alarms'>
+                    {filteredAlarms && filteredAlarms.map(alarm => (
+                        <div className='alarm-toggle-ctn' key={alarm.id}>
+                            <Alarm
+                                alarm={alarm}
+                                openTab={openTab}
+                                setOpenTab={setOpenTab}
+                                alarmlist={id ? alarmlists[id] : dashAlarmlist}
+                                setMainAlarmlistSwitch={setMainAlarmlistSwitch}
+                            />
+                        </div>))
+                    }
+                </div>}
             </div>
         </div>
     )
