@@ -39,16 +39,8 @@
     width: 200px;
     padding: 0 0 0 20px;
     font-family: 'Lexend Deca';
+    overflow: scroll;
 }
-
-/* .alarmlist-heading-ctn > h1 {
-    font-family: 'Lexend Deca';
-    font-size: 20pt;
-}
-
-.alarmlist-heading-ctn {
-    margin: 0;
-} */
 
 .alarmlist-name-heading > a {
     text-decoration: none;
@@ -64,7 +56,6 @@
     color: #3478F6;
     font-size: 20pt;
     margin: 0;
-
 }
 
 .settings-menu {
