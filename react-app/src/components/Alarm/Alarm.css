@@ -151,7 +151,6 @@ so that whereever you click the slider, the radio box will be (un)checked */
     background-color: transparent;
     border: 0;
     padding: 0;
-    color: white;
     font-weight: 1000;
     cursor: pointer;
     transition-duration: 0.2s;
@@ -159,7 +158,8 @@ so that whereever you click the slider, the radio box will be (un)checked */
 }
 
 .alarm-edit-btn {
-    background-color: #D3D3D3;
+    background-color: #E3E7F4;
+    color: black;
     border-right: 1px solid gray;
 }
 
@@ -170,6 +170,7 @@ so that whereever you click the slider, the radio box will be (un)checked */
 
 .alarm-delete-btn {
     background-color: #3478F6;
+    color: white;
 }
 
 .alarm-delete-btn:hover {

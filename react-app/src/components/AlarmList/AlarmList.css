@@ -157,6 +157,10 @@
     background-color: gray;
 }
 
+.edit-alarmlist:hover .alarmlist-edit-btn {
+    color: white;
+}
+
 .delete-alarmlist:hover {
     background-color: red;
 }
