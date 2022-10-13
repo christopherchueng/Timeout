@@ -75,11 +75,11 @@
 
 .fa-plus {
     color: lightgray;
+    transition: color 0.3s;
 }
 
 .fa-plus:hover {
-    transition: 0.3s;
-    color: #3478F6;
+    color: #2350a3;
 }
 
 .logout-switch {
