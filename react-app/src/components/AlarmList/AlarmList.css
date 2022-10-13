@@ -5,6 +5,10 @@
     margin: 0;
 }
 
+.alarmlist-content {
+    border-bottom: 1px solid lightgray;
+}
+
 .toggle-and-settings {
     display: flex;
     flex-direction: row;
@@ -17,7 +21,6 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    border-bottom: 1px solid lightgray;
 }
 
 .alarmlist-header {
@@ -102,16 +105,12 @@
     flex-direction: row;
     align-items: center;
     height: 100%;
-
 }
 
 .settings-ctn {
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* border: 1px solid lightgray; */
-    /* border-radius: 5px; */
-    /* width: 100%; */
     width: 200px;
     height: 100%;
 }
@@ -124,13 +123,15 @@
 }
 
 .edit-alarmlist {
-    background-color: lightgray;
+    /* background-color: #C0CBEA; */
+    background-color: #E3E7F4;
+    transition: background-color 0.3s;
     /* background-color: #3478F6; */
 }
 
 .delete-alarmlist {
-    /* background-color: lightgray; */
     background-color: #3478F6;
+    transition: background-color 0.3s;
 }
 
 .alarmlist-edit-btn,
@@ -149,19 +150,15 @@
 }
 
 .alarmlist-edit-btn {
-    border-right: 1px solid gray;
-    color: white;
+    color: black;
 }
 
 .edit-alarmlist:hover {
     background-color: gray;
-    transition: 0.2s;
-    color: white;
 }
 
 .delete-alarmlist:hover {
     background-color: red;
-    transition: 0.2s;
 }
 
 .fa-angle-right {
@@ -171,9 +168,7 @@
 .dropdown-alarm-btn {
     display: flex;
     align-items: center;
-    /* padding-left: 20px; */
     cursor: pointer;
-    /* border-bottom: 1px solid lightgray; */
     height: 30px;
 }
 
