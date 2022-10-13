@@ -117,18 +117,19 @@ const AlarmList = ({ dashAlarmlist }) => {
                 />
             </div>
             :
-            <div className='alarmlist-top'
+            <div
+                className='alarmlist-top'
                 style={{
                     transform: openSettings ? 'translateX(-100px)' : '',
                     transition: '0.2s',
                     // cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''
                 }}
+                onMouseEnter={() => setShowEllipsis(true)}
+                onMouseLeave={() => setShowEllipsis(false)}
             >
                 <div
                     className='alarmlist-header'
                     key={dashAlarmlist?.id || alarmlistId}
-                    onMouseEnter={() => setShowEllipsis(true)}
-                    onMouseLeave={() => setShowEllipsis(false)}
                 >
                     <div
                         className='alarmlist-name'
