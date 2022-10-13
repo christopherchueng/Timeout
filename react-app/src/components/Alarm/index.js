@@ -200,17 +200,19 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                             </div>
                         </div>
                         <div className="alarm-right">
-                            <label className='alarm-switch'>
-                                <input
-                                    type='checkbox'
-                                    value={alarmOn}
-                                    onChange={toggleAlarm}
-                                    className='alarm-radio-box'
-                                    checked={alarmOn}
-                                />
-                                <div className='alarm-slider alarm-ball'>
-                                </div>
-                            </label>
+                            <div className="alarm-toggle-button-ctn">
+                                <label className='alarm-switch'>
+                                    <input
+                                        type='checkbox'
+                                        value={alarmOn}
+                                        onChange={toggleAlarm}
+                                        className='alarm-radio-box'
+                                        checked={alarmOn}
+                                    />
+                                    <div className='alarm-slider alarm-ball'>
+                                    </div>
+                                </label>
+                            </div>
                             <div className="alarm-ellipsis">
                                 {showEllipsis &&
                                 <button className='alarm-ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>

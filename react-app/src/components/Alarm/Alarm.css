@@ -65,11 +65,13 @@
     font-family: 'Lexend Deca';
     font-size: 10pt;
 }
+.alarm-toggle-button-ctn {
+    display: flex;
+    align-items: center;
+}
 
 .alarm-switch {
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
 /* This will allow the checkbox to embody/"swallow" the entire label
