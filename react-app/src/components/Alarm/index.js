@@ -169,7 +169,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                     className="alarm-hover-ellipsis"
                     onMouseEnter={() => setShowEllipsis(true)}
                     onMouseLeave={() => setShowEllipsis(false)}
-                    onClick={() => setOpenSettings(!openSettings)}
                     style={{
                         transform: openSettings ? 'translateX(-90px)' : '',
                         transition: '0.2s'
@@ -213,7 +212,10 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                                     </div>
                                 </label>
                             </div>
-                            <div className="alarm-ellipsis">
+                            <div
+                                className="alarm-ellipsis"
+                                onClick={() => setOpenSettings(!openSettings)}
+                            >
                                 {showEllipsis &&
                                 <button className='alarm-ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
                                     <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>

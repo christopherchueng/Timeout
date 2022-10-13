@@ -192,6 +192,10 @@
     background-color: rgb(59, 145, 249, 0.2);
 }
 
+.alarm-toggle-ctn:last-child > .alarm-hover-ellipsis {
+    border: 0;
+}
+
 .update-alarmlist-icon,
 .delete-alarmlist-icon {
     padding-left: 10px;
