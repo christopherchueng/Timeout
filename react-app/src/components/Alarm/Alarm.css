@@ -160,7 +160,7 @@ so that whereever you click the slider, the radio box will be (un)checked */
 }
 
 .alarm-edit-btn {
-    background-color: #E3E7F4;
+    background-color: white;
     color: black;
     border-right: 1px solid gray;
 }
