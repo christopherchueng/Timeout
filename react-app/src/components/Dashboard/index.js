@@ -27,7 +27,7 @@ const Dashboard = () => {
     return (
         <div id='dashboard--refactored'>
             {/* If sidebar is open, push dashboard to right.*/}
-            <div id='dashboard' style={{marginLeft: isSidebarOpen ? '25vw' : '0'}}>
+            <div id='dashboard' style={{marginLeft: isSidebarOpen ? '360px' : '0'}}>
                 <div id='dash-navbar'>
                     <DashNavBar />
                 </div>

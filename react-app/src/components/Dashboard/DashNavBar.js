@@ -11,7 +11,7 @@ const DashNavBar = () => {
         <nav id='navbar'>
             <ul
                 // If sidebar is not open, fill remaining space with width. Transitions on navbar should only take place on dashboard.
-                style={{width: isSidebarOpen ? '75vw' : '100vw', transition: 'width 0.3s'}}
+                style={{width: isSidebarOpen ? 'calc(100vw - 360px)' : '100vw', transition: 'width 0.3s'}}
             >
                 <li id='navbar-left'>
                     <div className='sidebar-menu-ctn'>

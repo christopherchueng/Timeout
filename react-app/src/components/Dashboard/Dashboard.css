@@ -30,7 +30,7 @@
 
 .alarmlist-menu {
     position: fixed;
-    width: 25vw;
+    width: 360px;
     border-bottom: 1px solid lightgray;
     overflow-y: scroll;
     overflow-x: hidden;
