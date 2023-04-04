@@ -1,25 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
-import { getAlarm, getAlarms, updateAlarm } from '../../../store/alarm'
+import { getAlarmlists } from '../../../store/alarmlist'
+import { getAlarm, updateAlarm } from '../../../store/alarm'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import Multiselect from 'multiselect-react-dropdown'
+import { DAYS } from '../constants'
 import './EditAlarm.css'
 
 const EditAlarm = () => {
     const { id } = useParams()
     const alarmId = +id
-    let todaysDate = new Date()
+    const todaysDate = new Date()
     const history = useHistory()
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
-    const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
-    const defaultAlarmlistArr = Object.values(defaultAlarmlist)
-    // const alarmObj = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
     const alarmObj = useSelector(state => state?.alarm?.entries)
-    const alarmArr = Object.values(alarmObj)
     const alarm = alarmObj[alarmId]
 
     const [name, setName] = useState('')
@@ -29,23 +26,14 @@ const EditAlarm = () => {
     const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState([])
     const [snooze, setSnooze] = useState('')
-    // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
     const [alarmlist, setAlarmlist] = useState(0)
     const [errors, setErrors] = useState({})
-    const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(alarm?.name?.length)
 
     useEffect(() => {
-        // const asyncDispatch = async () => {
         dispatch(getAlarm(alarmId))
         dispatch(getAlarmlists())
-        // dispatch(getDefaultAlarmlist())
-        // }
-        // asyncDispatch()
-        // if (alarm === undefined) {
-            // dispatch(getAlarms(alarm?.alarmlistId))
-            // }
     }, [dispatch, id])
 
     useEffect(() => {
@@ -87,29 +75,12 @@ const EditAlarm = () => {
     }, [name, id])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
-    let days = [
-            {name: 'Sunday', id: 0, short: 'Sun'},
-            {name: 'Monday', id: 1, short: 'Mon'},
-            {name: 'Tuesday', id: 2, short: 'Tue'},
-            {name: 'Wednesday', id: 3, short: 'Wed'},
-            {name: 'Thursday', id: 4, short: 'Thu'},
-            {name: 'Friday', id: 5, short: 'Fri'},
-            {name: 'Saturday', id: 6, short: 'Sat'}
-        ]
 
-    const onSelect = (selectedList, selectedItem) => {
+    const onSelect = useCallback((selectedList) => {
         const daysSelected = selectedList.map(day => day.id)
         setRepeat(daysSelected)
-    }
+    }, [setRepeat])
 
-    // let selectedDays = []
-
-    // const onSelect = (e) => {
-    //     if (!selectedDays.includes(e.target.value)) {
-    //         selectedDays.push(e.target.value)
-    //         setRepeat(selectedDays)
-    //     }
-    // }
     /* ---------------------- END MULTISELECT INFO ---------------------- */
 
     const onSubmit = async (e) => {
@@ -378,7 +349,7 @@ const EditAlarm = () => {
                         </div>
                         <div className='alarm-repeat-select'>
                             <Multiselect
-                                options={days}
+                                options={DAYS}
                                 onSelect={onSelect}
                                 onRemove={onSelect}
                                 displayValue="name"

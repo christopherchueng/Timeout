@@ -1,15 +1,6 @@
-import { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { Modal } from "../../context/Modal"
-import { useTimeContext } from "../../context/TimeContext"
 import './Snooze.css'
 
-const Snooze = ({ alarm, showSnoozeModal, setShowSnoozeModal, countdown, setCountdown, snoozeOn, setSnoozeOn }) => {
-    const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
-
-    // const initialTimer = () => Number(window.localStorage.getItem('snooze') || 0)
-    // const [countdown, setCountdown] = useState(60)
-
+const Snooze = ({ alarm, setShowSnoozeModal, countdown, setCountdown, setSnoozeOn }) => {
     // 2 cases: For repeated days
     // If click on Snooze, then settimeout for 10 min
     // If click on Turn off, then just close modal and don't do anything else

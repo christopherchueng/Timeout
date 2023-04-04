@@ -13,7 +13,6 @@ const DeleteAlarmlistModal = ({ alarmlist, openSettings, setOpenSettings }) => {
     return (
         <>
             <button className='delete-alarmlist-btn' onClick={() => setShowModal(true)}>
-                {/* <span className="fa-solid fa-trash delete-alarmlist-icon"></span> */}
                 <span className="delete-alarmlist-label">Delete</span>
             </button>
             {showModal && (

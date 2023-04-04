@@ -1,23 +1,16 @@
-import React, { useState, useEffect, useRef, forwardRef } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux'
 import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import './EditAlarmlistForm.css'
 
-const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, setOpenSettings }) => {
+const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, setOpenSettings }) => {
     const dispatch = useDispatch()
-    const history = useHistory()
-    const currentUser = useSelector(state => state?.session?.user)
 
     const [name, setName] = useState('')
     const [toggle, setToggle] = useState('')
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [errors, setErrors] = useState({});
-    // const [name, setName] = useState(alarmlist.name)
-    // const [toggle, setToggle] = useState(alarmlist.toggle)
-    // const [isSubmitted, setIsSubmitted] = useState(false)
-    // const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
         setName(alarmlist?.name)
@@ -29,9 +22,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
         if (name === 'Default') {
             validationErrors.name = 'Please choose a different alarmlist name.'
         }
-        // if (!name) {
-        //     validationErrors.name = 'Please provide an alarmlist name.'
-        // }
+
         if (name.length > 100) {
             validationErrors.name = 'Please select a name up to 100 characters long.'
         }
@@ -73,7 +64,9 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, openSettings, s
             <form onSubmit={onSubmit}>
                 <div className='dashboard-alarmlist-input'>
                     <div className='cancel-alarmlist-edit'>
-                        <button type='button' className="cancel-alarmlist-edit-btn" onClick={onClick}><span className="fa-solid fa-xmark fa-xl"></span></button>
+                        <button type='button' className="cancel-alarmlist-edit-btn" onClick={onClick}>
+                            <span className="fa-solid fa-xmark fa-xl"></span>
+                        </button>
                     </div>
                     {/* -------------------- NAME -------------------- */}
                     <input

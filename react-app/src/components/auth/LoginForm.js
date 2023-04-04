@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, Redirect, useHistory } from 'react-router-dom';
-import { login } from '../../store/session';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import DemoUserForm from './DemoUserForm';
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, Redirect, useHistory } from 'react-router-dom'
+import { login } from '../../store/session'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import './LoginForm.css'
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const history = useHistory()
 
-  const [errors, setErrors] = useState({});
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  const [errors, setErrors] = useState({})
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const user = useSelector(state => state.session.user)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   useEffect(() => {
@@ -35,24 +34,24 @@ const LoginForm = () => {
   }, [email, password])
 
   const onLogin = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setIsSubmitted(true)
-    const data = await dispatch(login(email, password));
+    const data = await dispatch(login(email, password))
     if (data) {
-      setErrors(data);
+      setErrors(data)
     }
-  };
+  }
 
   const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
+    setEmail(e.target.value)
+  }
 
   const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
+    setPassword(e.target.value)
+  }
 
   if (user) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to='/dashboard' />
   }
 
   const onSubmit = async (e) => {
@@ -122,7 +121,7 @@ const LoginForm = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

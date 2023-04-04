@@ -10,4 +10,4 @@ const ErrorMessage = ({ error, setClassName }) => {
     return errorMsg
   }
 
-  export default ErrorMessage;
+  export default ErrorMessage

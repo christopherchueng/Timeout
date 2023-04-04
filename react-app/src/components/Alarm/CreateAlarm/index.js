@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAlarmlists, getDefaultAlarmlist } from '../../../store/alarmlist'
+import { getAlarmlists } from '../../../store/alarmlist'
 import { createAlarm } from '../../../store/alarm'
 import Multiselect from 'multiselect-react-dropdown'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
+import { DAYS } from '../constants'
+
 import './CreateAlarm.css'
 
 const CreateAlarm = () => {
-    let todaysDate = new Date()
+    const todaysDate = new Date()
     const history = useHistory()
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = Object.values(alarmlistsObj).sort()
-    // const defaultAlarmlist = useSelector(state => state?.alarmlist?.default)
-    // const defaultAlarmlistArr = Object.values(defaultAlarmlist)
-    const newAlarm = useSelector(state => state?.alarm?.entries || state?.alarm?.independent)
 
     const [name, setName] = useState('')
     const [hour, setHour] = useState('')
@@ -24,17 +23,14 @@ const CreateAlarm = () => {
     const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState('')
     const [snooze, setSnooze] = useState('')
-    // const [alarmlist, setAlarmlist] = useState(defaultAlarmlistArr[0]?.id)
     const [alarmlist, setAlarmlist] = useState('')
     const [errors, setErrors] = useState({})
-    const [isSubmitted, setIsSubmitted] = useState(false)
     const [nameFocus, setNameFocus] = useState(false)
     const [messageCount, setMessageCount] = useState(0)
 
 
     useEffect(() => {
         dispatch(getAlarmlists())
-        // dispatch(getDefaultAlarmlist())
     }, [dispatch])
 
     useEffect(() => {
@@ -74,20 +70,12 @@ const CreateAlarm = () => {
     }, [name])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
-    let days = [
-        {name: 'Sunday', id: 0, short: 'Sun'},
-        {name: 'Monday', id: 1, short: 'Mon'},
-        {name: 'Tuesday', id: 2, short: 'Tue'},
-        {name: 'Wednesday', id: 3, short: 'Wed'},
-        {name: 'Thursday', id: 4, short: 'Thu'},
-        {name: 'Friday', id: 5, short: 'Fri'},
-        {name: 'Saturday', id: 6, short: 'Sat'}
-    ]
 
-    const onSelect = (selectedList, selectedItem) => {
+    const onSelect = useCallback((selectedList) => {
         const daysSelected = selectedList.map(day => day.id)
         setRepeat(daysSelected)
-    }
+    }, [setRepeat])
+
     /* ---------------------- END MULTISELECT INFO ---------------------- */
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -334,7 +322,7 @@ const CreateAlarm = () => {
                         </div>
                         <div className='alarm-repeat-select'>
                             <Multiselect
-                                options={days}
+                                options={DAYS}
                                 onSelect={onSelect}
                                 onRemove={onSelect}
                                 // showCheckbox={false}

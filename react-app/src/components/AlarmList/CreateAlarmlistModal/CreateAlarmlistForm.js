@@ -1,32 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { createAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
 import './AlarmlistForm.css'
 
-const CreateAlarmlistForm = ({ showModal, setShowModal }) => {
+const CreateAlarmlistForm = ({ setShowModal }) => {
     const dispatch = useDispatch()
-    const history = useHistory()
     const currentUser = useSelector(state => state?.session?.user)
 
     const [name, setName] = useState('')
     const [isSubmitted, setIsSubmitted] = useState(false)
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
-        const validationErrors = {};
-        // if (name === 'Other') {
-        //     validationErrors.name = 'Please choose a different alarmlist name.'
-        // }
-        // if (!name) {
-        //     validationErrors.name = 'Please provide an alarmlist name.'
-        // }
+        const validationErrors = {}
+
         if (name.length > 100) {
             validationErrors.name = 'Please select a name up to 100 characters long.'
         }
 
-        setErrors(validationErrors);
+        setErrors(validationErrors)
 
     }, [name])
 

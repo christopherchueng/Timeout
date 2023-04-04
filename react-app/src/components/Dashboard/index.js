@@ -2,7 +2,6 @@ import React, { useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { getAlarmlists } from "../../store/alarmlist"
-import { getAlarms } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
 import { useSidebarContext } from "../../context/SidebarContext"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
@@ -14,8 +13,8 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlists = Object.values(alarmlistsObj)
-    const { hour, minutes, seconds, meridiem, currentTime } = useTimeContext()
-    const { isSidebarOpen, setIsSidebarOpen } = useSidebarContext()
+    const { hour, minutes, seconds, currentTime } = useTimeContext()
+    const { isSidebarOpen } = useSidebarContext()
 
     const subDirectoryURL = useLocation().pathname
 

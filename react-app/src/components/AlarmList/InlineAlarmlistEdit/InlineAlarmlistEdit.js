@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import EditAlarmlistForm from "../EditAlarmlistForm"
 import DeleteAlarmlistModal from "../DeleteAlarmlistModal"
-import AlarmlistToggle from "../AlarmlistToggle/AlarmlistToggle"
-import Alarm from "../../Alarm"
 import './InlineAlarmlistEdit.css'
 
 const InlineAlarmlistEdit = ({ alarmlist }) => {

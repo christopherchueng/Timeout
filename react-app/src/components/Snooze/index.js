@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Modal } from "../../context/Modal";
-import Snooze from "./Snooze";
+import { Modal } from "../../context/Modal"
+import Snooze from "./Snooze"
 import './Snooze.css'
 
 const SnoozeModal = ({ alarm, alarmOn, setAlarmOn, showSnoozeModal, setShowSnoozeModal, countdown, setCountdown, snoozeOn, setSnoozeOn }) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams, Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { getAlarmlist, updateAlarmlist } from "../../store/alarmlist"
 import { getAlarms, updateAlarm } from "../../store/alarm"
 import EditAlarmlistForm from "./EditAlarmlistForm"
@@ -46,15 +46,6 @@ const AlarmList = ({ dashAlarmlist }) => {
             setName(alarmlists[id]?.name || dashAlarmlist?.name)
             setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
         }
-
-        // if (alarmlists && Object.values(alarmlists).length !== 0) {
-        //     setName(alarmlists[id]?.name)
-        //     setMainAlarmlistSwitch(alarmlists[id]?.toggle)
-        // }
-        // else if (dashAlarmlist && Object.values(dashAlarmlist).length !== 0) {
-        //     setName(dashAlarmlist?.name)
-        //     setMainAlarmlistSwitch(dashAlarmlist?.toggle)
-        // }
     }, [dashAlarmlist, alarmlists, id])
 
     const toggleAlarmlist = (e) => {

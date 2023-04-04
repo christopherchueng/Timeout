@@ -1,8 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
-import { useSidebarContext } from '../context/SidebarContext';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { NavLink, useLocation } from 'react-router-dom'
+import LogoutButton from './auth/LogoutButton'
+import { useSidebarContext } from '../context/SidebarContext'
 import './NavBar.css'
 
 const NavBar = () => {

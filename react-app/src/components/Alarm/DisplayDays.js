@@ -1,11 +1,14 @@
-const DisplayDays = ({ alarmDays }) => {
-    // const weekdays = [1, 2, 3, 4, 5]
-    // const weekends = [0, 6]
+import { useMemo } from 'react'
 
-    const oneDay = alarmDays.length === 1
-    const everyWeekday = alarmDays.length === 5 && alarmDays.every(day => day.id !== 0 && day.id !== 6)
-    const everyWeekend = alarmDays.length === 2 && alarmDays.every(day => day.id === 0 || day.id === 6)
-    const everyDay = alarmDays.length === 7
+const DisplayDays = ({ alarmDays }) => {
+    const oneDay = useMemo(() => (alarmDays.length === 1), [alarmDays.length])
+    const everyWeekday = useMemo(() => (
+        alarmDays.length === 5 && alarmDays.every(day => day.id !== 0 && day.id !== 6)
+    ), [alarmDays])
+    const everyWeekend = useMemo(() => (
+        alarmDays.length === 2 && alarmDays.every(day => day.id === 0 || day.id === 6)
+    ), [alarmDays])
+    const everyDay = useMemo(() => (alarmDays.length === 7), [alarmDays.length])
 
     return (
         <>

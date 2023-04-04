@@ -4,7 +4,7 @@ import { deleteAlarmlist } from '../../../store/alarmlist'
 import './DeleteAlarmlistForm.css'
 
 
-const DeleteAlarmlistForm = ({ alarmlist, showModal, setShowModal, openSettings, setOpenSettings }) => {
+const DeleteAlarmlistForm = ({ alarmlist, showModal, setShowModal, setOpenSettings }) => {
     const dispatch = useDispatch()
     const history = useHistory()
 

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useParams, Link, useHistory } from "react-router-dom"
 import { deleteAlarm } from "../../store/alarm"
 import { useTimeContext } from "../../context/TimeContext"
 import { updateAlarm } from "../../store/alarm"
-import { updateAlarmlist } from "../../store/alarmlist"
 import SnoozeModal from "../Snooze"
 import './Alarm.css'
 import DisplayDays from "./DisplayDays"
