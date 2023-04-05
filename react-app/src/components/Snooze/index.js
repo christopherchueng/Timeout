@@ -19,7 +19,7 @@ const SnoozeModal = ({ alarm, alarmOn, setAlarmOn, showSnoozeModal, setShowSnooz
                 />
             </Modal>
         </div>
-      );
+      )
 }
 
 export default SnoozeModal

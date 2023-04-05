@@ -86,7 +86,7 @@ const NavBar = () => {
         }
       </nav>}
     </>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar

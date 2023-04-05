@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react"
+import React, { useEffect, useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { getAlarmlists } from "../../store/alarmlist"
@@ -12,7 +12,7 @@ import DashNavBar from "./DashNavBar"
 const Dashboard = () => {
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const alarmlists = Object.values(alarmlistsObj)
+    const alarmlists = useMemo(() => Object.values(alarmlistsObj), [alarmlistsObj])
     const { hour, minutes, seconds, currentTime } = useTimeContext()
     const { isSidebarOpen } = useSidebarContext()
 

@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react"
+import { useCallback, useMemo, useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getAlarmlist, updateAlarmlist } from "../../store/alarmlist"
@@ -14,8 +14,8 @@ const AlarmList = ({ alarmlist }) => {
     const { id } = useParams()
     const alarmlists = useSelector(state => state?.alarmlist?.entries)
     const alarmsObj = useSelector(state => state?.alarm?.entries)
-    const alarmsArr = Object.values(alarmsObj)
-    const filteredAlarms = alarmsArr.filter(alarm => alarm?.alarmlistId === alarmlist?.id)
+    const alarmsArr = useMemo(() => Object.values(alarmsObj), [alarmsObj])
+    const filteredAlarms = useMemo(() => alarmsArr.filter(alarm => alarm?.alarmlistId === alarmlist?.id), [alarmsArr])
     const [name, setName] = useState(0)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState('')
     const [openTab, setOpenTab] = useState(false)
@@ -60,7 +60,6 @@ const AlarmList = ({ alarmlist }) => {
                 }
 
                 if (alarm.alarmlistId === alarmlist?.id) {
-
                     const alarmPayload = {
                         'alarm_id': alarm.id,
                         'name': alarm.name,

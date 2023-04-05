@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import { useDispatch } from 'react-redux'
 import { updateAlarmlist } from '../../../store/alarmlist'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage'
@@ -18,7 +18,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, setOpenSettings
     }, [])
 
     useEffect(() => {
-        const validationErrors = {};
+        const validationErrors = {}
         if (name === 'Default') {
             validationErrors.name = 'Please choose a different alarmlist name.'
         }
@@ -27,7 +27,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, setOpenSettings
             validationErrors.name = 'Please select a name up to 100 characters long.'
         }
 
-        setErrors(validationErrors);
+        setErrors(validationErrors)
 
     }, [name])
 
@@ -89,7 +89,7 @@ const EditAlarmlistForm = ({ isEditing, setIsEditing, alarmlist, setOpenSettings
                 </div>
             </form>
         </>
-      );
+      )
 }
 
 export default EditAlarmlistForm

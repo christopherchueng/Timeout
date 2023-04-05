@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists } from '../../../store/alarmlist'
@@ -14,7 +14,7 @@ const CreateAlarm = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const alarmlistsArr = Object.values(alarmlistsObj).sort()
+    const alarmlistsArr = useMemo(() => Object.values(alarmlistsObj).sort(), [alarmlistsObj])
 
     const [name, setName] = useState('')
     const [hour, setHour] = useState('')

@@ -6,19 +6,17 @@ function User() {
   const { userId }  = useParams()
 
   useEffect(() => {
-    if (!userId) {
-      return
-    }
+    if (!userId) return
+
     (async () => {
       const response = await fetch(`/api/users/${userId}`)
       const user = await response.json()
+
       setUser(user)
     })()
   }, [userId])
 
-  if (!user) {
-    return null
-  }
+  if (!user) return null
 
   return (
     <ul>

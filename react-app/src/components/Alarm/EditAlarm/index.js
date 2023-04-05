@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAlarmlists } from '../../../store/alarmlist'
@@ -10,14 +10,14 @@ import './EditAlarm.css'
 
 const EditAlarm = () => {
     const { id } = useParams()
-    const alarmId = +id
+    const alarmId = useMemo(() => +id, [id])
     const todaysDate = new Date()
     const history = useHistory()
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const alarmlistsArr = Object.values(alarmlistsObj).sort()
+    const alarmlistsArr = useMemo(() => Object.values(alarmlistsObj).sort(), [alarmlistsObj])
     const alarmObj = useSelector(state => state?.alarm?.entries)
-    const alarm = alarmObj[alarmId]
+    const alarm = useMemo(() => alarmObj[alarmId], [alarmObj])
 
     const [name, setName] = useState('')
     const [hour, setHour] = useState(0)

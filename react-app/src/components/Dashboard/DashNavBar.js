@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import LogoutButton from '../auth/LogoutButton';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import LogoutButton from '../auth/LogoutButton'
 import { useSidebarContext} from './../../context/SidebarContext'
 import '../NavBar.css'
 
@@ -50,7 +50,7 @@ const DashNavBar = () => {
                 </li>
             </ul>
         </nav>
-    );
+    )
 }
 
-export default DashNavBar;
+export default DashNavBar

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import DemoUserForm from '../auth/DemoUserForm';
-import { useTimeContext } from '../../context/TimeContext';
+import { useState, useEffect } from 'react'
+import { Link, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import DemoUserForm from '../auth/DemoUserForm'
+import { useTimeContext } from '../../context/TimeContext'
 import './SplashPage.css'
 
 const SplashPage = () => {
@@ -10,7 +10,7 @@ const SplashPage = () => {
     const currentUser = useSelector(state => state.session.user)
 
     if (currentUser) {
-        return <Redirect to='/dashboard' />;
+        return <Redirect to='/dashboard' />
     }
 
     return (

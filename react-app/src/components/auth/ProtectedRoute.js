@@ -9,7 +9,7 @@ const ProtectedRoute = props => {
       {(user)? props.children  : <Redirect to='/login' />}
     </Route>
   )
-};
+}
 
 
-export default ProtectedRoute;
+export default ProtectedRoute

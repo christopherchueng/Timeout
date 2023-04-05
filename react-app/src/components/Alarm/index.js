@@ -13,11 +13,9 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
     const history = useHistory()
     // Only use this id below for when you are on the alarmlists/:id page! DO NOT USE WHEN ON DASHBOARD
     const { id } = useParams()
-    // const alarmsObj = useSelector(state => state?.alarm?.entries)
-    // const alarmsArr = Object.values(alarmsObj)
     const initialTimer = () => Number(window.localStorage.getItem('snooze'))
 
-    const { currentTime, hour, minutes, seconds, meridiem } = useTimeContext()
+    const { currentTime, seconds } = useTimeContext()
     const [name, setName] = useState('')
     const [alarmHour, setAlarmHour] = useState('')
     const [alarmMinutes, setAlarmMinutes] = useState('')
@@ -26,7 +24,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
     const [repeat, setRepeat] = useState('')
     const [snooze, setSnooze] = useState('')
     const [alarmOn, setAlarmOn] = useState('')
-    const [alarmlistId, setAlarmlistId] = useState('')
     const [showSnoozeModal, setShowSnoozeModal] = useState(false)
     const [snoozeOn, setSnoozeOn] = useState(false)
     const [countdown, setCountdown] = useState(initialTimer)
@@ -50,7 +47,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         setSound(alarm?.sound)
         setSnooze(alarm?.snooze)
         setRepeat(alarm?.repeat)
-        setAlarmlistId(alarm?.alarmlistId)
     }, [alarm, alarm?.toggle])
 
     useEffect(() => {
@@ -71,7 +67,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
         if (alarm.repeat.length === 0) {
             if (checkHourMinMeridiem(alarm) &&
                 +((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0) {
-                    setShowSnoozeModal(true);
+                    setShowSnoozeModal(true)
                     setAlarmOn(!alarmOn)
 
                     let repeatPayload = []

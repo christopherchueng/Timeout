@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import './index.css';
-import App from './App';
-import { ModalProvider } from './context/Modal';
-import configureStore from './store';
-import TimeProvider from './context/TimeContext';
-import SidebarProvider from './context/SidebarContext';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import './index.css'
+import App from './App'
+import { ModalProvider } from './context/Modal'
+import configureStore from './store'
+import TimeProvider from './context/TimeContext'
+import SidebarProvider from './context/SidebarContext'
 
-const store = configureStore();
+const store = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,4 +23,4 @@ ReactDOM.render(
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
-);
+)

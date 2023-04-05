@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from "react"
 import { Modal } from '../../../context/Modal'
-import CreateAlarmlistForm from "./CreateAlarmlistForm";
+import CreateAlarmlistForm from "./CreateAlarmlistForm"
 import './AlarmlistForm.css'
 
 const CreateAlarmlistModal = () => {
@@ -17,7 +17,7 @@ const CreateAlarmlistModal = () => {
                 </Modal>
             )}
         </div>
-      );
+      )
 }
 
 export default CreateAlarmlistModal

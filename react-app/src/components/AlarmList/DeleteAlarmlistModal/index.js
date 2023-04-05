@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from "react"
 import { Modal } from '../../../context/Modal'
-import DeleteAlarmlistForm from "./DeleteAlarmlistForm";
+import DeleteAlarmlistForm from "./DeleteAlarmlistForm"
 
 const DeleteAlarmlistModal = ({ alarmlist, openSettings, setOpenSettings }) => {
     const [showModal, setShowModal] = useState(false)
@@ -21,7 +21,7 @@ const DeleteAlarmlistModal = ({ alarmlist, openSettings, setOpenSettings }) => {
                 </Modal>
             )}
         </>
-      );
+      )
 }
 
 export default DeleteAlarmlistModal
