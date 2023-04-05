@@ -11,15 +11,18 @@ def name_exists(form, field):
     elif len(name) <= 0:
         raise ValidationError('Please provide an alarm name.')
 
+
 def check_hour(form, field):
     hour = field.data
     if hour > 12 or hour <= 0:
         raise ValidationError('Please provide a number between 1 and 12.')
 
+
 def check_minutes(form, field):
     minutes = field.data
     if int(minutes) > 59 or int(minutes) < 0:
         raise ValidationError('Please provide a number between 0 and 59.')
+
 
 def check_meridiem(form, field):
     meridiem = field.data

@@ -15,11 +15,6 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages[field] = error
     return errorMessages
-    # errorMessages = []
-    # for field in validation_errors:
-    #     for error in validation_errors[field]:
-    #         errorMessages.append(f'{field} : {error}')
-    # return errorMessages
 
 
 @alarmlist_routes.route('/<int:alarmlist_id>')
@@ -29,6 +24,7 @@ def get_one_alarmlist_no_default(alarmlist_id):
     alarmlist = Alarmlist.query.get(alarmlist_id)
     return alarmlist.to_dict()
 
+
 @alarmlist_routes.route('/')
 @login_required
 def get_alarmlists():
@@ -36,12 +32,6 @@ def get_alarmlists():
     alarmlists = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id()).all()
     return jsonify([alarmlist.to_dict() for alarmlist in alarmlists])
 
-# @alarmlist_routes.route('/default')
-# @login_required
-# def get_default_alarmlist():
-#     # Get default alarmlist
-#     default_alarmlist = Alarmlist.query.filter(Alarmlist.user_id == current_user.get_id(), Alarmlist.name == 'Other').first()
-#     return default_alarmlist.to_dict()
 
 @alarmlist_routes.route('/', methods=['POST'])
 @login_required
