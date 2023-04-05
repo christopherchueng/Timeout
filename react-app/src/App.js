@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import { useDispatch } from 'react-redux';
-import { authenticate } from './store/session';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import SplashPage from './components/SplashPage';
-import Dashboard from './components/Dashboard';
-import AlarmList from './components/AlarmList';
-import CreateAlarm from './components/Alarm/CreateAlarm';
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import ProtectedRoute from './components/auth/ProtectedRoute'
+import { useDispatch } from 'react-redux'
+import { authenticate } from './store/session'
+import LoginForm from './components/auth/LoginForm'
+import SignUpForm from './components/auth/SignUpForm'
+import NavBar from './components/NavBar'
+import SplashPage from './components/SplashPage'
+import Dashboard from './components/Dashboard'
+import CreateAlarm from './components/Alarm/CreateAlarm'
 import EditAlarm from './components/Alarm/EditAlarm'
-import { useSidebarContext } from './context/SidebarContext';
+import { useSidebarContext } from './context/SidebarContext'
 
 function App() {
-  const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(false)
+  const dispatch = useDispatch()
   const { setIsSidebarOpen } = useSidebarContext()
 
   useEffect(() => {
@@ -24,13 +23,13 @@ function App() {
 
   useEffect(() => {
     (async() => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
+      await dispatch(authenticate())
+      setLoaded(true)
+    })()
+  }, [dispatch])
 
   if (!loaded) {
-    return null;
+    return null
   }
 
   return (
@@ -57,7 +56,7 @@ function App() {
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

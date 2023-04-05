@@ -111,14 +111,8 @@ const AlarmList = ({ alarmlist }) => {
                 onMouseEnter={() => setShowEllipsis(true)}
                 onMouseLeave={() => setShowEllipsis(false)}
             >
-                <div
-                    className='alarmlist-header'
-                    key={alarmlist?.id}
-                >
-                    <div
-                        className='alarmlist-name'
-                        onClick={() => setOpenTab(!openTab)}
-                    >
+                <div className='alarmlist-header' key={alarmlist?.id}>
+                    <div className='alarmlist-name' onClick={() => setOpenTab(prev => !prev)}>
                         <h1
                             className="alarmlist-name-heading"
                             style={{color: alarmlist?.toggle ? 'black' : '#a5a5a5'}}
