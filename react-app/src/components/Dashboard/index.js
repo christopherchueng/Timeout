@@ -78,7 +78,7 @@ const Dashboard = () => {
                     <>
                         {alarmlists && alarmlists.map(alarmlist => (
                             <div className='alarmlist-comp' key={alarmlist.id}>
-                                <AlarmList dashAlarmlist={alarmlist} />
+                                <AlarmList alarmlist={alarmlist} />
                             </div>
                         ))}
                     </>

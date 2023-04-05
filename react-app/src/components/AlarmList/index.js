@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useCallback, useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getAlarmlist, updateAlarmlist } from "../../store/alarmlist"
@@ -9,15 +9,13 @@ import Alarm from "../Alarm"
 import './AlarmList.css'
 
 
-const AlarmList = ({ dashAlarmlist }) => {
+const AlarmList = ({ alarmlist }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
-    const alarmlistId = +id
     const alarmlists = useSelector(state => state?.alarmlist?.entries)
     const alarmsObj = useSelector(state => state?.alarm?.entries)
     const alarmsArr = Object.values(alarmsObj)
-    const filteredAlarms = alarmsArr.filter(alarm => alarmlistId ? alarm?.alarmlistId === alarmlistId : alarm?.alarmlistId === dashAlarmlist?.id)
-    // const filteredAlarms = alarmsArr.filter(alarm => alarm?.alarmlistId === dashAlarmlist?.id)
+    const filteredAlarms = alarmsArr.filter(alarm => alarm?.alarmlistId === alarmlist?.id)
     const [name, setName] = useState(0)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState('')
     const [openTab, setOpenTab] = useState(false)
@@ -26,35 +24,31 @@ const AlarmList = ({ dashAlarmlist }) => {
     const [showEllipsis, setShowEllipsis] = useState(false)
 
     useEffect(() => {
-        dispatch(getAlarmlist(id ? alarmlistId : dashAlarmlist?.id))
-        dispatch(getAlarms(id ? alarmlistId : dashAlarmlist?.id))
+        dispatch(getAlarmlist(alarmlist?.id))
+        dispatch(getAlarms(alarmlist?.id))
     }, [dispatch])
 
     useEffect(() => {
         // Sometimes, the page renders at the bottom first,
         // so this will force the page to scroll up on mount
         window.scrollTo(0, 0)
-
-        // setMainAlarmlistSwitch(mainAlarmlistSwitch)
     }, [])
 
     useEffect(() => {
         if (
             (alarmlists && Object.values(alarmlists).length !== 0) ||
-            (dashAlarmlist && Object.values(dashAlarmlist).length !== 0)
+            (alarmlist && Object.values(alarmlist).length !== 0)
             ) {
-            setName(alarmlists[id]?.name || dashAlarmlist?.name)
-            setMainAlarmlistSwitch(alarmlists[id]?.toggle || dashAlarmlist?.toggle)
+            setName(alarmlists[id]?.name || alarmlist?.name)
+            setMainAlarmlistSwitch(alarmlists[id]?.toggle || alarmlist?.toggle)
         }
-    }, [dashAlarmlist, alarmlists, id])
+    }, [alarmlist, alarmlists, id])
 
-    const toggleAlarmlist = (e) => {
-        e.preventDefault()
-
+    const toggleAlarmlist = useCallback(() => {
         const payload = {
             name,
             'toggle': !mainAlarmlistSwitch,
-            'id': alarmlistId || dashAlarmlist?.id,
+            'id': alarmlist?.id,
         }
 
         dispatch(updateAlarmlist(payload)).then(
@@ -65,7 +59,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     repeatPayload.push(day.id)
                 }
 
-                if (alarm.alarmlistId === (alarmlistId || dashAlarmlist?.id)) {
+                if (alarm.alarmlistId === alarmlist?.id) {
 
                     const alarmPayload = {
                         'alarm_id': alarm.id,
@@ -92,7 +86,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                 }
             })
         )
-    }
+    }, [dispatch, alarmsArr, mainAlarmlistSwitch])
 
     return (
         <div className='alarmlist-content'>
@@ -102,7 +96,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                 <EditAlarmlistForm
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
-                    alarmlist={alarmlistId ? alarmlists[alarmlistId] : dashAlarmlist}
+                    alarmlist={alarmlist}
                     openSettings={openSettings}
                     setOpenSettings={setOpenSettings}
                 />
@@ -113,25 +107,23 @@ const AlarmList = ({ dashAlarmlist }) => {
                 style={{
                     transform: openSettings ? 'translateX(-100px)' : '',
                     transition: '0.2s',
-                    // cursor: dashAlarmlist?.id !== 1 ? 'pointer' : ''
                 }}
                 onMouseEnter={() => setShowEllipsis(true)}
                 onMouseLeave={() => setShowEllipsis(false)}
             >
                 <div
                     className='alarmlist-header'
-                    key={dashAlarmlist?.id || alarmlistId}
+                    key={alarmlist?.id}
                 >
                     <div
                         className='alarmlist-name'
                         onClick={() => setOpenTab(!openTab)}
                     >
-                        {/* <h1 className="alarmlist-name-heading">{dashAlarmlist ? <Link onClick={() => setOpenTab(true)} to={`/alarmlists/${dashAlarmlist?.id}`}>{dashAlarmlist?.name}</Link> : alarmlists[id]?.name}</h1> */}
                         <h1
                             className="alarmlist-name-heading"
-                            style={{color: dashAlarmlist?.toggle ? 'black' : '#a5a5a5'}}
+                            style={{color: alarmlist?.toggle ? 'black' : '#a5a5a5'}}
                         >
-                            {dashAlarmlist?.name}
+                            {alarmlist?.name}
                         </h1>
                         {filteredAlarms.length ? <div className="dropdown-alarm-btn">
                             <button
@@ -140,7 +132,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                             >
                                 <i
                                     className="fa-solid fa-angle-right fa-xl"
-                                    style={{color: dashAlarmlist?.toggle ? 'black' : '#a5a5a5'}}
+                                    style={{color: alarmlist?.toggle ? 'black' : '#a5a5a5'}}
                                 ></i>
                             </button>
                         </div> : ''}
@@ -148,7 +140,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <div className='toggle-and-settings'>
                         <div
                             className='alarmlist-toggle'
-                            style={{paddingRight: dashAlarmlist?.id === 1 ? '35px' : ''}}
+                            style={{paddingRight: alarmlist?.id === 1 ? '35px' : ''}}
                         >
                             <label className='alarmlist-switch'>
                                 <input
@@ -163,11 +155,11 @@ const AlarmList = ({ dashAlarmlist }) => {
                             </label>
                         </div>
                         {/* Default alarmlist name (alarmlistId 1) cannot be deleted or edited */}
-                        {(alarmlists[alarmlistId]?.id || dashAlarmlist?.id) !== 1
+                        {alarmlist?.id !== 1
                             ?
                             <div
                                 className='settings-menu'
-                                onClick={() => dashAlarmlist?.id !== 1 && setOpenSettings(!openSettings)}
+                                onClick={() => alarmlist?.id !== 1 && setOpenSettings(!openSettings)}
                             >
                                 <div className='alarmlist-toggle-settings'>
                                     {showEllipsis &&
@@ -191,12 +183,11 @@ const AlarmList = ({ dashAlarmlist }) => {
                     <div className='settings-ctn'>
                         <div className='edit-alarmlist'>
                             <button type='button' className='alarmlist-edit-btn' onClick={() => setIsEditing(!isEditing)}>
-                                {/* <span className="fa-solid fa-pen update-alarmlist-icon"></span> */}
                                 <span className="edit-alarmlist-label">Edit</span>
                             </button>
                         </div>
                         <div className='delete-alarmlist'>
-                            <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : dashAlarmlist} openSettings={openSettings} setOpenSettings={setOpenSettings} />
+                            <DeleteAlarmlistModal alarmlist={id ? alarmlists[id] : alarmlist} openSettings={openSettings} setOpenSettings={setOpenSettings} />
                         </div>
                     </div>}
                 </div>
@@ -204,7 +195,7 @@ const AlarmList = ({ dashAlarmlist }) => {
             <div id='alarmlist-alarms'>
                 {filteredAlarms.length === 0 ?
                 <div className='no-alarms-ctn'>
-                    <p className='no-alarms'>{`You have no alarms under '${dashAlarmlist?.name}.' Create a new alarm in the top right corner!`}</p>
+                    <p className='no-alarms'>{`You have no alarms under '${alarmlist?.name}.' Create a new alarm in the top right corner!`}</p>
                 </div>
                 :
                 <div className='dropdown-alarms'>
@@ -214,7 +205,7 @@ const AlarmList = ({ dashAlarmlist }) => {
                                 alarm={alarm}
                                 openTab={openTab}
                                 setOpenTab={setOpenTab}
-                                alarmlist={id ? alarmlists[id] : dashAlarmlist}
+                                alarmlist={id ? alarmlists[id] : alarmlist}
                                 setMainAlarmlistSwitch={setMainAlarmlistSwitch}
                             />
                         </div>))
