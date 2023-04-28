@@ -10,14 +10,14 @@ import './EditAlarm.css'
 
 const EditAlarm = () => {
     const { id } = useParams()
-    const alarmId = useMemo(() => +id, [id])
+    const alarmId = +id
     const todaysDate = new Date()
     const history = useHistory()
     const dispatch = useDispatch()
     const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
     const alarmlistsArr = useMemo(() => Object.values(alarmlistsObj).sort(), [alarmlistsObj])
     const alarmObj = useSelector(state => state?.alarm?.entries)
-    const alarm = useMemo(() => alarmObj[alarmId], [alarmObj])
+    const alarm = alarmObj[alarmId]
 
     const [name, setName] = useState('')
     const [hour, setHour] = useState(0)
