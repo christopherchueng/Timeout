@@ -43,7 +43,6 @@
 }
 
 .global-dashboard-time {
-    font-family: 'Lexend Deca';
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,6 +52,7 @@
 }
 
 .dashboard-time-ctn {
+    font-family: 'Lexend Deca';
     display: flex;
     flex-direction: row;
     justify-content: center;
