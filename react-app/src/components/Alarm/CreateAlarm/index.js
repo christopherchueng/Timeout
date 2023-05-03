@@ -54,7 +54,7 @@ const CreateAlarm = () => {
         }
 
         setErrors(validationErrors)
-    }, [name, alarmlist])
+    }, [name, alarmlistsArr.length])
 
     useEffect(() => {
         setMessageCount(name.length)
@@ -96,7 +96,6 @@ const CreateAlarm = () => {
             history.push(`/dashboard`)
             // history.push(`/alarmlists/${alarmlist}`)
         }
-
     }
 
     return (

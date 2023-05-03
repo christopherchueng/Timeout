@@ -60,7 +60,7 @@ const EditAlarm = () => {
         }
 
         setErrors(validationErrors)
-    }, [name, alarmlist, alarmlistsObj])
+    }, [name, alarmlistsArr.length])
 
     useEffect(() => {
         setMessageCount(name?.length)
