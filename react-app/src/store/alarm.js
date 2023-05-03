@@ -77,32 +77,10 @@ export const getIndependentAlarms = (alarmlist_id) => async (dispatch) => {
 }
 
 export const createAlarm = (payload) => async (dispatch) => {
-    const {
-        name,
-        hour,
-        minutes,
-        meridiem,
-        sound,
-        repeat,
-        snooze,
-        toggle,
-        alarmlist_id
-    } = payload
-
-    const formData = new FormData()
-    formData.append('name', name)
-    formData.append('hour', hour)
-    formData.append('minutes', minutes)
-    formData.append('meridiem', meridiem)
-    formData.append('sound', sound)
-    formData.append('repeat', repeat)
-    formData.append('snooze', snooze)
-    formData.append('toggle', toggle)
-    formData.append('alarmlist_id', alarmlist_id)
-
     const response = await fetch('/api/alarms/create', {
         method: 'POST',
-        body: formData
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
     })
 
     if (response.ok) {
@@ -117,32 +95,10 @@ export const createAlarm = (payload) => async (dispatch) => {
 }
 
 export const updateAlarm = (payload) => async (dispatch) => {
-    const {
-        name,
-        hour,
-        minutes,
-        meridiem,
-        sound,
-        repeat,
-        snooze,
-        toggle,
-        alarmlist_id
-    } = payload
-
-    const formData = new FormData()
-    formData.append('name', name)
-    formData.append('hour', hour)
-    formData.append('minutes', minutes)
-    formData.append('meridiem', meridiem)
-    formData.append('sound', sound)
-    formData.append('repeat', repeat)
-    formData.append('snooze', snooze)
-    formData.append('toggle', toggle)
-    formData.append('alarmlist_id', alarmlist_id)
-
     const response = await fetch(`/api/alarms/${payload.alarm_id}/edit`, {
         method: 'PUT',
-        body: formData
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
     })
 
     if (response.ok) {
