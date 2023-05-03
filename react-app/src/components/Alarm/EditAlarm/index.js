@@ -24,6 +24,7 @@ const EditAlarm = () => {
     const [minutes, setMinutes] = useState(0)
     const [meridiem, setMeridiem] = useState('')
     const [repeat, setRepeat] = useState([])
+    const [sound, setSound] = useState('')
     const [snooze, setSnooze] = useState('')
     const [alarmlist, setAlarmlist] = useState(0)
     const [errors, setErrors] = useState({})
@@ -40,6 +41,7 @@ const EditAlarm = () => {
         setHour(alarm?.hour)
         setMinutes(alarm?.minutes)
         setMeridiem(alarm?.meridiem)
+        setSound(alarm?.sound)
         setSnooze(alarm?.snooze)
         setRepeat(alarm?.repeat)
         setAlarmlist(alarm?.alarmlistId)
@@ -93,6 +95,7 @@ const EditAlarm = () => {
             hour,
             'minutes': `${minutes}`,
             meridiem,
+            sound,
             'repeat': JSON.stringify(newRepeat).replace(/[\[\]']+/g,''),
             snooze,
             'toggle': true,
@@ -106,6 +109,7 @@ const EditAlarm = () => {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
+            setSound('')
             setRepeat([])
             setSnooze('')
             setAlarmlist(alarmlistsArr[0]?.id)

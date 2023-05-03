@@ -1,3 +1,5 @@
+import os
+
 from flask import Blueprint, jsonify, request
 from app.models import db, Alarmlist, Alarm
 from flask_login import login_required, current_user
@@ -35,27 +37,8 @@ def get_alarmlist_alarms(alarmlist_id):
 @login_required
 def add_alarm():
     form = AlarmForm()
-    # form['csrf_token'].data = request.cookies['csrf_token']
-
-    # if "sound" in request.files:
-    #     sound = request.files["sound"]
-
-    #     # Deals with incorrect file format/type
-    #     if not allowed_file(sound.filename):
-    #         return {"errors": "file type not permitted"}, 400
-
-    #     sound.filename = get_unique_filename(sound.filename)
-
-    #     upload = upload_file_to_s3(sound)
-
-    #     # if no url key in dictionary
-    #     # then an error occurred when uploading
-    #     if "url" not in upload:
-    #         return upload, 400
-
-    #     url = upload["url"]
-    # else:
-    #     url = 'https://timeout-jingles.s3.amazonaws.com/Daybreak.mp3'
+    form['csrf_token'].data = request.cookies['csrf_token']
+    jingle = os.environ.get("DEFAULT_JINGLE")
 
     if form.validate_on_submit():
         new_alarm = Alarm(
@@ -63,7 +46,7 @@ def add_alarm():
             hour=form.data['hour'],
             minutes=form.data['minutes'],
             meridiem=form.data['meridiem'],
-            sound='https://www.dropbox.com/s/et5515p16h4g96n/Daybreak.mp3?dl=0',
+            sound=jingle,
             repeat=form.data['repeat'],
             snooze=form.data['snooze'],
             toggle=True,
@@ -80,29 +63,9 @@ def add_alarm():
 @login_required
 def update_alarm(alarm_id):
     form = AlarmForm()
-    # form['csrf_token'].data = request.cookies['csrf_token']
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    # alarm = Alarm.query.get(alarm_id)
-
-    # if "sound" in request.files:
-    #     sound = request.files["sound"]
-
-    #     # Deals with incorrect file format/type
-    #     if not allowed_file(sound.filename):
-    #         return {"errors": "file type not permitted"}, 400
-
-    #     sound.filename = get_unique_filename(sound.filename)
-
-    #     upload = upload_file_to_s3(sound)
-
-    #     # if no url key in dictionary
-    #     # then an error occurred when uploading
-    #     if "url" not in upload:
-    #         return upload, 400
-
-    #     url = upload["url"]
-    # else:
-    #     url = alarm.sound
+    alarm = Alarm.query.get(alarm_id)
 
     if form.validate_on_submit():
         alarm.name = form.data['name']

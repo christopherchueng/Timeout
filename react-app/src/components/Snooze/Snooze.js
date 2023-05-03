@@ -30,7 +30,7 @@ const Snooze = ({ alarm, setShowSnoozeModal, countdown, setCountdown, setSnoozeO
                 <div className='snooze-name'>
                     <span>{alarm.name}</span>
                 </div>
-                <audio src={alarm.sound} hidden={true} autoPlay loop></audio>
+                <audio src={alarm.sound} hidden autoPlay loop></audio>
                 {alarm.snooze ?
                 <>
                     <div className="snooze-disclaimer">

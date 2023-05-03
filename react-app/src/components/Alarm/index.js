@@ -90,7 +90,6 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                     }
 
                     await dispatch(updateAlarm(payload))
-                    // alarm.minutes < 10 ? alert(`${alarm.name} ${alarm.hour}:0${alarm.minutes} ${alarm.meridiem}`) : alert(`${alarm.name} ${alarm.hour}:${alarm.minutes} ${alarm.meridiem}`)
             }
         }
 
