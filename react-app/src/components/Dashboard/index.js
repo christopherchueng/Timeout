@@ -24,7 +24,7 @@ const Dashboard = () => {
     }, [dispatch])
 
     const displayDaysOfTheWeek = (time) => {
-        const [todaysDay, _time, _meridiem] = time.split(' ')
+        const [todaysDay] = time.split(' ')
 
         const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 
