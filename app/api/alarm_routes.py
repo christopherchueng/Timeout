@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request
 from app.models import db, Alarmlist, Alarm
 from flask_login import login_required, current_user
 from app.forms import AlarmForm
-from app.s3_helpers import upload_file_to_s3, allowed_file, get_unique_filename
 
 alarm_routes = Blueprint('alarms', __name__)
 
@@ -36,27 +35,27 @@ def get_alarmlist_alarms(alarmlist_id):
 @login_required
 def add_alarm():
     form = AlarmForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    # form['csrf_token'].data = request.cookies['csrf_token']
 
-    if "sound" in request.files:
-        sound = request.files["sound"]
+    # if "sound" in request.files:
+    #     sound = request.files["sound"]
 
-        # Deals with incorrect file format/type
-        if not allowed_file(sound.filename):
-            return {"errors": "file type not permitted"}, 400
+    #     # Deals with incorrect file format/type
+    #     if not allowed_file(sound.filename):
+    #         return {"errors": "file type not permitted"}, 400
 
-        sound.filename = get_unique_filename(sound.filename)
+    #     sound.filename = get_unique_filename(sound.filename)
 
-        upload = upload_file_to_s3(sound)
+    #     upload = upload_file_to_s3(sound)
 
-        # if no url key in dictionary
-        # then an error occurred when uploading
-        if "url" not in upload:
-            return upload, 400
+    #     # if no url key in dictionary
+    #     # then an error occurred when uploading
+    #     if "url" not in upload:
+    #         return upload, 400
 
-        url = upload["url"]
-    else:
-        url = 'https://timeout-jingles.s3.amazonaws.com/Daybreak.mp3'
+    #     url = upload["url"]
+    # else:
+    #     url = 'https://timeout-jingles.s3.amazonaws.com/Daybreak.mp3'
 
     if form.validate_on_submit():
         new_alarm = Alarm(
@@ -64,7 +63,7 @@ def add_alarm():
             hour=form.data['hour'],
             minutes=form.data['minutes'],
             meridiem=form.data['meridiem'],
-            sound=url,
+            sound='https://www.dropbox.com/s/et5515p16h4g96n/Daybreak.mp3?dl=0',
             repeat=form.data['repeat'],
             snooze=form.data['snooze'],
             toggle=True,
@@ -81,36 +80,36 @@ def add_alarm():
 @login_required
 def update_alarm(alarm_id):
     form = AlarmForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    # form['csrf_token'].data = request.cookies['csrf_token']
 
-    alarm = Alarm.query.get(alarm_id)
+    # alarm = Alarm.query.get(alarm_id)
 
-    if "sound" in request.files:
-        sound = request.files["sound"]
+    # if "sound" in request.files:
+    #     sound = request.files["sound"]
 
-        # Deals with incorrect file format/type
-        if not allowed_file(sound.filename):
-            return {"errors": "file type not permitted"}, 400
+    #     # Deals with incorrect file format/type
+    #     if not allowed_file(sound.filename):
+    #         return {"errors": "file type not permitted"}, 400
 
-        sound.filename = get_unique_filename(sound.filename)
+    #     sound.filename = get_unique_filename(sound.filename)
 
-        upload = upload_file_to_s3(sound)
+    #     upload = upload_file_to_s3(sound)
 
-        # if no url key in dictionary
-        # then an error occurred when uploading
-        if "url" not in upload:
-            return upload, 400
+    #     # if no url key in dictionary
+    #     # then an error occurred when uploading
+    #     if "url" not in upload:
+    #         return upload, 400
 
-        url = upload["url"]
-    else:
-        url = alarm.sound
+    #     url = upload["url"]
+    # else:
+    #     url = alarm.sound
 
     if form.validate_on_submit():
         alarm.name = form.data['name']
         alarm.hour = form.data['hour']
         alarm.minutes = form.data['minutes']
         alarm.meridiem = form.data['meridiem']
-        alarm.sound = url
+        alarm.sound = form.data['sound']
         alarm.repeat = form.data['repeat']
         alarm.snooze = form.data['snooze']
         alarm.toggle = form.data['toggle']

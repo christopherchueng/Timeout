@@ -128,10 +128,8 @@ select {
 
 .alarm-name-form,
 .alarm-alarmlist-label,
-.alarm-sound-label,
 .alarm-repeat-label,
-.alarm-snooze-label,
-.alarm-sound-input {
+.alarm-snooze-label {
     font-family: 'Lexend Deca';
     font-weight: 1000;
 }
@@ -218,29 +216,6 @@ select {
     font-size: 10pt;
     padding: 10px 0 0 15px;
     text-align: right;
-}
-
-.alarm-sound-form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    padding-top: 30px;
-}
-
-.alarm-sound-input {
-    /* border-bottom: 1px solid black; */
-    text-align: right;
-    cursor: pointer;
-    width: 350px;
-    /* width: auto; */
-    max-width: 350px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 14pt;
-    color: #3478F6;
 }
 
 .alarm-repeat-select {

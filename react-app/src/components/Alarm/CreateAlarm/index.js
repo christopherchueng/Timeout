@@ -20,7 +20,6 @@ const CreateAlarm = () => {
     const [hour, setHour] = useState('')
     const [minutes, setMinutes] = useState('')
     const [meridiem, setMeridiem] = useState('')
-    const [sound, setSound] = useState('')
     const [repeat, setRepeat] = useState('')
     const [snooze, setSnooze] = useState('')
     const [alarmlist, setAlarmlist] = useState('')
@@ -53,17 +52,9 @@ const CreateAlarm = () => {
         if (!alarmlistsArr.length) {
             validationErrors.alarmlist = 'You currently do not have any alarmlists! Please create an alarmlist first!'
         }
-        if (sound &&
-            !sound.name.endsWith('mp3') &&
-            !sound.name.endsWith('mp4') &&
-            !sound.name.endsWith('aac') &&
-            !sound.name.endsWith('wma') &&
-            !sound.name.endsWith('flac')) {
-            validationErrors.sound = "Please provide a valid file ('mp3', 'mp4', 'aac', 'wma', 'flac')."
-        }
 
         setErrors(validationErrors)
-    }, [name, alarmlist, sound])
+    }, [name, alarmlist])
 
     useEffect(() => {
         setMessageCount(name.length)
@@ -85,7 +76,6 @@ const CreateAlarm = () => {
             hour,
             'minutes': `${minutes}`,
             meridiem,
-            sound,
             'repeat': `${repeat}`,
             snooze,
             'toggle': true,
@@ -99,7 +89,6 @@ const CreateAlarm = () => {
             setName('Alarm')
             setHour((todaysDate.getHours() + 24) % 12 || 12)
             setMinutes(todaysDate.getMinutes())
-            setSound('')
             setRepeat([])
             setSnooze(false)
             setAlarmlist(alarmlistsArr[0]?.id)
@@ -108,11 +97,6 @@ const CreateAlarm = () => {
             // history.push(`/alarmlists/${alarmlist}`)
         }
 
-    }
-
-    const updateSound = e => {
-        const file = e.target.files[0]
-        setSound(file)
     }
 
     return (
@@ -294,26 +278,6 @@ const CreateAlarm = () => {
                     </div>
                     <div className='alarm-formError-ctn'>
                         {<ErrorMessage error={errors.alarmlist} setClassName="select-alarmlist-error" />}
-                    </div>
-                    {/* ------------------------- SOUND ------------------------- */}
-                    <div className='alarm-sound-form'>
-                        <div className='alarm-sound-label'>
-                            <label htmlFor='sound'>Sound</label>
-                        </div>
-                        <label className='alarm-sound-input'>
-                            {!sound ? 'Default' : sound.name}
-                            <input
-                                className='sound-link'
-                                name='sound'
-                                accept='sound/*'
-                                onChange={updateSound}
-                                type='file'
-                                hidden={true}
-                            />
-                        </label>
-                    </div>
-                    <div className='alarm-formError-ctn'>
-                        {<ErrorMessage error={errors.sound} setClassName="alarm-sound-error" />}
                     </div>
                     {/* ------------------------- REPEAT ------------------------- */}
                     <div className='alarm-repeat-form'>
