@@ -1,6 +1,5 @@
 const LOAD_ONE_ALARM = 'alarm/loadOneAlarm'
 const LOAD_ALARMS = 'alarm/loadAlarms'
-const LOAD_INDEPENDENT_ALARMS = 'alarm/loadIndependentAlarms'
 const ADD_ALARM = 'alarm/addAlarm'
 const EDIT_ALARM = 'alarm/editAlarm'
 const REMOVE_ALARM = 'alarm/removeAlarm'
@@ -16,13 +15,6 @@ export const loadOneAlarm = (alarm) => {
 export const loadAlarms = (alarms) => {
     return {
         type: LOAD_ALARMS,
-        alarms
-    }
-}
-
-export const loadIndependentAlarms = (alarms) => {
-    return {
-        type: LOAD_INDEPENDENT_ALARMS,
         alarms
     }
 }
@@ -63,13 +55,6 @@ export const getAlarm = (alarm_id) => async (dispatch) => {
 }
 
 export const getAlarms = (alarmlist_id) => async (dispatch) => {
-    const response = await fetch(`/api/alarms/${alarmlist_id}/alarms`)
-
-    const alarms = await response.json()
-    dispatch(loadAlarms(alarms))
-}
-
-export const getIndependentAlarms = (alarmlist_id) => async (dispatch) => {
     const response = await fetch(`/api/alarms/${alarmlist_id}/alarms`)
 
     const alarms = await response.json()
@@ -128,7 +113,7 @@ export const clearAllAlarms = () => async (dispatch) => {
     return {}
 }
 
-const initialState = { entries: {}, independent: {}, isLoading: true }
+const initialState = { entries: {}, isLoading: true }
 
 const alarmReducer = (state = initialState, action) => {
     let newState
@@ -138,21 +123,21 @@ const alarmReducer = (state = initialState, action) => {
             newState.entries[action.alarm.id] = action.alarm
             return newState
         case LOAD_ALARMS:
-            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
+            newState = { ...state, entries: { ...state.entries }}
             action.alarms.forEach(alarm => {
                 newState.entries[alarm.id] = alarm
             })
             return newState
         case ADD_ALARM:
-            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
+            newState = { ...state, entries: { ...state.entries }}
             newState.entries[action.alarm.id] = action.alarm
             return newState
         case EDIT_ALARM:
-            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
+            newState = { ...state, entries: { ...state.entries }}
             newState.entries[action.alarm.id] = action.alarm
             return newState
         case REMOVE_ALARM:
-            newState = { ...state, entries: { ...state.entries }, independent: { ...state.independent }}
+            newState = { ...state, entries: { ...state.entries }}
             delete newState.entries[action.alarmId]
             return newState
         case CLEAR_ALARMS:
