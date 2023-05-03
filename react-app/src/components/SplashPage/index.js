@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import DemoUserForm from '../auth/DemoUserForm'
 import { useTimeContext } from '../../context/TimeContext'
+import { displayDaysOfTheWeek } from "../utils"
+import DemoUserForm from '../auth/DemoUserForm'
 import './SplashPage.css'
 
 const SplashPage = () => {
@@ -41,13 +41,7 @@ const SplashPage = () => {
                 </div>
             </div>
             <div className='splash-days'>
-                <div className='splash-sun' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Sun') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SUN</div>
-                <div className='splash-mon' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Mon') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>MON</div>
-                <div className='splash-tue' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Tue') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>TUE</div>
-                <div className='splash-wed' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Wed') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>WED</div>
-                <div className='splash-thu' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Thu') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>THU</div>
-                <div className='splash-fri' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Fri') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>FRI</div>
-                <div className='splash-sat' style={{color: currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).includes('Sat') ? '#3478F6' : 'rgba(0, 0, 0, 0.4)'}}>SAT</div>
+                {displayDaysOfTheWeek(currentTime.toLocaleTimeString('en-US', {weekday: 'short'}))}
             </div>
             {/* ---------------------------- ENTRIES ---------------------------- */}
             <div className='splash-entries'>

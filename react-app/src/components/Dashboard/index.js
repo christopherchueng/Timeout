@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom"
 import { getAlarmlists } from "../../store/alarmlist"
 import { useTimeContext } from "../../context/TimeContext"
 import { useSidebarContext } from "../../context/SidebarContext"
+import { displayDaysOfTheWeek } from "../utils"
 import CreateAlarmlistModal from "../AlarmList/CreateAlarmlistModal"
 import AlarmList from "../AlarmList"
 import './Dashboard.css'
@@ -22,18 +23,6 @@ const Dashboard = () => {
         // Get all alarmlists under the current user (Backend will grab the current session user)
         dispatch(getAlarmlists())
     }, [dispatch])
-
-    const displayDaysOfTheWeek = (time) => {
-        const [todaysDay] = time.split(' ')
-
-        const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-
-        return (
-            days.map((day) => (
-                <div key={day} style={{color: day === todaysDay.toUpperCase() && '#3478F6'}}>{day}</div>
-            ))
-        )
-    }
 
     return (
         <div id='dashboard--refactored'>
