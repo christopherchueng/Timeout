@@ -19,7 +19,7 @@ export const selectOptions = (min, max, showLeadingZero) => {
 
     return (
         options.map(value => (
-            <option value={value}>{value}</option>
+            <option key={value} value={value}>{value}</option>
         ))
     )
 }

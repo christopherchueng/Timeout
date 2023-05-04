@@ -19,7 +19,7 @@ const EditAlarm = () => {
     const alarmObj = useSelector(state => state?.alarm?.entries)
     const alarm = alarmObj[+id]
 
-    const [name, setName] = useState('')
+    const [name, setName] = useState(alarm && alarm?.name)
     const [hour, setHour] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [meridiem, setMeridiem] = useState('')

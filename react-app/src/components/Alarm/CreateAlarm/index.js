@@ -16,16 +16,16 @@ const CreateAlarm = () => {
     const dispatch = useDispatch()
     const alarmlists = useSelector(state => Object.values(state?.alarmlist?.entries).sort())
 
-    const [name, setName] = useState('')
+    const [name, setName] = useState('Alarm')
     const [hour, setHour] = useState('')
     const [minutes, setMinutes] = useState('')
     const [meridiem, setMeridiem] = useState('')
     const [repeat, setRepeat] = useState('')
     const [snooze, setSnooze] = useState('')
-    const [alarmlist, setAlarmlist] = useState('')
+    const [alarmlist, setAlarmlist] = useState(alarmlists[0]?.id)
     const [errors, setErrors] = useState({})
     const [nameFocus, setNameFocus] = useState(false)
-    const [messageCount, setMessageCount] = useState(0)
+    const [nameLength, setNameLength] = useState(0)
 
 
     useEffect(() => {
@@ -33,12 +33,10 @@ const CreateAlarm = () => {
     }, [dispatch])
 
     useEffect(() => {
-        setName('Alarm')
         setHour((todaysDate.getHours() + 24) % 12 || 12)
         setMinutes(todaysDate.getMinutes())
         setMeridiem(todaysDate.getHours() >= 12 ? 'PM' : 'AM')
         setSnooze(false)
-        setAlarmlist(alarmlists[0]?.id)
     }, [])
 
     useEffect(() => {
@@ -57,7 +55,7 @@ const CreateAlarm = () => {
     }, [name, alarmlists.length])
 
     useEffect(() => {
-        setMessageCount(name.length)
+        setNameLength(name.length)
     }, [name])
 
     /* ---------------------- START MULTISELECT INFO ---------------------- */
@@ -170,12 +168,12 @@ const CreateAlarm = () => {
                                 {nameFocus
                                 ?
                                 <div className='char-count-ctn'>
-                                    {messageCount > 150
+                                    {nameLength > 150
                                     ?   <div className='char-count-cmt' style={{color: 'red', width: '70px'}}>
-                                            <span>{messageCount} / 150</span>
+                                            <span>{nameLength} / 150</span>
                                         </div>
                                     :   <div className='char-count-cmt'>
-                                            <span>{messageCount} / 150</span>
+                                            <span>{nameLength} / 150</span>
                                         </div>}
                                 </div>
                                 : ''
