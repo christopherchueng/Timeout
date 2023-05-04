@@ -68,6 +68,7 @@ const CreateAlarm = () => {
     }, [setRepeat])
 
     /* ---------------------- END MULTISELECT INFO ---------------------- */
+
     const onSubmit = async (e) => {
         e.preventDefault()
 
@@ -94,7 +95,6 @@ const CreateAlarm = () => {
             setAlarmlist(alarmlists[0]?.id)
             setErrors({})
             history.push(`/dashboard`)
-            // history.push(`/alarmlists/${alarmlist}`)
         }
     }
 
