@@ -145,6 +145,10 @@ select {
     height: 30px;
 }
 
+.alarmlist-selection-form:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
 .alarm-name-form,
 .add-to-alarmlist-form,
 .alarm-repeat-form {
@@ -192,11 +196,8 @@ select {
 
 .name-input-box:hover,
 .name-input-box:focus {
-    border: 1px solid lightgray;
-    padding: 0 20px;
-    border-radius: 25px;
-    background-color: white;
     outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .char-count-ctn {

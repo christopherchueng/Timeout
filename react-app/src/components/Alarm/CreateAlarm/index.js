@@ -218,7 +218,6 @@ const CreateAlarm = () => {
                                 options={DAYS}
                                 onSelect={onSelect}
                                 onRemove={onSelect}
-                                // showCheckbox={false}
                                 displayValue="name"
                                 placeholder='Never'
                                 hidePlaceholder={repeat.length}
