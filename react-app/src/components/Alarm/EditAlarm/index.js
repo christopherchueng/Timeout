@@ -12,13 +12,12 @@ import './EditAlarm.css'
 
 const EditAlarm = () => {
     const { id } = useParams()
-    const alarmId = +id
     const todaysDate = new Date()
     const history = useHistory()
     const dispatch = useDispatch()
     const alarmlists = useSelector(state => Object.values(state?.alarmlist?.entries).sort())
     const alarmObj = useSelector(state => state?.alarm?.entries)
-    const alarm = alarmObj[alarmId]
+    const alarm = alarmObj[+id]
 
     const [name, setName] = useState('')
     const [hour, setHour] = useState(0)
@@ -33,7 +32,7 @@ const EditAlarm = () => {
     const [messageCount, setMessageCount] = useState(alarm?.name?.length)
 
     useEffect(() => {
-        dispatch(getAlarm(alarmId))
+        dispatch(getAlarm(+id))
         dispatch(getAlarmlists())
     }, [dispatch, id])
 
@@ -91,7 +90,7 @@ const EditAlarm = () => {
         : []
 
         const payload = {
-            'alarm_id': alarmId,
+            'alarm_id': +id,
             name,
             hour,
             'minutes': `${minutes}`,
@@ -177,14 +176,13 @@ const EditAlarm = () => {
                         <div className='alarm-name-label'>
                             <label htmlFor='name'>Name</label>
                         </div>
-                        <div className='alarm-name-and-count'>
+                        <div className='flex flex-col pt-2'>
                             <div className='alarm-name-input'>
                                 <input
                                     name='name'
                                     type='text'
                                     className='name-input-box'
                                     value={name}
-                                    // defaultValue={name}
                                     onChange={e => setName(e.target.value)}
                                     onClick={() => setNameFocus(true)}
                                     onBlur={() => setNameFocus(false)}
@@ -216,7 +214,7 @@ const EditAlarm = () => {
                         <div className='alarm-alarmlist-label'>
                             <label htmlFor='alarmlist'>Add to Alarmlist</label>
                         </div>
-                        <div className='alarm-alarmlist-select'>
+                        <div className='flex align-center'>
                             <select
                                 name='alarmlist'
                                 value={alarmlist}
@@ -250,9 +248,9 @@ const EditAlarm = () => {
                                 hidePlaceholder={repeat?.length}
                                 style={{
                                     searchBox: {
-                                        width: '150px',
-                                        // border: '1px solid black',
-                                        border: '0',
+                                        width: '350px',
+                                        border: '1px solid lightgray',
+                                        borderRadius: '25px',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         flexDirection: 'column',
@@ -265,11 +263,11 @@ const EditAlarm = () => {
                                     },
                                     inputField: {
                                         cursor: 'pointer',
-                                        padding: '0',
+                                        paddingRight: '20px',
                                         textAlign: 'right',
                                         fontFamily: 'Lexend Deca',
                                         fontWeight: '1000',
-                                        color: 'black',
+                                        color: '#3478F6',
                                         fontSize: '14pt'
                                     },
                                     chips: {
@@ -278,22 +276,10 @@ const EditAlarm = () => {
                                         color: '#3478F6',
                                         paddingRight: '0',
                                         marginRight: '0',
-                                        fontSize: '12pt'
+                                        fontSize: '14pt'
                                     },
                                 }}
                             />
-                            {/* <select
-                                name='repeat'
-                                multiple='true'
-                                aria-multiselectable="true"
-                                value={repeat}
-                            >
-                                {days.options.map(day => (
-                                    <option value={day.id} key={day.id} onClick={e => onSelect(e)}>
-                                        {day.name}
-                                    </option>
-                                ))}
-                            </select> */}
                         </div>
                     </div>
                     {/* ------------------------- SNOOZE ------------------------- */}
