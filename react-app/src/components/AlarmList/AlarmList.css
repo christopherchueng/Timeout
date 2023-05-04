@@ -44,9 +44,16 @@
     align-items: center;
     height: 100%;
     width: auto;
-    padding: 0 0 0 20px;
+    margin: 0 0 0 20px;
+    padding-left: 6px;
     font-family: 'Lexend Deca';
     cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 15px;
+}
+
+.alarmlist-name:hover {
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .alarmlist-name-heading > a {

@@ -13,9 +13,8 @@ const AlarmList = ({ alarmlist }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const alarmlists = useSelector(state => state?.alarmlist?.entries)
-    const alarmsObj = useSelector(state => state?.alarm?.entries)
-    const alarmsArr = useMemo(() => Object.values(alarmsObj), [alarmsObj])
-    const filteredAlarms = useMemo(() => alarmsArr.filter(alarm => alarm?.alarmlistId === alarmlist?.id), [alarmsArr])
+    const alarms = useSelector(state => Object.values(state?.alarm?.entries))
+    const filteredAlarms = useMemo(() => alarms.filter(alarm => alarm?.alarmlistId === alarmlist?.id), [alarms])
     const [name, setName] = useState(0)
     const [mainAlarmlistSwitch, setMainAlarmlistSwitch] = useState('')
     const [openTab, setOpenTab] = useState(false)
@@ -52,7 +51,7 @@ const AlarmList = ({ alarmlist }) => {
         }
 
         dispatch(updateAlarmlist(payload)).then(
-            alarmsArr.forEach(async alarm => {
+            alarms.forEach(async alarm => {
                 let repeatPayload = []
 
                 for (let day of alarm.repeat) {
@@ -85,7 +84,7 @@ const AlarmList = ({ alarmlist }) => {
                 }
             })
         )
-    }, [dispatch, alarmsArr, mainAlarmlistSwitch])
+    }, [dispatch, alarms, mainAlarmlistSwitch])
 
     return (
         <div className='alarmlist-content'>

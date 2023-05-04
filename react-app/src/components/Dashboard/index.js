@@ -12,8 +12,7 @@ import DashNavBar from "./DashNavBar"
 
 const Dashboard = () => {
     const dispatch = useDispatch()
-    const alarmlistsObj = useSelector(state => state?.alarmlist?.entries)
-    const alarmlists = useMemo(() => Object.values(alarmlistsObj), [alarmlistsObj])
+    const alarmlists = useSelector(state => Object.values(state?.alarmlist?.entries))
     const { hour, minutes, seconds, currentTime } = useTimeContext()
     const { isSidebarOpen } = useSidebarContext()
 

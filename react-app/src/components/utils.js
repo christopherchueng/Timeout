@@ -9,3 +9,17 @@ export const displayDaysOfTheWeek = (time) => {
         ))
     )
 }
+
+export const selectOptions = (min, max, showLeadingZero) => {
+    const options = []
+
+    for (let i = min; i <= max; i++) {
+        showLeadingZero && i < 10 ? options.push(`0${i}`) : options.push(i)
+    }
+
+    return (
+        options.map(value => (
+            <option value={value}>{value}</option>
+        ))
+    )
+}
