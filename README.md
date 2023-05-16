@@ -33,7 +33,7 @@ Once an alarm has been set, wait and see what happens (this should be no surpris
 ![Screen Shot 2022-08-01 at 10 07 41 PM](https://user-images.githubusercontent.com/78316838/182276420-babad45e-7f9f-4011-bbc8-5576be045fd5.png)
 
 ## AWS
-Personalize the way your alarms sound by uploading your own jingles/sounds/songs to an alarm!
+[DEPRECATED FEATURE 5/16/2023] Personalize the way your alarms sound by uploading your own jingles/sounds/songs to an alarm!
 
 # Honorable Mentions
 ## Days of the Week
