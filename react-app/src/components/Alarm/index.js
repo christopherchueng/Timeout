@@ -56,49 +56,49 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
     // Alarm goes off
     useEffect(async () => {
         const checkHourMinMeridiem = (alarm) => {
-            return alarm.hour === (+(currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'})) % 12 || 12) &&
-            alarm.minutes === +(currentTime.toLocaleTimeString('en-US', {hour12: true, minute: 'numeric'})) &&
-            alarm.meridiem === (currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 &&
-                                currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM') &&
-            alarm.toggle === true
+            return alarm.hour === (+(currentTime.toLocaleTimeString('en-US', { hour12: false, hour: 'numeric' })) % 12 || 12) &&
+                alarm.minutes === +(currentTime.toLocaleTimeString('en-US', { hour12: true, minute: 'numeric' })) &&
+                alarm.meridiem === (currentTime.toLocaleTimeString('en-US', { hour12: false, hour: 'numeric' }) >= 12 &&
+                    currentTime.toLocaleTimeString('en-US', { hour12: false, hour: 'numeric' }) <= 23 ? 'PM' : 'AM') &&
+                alarm.toggle === true
         }
 
         // If alarm time matches with currentTime and toggle is on, then show modal AND TURN TOGGLE OFF.
         if (alarm.repeat.length === 0) {
             if (checkHourMinMeridiem(alarm) &&
-                +((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) === 0) {
-                    setShowSnoozeModal(true)
-                    setAlarmOn(!alarmOn)
+                +((currentTime.toLocaleDateString('en-US', { second: 'numeric' })).split(',')[1]) === 0) {
+                setShowSnoozeModal(true)
+                setAlarmOn(!alarmOn)
 
-                    let repeatPayload = []
+                let repeatPayload = []
 
-                    for (let day of repeat) {
-                        repeatPayload.push(day.id)
-                    }
+                for (let day of repeat) {
+                    repeatPayload.push(day.id)
+                }
 
-                    const payload = {
-                        'alarm_id': alarm?.id,
-                        name,
-                        'hour': alarmHour,
-                        'minutes': `${alarmMinutes}`,
-                        'meridiem': alarmMeridiem,
-                        sound,
-                        'repeat': `${repeatPayload}`,
-                        snooze,
-                        'toggle': false,
-                        'alarmlist_id': alarm?.alarmlistId
-                    }
+                const payload = {
+                    'alarm_id': alarm?.id,
+                    name,
+                    'hour': alarmHour,
+                    'minutes': `${alarmMinutes}`,
+                    'meridiem': alarmMeridiem,
+                    sound,
+                    'repeat': `${repeatPayload}`,
+                    snooze,
+                    'toggle': false,
+                    'alarmlist_id': alarm?.alarmlistId
+                }
 
-                    await dispatch(updateAlarm(payload))
+                await dispatch(updateAlarm(payload))
             }
         }
 
         // If alarm time matches with currentTime, date and toggle is on, then show modal AND LEAVE TOGGLE ON.
         for (let day of alarm.repeat) {
             if (checkHourMinMeridiem(alarm) &&
-                day.short === currentTime.toLocaleTimeString('en-US', {weekday: 'short'}).split(' ')[0] &&
-                +((currentTime.toLocaleDateString('en-US', {second: 'numeric'})).split(',')[1]) < 2) {
-                    setShowSnoozeModal(true)
+                day.short === currentTime.toLocaleTimeString('en-US', { weekday: 'short' }).split(' ')[0] &&
+                +((currentTime.toLocaleDateString('en-US', { second: 'numeric' })).split(',')[1]) < 2) {
+                setShowSnoozeModal(true)
             }
         }
     }, [currentTime, alarm])
@@ -112,7 +112,7 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
                 if (prev > 0) {
                     setCountdown(prev - 1)
                     window.localStorage.setItem('snooze', countdown)
-                } else if (countdown <= 0) {
+                } else {
                     // If countdown hits 0, then show the snooze modal.
                     setShowSnoozeModal(true)
                     setSnoozeOn(false)
@@ -158,99 +158,99 @@ const Alarm = ({ alarm, openTab, setOpenTab, alarmlist, setMainAlarmlistSwitch }
     return (
         <>
             {openTab ?
-            <>
-                <div
-                    className="alarm-hover-ellipsis"
-                    onMouseEnter={() => setShowEllipsis(true)}
-                    onMouseLeave={() => setShowEllipsis(false)}
-                    style={{
-                        transform: openSettings ? 'translateX(-90px)' : '',
-                        transition: '0.2s'
-                    }}
-                >
-                    <div className='hidden-alarm-toggle-ctn'>
-                        <div className='alarm-content'>
-                            <div
-                                className='alarm-content-ctn'
-                                style={{color: alarmOn ? 'black' : '#a5a5a5'}}
-                            >
-                                <div className='alarm-time'>
-                                    {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
-                                    <div className='alarm-meridiem'>
-                                        {alarm?.meridiem}
+                <>
+                    <div
+                        className="alarm-hover-ellipsis"
+                        onMouseEnter={() => setShowEllipsis(true)}
+                        onMouseLeave={() => setShowEllipsis(false)}
+                        style={{
+                            transform: openSettings ? 'translateX(-90px)' : '',
+                            transition: '0.2s'
+                        }}
+                    >
+                        <div className='hidden-alarm-toggle-ctn'>
+                            <div className='alarm-content'>
+                                <div
+                                    className='alarm-content-ctn'
+                                    style={{ color: alarmOn ? 'black' : '#a5a5a5' }}
+                                >
+                                    <div className='alarm-time'>
+                                        {alarm?.hour}:{alarm?.minutes < 10 ? '0' + alarm?.minutes : alarm?.minutes}
+                                        <div className='alarm-meridiem'>
+                                            {alarm?.meridiem}
+                                        </div>
+                                    </div>
+                                    <div className='alarm-name'>
+                                        {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
+                                    </div>
+                                    <div className='alarm-days'>
+                                        {alarm.repeat.length === 0 ?
+                                            ""
+                                            :
+                                            <DisplayDays alarmDays={alarm.repeat} />
+                                        }
                                     </div>
                                 </div>
-                                <div className='alarm-name'>
-                                    {alarm?.name}{alarm.repeat.length === 0 ? '' : `,`}
-                                </div>
-                                <div className='alarm-days'>
-                                    {alarm.repeat.length === 0 ?
-                                    ""
-                                    :
-                                    <DisplayDays alarmDays={alarm.repeat} />
-                                    }
-                                </div>
                             </div>
-                        </div>
-                        <div className="alarm-right">
-                            <div className="alarm-toggle-button-ctn">
-                                <label className='alarm-switch'>
-                                    <input
-                                        type='checkbox'
-                                        value={alarmOn}
-                                        onChange={toggleAlarm}
-                                        className='alarm-radio-box'
-                                        checked={alarmOn}
-                                    />
-                                    <div className='alarm-slider alarm-ball'>
-                                    </div>
-                                </label>
-                            </div>
-                            <div
-                                className="alarm-ellipsis"
-                                onClick={() => setOpenSettings(!openSettings)}
-                            >
-                                {showEllipsis &&
-                                <button className='alarm-ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
-                                    <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
-                                </button>}
+                            <div className="alarm-right">
+                                <div className="alarm-toggle-button-ctn">
+                                    <label className='alarm-switch'>
+                                        <input
+                                            type='checkbox'
+                                            value={alarmOn}
+                                            onChange={toggleAlarm}
+                                            className='alarm-radio-box'
+                                            checked={alarmOn}
+                                        />
+                                        <div className='alarm-slider alarm-ball'>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div
+                                    className="alarm-ellipsis"
+                                    onClick={() => setOpenSettings(!openSettings)}
+                                >
+                                    {showEllipsis &&
+                                        <button className='alarm-ellipsis-settings' onClick={() => setOpenSettings(!openSettings)}>
+                                            <i className="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                                        </button>}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div
-                    className='alarm-setting-btns'
-                    style={{
-                        transform: openSettings ? 'translateX(-45px)' : '',
-                        width: '0',
-                        padding: !openSettings && '0'
-                    }}
-                >
-                    {openSettings && <div className="alarm-edit-delete">
-                        <Link to={`/alarms/${alarm?.id}/edit`}><div className='alarm-edit-btn'>
-                            <span className="edit-alarm-label">Edit</span>
-                        </div></Link>
-                        <button type='button' onClick={(e) => removeAlarm(e)}>
-                            <div className='alarm-delete-btn'>
+                    <div
+                        className='alarm-setting-btns'
+                        style={{
+                            transform: openSettings ? 'translateX(-45px)' : '',
+                            width: '0',
+                            padding: !openSettings && '0'
+                        }}
+                    >
+                        {openSettings && <div className="alarm-edit-delete">
+                            <Link to={`/alarms/${alarm?.id}/edit`}><div className='alarm-edit-btn'>
+                                <span className="edit-alarm-label">Edit</span>
+                            </div></Link>
+                            <button type='button' onClick={(e) => removeAlarm(e)}>
+                                <div className='alarm-delete-btn'>
                                     <span className="delete-alarm">Delete</span>
-                            </div>
-                        </button>
-                    </div>}
-                </div>
-            </>
-            : ""}
+                                </div>
+                            </button>
+                        </div>}
+                    </div>
+                </>
+                : ""}
             {showSnoozeModal ?
-            <SnoozeModal
-                alarm={alarm}
-                alarmOn={alarmOn}
-                setAlarmOn={setAlarmOn}
-                countdown={countdown}
-                setCountdown={setCountdown}
-                snoozeOn={snoozeOn}
-                setSnoozeOn={setSnoozeOn}
-                showSnoozeModal={showSnoozeModal}
-                setShowSnoozeModal={setShowSnoozeModal}
-            /> : ''}
+                <SnoozeModal
+                    alarm={alarm}
+                    alarmOn={alarmOn}
+                    setAlarmOn={setAlarmOn}
+                    countdown={countdown}
+                    setCountdown={setCountdown}
+                    snoozeOn={snoozeOn}
+                    setSnoozeOn={setSnoozeOn}
+                    showSnoozeModal={showSnoozeModal}
+                    setShowSnoozeModal={setShowSnoozeModal}
+                /> : ''}
         </>
     )
 }
