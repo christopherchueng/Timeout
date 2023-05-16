@@ -30,7 +30,8 @@ As a signed in user, you will be able to create, read, update, and delete their 
 ## Snooze
 Once an alarm has been set, wait and see what happens (this should be no surprise)! This was probably one of the trickiest parts of the projects due to the many cases I had to consider. However, with the help of local storage and context, I was able to implement a timer and have the alarm go off at the right day and time. The below code exhibits an extensive snooze boolean condition: when the snooze checkbox is on, then display the snooze modal. Otherwise, have the alarm go off and turn off the alarm toggle. The worst part about this feature was having to wait for the currentTime to match the alarm set. If only there was a way to fast forward time!
 
-![Screen Shot 2022-08-01 at 10 07 41 PM](https://user-images.githubusercontent.com/78316838/182276420-babad45e-7f9f-4011-bbc8-5576be045fd5.png)
+![snooze](https://github.com/christopherchueng/Timeout/assets/78316838/646bfff7-dc48-49d5-8e56-151f22166bb7)
+
 
 ## AWS
 [DEPRECATED FEATURE 5/16/2023] Personalize the way your alarms sound by uploading your own jingles/sounds/songs to an alarm!
@@ -40,7 +41,8 @@ Once an alarm has been set, wait and see what happens (this should be no surpris
 When a user selects specific repeated days, pay attention to the days displayed on the dashboard that was implemented by the code below!
 
 ![Screen Shot 2022-08-01 at 10 23 38 PM](https://user-images.githubusercontent.com/78316838/182278169-38375cfb-709d-45ad-b0dd-aa90d0da9375.png)
-![Screen Shot 2022-08-01 at 9 26 57 PM](https://user-images.githubusercontent.com/78316838/182276725-3a6ed51d-b059-4cfc-9463-fa321e30c26b.png)
+![display_days](https://github.com/christopherchueng/Timeout/assets/78316838/b7b9552c-73ff-45da-8738-72ea3f455702)
+
 
 ## Minutes as a String?!
 When creating/editing an alarm and trying to enter the integer 0 as a value under the minutes column, I kept receiving an invalid input because the DataRequired validator in wtforms considers 0 as an erroneous/falsey input. To accommodate for this, I had to change the minutes field into a StringField and use the InputRequired validator.
@@ -48,7 +50,7 @@ When creating/editing an alarm and trying to enter the integer 0 as a value unde
 ## Converting Repeated Days
 Since the repeated days field can take in a collection of data, I had to find a way that would allow the frontend and backend to communicate and deliver information to each other. When a user submits a form with repeated days selected, this will send over a string of number(s) to the backend. When the payload gets to the backend, I created a function that extracts the data, converts the numbers into a dictionary that includes the name, id, and shortened name, and then deliver the conversion to the frontend.
 
-![Screen Shot 2022-08-01 at 10 00 01 PM](https://user-images.githubusercontent.com/78316838/182276516-c0837db9-1a29-4bf8-b2f9-34cd604a4620.png)
+![convert_repeat](https://github.com/christopherchueng/Timeout/assets/78316838/e1414e62-7618-4520-b1c3-b300f346273f)
 
 # Run App Locally
 
