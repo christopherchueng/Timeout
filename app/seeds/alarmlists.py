@@ -30,5 +30,8 @@ def seed_alarmlists():
     db.session.commit()
 
 def undo_alarmlists():
-    db.session.execute('TRUNCATE alarmlists RESTART IDENTITY CASCADE')
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.alarmlists RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM alarmlists")
     db.session.commit()

@@ -295,5 +295,8 @@ def seed_alarms():
     db.session.commit()
 
 def undo_alarms():
-    db.session.execute('TRUNCATE alarms RESTART IDENTITY CASCADE')
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.alarms RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute("DELETE FROM alarms")
     db.session.commit()

@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from flask import jsonify
 
@@ -28,6 +28,9 @@ def convert_repeat(day_str):
 class Alarm(db.Model):
     __tablename__ = 'alarms'
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
     hour = db.Column(db.Integer, nullable=False)
@@ -37,7 +40,7 @@ class Alarm(db.Model):
     repeat = db.Column(db.String(255))
     snooze = db.Column(db.Boolean)
     toggle = db.Column(db.Boolean)
-    alarmlist_id = db.Column(db.Integer, db.ForeignKey('alarmlists.id'), nullable=False)
+    alarmlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('alarmlists.id')), nullable=False)
 
 
     # Many-to-One relationship with Alarmlists

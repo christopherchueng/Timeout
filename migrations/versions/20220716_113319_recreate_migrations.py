@@ -1,12 +1,16 @@
 """recreate_migrations
 
 Revision ID: f0199e41cba5
-Revises: 
+Revises:
 Create Date: 2022-07-16 11:33:19.408470
 
 """
 from alembic import op
 import sqlalchemy as sa
+
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
@@ -27,6 +31,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.create_table('alarmlists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
@@ -35,6 +43,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE alarmlists SET SCHEMA {SCHEMA};")
+
     op.create_table('alarms',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=150), nullable=False),
@@ -49,6 +61,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['alarmlist_id'], ['alarmlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE alarms SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
