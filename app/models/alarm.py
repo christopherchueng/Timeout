@@ -3,25 +3,33 @@ from datetime import datetime
 from flask import jsonify
 
 def convert_repeat(day_str):
-    weekdays_mapping = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    repeat_days = []
+    weekdays_hash = {
+        '0': "Sunday",
+        '1': "Monday",
+        '2': "Tuesday",
+        '3': "Wednesday",
+        '4': "Thursday",
+        '5': "Friday",
+        '6': "Saturday"
+    }
+
     if day_str == None or len(day_str) == 0:
-        day_str = []
-        # return day_str
-    elif len(day_str) == 1:
+        return ''
+
+    if len(day_str) == 1:
         day_str = [day_str]
-        # return day_str
     else:
         day_str = day_str.split(',')
 
-    if len(day_str) != 0:
-        for num in day_str:
-            for i in range(len(weekdays_mapping)):
-                day = weekdays_mapping[i]
-                if int(float(num)) == i:
-                    repeat_days.append({'name': day, 'id': i, 'short': day[0:3]})
-    else:
-        return ''
+    repeat_days = []
+
+    for num in day_str:
+        repeat_days.append({
+            'name': weekdays_hash[num],
+            'id': int(num),
+            'short': weekdays_hash[num][0:3]
+        })
+
     return repeat_days
 
 
