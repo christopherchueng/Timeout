@@ -5,10 +5,9 @@
     align-items: center;
 }
 
-#create-alarm > form,
-#edit-alarm > form {
+#create-alarm>form,
+#edit-alarm>form {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     height: auto;
 }
@@ -38,7 +37,7 @@
     height: 500px;
 }
 
-.select-times-and-meridiem > div {
+.select-times-and-meridiem>div {
     padding: 0 20px;
 }
 
@@ -48,24 +47,24 @@
     justify-content: center;
 }
 
-.alarm-hour-form > select,
-.alarm-minutes-form > select,
-.alarm-meridiem-form > select {
+.alarm-hour-form>select,
+.alarm-minutes-form>select,
+.alarm-meridiem-form>select {
     width: auto;
     overflow: scroll;
     display: flex;
     justify-content: center;
-    text-align-last:center;
+    text-align-last: center;
 
 }
 
-.alarm-hour-form > select,
-.alarm-minutes-form > select {
+.alarm-hour-form>select,
+.alarm-minutes-form>select {
     height: 500px;
     font-size: 100pt;
 }
 
-.alarm-meridiem-form > select {
+.alarm-meridiem-form>select {
     font-size: 50pt;
     height: auto;
 }
@@ -77,29 +76,29 @@
     font-size: 50pt;
 }
 
-.alarm-hour-form > select > option,
-.alarm-minutes-form > select > option,
-.alarm-meridiem-form > select > option {
+.alarm-hour-form>select>option,
+.alarm-minutes-form>select>option,
+.alarm-meridiem-form>select>option {
     color: #CECECE;
 }
 
-.alarm-hour-form > select > option:checked,
-.alarm-minutes-form > select > option:checked,
-.alarm-meridiem-form > select > option:checked {
+.alarm-hour-form>select>option:checked,
+.alarm-minutes-form>select>option:checked,
+.alarm-meridiem-form>select>option:checked {
     border-radius: 25px;
     color: black;
     /* background-color: #3478F6; */
 }
 
-.alarm-hour-form > select::-webkit-scrollbar,
-.alarm-minutes-form > select::-webkit-scrollbar,
-.alarm-meridiem-form > select::-webkit-scrollbar {
+.alarm-hour-form>select::-webkit-scrollbar,
+.alarm-minutes-form>select::-webkit-scrollbar,
+.alarm-meridiem-form>select::-webkit-scrollbar {
     display: none;
 }
 
-.alarm-hour-form > select:focus,
-.alarm-minutes-form > select:focus,
-.alarm-meridiem-form > select:focus {
+.alarm-hour-form>select:focus,
+.alarm-minutes-form>select:focus,
+.alarm-meridiem-form>select:focus {
     outline: none;
 }
 
@@ -179,7 +178,7 @@ select {
     width: 350px;
 }
 
-.alarm-name-input > input {
+.alarm-name-input>input {
     height: 30px;
     border: 1px solid lightgray;
     border-radius: 25px;
@@ -282,12 +281,12 @@ select {
     left: 2.5px;
 }
 
-.snooze-radio-box:checked + .snooze-slider:before {
+.snooze-radio-box:checked+.snooze-slider:before {
     transform: translateX(25px);
     transition: 0.2s;
 }
 
-.snooze-radio-box:checked + .snooze-slider {
+.snooze-radio-box:checked+.snooze-slider {
     background-color: #3478F6;
     border: 1px solid #3478F6;
     /* background-color: lightgreen; */
@@ -317,4 +316,37 @@ select {
 
 .pt-2 {
     padding-top: 4px;
+}
+
+@media screen and (max-width: 1300px) {
+
+    #create-alarm>form,
+    #edit-alarm>form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .create-left {
+        height: 350px;
+    }
+
+    .create-right {
+        margin-left: 0;
+    }
+
+    .alarm-hour-form>select,
+    .alarm-minutes-form>select {
+        font-size: 65pt;
+        height: 290px;
+    }
+
+    .alarm-meridiem-form>select {
+        font-size: 45pt;
+    }
+
+    .time-colon-ctn,
+    .select-times-and-meridiem {
+        height: 265px;
+    }
+
 }
