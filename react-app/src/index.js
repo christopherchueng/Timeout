@@ -7,19 +7,22 @@ import { ModalProvider } from './context/Modal'
 import configureStore from './store'
 import TimeProvider from './context/TimeContext'
 import SidebarProvider from './context/SidebarContext'
+import ViewportProvider from './context/ViewportContext'
 
 const store = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <SidebarProvider>
-        <ModalProvider>
-          <TimeProvider>
-            <App />
-          </TimeProvider>
-        </ModalProvider>
-      </SidebarProvider>
+      <ViewportProvider>
+        <SidebarProvider>
+          <ModalProvider>
+            <TimeProvider>
+              <App />
+            </TimeProvider>
+          </ModalProvider>
+        </SidebarProvider>
+      </ViewportProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

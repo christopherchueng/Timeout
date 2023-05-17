@@ -77,7 +77,7 @@
     width: 100vw;
 }
 
-.splash-days > div {
+.splash-days>div {
     padding: 0 40px 40px 40px;
     font-weight: 1000;
     color: rgba(0, 0, 0, 0.4)
@@ -86,8 +86,8 @@
 .splash-entries {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    width: 100vw;
+    justify-content: space-between;
+    width: 1000px;
 }
 
 .splash-login-ctn,
@@ -149,4 +149,38 @@
 .register-label a {
     text-decoration: none;
     color: black;
+}
+
+@media screen and (max-width: 1100px) {
+    .splash-entries {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .splash-switch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10pt;
+        width: 424px;
+    }
+
+    .splash-login-ctn a,
+    .splash-register-ctn a {
+        text-decoration: none;
+    }
+
+    .splash-switch-span {
+        color: black;
+    }
+
+    .splash-switch:hover .splash-switch-span {
+        opacity: 0;
+        transition: all 0.2s ease-out;
+    }
+
+    .splash-switch:hover .splash-ball:before {
+        transform: translateX(384px);
+    }
 }

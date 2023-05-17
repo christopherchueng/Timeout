@@ -1,12 +1,15 @@
+import { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useTimeContext } from '../../context/TimeContext'
+import { useViewPortContext } from '../../context/ViewportContext'
 import { displayDaysOfTheWeek } from "../utils"
 import DemoUserForm from '../auth/DemoUserForm'
 import './SplashPage.css'
 
 const SplashPage = () => {
     const { hour, minutes, seconds, currentTime } = useTimeContext()
+    const { width } = useViewPortContext()
     const currentUser = useSelector(state => state.session.user)
 
     if (currentUser) {
@@ -35,23 +38,24 @@ const SplashPage = () => {
                         <div className='splash-meridiem'>
                             {/* If hour is in between 12 and 23 inclusive, then show PM.
                             24 === 12 AM and anything less than 12 is before noon, so show AM */}
-                            {currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) >= 12 && currentTime.toLocaleTimeString('en-US', {hour12: false, hour: 'numeric'}) <= 23 ? 'PM' : 'AM'}
+                            {currentTime.toLocaleTimeString('en-US', { hour12: false, hour: 'numeric' }) >= 12 && currentTime.toLocaleTimeString('en-US', { hour12: false, hour: 'numeric' }) <= 23 ? 'PM' : 'AM'}
                         </div>
                     </div>
                 </div>
             </div>
             <div className='splash-days'>
-                {displayDaysOfTheWeek(currentTime.toLocaleTimeString('en-US', {weekday: 'short'}))}
+                {displayDaysOfTheWeek(currentTime.toLocaleTimeString('en-US', { weekday: 'short' }))}
             </div>
             {/* ---------------------------- ENTRIES ---------------------------- */}
             <div className='splash-entries'>
                 <div className='splash-login-ctn'>
                     <div className='login-label'>
-                        Login
+                        {width >= 1100 ? 'Login' : ''}
                     </div>
                     {/* ---------------------------- LOGIN SWITCH & BALL ---------------------------- */}
                     <Link to='/login'>
                         <div className='splash-switch'>
+                            {width < 1100 && <span className='splash-switch-span'>Login</span>}
                             <div className='splash-ball'>
                             </div>
                         </div>
@@ -59,11 +63,12 @@ const SplashPage = () => {
                 </div>
                 <div className='splash-register-ctn'>
                     <div className='register-label'>
-                        Register
+                        {width >= 1100 ? 'Register' : ''}
                     </div>
                     {/* ---------------------------- REGISTER SWITCH & BALL ---------------------------- */}
                     <Link to='/register'>
                         <div className='splash-switch'>
+                            {width < 1100 && <span className='splash-switch-span'>Register</span>}
                             <div className='splash-ball'>
                             </div>
                         </div>
@@ -71,7 +76,7 @@ const SplashPage = () => {
                 </div>
                 <div className='splash-demo-ctn'>
                     <div className='splash-demo'>
-                        Demo
+                        {width >= 1100 ? 'Demo' : ''}
                     </div>
                     {/* ---------------------------- DEMO SWITCH & BALL ---------------------------- */}
                     <DemoUserForm />
